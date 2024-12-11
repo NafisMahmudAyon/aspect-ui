@@ -1,6 +1,6 @@
 const twCssForReact = {
   'src/index.css': `
-  @import "keep-react/css";
+  @import "aspect-ui/css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,31 +8,20 @@ const twCssForReact = {
 }
 const twCssForNext = {
   'app/globals.css': `
-  @import "keep-react/css";
+  @import "aspect-ui/css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
   `,
 }
-// const importInReact = 
-//   `import { Button } from "keep-react";
-  
-// const App = () => {
-//   return (
-//     <Button>Keep React</Button>
-//   )
-// }
-
-// export default App;
-//   `
 
 const importInReact = {
   'src/App.tsx': `
-import { Button } from "keep-react";
+import { Button } from "aspect-ui";
   
 const App = () => {
   return (
-    <Button>Keep React</Button>
+    <Button>Aspect UI</Button>
   )
 }
 
@@ -41,11 +30,11 @@ export default App;
 }
 const importInNext = {
   'app/page.tsx': `
-  import { Button } from "keep-react";
+  import { Button } from "aspect-ui";
 
 const page = () => {
   return (
-    <Button>Keep React</Button>
+    <Button>Aspect UI</Button>
   )
 }
     
@@ -55,10 +44,10 @@ export default page;
 const twNpmInstall = {
   'Install-Tailwind-CSS': 'npm i autoprefixer postcss tailwindcss\nnpx tailwindcss init -p',
 }
-const keepInstall = {
-  npm: 'npm i keep-react phosphor-react',
-  yarn: 'yarn add keep-react phosphor-react',
-  pnpm: 'pnpm add keep-react phosphor-react',
+const aspectInstall = {
+  npm: 'npm i aspect-ui',
+  yarn: 'yarn add aspect-ui',
+  pnpm: 'pnpm add aspect-ui',
 }
 const viteReact = {
   'Vite-React': `
@@ -71,30 +60,30 @@ const nextJsInstall = {
 }
 const twConfigForReact = {
   'tailwind.config.js': `
-import { keepTheme } from "keep-react/keepTheme";
+import { AspectUITheme } from "aspect-ui/AspectUITheme";
 
 const config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {},
 }
 
-export default keepTheme(config);
+export default AspectUITheme(config);
 `,
   'tailwind.config.ts': `
   import type { Config } from 'tailwindcss'
-import { keepTheme } from "keep-react/keepTheme";
+import { AspectUITheme } from "aspect-ui/AspectUITheme";
 
 const config : Config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {},
 }
 
-export default keepTheme(config);
+export default AspectUITheme(config);
   `,
 }
 const twConfigForNextJS = {
   'tailwind.config.js': `
-import { keepTheme } from "keep-react/keepTheme";
+import { AspectUITheme } from "aspect-ui/AspectUITheme";
 
 const config = {
   content: [
@@ -104,11 +93,11 @@ const config = {
   theme: {},
 };
 
-export default keepTheme(config);
+export default AspectUITheme(config);
 `,
   'tailwind.config.ts': `
   import type { Config } from 'tailwindcss'
-import { keepTheme } from "keep-react/keepTheme";
+import { AspectUITheme } from "aspect-ui/AspectUITheme";
 
 const config : Config = {
   content: [
@@ -118,14 +107,14 @@ const config : Config = {
   theme: {},
 };
 
-export default keepTheme(config);
+export default AspectUITheme(config);
   `,
 }
 
 export {
   importInNext,
   importInReact,
-  keepInstall,
+  aspectInstall,
   nextJsInstall,
   twConfigForNextJS,
   twConfigForReact,

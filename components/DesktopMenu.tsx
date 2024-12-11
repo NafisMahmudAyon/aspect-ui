@@ -16,7 +16,7 @@ const DesktopMenu = () => {
       </Link>
       <NavbarList>
         {navbarRoutes.map((nav)=>(
-          <Link key={nav.id} href={nav.href} target='_self' className='hover:text-primary-900 dark:hover:text-primary-50'>
+          <Link key={nav.id} href={nav.href} target='_self' className='text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-50'>
             {nav.name}
           </Link>
         ))}

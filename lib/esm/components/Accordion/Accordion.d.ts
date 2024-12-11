@@ -5,6 +5,7 @@ interface AccordionProps {
     iconPosition?: 'left' | 'right';
     iconClassName?: string;
     activeIconClassName?: string;
+    activeItem?: string[];
     activeIcon?: ReactNode;
     inactiveIcon?: ReactNode;
     multiple?: boolean;

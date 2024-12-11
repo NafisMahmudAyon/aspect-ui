@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={`${inter.className} bg-primary-50 dark:bg-primary-950`} suppressHydrationWarning={true}>
         <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
-          {children}</AspectThemeProvider></body>
+          {children}
+          </AspectThemeProvider>
+          </body>
     </html>
   )
 }

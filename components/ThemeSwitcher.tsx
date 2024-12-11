@@ -47,7 +47,7 @@ const ThemeSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setShowTheme(!showTheme)}
-        className="rounded-lg border border-primary-100 bg-primary-100 p-2.5 transition-all duration-300 hover:bg-primary-50 dark:border-primary-800 dark:bg-primary-900 dark:hover:border-primary-600 dark:hover:bg-primary-900">
+        className="rounded-lg border border-primary-800 bg-primary-100 p-2.5 transition-all duration-300 hover:bg-primary-50 dark:border-primary-800 dark:bg-primary-900 dark:hover:border-primary-600 dark:hover:bg-primary-900">
         <AnimatePresence>
           <motion.span
             key="light"

@@ -1,7 +1,8 @@
 const Display = () => {
   return (
     <div className="py-3">
-      <h1 className="text-display">Display</h1>
+      <h1 className="text-display1">Display</h1>
+      <h1 className="text-display2">Display</h1>
     </div>
   )
 }
@@ -9,7 +10,12 @@ const Display = () => {
 const DisplayCode = {
   Code: `
 export const Display = () => {
-  return <h1 className="text-display">Display</h1>
+  return (
+    <div className="py-3">
+      <h1 className="text-display1">Display</h1>
+      <h1 className="text-display2">Display</h1>
+    </div>
+  )
 }
 `,
 }

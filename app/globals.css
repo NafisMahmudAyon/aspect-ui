@@ -33,6 +33,39 @@ body {
   }
 }
 
+.light-scrollbar::-webkit-scrollbar {
+  width: 5px !important;
+}
+.light-scrollbar::-webkit-scrollbar-track {
+  display: none;
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary-800 dark:bg-primary-200 rounded;
+}
+/* .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;  
+  } */
+
+  .section-title {
+    padding-top: 90px;
+  }
+
+  .code {
+  font-family: 'Code';
+  font-weight: 100;
+  @apply bg-primary-200 dark:bg-primary-800 text-primary-800 dark:text-primary-200;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.375rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  display: inline-block;
+}
 .button {
   font-size: 3rem;
   line-height: 4.875rem;

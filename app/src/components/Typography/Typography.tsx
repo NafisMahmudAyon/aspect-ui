@@ -16,32 +16,35 @@ type TypographyVariant =
 
 interface TypographyProps {
   variant?: TypographyVariant
-  children: React.ReactNode
+  tagName?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "caption"
+  children?: React.ReactNode
   className?: string
 }
 
 export const Typography: React.FC<TypographyProps> = ({
-  variant,
+  variant="",
+  tagName = "p",
   children,
   className = ''
 }) => {
-  const getComponent = (): React.ElementType => {
-    switch (variant) {
-      case 'h1':
-      case 'h2':
-      case 'h3':
-      case 'h4':
-      case 'h5':
-      case 'h6':
-        return variant
-      case 'display1':
-        return 'h1'
-      case 'display2':
-        return 'h1'
-      default:
-        return 'p'
-    }
-  }
+  const TagName=tagName
+  // const getComponent = (): React.ElementType => {
+  //   switch (variant) {
+  //     case 'h1':
+  //     case 'h2':
+  //     case 'h3':
+  //     case 'h4':
+  //     case 'h5':
+  //     case 'h6':
+  //       return variant
+  //     case 'display1':
+  //       return 'h1'
+  //     case 'display2':
+  //       return 'h1'
+  //     default:
+  //       return 'p'
+  //   }
+  // }
 
   const getStyles = (): string => {
     switch (variant) {
@@ -72,14 +75,14 @@ export const Typography: React.FC<TypographyProps> = ({
     }
   }
 
-  const Component = getComponent()
+  // const Component = getComponent()
   const styles = getStyles()
 
   return (
-    <Component
+    <TagName
       className={cn("text-primary-800 dark:text-primary-200", styles, className)}
     >
       {children}
-    </Component>
+    </TagName>
   )
 }

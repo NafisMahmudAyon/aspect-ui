@@ -48,6 +48,7 @@ const AccordionDemo = () => {
       <Accordion
         className='space-y-4'
         activeHeaderClassName=''
+        activeItem={['item1', 'item2']}
         headerClassName=''
         iconEnabled={true}
         iconPosition='right'

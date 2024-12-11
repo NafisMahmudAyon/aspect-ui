@@ -10,6 +10,7 @@ interface AccordionProps {
   iconPosition?: 'left' | 'right'
   iconClassName?: string
   activeIconClassName?: string
+  activeItem?: string[]
   activeIcon?: ReactNode
   inactiveIcon?: ReactNode
   multiple?: boolean
@@ -26,6 +27,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   iconEnabled = true,
   iconPosition = 'right',
   iconClassName = '',
+  activeItem,
   activeIconClassName = '',
   activeIcon,
   inactiveIcon,
@@ -38,7 +40,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   contentClassName = '',
   ...rest
 }) => {
-  const [openItems, setOpenItems] = useState<string[]>([])
+  const [openItems, setOpenItems] = useState<string[]>(activeItem ?? [])
 
   const toggleItem = (itemId: string) => {
     setOpenItems(prev => {
