@@ -5,7 +5,7 @@ import { ModalProvider } from './ModalContext'
 
 interface ModalProps {
   children: ReactNode
-  handleOpen: () => void
+  handleOpen?: () => void
 }
 
 export const Modal: React.FC<ModalProps> = ({ children, handleOpen }) => {
