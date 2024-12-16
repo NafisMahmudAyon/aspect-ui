@@ -8,16 +8,13 @@ interface ModalProps {
   handleOpen?: () => void
 }
 
-export const Modal: React.FC<ModalProps> = ({ children, handleOpen }) => {
+export const Modal: React.FC<ModalProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleOpenModal = useCallback(() => {
+  const handleOpen = useCallback(() => {
     setIsOpen(prev => !prev)
   }, [setIsOpen])
-  
-  if(!handleOpen) {
-    handleOpen = handleOpenModal
-  }
+
 
   useEffect(() => {
     const handleEscapeKeyPress = (event: KeyboardEvent) => {
