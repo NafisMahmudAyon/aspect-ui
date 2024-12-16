@@ -1,15 +1,15 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import { useModal } from './ModalContext'
+import React, { ButtonHTMLAttributes, ReactNode } from 'react'
 import { cn } from '../../utils/cn'
+import { useModal } from './ModalContext'
 
-interface ModalActionProps {
+interface ModalActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   className?: string
 }
 
-export const ModalAction: React.FC<ModalActionProps> = ({ children, className='', ...rest }) => {
+export const ModalAction: React.FC<ModalActionProps> = ({ children, className = '', ...rest }) => {
   const { handleOpen } = useModal()
 
   return (

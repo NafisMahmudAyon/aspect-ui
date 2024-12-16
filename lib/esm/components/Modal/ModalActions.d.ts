@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-interface ModalActionProps {
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
+interface ModalActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     className?: string;
 }
