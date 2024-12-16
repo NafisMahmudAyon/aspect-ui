@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, type JSX } from 'react';
 import { cn } from '../../utils/cn'
 
 type AlertType = 'success' | 'warning' | 'error' | 'info'

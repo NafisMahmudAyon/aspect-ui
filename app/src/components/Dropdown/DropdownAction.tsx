@@ -8,7 +8,7 @@ import { Down, Left, Right, Up } from '../Icon/Arrow'
 interface DropdownActionProps {
   children: ReactNode
   className?: string
-  icon?: ReactElement
+  icon?: ReactElement<any>
   iconPosition?: 'start' | 'end'
 }
 

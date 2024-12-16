@@ -39,12 +39,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
             onToggle: disabled ? undefined : () => toggleItem(id),
             disabled
           }
-
-          // Only add isOpen if it's a valid prop for the child
-          // if ('isOpen' in child.props) {
-          //   childProps.isOpen = isOpen;
-          // }
-
           return cloneElement(child, childProps)
         }
         return child

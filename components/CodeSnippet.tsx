@@ -2,7 +2,7 @@
 
 import { Button } from "@/app/src";
 import { cn } from "@/app/src/utils/cn";
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 
 // import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";

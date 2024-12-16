@@ -4,10 +4,10 @@ import { ReactElement } from 'react';
 interface SliderProps {
     children: React.ReactNode;
     options: Options;
-    playPauseButton?: ReactElement;
-    arrowIcon?: ReactElement;
-    playIcon?: ReactElement;
-    pauseIcon?: ReactElement;
+    playPauseButton?: ReactElement<any>;
+    arrowIcon?: ReactElement<any>;
+    playIcon?: ReactElement<any>;
+    pauseIcon?: ReactElement<any>;
     autoplay?: boolean;
     pagination?: boolean;
     arrows?: boolean;

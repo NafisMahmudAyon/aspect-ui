@@ -15,7 +15,7 @@ interface AvatarBadgeProps {
     | 'invisible'
   counter?: number
   position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
-  icon?: React.ReactElement
+  icon?: React.ReactElement<any>
   iconEnabled?: boolean
   iconSize?: number
 }
