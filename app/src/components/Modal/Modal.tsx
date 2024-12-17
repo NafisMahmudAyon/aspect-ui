@@ -5,27 +5,34 @@ import { ModalProvider } from './ModalContext'
 
 interface ModalProps {
   children: ReactNode
-  handleOpen?: () => void
+  isOpenExternal?: boolean
+  onToggle?: (isOpen: boolean) => void
 }
 
-export const Modal: React.FC<ModalProps> = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false)
+export const Modal: React.FC<ModalProps> = ({ children, isOpenExternal, onToggle }) => {
+  const [isOpenInternal, setIsOpenInternal] = useState(false)
+
+  const isOpen = isOpenExternal ?? isOpenInternal
 
   const handleOpen = useCallback(() => {
-    setIsOpen(prev => !prev)
-  }, [setIsOpen])
-
+    const newState = !isOpen
+    if (onToggle) {
+      onToggle(newState)
+    } else {
+      setIsOpenInternal(newState)
+    }
+  }, [isOpen, onToggle])
 
   useEffect(() => {
     const handleEscapeKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        isOpen && setIsOpen(false)
+        isOpen && handleOpen()
       }
     }
 
     const handleClickOutsideModal = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest('.aspect-ui-modal')) {
-        isOpen && setIsOpen(false)
+        isOpen && handleOpen()
       }
     }
 
@@ -38,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({ children }) => {
       document.removeEventListener('keydown', handleEscapeKeyPress)
       document.removeEventListener('mousedown', handleClickOutsideModal)
     }
-  }, [isOpen, setIsOpen])
+  }, [isOpen, handleOpen])
 
   return (
     <ModalProvider value={{ isOpen, handleOpen }}>{children}</ModalProvider>

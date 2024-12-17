@@ -44,17 +44,17 @@ export default function Home() {
   return (
     <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950'>
       <Dark />
-      <AccordionDemo />
+      {/* <AccordionDemo />
       <ButtonDemo />
-      <CardDemo />
+      <CardDemo /> */}
       {/* <ImageDemo /> */}
-      <AvatarDemo />
+      {/* <AvatarDemo />
       <ProgressBarDemo />
       <CircularProgressDemo />
       <CarouselDemo />
-      <BreadcrumbDemo />
+      <BreadcrumbDemo /> */}
       <ModalDemo />
-      <TabsDemo />
+      {/* <TabsDemo />
       <TableDemo />
       <DropdownDemo />
       <NavbarDemo />
@@ -76,12 +76,12 @@ export default function Home() {
       <DividerDemo />
       <NumberCounterDemo />
       <SkeletonDemo />
-      <SliderDemo />
+      <SliderDemo /> */}
       <ToastDemo />
-      <BackToTopDemo />  
+      {/* <BackToTopDemo />  
       <TimelineDemo />
       <TypographyDemo />
-      <MasonryDemo />
+      <MasonryDemo /> */}
       {/* <p className='text-body2  '>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni delectus ab commodi est. Deserunt quos necessitatibus corporis sint hic, nulla fugit tenetur nam perspiciatis maiores aliquid veniam. Nisi, quae modi!</p> */}
     </main>
   )
