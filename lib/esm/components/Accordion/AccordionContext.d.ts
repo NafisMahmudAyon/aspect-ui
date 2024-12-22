@@ -13,6 +13,7 @@ interface AccordionContextType {
     headerClassName?: string;
     activeHeaderClassName?: string;
     contentClassName?: string;
+    reset?: boolean;
 }
 export declare const AccordionProvider: React.FC<{
     children: React.ReactNode;

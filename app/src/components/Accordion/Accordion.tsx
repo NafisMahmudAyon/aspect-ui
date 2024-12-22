@@ -20,6 +20,7 @@ interface AccordionProps {
   headerClassName?: string
   activeHeaderClassName?: string
   contentClassName?: string
+  reset?: boolean
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -38,6 +39,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   headerClassName = '',
   activeHeaderClassName = '',
   contentClassName = '',
+  reset = false,
   ...rest
 }) => {
   const [openItems, setOpenItems] = useState<string[]>(activeItem ?? [])
@@ -67,7 +69,8 @@ export const Accordion: React.FC<AccordionProps> = ({
         activeLabelClassName,
         headerClassName,
         activeHeaderClassName,
-        contentClassName
+        contentClassName,
+        reset
       }}
     >
       <div className={cn('space-y-2', className)} {...rest}>{children}</div>

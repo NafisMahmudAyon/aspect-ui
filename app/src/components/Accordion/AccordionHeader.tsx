@@ -1,8 +1,8 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import { useAccordion } from './AccordionContext'
 import { cn } from '../../utils/cn'
+import { useAccordion } from './AccordionContext'
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   className?: string
@@ -69,6 +69,8 @@ interface AccordionHeaderProps {
   activeLabelClassName?: string
   headerClassName?: string
   activeHeaderClassName?: string
+  reset?: boolean
+  tagName?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'button'
 }
 
 export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
@@ -87,6 +89,8 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   headerClassName: headerHeaderClassName,
   activeHeaderClassName: headerActiveHeaderClassName,
   disabled = false,
+  reset = false,
+  tagName = 'h2',
   ...rest
 }) => {
   const {
@@ -99,9 +103,10 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     labelClassName: accordionLabelClassName,
     activeLabelClassName: accordionActiveLabelClassName,
     headerClassName: accordionHeaderClassName,
-    activeHeaderClassName: accordionActiveHeaderClassName
+    activeHeaderClassName: accordionActiveHeaderClassName,
+    reset: accordionReset
   } = useAccordion()
-
+  const TagName = tagName
   const iconEnabled = headerIconEnabled ?? accordionIconEnabled
   const iconPosition = headerIconPosition ?? accordionIconPosition
   const iconClassName = headerIconClassName ?? accordionIconClassName
@@ -122,16 +127,18 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
 
   const labelClass = cn(labelClassName, isOpen ? activeLabelClassName : '')
   const headerClass = cn(headerClassName, isOpen ? activeHeaderClassName : '')
+  const accordionHeaderReset = accordionReset ?? reset
+  console.log(accordionHeaderReset)
   return (
-    <button
+    <TagName
       className={cn(
         'flex w-full items-center justify-between p-4 text-left transition-all duration-150 ease-in-out',
         disabled
-        ? ''
-        : 'cursor-pointer hover:bg-primary-200 dark:hover:bg-primary-900',
+          ? ''
+          : `cursor-pointer ${accordionHeaderReset ? '' : 'hover:bg-primary-200 dark:hover:bg-primary-900'}`,
         isOpen
-        ? 'bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200'
-        : 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100',
+          ? accordionHeaderReset ? '' : 'bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200'
+          : accordionHeaderReset ? '' : 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100',
         className,
         headerClass,
       )}
@@ -145,6 +152,6 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
       {iconEnabled && iconPosition === 'right' && (
         <span className={`${iconClass}`}>{icon}</span>
       )}
-    </button>
+    </TagName>
   )
 }

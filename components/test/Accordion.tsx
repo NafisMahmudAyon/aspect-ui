@@ -131,10 +131,10 @@ const AccordionDemo = () => {
         </AccordionItem>
       </Accordion> */}
 
-      <Accordion className='space-y-4'>
+      <Accordion className='space-y-4' reset={true}>
         {accordionItems.map((item, index) => (
           <AccordionItem key={index} id={`item-${index + 1}`}>
-            <AccordionHeader headerClassName='bg-red-400' activeHeaderClassName='text-red-600'>{item.title}</AccordionHeader>
+            <AccordionHeader tagName='h1'>{item.title}</AccordionHeader>
             <AccordionContent>{item.content}</AccordionContent>
           </AccordionItem>
         ))}

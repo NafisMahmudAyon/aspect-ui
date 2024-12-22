@@ -16,6 +16,7 @@ interface AccordionContextType {
   headerClassName?: string
   activeHeaderClassName?: string
   contentClassName?: string
+  reset?: boolean
 }
 
 const AccordionContext = createContext<AccordionContextType | undefined>(
