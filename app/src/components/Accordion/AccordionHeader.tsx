@@ -111,7 +111,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const inactiveIcon = headerInactiveIcon ?? accordionInactiveIcon ?? <Down />
 
   const icon = isOpen ? activeIcon : inactiveIcon
-  const iconClass = `${iconClassName} ${isOpen ? activeIconClassName : ''} transition-transform duration-300`
+  const iconClass = cn(iconClassName, isOpen ? activeIconClassName : '', 'transition-transform duration-300')
 
   const labelClassName = headerLabelClassName ?? accordionLabelClassName
   const activeLabelClassName =
@@ -120,20 +120,20 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const activeHeaderClassName =
     headerActiveHeaderClassName ?? accordionActiveHeaderClassName
 
-  const labelClass = `${labelClassName} ${isOpen ? activeLabelClassName : ''}`
-  const headerClass = `${headerClassName} ${isOpen ? activeHeaderClassName : ''}`
+  const labelClass = cn(labelClassName, isOpen ? activeLabelClassName : '')
+  const headerClass = cn(headerClassName, isOpen ? activeHeaderClassName : '')
   return (
     <button
       className={cn(
-        headerClass,
         'flex w-full items-center justify-between p-4 text-left transition-all duration-150 ease-in-out',
         disabled
-          ? ''
-          : 'cursor-pointer hover:bg-primary-200 dark:hover:bg-primary-900',
+        ? ''
+        : 'cursor-pointer hover:bg-primary-200 dark:hover:bg-primary-900',
         isOpen
-          ? 'bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200'
-          : 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100',
-        className
+        ? 'bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200'
+        : 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100',
+        className,
+        headerClass,
       )}
       onClick={onToggle}
       disabled={disabled} {...rest}
