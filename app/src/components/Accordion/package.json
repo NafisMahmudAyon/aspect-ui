@@ -1,6 +1,6 @@
 {
   "name": "aspect-ui-accordion",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Accordion Component",
   "files": [
     "./lib/"
