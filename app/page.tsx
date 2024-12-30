@@ -55,8 +55,8 @@ export default function Home() {
       <BreadcrumbDemo /> */}
       {/* <ModalDemo /> */}
       {/* <DropdownDemo /> */}
-      {/* <TabsDemo />
-      <TableDemo />
+      <TabsDemo />
+      {/* <TableDemo />
       <NavbarDemo />
       <SidebarDemo />
       <InputDemo />

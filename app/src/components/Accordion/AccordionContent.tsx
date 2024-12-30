@@ -9,15 +9,19 @@ interface AccordionContentProps {
   children: ReactNode
   isOpen?: boolean
   className?: string
+  reset?: boolean
 }
 
 export const AccordionContent: React.FC<AccordionContentProps> = ({
   children,
   isOpen,
   className = '',
+  reset = false,
   ...rest
 }) => {
-  const { contentClassName } = useAccordion()
+  const { contentClassName: accordionContentClassName, reset: accordionReset } = useAccordion()
+
+  const accordionContentReset = accordionReset ?? reset
 
   return (
     <AnimatePresence initial={false}>
@@ -36,9 +40,9 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
             className={cn(
               'overflow-hidden border-t p-4',
               isOpen
-                ? 'border-primary-950 dark:border-primary-100 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200'
-                : 'border-primary-950 dark:border-primary-100',
-              contentClassName,
+                ? accordionContentReset ? "" : 'border-primary-950 dark:border-primary-100 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200'
+                : accordionContentReset ? "" :  'border-primary-950 dark:border-primary-100',
+              accordionContentClassName,
               className
             )} {...rest}
           >

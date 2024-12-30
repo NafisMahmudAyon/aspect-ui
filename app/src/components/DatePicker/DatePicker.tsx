@@ -159,7 +159,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   <DropdownList>
                     {monthNames.map((month, index) => (
                       <DropdownItem className={`bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 ${currentDate.getMonth() == index ? "bg-primary-200 dark:bg-primary-800" : ""}`} key={month} onClick={() => {
-                        console.log(month)
                         const cDate = new Date()
                         if (cDate.getMonth() === index) {
 

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 interface TabItemProps {
     children: ReactNode;
-    value: string;
+    id: string;
     disabled?: boolean;
     className?: string;
     activeClassName?: string;

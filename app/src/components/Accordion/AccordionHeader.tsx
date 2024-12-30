@@ -128,7 +128,6 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const labelClass = cn(labelClassName, isOpen ? activeLabelClassName : '')
   const headerClass = cn(headerClassName, isOpen ? activeHeaderClassName : '')
   const accordionHeaderReset = accordionReset ?? reset
-  console.log(accordionHeaderReset)
   return (
     <TagName
       className={cn(
