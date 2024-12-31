@@ -6,6 +6,7 @@ interface TabItemProps {
     className?: string;
     activeClassName?: string;
     disabledClassName?: string;
+    onClick?: () => void;
 }
 export declare const TabItem: React.FC<TabItemProps>;
 export {};
