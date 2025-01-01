@@ -21,10 +21,12 @@ interface TooltipProps {
 
 interface TooltipActionProps {
   children: ReactNode
+  className?: string
 }
 
 interface TooltipContentProps {
   children: ReactNode
+  className?: string
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -196,7 +198,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 }
 
 
-const TooltipAction: React.FC<TooltipActionProps> = ({ children }) => <>{children}</>
-const TooltipContent: React.FC<TooltipContentProps> = ({ children }) => <>{children}</>
+const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '' }) => <div className={className}>{children}</div>
+const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '' }) => <div className={className}>{children}</div>
 
 export { Tooltip, TooltipAction, TooltipContent }

@@ -4,7 +4,6 @@ import {
   TooltipAction,
   TooltipContent
 } from '@/app/src/components/Tooltip/Tooltip'
-import React from 'react'
 
 const TooltipDemo = () => {
   return (
@@ -44,11 +43,11 @@ const TooltipDemo = () => {
           </TooltipContent>
         </Tooltip>
       </div>
-      <Tooltip direction="left" showOnClick={true} arrowSize={10} arrowColor="#a9cdcf">
-        <TooltipAction>
-          <Button className="handle bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-10 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-move">
+      <Tooltip direction="left" arrowSize={10} arrowColor="#a9cdcf">
+        <TooltipAction className="handle bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-10 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-move">
+          {/* <Button> */}
             aa
-          </Button>
+          {/* </Button> */}
         </TooltipAction>
         <TooltipContent>
           <p
