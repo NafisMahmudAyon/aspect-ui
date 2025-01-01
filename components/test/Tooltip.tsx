@@ -1,3 +1,4 @@
+import { Button } from '@/app/src'
 import {
   Tooltip,
   TooltipAction,
@@ -43,6 +44,20 @@ const TooltipDemo = () => {
           </TooltipContent>
         </Tooltip>
       </div>
+      <Tooltip direction="left" showOnClick={true} arrowSize={10} arrowColor="#a9cdcf">
+        <TooltipAction>
+          <Button className="handle bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-10 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-move">
+            aa
+          </Button>
+        </TooltipAction>
+        <TooltipContent>
+          <p
+            className="text-body1 !text-[11px]"
+            aria-label="Drag to reorder">
+            Drag to reorder
+          </p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   )
 }

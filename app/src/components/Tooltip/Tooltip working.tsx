@@ -47,9 +47,6 @@ const Tooltip: React.FC<TooltipProps> = ({
     React.ReactElement<TooltipContentProps>
   ]
 
-  let showTimeout: NodeJS.Timeout | null = null
-  let hideTimeout: NodeJS.Timeout | null = null
-
   const updateTooltipPosition = () => {
     if (!tooltipRef.current || !triggerRef.current) return
     const rect = triggerRef.current.getBoundingClientRect()
@@ -85,22 +82,16 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   const showTooltip = () => {
-    if (hideTimeout) {
-      clearTimeout(hideTimeout)
-    }
-    showTimeout = setTimeout(() => {
-      setIsVisible(true)
-      setTooltipPosition(null) // Reset position to allow recalculation
-    }, 100) // Add a small delay
+    setIsVisible(true)
+    setTooltipPosition(null) // Reset position to allow recalculation
   }
 
   const hideTooltip = () => {
-    if (showTimeout) {
-      clearTimeout(showTimeout)
-    }
-    hideTimeout = setTimeout(() => {
-      setIsVisible(false)
-    }, 100) // Add a small delay
+    setIsVisible(false)
+  }
+
+  const closeTooltip = () => {
+    setIsVisible(false)
   }
 
   const handleOutsideClick = (event: MouseEvent) => {
@@ -110,7 +101,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       triggerRef.current &&
       !triggerRef.current.contains(event.target as Node)
     ) {
-      setIsVisible(false)
+      closeTooltip()
     }
   }
 
@@ -130,8 +121,6 @@ const Tooltip: React.FC<TooltipProps> = ({
     return () => {
       document.removeEventListener('scroll', updateTooltipPosition, true)
       document.removeEventListener('click', handleOutsideClick)
-      if (showTimeout) clearTimeout(showTimeout)
-      if (hideTimeout) clearTimeout(hideTimeout)
     }
   }, [isVisible, tooltipPosition, showOnClick])
 
@@ -149,16 +138,11 @@ const Tooltip: React.FC<TooltipProps> = ({
       case 'right':
         return { ...baseStyle, left: `-${arrowSize * 2}px`, top: '50%', transform: 'translateY(-50%)', borderRightColor: arrowColor }
       case 'bottom':
-        return {
-          ...baseStyle, top: `-${arrowSize * 2}px`, left: '50%', transform: 'translateX(-50%)', borderBottomColor: arrowColor
-        }
+        return { ...baseStyle, top: `-${arrowSize * 2}px`, left: '50%', transform: 'translateX(-50%)', borderBottomColor: arrowColor }
       case 'left':
-        return {
-          ...baseStyle, right: `-${arrowSize * 2}px`, top: '50%', transform: 'translateY(-50%)', borderLeftColor: arrowColor
-        }
+        return { ...baseStyle, right: `-${arrowSize * 2}px`, top: '50%', transform: 'translateY(-50%)', borderLeftColor: arrowColor }
     }
   }
-
 
   return (
     <div className={cn('relative inline-block', className)} {...rest}>
@@ -194,7 +178,6 @@ const Tooltip: React.FC<TooltipProps> = ({
     </div>
   )
 }
-
 
 const TooltipAction: React.FC<TooltipActionProps> = ({ children }) => <>{children}</>
 const TooltipContent: React.FC<TooltipContentProps> = ({ children }) => <>{children}</>
