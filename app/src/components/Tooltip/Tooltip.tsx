@@ -164,7 +164,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         }
     }
   }
-
+console.log(getArrowStyle())
 
   return (
     <div className={cn('relative inline-block', className)} {...rest}>
@@ -181,8 +181,8 @@ const Tooltip: React.FC<TooltipProps> = ({
         ReactDOM.createPortal(
           <div
             ref={tooltipRef}
-            className={cn(
-              'absolute px-2 py-1 rounded-md text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
+            className={cn('absolute',
+              // 'absolute rounded-md text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
               contentClassName
             )}
             style={{
@@ -203,6 +203,8 @@ const Tooltip: React.FC<TooltipProps> = ({
 
 
 const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '', reset = false, ...rest }) => <div className={className} {...rest}>{children}</div>
-const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '', ...rest }) => <div className={className} {...rest}>{children}</div>
+const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '', reset = false, ...rest }) => <div className={cn(
+  'rounded-md px-2 py-1 text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
+  className)} {...rest}>{children}</div>
 
 export { Tooltip, TooltipAction, TooltipContent }
