@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode, ChangeEvent } from 'react';
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     type?: string;
@@ -10,5 +10,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     wrapperClassName?: string;
     errorClassName?: string;
     passwordIconClassName?: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;

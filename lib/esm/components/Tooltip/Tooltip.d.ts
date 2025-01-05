@@ -12,14 +12,17 @@ interface TooltipProps {
     arrowSize?: number;
     contentClassName?: string;
     actionClassName?: string;
+    reset?: boolean;
 }
 interface TooltipActionProps {
     children: ReactNode;
     className?: string;
+    reset?: boolean;
 }
 interface TooltipContentProps {
     children: ReactNode;
     className?: string;
+    reset?: boolean;
 }
 declare const Tooltip: React.FC<TooltipProps>;
 declare const TooltipAction: React.FC<TooltipActionProps>;

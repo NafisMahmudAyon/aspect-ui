@@ -2,7 +2,7 @@
 
 'use client'
 
-import { InputHTMLAttributes, forwardRef, ReactNode, useState } from 'react'
+import { InputHTMLAttributes, forwardRef, ReactNode, useState, ChangeEvent } from 'react'
 import { Hide, Mail, Show } from '../Icon/Form'
 import { cn } from '../../utils/cn'
 import { Tooltip, TooltipAction, TooltipContent } from '../Tooltip'
@@ -18,10 +18,11 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   wrapperClassName?: string
   errorClassName?: string
   passwordIconClassName?: string
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, type = "text", error, icon = <Mail />, labelClassName = "", iconClassName = "", className = "", wrapperClassName = "", errorClassName = "", passwordIconClassName = "", ...rest }, ref) => {
+  ({ label, type = "text", error, icon = <Mail />, labelClassName = "", iconClassName = "", className = "", wrapperClassName = "", errorClassName = "", passwordIconClassName = "", onChange, ...rest }, ref) => {
     const [isShown, setIsShown] = useState(false)
 
     const handleClick = () => setIsShown(!isShown)
@@ -48,6 +49,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={inputType} // Use the determined input type
             className={cn("w-full rounded-md border bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 placeholder:text-secondary-500 px-3 py-2 shadow-sm focus-visible:border-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ps-11", type === 'password' && 'pe-11', error ? 'border-error-500' : 'border-gray-300', className)}
+            onChange={(event) => {
+              onChange?.(event)
+            }}
             {...rest}
           />
           {type === "password" &&

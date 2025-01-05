@@ -17,16 +17,19 @@ interface TooltipProps {
   arrowSize?: number
   contentClassName?: string
   actionClassName?: string
+  reset?: boolean
 }
 
 interface TooltipActionProps {
   children: ReactNode
   className?: string
+  reset?: boolean
 }
 
 interface TooltipContentProps {
   children: ReactNode
   className?: string
+  reset?: boolean
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -38,6 +41,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   arrowSize = 10,
   contentClassName = '',
   actionClassName = '',
+  reset = false,
   ...rest
 }) => {
   const [isVisible, setIsVisible] = useState(false)
@@ -178,7 +182,7 @@ const Tooltip: React.FC<TooltipProps> = ({
           <div
             ref={tooltipRef}
             className={cn(
-              'absolute bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-2 py-1 rounded-md text-body2 w-max',
+              'absolute px-2 py-1 rounded-md text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
               contentClassName
             )}
             style={{
@@ -198,7 +202,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 }
 
 
-const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '' }) => <div className={className}>{children}</div>
-const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '' }) => <div className={className}>{children}</div>
+const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '', reset = false, ...rest }) => <div className={className} {...rest}>{children}</div>
+const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '', ...rest }) => <div className={className} {...rest}>{children}</div>
 
 export { Tooltip, TooltipAction, TooltipContent }
