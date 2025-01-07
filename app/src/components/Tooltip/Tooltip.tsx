@@ -164,7 +164,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         }
     }
   }
-console.log(getArrowStyle())
+// console.log(getArrowStyle())
 
   return (
     <div className={cn('relative inline-block', className)} {...rest}>
