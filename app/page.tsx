@@ -55,6 +55,7 @@ export default function Home() {
       <BreadcrumbDemo /> */}
       {/* <ModalDemo /> */}
       {/* <DropdownDemo /> */}
+      <DatePickerDemo />
       <TabsDemo />
       <TooltipDemo />
       {/* <TableDemo />
@@ -68,7 +69,6 @@ export default function Home() {
       <UploadDemo />
       <ToggleButtonDemo />
       <PaginationDemo />
-      <DatePickerDemo />
       <SpinnerDemo />
       <StepperDemo />
       <RatingDemo />

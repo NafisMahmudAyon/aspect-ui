@@ -134,7 +134,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         {...rest}
       />
       {isOpen && (
-        <div className='absolute p-4 left-0 top-full mt-2 rounded-md border border-primary-500 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 shadow-lg'>
+        <div className='absolute p-4 left-0 top-full mt-2 rounded-md border border-primary-500 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 shadow-lg z-[9999]'>
           <div className='flex items-center justify-between py-2'>
             <button onClick={handlePrevMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded' ? 'rounded-md' : '')}>
               <Left />
