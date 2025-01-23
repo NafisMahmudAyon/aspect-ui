@@ -40,6 +40,8 @@ import TimelineDemo from '@/components/test/Timeline'
 import TypographyDemo from '@/components/test/Typography'
 import MasonryDemo from '@/components/test/Masonry'
 import AccordionDemo from '@/components/test/Accordion'
+import SelectDemo from '@/components/test/Select'
+import PopoverDemo from '@/components/test/Popover'
 export default function Home() {
   return (
     <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950'>
@@ -57,6 +59,8 @@ export default function Home() {
       {/* <DropdownDemo /> */}
       <DatePickerDemo />
       <TabsDemo />
+      <SelectDemo />
+      <PopoverDemo />
       <TooltipDemo />
       {/* <TableDemo />
       <NavbarDemo />
