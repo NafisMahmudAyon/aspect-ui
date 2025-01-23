@@ -94,6 +94,10 @@
       "types": "./lib/esm/components/Pagination/index.d.ts",
       "default": "./lib/cjs/components/Pagination/index.js"
     },
+    "./Popover": {
+      "types": "./lib/esm/components/Popover/index.d.ts",
+      "default": "./lib/cjs/components/Popover/index.js"
+    },
     "./ProgressBar": {
       "types": "./lib/esm/components/ProgressBar/index.d.ts",
       "default": "./lib/cjs/components/ProgressBar/index.js"
