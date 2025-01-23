@@ -31,7 +31,7 @@ const ModalDemo = () => {
             <p className='mb-4'>This is the modal content.</p>
             <button
           onClick={() => showToast('success')}
-          className='rounded bg-green-500 px-4 py-2 text-white'
+          className='rounded-sm bg-green-500 px-4 py-2 text-white'
         >
           Show Success Toast
         </button>

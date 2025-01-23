@@ -97,7 +97,7 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({
       <CodeBody
         content={Object.values(content)[codeType]}
         language={lang}
-        styles={`${bodyStyles} pt-1 px-4 pb-1 text-sm overflow-y-scroll !rounded-b-lg block`}
+        styles={`${bodyStyles} pt-1 px-4 pb-1 text-sm overflow-y-scroll rounded-b-lg! block`}
         children={children}
         preview={preview}
       />

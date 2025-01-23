@@ -178,43 +178,43 @@ export const Image: React.FC<ImageProps> = ({
             <div className='absolute right-4 top-4 space-y-2'>
               <button
                 onClick={() => handleZoom('in')}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Zoom In
               </button>
               <button
                 onClick={() => handleZoom('out')}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Zoom Out
               </button>
               <button
                 onClick={() => handleRotate('cw')}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Rotate Clockwise
               </button>
               <button
                 onClick={() => handleRotate('ccw')}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Rotate Anti-Clockwise
               </button>
               <button
                 onClick={handleMirror}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Mirror
               </button>
               <button
                 onClick={handleFlipVertical}
-                className='rounded-full bg-white p-2 shadow hover:bg-gray-200'
+                className='rounded-full bg-white p-2 shadow-sm hover:bg-gray-200'
               >
                 Flip Upside Down
               </button>
               <button
                 onClick={() => setLightboxOpen(false)}
-                className='rounded-full bg-red-600 p-2 text-white shadow hover:bg-red-800'
+                className='rounded-full bg-red-600 p-2 text-white shadow-sm hover:bg-red-800'
               >
                 Close
               </button>

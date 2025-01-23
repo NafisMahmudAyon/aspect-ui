@@ -22,7 +22,7 @@ const DocSidebar = () => {
         id="componentListSidebar"
         className=" space-y-5 2xl:py-6 2xl:pl-8">
         <Accordion multiple={true} activeItem={['item-1', 'item-2', 'item-3']}>
-          {/* <AccordionPanel className="!border-b-0"> */}
+          {/* <AccordionPanel className="border-b-0!"> */}
           <AccordionItem id="item-1" className="p-0 border-none mb-3">
             <AccordionHeader className="text-body1 font-semibold text-primary-900 dark:text-primary-100 bg-transparent dark:bg-transparent px-0 py-2 hover:bg-transparent dark:hover:bg-transparent">
               Getting Started
@@ -33,7 +33,7 @@ const DocSidebar = () => {
                   <li key={route.id}>
                     <Link
                       className={cn("-ml-px border-l border-l-transparent pl-3 text-body-4 font-medium text-primary-700 hover:-ml-px hover:border-l hover:border-primary-500 hover:text-primary-800 dark:text-primary-400 dark:hover:border-white dark:hover:text-primary-200", IsActive(route.href)
-                          ? 'border-l !border-primary-500 text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:!border-white dark:text-primary-200 dark:hover:text-primary-200'
+                          ? 'border-l border-primary-500! text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:border-white! dark:text-primary-200 dark:hover:text-primary-200'
                           : ''
                         )}
                       href={route.href}>
@@ -55,7 +55,7 @@ const DocSidebar = () => {
                   <li key={route.id}>
                     <Link
                       className={cn("-ml-px border-l border-l-transparent pl-3 text-body-4 font-medium text-primary-700 hover:-ml-px hover:border-l hover:border-primary-500 hover:text-primary-800 dark:text-primary-400 dark:hover:border-white dark:hover:text-primary-200", IsActive(route.href)
-                        ? 'border-l !border-primary-500 text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:!border-white dark:text-primary-200 dark:hover:text-primary-200'
+                        ? 'border-l border-primary-500! text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:border-white! dark:text-primary-200 dark:hover:text-primary-200'
                         : ''
                       )}
                       href={route.href}>
@@ -76,7 +76,7 @@ const DocSidebar = () => {
                   <li key={route.id}>
                     <Link
                       className={cn("-ml-px border-l border-l-transparent pl-3 text-body-4 font-medium text-primary-700 hover:-ml-px hover:border-l hover:border-primary-500 hover:text-primary-800 dark:text-primary-400 dark:hover:border-white dark:hover:text-primary-200", IsActive(route.href)
-                        ? 'border-l !border-primary-500 text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:!border-white dark:text-primary-200 dark:hover:text-primary-200'
+                        ? 'border-l border-primary-500! text-primary-800 transition-colors duration-150 hover:text-primary-800 dark:border-white! dark:text-primary-200 dark:hover:text-primary-200'
                         : ''
                       )}
                       href={route.href}>

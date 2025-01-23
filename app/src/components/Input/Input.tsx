@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             type={inputType} // Use the determined input type
-            className={cn("w-full rounded-md border bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 placeholder:text-secondary-500 px-3 py-2 shadow-sm focus-visible:border-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-200 ps-11", type === 'password' && 'pe-11', error ? 'border-error-500' : 'border-gray-300', className)}
+            className={cn("w-full rounded-md border bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 placeholder:text-secondary-500 px-3 py-2 shadow-xs focus-visible:border-primary-200 focus:outline-hidden focus:ring-2 focus:ring-primary-200 ps-11", type === 'password' && 'pe-11', error ? 'border-error-500' : 'border-gray-300', className)}
             onChange={(event) => {
               onChange?.(event)
             }}

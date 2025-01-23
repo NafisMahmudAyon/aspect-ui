@@ -129,7 +129,7 @@ export const Image: React.FC<ImageProps> = ({
             <div className='fixed right-6 top-6 space-y-2'>
               <button
                 onClick={() => setLightboxOpen(false)}
-                className='flex size-10 items-center justify-center rounded-full text-lg leading-none text-white shadow'
+                className='flex size-10 items-center justify-center rounded-full text-lg leading-none text-white shadow-sm'
               >
                 <svg
                   fill='currentColor'

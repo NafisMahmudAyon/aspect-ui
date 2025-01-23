@@ -114,7 +114,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     >
       {/* Left button */}
       <button
-        className='absolute left-0 top-1/2 -translate-y-1/2 transform rounded bg-black bg-opacity-50 px-3 py-1 text-white hover:bg-opacity-75 focus:outline-none'
+        className='absolute left-0 top-1/2 -translate-y-1/2 transform rounded-sm bg-black bg-opacity-50 px-3 py-1 text-white hover:bg-opacity-75 focus:outline-hidden'
         onClick={prevSlide}
       >
         &#10094;
@@ -139,7 +139,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 
       {/* Right button */}
       <button
-        className='absolute right-0 top-1/2 -translate-y-1/2 transform rounded bg-black bg-opacity-50 px-3 py-1 text-white hover:bg-opacity-75 focus:outline-none'
+        className='absolute right-0 top-1/2 -translate-y-1/2 transform rounded-sm bg-black bg-opacity-50 px-3 py-1 text-white hover:bg-opacity-75 focus:outline-hidden'
         onClick={nextSlide}
       >
         &#10095;

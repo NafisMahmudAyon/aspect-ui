@@ -8,7 +8,7 @@ interface CheckboxProps {
   label: string
   checked: boolean;
   checkboxClassName?: string;
-  // variant?: 'rounded' | 'circle' | 'default'
+  // variant?: 'rounded-sm' | 'circle' | 'default'
   onChange: (checked: boolean) => void
   disabled?: boolean
   className?: string

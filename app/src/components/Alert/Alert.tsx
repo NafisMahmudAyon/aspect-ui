@@ -32,7 +32,7 @@ export const Alert: React.FC<AlertProps> = ({
   if (!isVisible) return null
 
   const getAlertStyles = (): string => {
-    const baseStyles = `px-4 py-3 rounded relative`
+    const baseStyles = `px-4 py-3 rounded-sm relative`
     switch (type) {
       case 'success':
         return `${baseStyles} bg-success-100 dark:bg-success-950 border border-success-400 text-success-700 dark:text-success-300`

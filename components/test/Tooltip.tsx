@@ -51,7 +51,7 @@ const TooltipDemo = () => {
         </TooltipAction>
         <TooltipContent className="bg-primary-200 dark:bg-primary-200 px-4 py-2 text-primary-900 dark:text-primary-900">
           <p
-            className="text-body1 !text-[11px]"
+            className="text-body1 text-[11px]!"
             aria-label="Drag to reorder">
             Drag to reorder
           </p>

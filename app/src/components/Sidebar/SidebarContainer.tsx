@@ -16,7 +16,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
 }) => {
   return (
     <div
-      className={cn('flex-grow overflow-y-auto my-2 space-y-1', className)}
+      className={cn('grow overflow-y-auto my-2 space-y-1', className)}
       {...rest}
     >
       {children}

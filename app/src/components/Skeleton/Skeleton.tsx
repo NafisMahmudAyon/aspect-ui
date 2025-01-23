@@ -3,7 +3,7 @@ import React from 'react'
 import { cn } from '../../utils/cn'
 // import { motion } from 'framer-motion';
 
-type SkeletonVariation = 'text' | 'circular' | 'rectangular' | 'rounded'
+type SkeletonVariation = 'text' | 'circular' | 'rectangular' | 'rounded-sm'
 // type AnimationType = 'pulse' | 'wave' | 'shimmer';
 
 interface SkeletonProps {
@@ -26,11 +26,11 @@ export const Skeleton: React.FC<SkeletonProps> = ({
         return 'rounded-full'
       case 'rectangular':
         return 'rounded-none'
-      case 'rounded':
+      case 'rounded-sm':
         return 'rounded-md'
       case 'text':
       default:
-        return 'rounded'
+        return 'rounded-sm'
     }
   }
   

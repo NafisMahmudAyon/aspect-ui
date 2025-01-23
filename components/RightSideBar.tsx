@@ -44,7 +44,7 @@ const RightSideBar: React.FC<RightSideBarProps> = ({ id = "" }) => {
           <a
             key={item.id}
             className={cn("-ml-px text-sm my-2 block px-2 pl-4 border-l border-l-transparent py-1 border-gray-300 dark:border-gray-500   transition-all duration-300 hover:border-l hover:border-primary-500 dark:hover:border-white",
-              item.id === activeId ? "!border-primary-500 dark:!border-white" : ""
+              item.id === activeId ? "border-primary-500! dark:border-white!" : ""
             )}
             href={`#${item.id}`}
             onClick={() => handleClick(item.id)}

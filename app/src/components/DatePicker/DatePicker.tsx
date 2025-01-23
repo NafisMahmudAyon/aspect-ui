@@ -8,7 +8,7 @@ interface DatePickerProps {
   onChange: (dates: Date[]) => void
   initialDates?: Date[]
   isRange?: boolean
-  shape?: 'rounded' | 'square' | 'circle'
+  shape?: 'rounded-sm' | 'square' | 'circle'
   placeholder?: string
   className?: string
 }
@@ -126,7 +126,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     <div className='relative'>
       <input
         type='text'
-        className={cn('w-full rounded-md border text-primary-800 dark:text-primary-200 border-primary-500 px-4 py-2 bg-primary-200 dark:bg-primary-800 outline-none focus-visible:outlined', className)}
+        className={cn('w-full rounded-md border text-primary-800 dark:text-primary-200 border-primary-500 px-4 py-2 bg-primary-200 dark:bg-primary-800 outline-hidden focus-visible:outlined', className)}
         value={formatDateRange(selectedDates)}
         onClick={() => setIsOpen(!isOpen)}
         readOnly
@@ -134,16 +134,16 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         {...rest}
       />
       {isOpen && (
-        <div className='absolute p-4 left-0 top-full mt-2 rounded-md border border-primary-500 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 shadow-lg z-[9999]'>
+        <div className='absolute p-4 left-0 top-full mt-2 rounded-md border border-primary-500 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 shadow-lg z-9999'>
           <div className='flex items-center justify-between py-2'>
-            <button onClick={handlePrevMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded' ? 'rounded-md' : '')}>
+            <button onClick={handlePrevMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
               <Left />
             </button>
             <div className='flex flex-1 justify-center gap-3'>
               {/* <select
                 value={currentDate.getMonth()}
                 onChange={(e) => setCurrentDate(new Date(currentDate.getFullYear(), parseInt(e.target.value), 1))}
-                className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-none cursor-pointer'
+                className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer'
               >
                 {monthNames.map((month, index) => (
                   <option key={month} value={index}>
@@ -152,7 +152,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 ))}
               </select> */}
               <Dropdown>
-                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-none cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
+                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
                   {monthNames[currentDate.getMonth()]}
                 </DropdownAction>
                 <DropdownContent>
@@ -173,7 +173,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 </DropdownContent>
               </Dropdown>
               <Dropdown>
-                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-none cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
+                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
                   {currentDate.getFullYear()}
                 </DropdownAction>
                 <DropdownContent className='overflow-y-auto [&::-webkit-scrollbar]:w-2
@@ -214,12 +214,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 ))}
               </select> */}
             </div>
-            <button onClick={handleNextMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded' ? 'rounded-md' : '')}>
+            <button onClick={handleNextMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
               <Right />
             </button>
           </div>
-          <div className='grid grid-cols-[repeat(7,_minmax(2rem,_1fr))] gap-1'>
-            <div className='grid grid-cols-[repeat(7,_minmax(2rem,_1fr))] col-start-1 col-end-8 gap-1 border-t border-b border-primary-500/30'>
+          <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1'>
+            <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] col-start-1 col-end-8 gap-1 border-t border-b border-primary-500/30'>
               {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
                 <div key={day} className='size-8 flex items-center justify-center text-center text-sm font-bold'>
                   {day}
@@ -232,7 +232,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 onClick={() => date && handleDateClick(date)}
                 className={cn(
                   'h-8 w-8 text-center',
-                  shape === 'circle' ? 'rounded-full' : shape === 'rounded' ? 'rounded-md' : '',
+                  shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '',
                   !date && 'invisible',
                   date && 'hover:bg-primary-200 dark:hover:bg-primary-800',
                   date && date.getDate() === currentDate.getDate() &&

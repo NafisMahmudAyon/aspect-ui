@@ -27,7 +27,7 @@ const TimelineItem: React.FC<
         <h3 className='text-lg font-semibold'>{title}</h3>
         <div className='mt-2'>{description}</div>
       </div>
-      <div className='z-10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-500'>
+      <div className='z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500'>
         {icon || <div className='h-3 w-3 rounded-full bg-white' />}
       </div>
     </div>

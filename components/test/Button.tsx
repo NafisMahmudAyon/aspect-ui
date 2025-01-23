@@ -111,7 +111,7 @@ const ButtonDemo = () => {
               placeholder='Task Description'
             ></textarea>
             <button
-              className='rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700'
+              className='rounded-sm bg-blue-600 px-4 py-2 text-white hover:bg-blue-700'
               onClick={() => setModalOpen(false)}
             >
               Add Task

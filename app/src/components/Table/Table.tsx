@@ -80,7 +80,7 @@
 //         <button
 //           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
 //           disabled={currentPage === 1}
-//           className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+//           className="px-4 py-2 bg-blue-500 text-white rounded-sm disabled:bg-gray-300"
 //         >
 //           Previous
 //         </button>
@@ -90,7 +90,7 @@
 //         <button
 //           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
 //           disabled={currentPage === totalPages}
-//           className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+//           className="px-4 py-2 bg-blue-500 text-white rounded-sm disabled:bg-gray-300"
 //         >
 //           Next
 //         </button>

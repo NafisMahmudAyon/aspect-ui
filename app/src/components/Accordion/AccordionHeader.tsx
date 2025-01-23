@@ -147,7 +147,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
       {iconEnabled && iconPosition === 'left' && (
         <span className={`${iconClass}`}>{icon}</span>
       )}
-      <span className={`${labelClass} flex-grow`}>{children}</span>
+      <span className={`${labelClass} grow`}>{children}</span>
       {iconEnabled && iconPosition === 'right' && (
         <span className={`${iconClass}`}>{icon}</span>
       )}

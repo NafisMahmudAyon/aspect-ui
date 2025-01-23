@@ -10,7 +10,7 @@ const SkeletonDemo = () => {
 
       <Skeleton variation='circular' width={50} height={50} />
       <Skeleton variation='rectangular' width='100%' height={100} />
-      <Skeleton variation='rounded' width='60%' height={30} />
+      <Skeleton variation='rounded-sm' width='60%' height={30} />
     </div>
   )
 }

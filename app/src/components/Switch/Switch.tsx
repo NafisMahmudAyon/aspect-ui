@@ -70,7 +70,7 @@ export const Switch: React.FC<SwitchProps> = ({
           className={cn("rounded-full shadow-inner transition-colors duration-300 ease-in-out", sizeClasses[size], checked ? cn('bg-primary-900 dark:bg-primary-200', activeClassName) : cn('bg-primary-200 dark:bg-primary-900', deactiveClassName))}
         ></div>
         <div
-          className={cn("absolute -translate-y-1/2 top-1/2 left-0.5 rounded-full flex items-center justify-center shadow leading-none transition-transform duration-300 ease-in-out", switchSizeClasses[size], checked ? cn('translate-x-[calc(100%-0.125rem)] transform bg-primary-200 dark:bg-primary-900', activeSwitchClassName) : cn('bg-primary-900 dark:bg-primary-200', deactiveSwitchClassName))}
+          className={cn("absolute -translate-y-1/2 top-1/2 left-0.5 rounded-full flex items-center justify-center shadow-sm leading-none transition-transform duration-300 ease-in-out", switchSizeClasses[size], checked ? cn('translate-x-[calc(100%-0.125rem)] transform bg-primary-200 dark:bg-primary-900', activeSwitchClassName) : cn('bg-primary-900 dark:bg-primary-200', deactiveSwitchClassName))}
         >
           {switchIconEnabled && activeSwitchIcon && (
             <>

@@ -65,7 +65,7 @@ const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className={cn("fixed z-[9999] bottom-4 right-4 rounded-md px-4 py-2 shadow-lg transition-opacity duration-300", getBackgroundColor(), className)}
+      className={cn("fixed z-9999 bottom-4 right-4 rounded-md px-4 py-2 shadow-lg transition-opacity duration-300", getBackgroundColor(), className)}
     >
       <div className={cn('flex items-center justify-between', containerClassName)}>
         <div className={messageAreaClassName}>

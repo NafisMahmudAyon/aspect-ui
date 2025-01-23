@@ -43,7 +43,7 @@ const Stepper: React.FC<StepperProps> = ({ children, initialStep = 0 }) => {
           <React.Fragment key={index}>
             {index > 0 && (
               <div
-                className={`mx-2 h-0.5 flex-grow ${
+                className={`mx-2 h-0.5 grow ${
                   index <= activeStep ? 'bg-blue-500' : 'bg-gray-300'
                 }`}
               />

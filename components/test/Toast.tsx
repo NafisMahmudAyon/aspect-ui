@@ -66,25 +66,25 @@ const ToastDemo: React.FC = () => {
       <div className='space-x-2'>
         <button
           onClick={() => showToast('success')}
-          className='rounded bg-green-500 px-4 py-2 text-white'
+          className='rounded-sm bg-green-500 px-4 py-2 text-white'
         >
           Show Success Toast
         </button>
         <button
           onClick={() => showToast('error')}
-          className='rounded bg-red-500 px-4 py-2 text-white'
+          className='rounded-sm bg-red-500 px-4 py-2 text-white'
         >
           Show Error Toast
         </button>
         <button
           onClick={() => showToast('info')}
-          className='rounded bg-blue-500 px-4 py-2 text-white'
+          className='rounded-sm bg-blue-500 px-4 py-2 text-white'
         >
           Show Info Toast
         </button>
         <button
           onClick={() => showToast('warning')}
-          className='rounded bg-yellow-500 px-4 py-2 text-white'
+          className='rounded-sm bg-yellow-500 px-4 py-2 text-white'
         >
           Show Warning Toast
         </button>

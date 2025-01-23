@@ -76,7 +76,7 @@ const ThemeSwitcher = () => {
             exit={{ opacity: 0, y: 10 }}
             className="list-menu absolute right-0 top-[calc(100%+24px)] w-[150px] rounded-xl border border-primary-100 bg-primary-100 p-4 dark:border-primary-800 dark:bg-primary-900 ">
             <button
-              className="theme-switch flex items-center gap-3 w-full  hover:border-primary-50/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-sm py-2 px-2"
+              className="theme-switch flex items-center gap-3 w-full  hover:border-primary-50/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-xs py-2 px-2"
               onClick={() => {
                 setTheme('light')
                 setShowTheme(false)
@@ -85,7 +85,7 @@ const ThemeSwitcher = () => {
               Light
             </button>
             <button
-              className="theme-switch flex items-center gap-3 w-full hover:border-primary-100/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-sm py-2 px-2"
+              className="theme-switch flex items-center gap-3 w-full hover:border-primary-100/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-xs py-2 px-2"
               onClick={() => {
                 setTheme('dark')
                 setShowTheme(false)
@@ -94,7 +94,7 @@ const ThemeSwitcher = () => {
               Dark
             </button>
             <button
-              className="theme-switch flex items-center gap-3 w-full  hover:border-primary-100/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-sm py-2 px-2"
+              className="theme-switch flex items-center gap-3 w-full  hover:border-primary-100/50 border-b border-transparent transition-all duration-150 ease-in-out rounded-xs py-2 px-2"
               onClick={() => {
                 setTheme('system')
                 setShowTheme(false)
