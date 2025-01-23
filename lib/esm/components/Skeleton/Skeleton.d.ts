@@ -1,5 +1,5 @@
 import React from 'react';
-type SkeletonVariation = 'text' | 'circular' | 'rectangular' | 'rounded';
+type SkeletonVariation = 'text' | 'circular' | 'rectangular' | 'rounded-sm';
 interface SkeletonProps {
     variation?: SkeletonVariation;
     width?: string | number;

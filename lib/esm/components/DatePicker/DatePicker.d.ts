@@ -3,7 +3,7 @@ interface DatePickerProps {
     onChange: (dates: Date[]) => void;
     initialDates?: Date[];
     isRange?: boolean;
-    shape?: 'rounded' | 'square' | 'circle';
+    shape?: 'rounded-sm' | 'square' | 'circle';
     placeholder?: string;
     className?: string;
 }
