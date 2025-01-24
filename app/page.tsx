@@ -55,7 +55,7 @@ export default function Home() {
       <CircularProgressDemo />
       <CarouselDemo />
       <BreadcrumbDemo /> */}
-      {/* <ModalDemo /> */}
+      <ModalDemo />
       {/* <DropdownDemo /> */}
       <DatePickerDemo />
       <TabsDemo />

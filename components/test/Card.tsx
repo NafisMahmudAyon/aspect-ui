@@ -38,7 +38,7 @@ const CardDemo = () => {
       </Card>
       <Card className="max-w-md">
         <CardContent>
-          <CardTitle>Keep design system</CardTitle>
+          <CardTitle>Aspect UI design system</CardTitle>
           <CardDescription>
             Component design systems can help developers to be more productive by providing them with a ready-made set of
             components to use.
@@ -49,7 +49,7 @@ const CardDemo = () => {
       <Card className="max-w-md">
         <CardContent>
           <CardTitle>Our Contributors</CardTitle>
-          <CardDescription>They help us to grow up the keep react component library</CardDescription>
+          <CardDescription>They help us to grow up the Aspect UI react component library</CardDescription>
           <AvatarGroup className="mt-3">
             <Avatar className="size-14">
               <AvatarImage name='A' />

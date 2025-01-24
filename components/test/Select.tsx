@@ -1,12 +1,11 @@
 'use client'
-import { Select } from '@/app/src/components/Select'
+// import { Select } from '@/app/src/components/Select'
 import React from 'react'
 
 const SelectDemo = () => {
-  console.log(Select)
   return (
     <div>
-      <Select
+      {/* <Select
         options={[
           { value: 'option1', label: 'Option 1' },
           { value: 'option2', label: 'Option 2' },
@@ -14,7 +13,7 @@ const SelectDemo = () => {
         ]}
         onChange={(value) => console.log(value)}
         multiple
-      />
+      /> */}
     </div>
   )
 }

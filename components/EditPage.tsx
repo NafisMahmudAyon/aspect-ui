@@ -9,7 +9,7 @@ interface EditPageProps {
 }
 
 const EditPage: FC<EditPageProps> = ({ pageLink, nextPageName, nextPageLink }) => {
-  const githubPageLink = `https://github.com/StaticMania/keep-react/tree/main/app${pageLink}`
+  const githubPageLink = `https://github.com/StaticMania/aspect-ui/tree/main/app${pageLink}`
   return (
     <div className="my-12">
       <div className="flex items-center justify-between">

@@ -15,7 +15,7 @@ export const ModalOverlay = forwardRef<HTMLDivElement, ModalOverlayProps>(
         transition={{ duration: 0.2 }}
         {...props}
         className={cn(
-          'keep-modal fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-80',
+          'fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black/80',
           className,
         )}
         ref={ref}>

@@ -410,12 +410,6 @@ export const quickAccessRoute: routerPath[] = [
   },
   {
     id: generatedID(),
-    name: 'Figma',
-    href: 'https://keepdesign.io/',
-    target: '_blank',
-  },
-  {
-    id: generatedID(),
     name: 'Typography',
     href: '/docs/getting-started/typography',
     target: '_self',
