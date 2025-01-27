@@ -7,7 +7,7 @@ const TabsDemo = () => {
   console.log(tabActive)
   return (
     <div>
-      <Tabs defaultActive='item-5' className='mx-auto max-w-xl'>
+      <Tabs defaultActive='item-5' className='mx-auto max-w-xl test'>
         <TabList>
           <TabItem id='item-5'>Figma</TabItem>
           <TabItem disabled={true} id='item-6'>Docs</TabItem>

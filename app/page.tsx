@@ -44,7 +44,7 @@ import SelectDemo from '@/components/test/Select'
 import PopoverDemo from '@/components/test/Popover'
 export default function Home() {
   return (
-    <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950'>
+    <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950  '>
       <Dark />
       <AccordionDemo />
       {/* <ButtonDemo />
