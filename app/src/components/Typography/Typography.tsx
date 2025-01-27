@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import { cn } from '../../utils/cn'
 
 type TypographyVariant =
@@ -14,7 +14,7 @@ type TypographyVariant =
   | 'body2'
   | 'caption'
 
-interface TypographyProps {
+interface TypographyProps extends HTMLAttributes<HTMLDivElement> {
   variant?: TypographyVariant
   tagName?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "caption" | "span"
   children?: React.ReactNode
