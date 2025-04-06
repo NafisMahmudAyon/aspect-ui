@@ -1,16 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
-const { execSync } = require('child_process')
+import fs from 'fs'
+import path from 'path'
 
 const targetDir = path.resolve(process.cwd(), 'components')
-
-// Components folder inside your package
 const componentsSrc = path.join(__dirname, '../components')
 
-// Copy components
-const copyRecursiveSync = (src, dest) => {
+function copyRecursiveSync(src: string, dest: string): void {
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true })
   }
@@ -27,6 +23,6 @@ const copyRecursiveSync = (src, dest) => {
   })
 }
 
-console.log(`⚙️ Initializing Aspect UI components...`)
+console.log('⚙️  Initializing Aspect UI components...')
 copyRecursiveSync(componentsSrc, targetDir)
 console.log(`✅ Components added to ${targetDir}`)
