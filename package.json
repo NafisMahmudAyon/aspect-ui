@@ -3,11 +3,16 @@
   "version": "0.0.70",
   "description": "A React component library for building user interfaces",
   "files": [
-    "./lib/"
+    "./lib/",
+    "./app/src/components",
+    "cli"
   ],
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "bin": {
+    "aspect-ui": "./cli/index.js"
+  },
   "exports": {
     ".": {
       "import": {

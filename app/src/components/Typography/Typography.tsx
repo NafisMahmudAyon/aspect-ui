@@ -25,7 +25,8 @@ export const Typography: React.FC<TypographyProps> = ({
   variant="",
   tagName = "p",
   children,
-  className = ''
+  className = '',
+  ...rest
 }) => {
   const TagName=tagName
   // const getComponent = (): React.ElementType => {
@@ -81,6 +82,7 @@ export const Typography: React.FC<TypographyProps> = ({
   return (
     <TagName
       className={cn("text-primary-800 dark:text-primary-200", styles, className)}
+      {...rest}
     >
       {children}
     </TagName>

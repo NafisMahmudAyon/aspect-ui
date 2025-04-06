@@ -12,9 +12,9 @@ import {
 } from '@/app/src/components/Carousel'
 import autoPlay from 'embla-carousel-autoplay'
 // import { CarouselContext } from ''
-import { Slider } from '@/app/src/components/Slider deprecated/Slider'
+// import { Slider } from '@/app/src/components/Slider deprecated/Slider'
 
-import { SliderItem } from '@/app/src/components/Slider deprecated/SliderItem'
+// import { SliderItem } from '@/app/src/components/Slider deprecated/SliderItem'
 import React from 'react'
 
 const CarouselDemo = () => {
