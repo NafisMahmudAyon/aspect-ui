@@ -4,7 +4,7 @@ import fs from 'fs'
 import path from 'path'
 
 const targetDir = path.resolve(process.cwd(), 'components')
-const componentsSrc = path.join(__dirname, '../components')
+const componentsSrc = path.join(__dirname, '../app/src/components')
 
 function copyRecursiveSync(src: string, dest: string): void {
   if (!fs.existsSync(dest)) {

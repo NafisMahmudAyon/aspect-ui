@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var targetDir = path_1.default.resolve(process.cwd(), 'components');
-var componentsSrc = path_1.default.join(__dirname, '../components');
+var componentsSrc = path_1.default.join(__dirname, '../app/src/components');
 function copyRecursiveSync(src, dest) {
     if (!fs_1.default.existsSync(dest)) {
         fs_1.default.mkdirSync(dest, { recursive: true });
