@@ -5,7 +5,8 @@
   "files": [
     "./lib/",
     "./app/src/components",
-    "cli"
+    ".dist/",
+    ".cli/"
   ],
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -46,141 +47,6 @@
     "./Button": {
       "types": "./lib/esm/components/Button/index.d.ts",
       "default": "./lib/cjs/components/Button/index.js"
-    },
-    "./Card": {
-      "types": "./lib/esm/components/Card/index.d.ts",
-      "default": "./lib/cjs/components/Card/index.js"
-    },
-    "./Carousel": {
-      "types": "./lib/esm/components/Carousel/index.d.ts",
-      "default": "./lib/cjs/components/Carousel/index.js"
-    },
-    "./Checkbox": {
-      "types": "./lib/esm/components/Checkbox/index.d.ts",
-      "default": "./lib/cjs/components/Checkbox/index.js"
-    },
-    "./CircularProgressBar": {
-      "types": "./lib/esm/components/CircularProgressBar/index.d.ts",
-      "default": "./lib/cjs/components/CircularProgressBar/index.js"
-    },
-    "./DatePicker": {
-      "types": "./lib/esm/components/DatePicker/index.d.ts",
-      "default": "./lib/cjs/components/DatePicker/index.js"
-    },
-    "./Divider": {
-      "types": "./lib/esm/components/Divider/index.d.ts",
-      "default": "./lib/cjs/components/Divider/index.js"
-    },
-    "./Dropdown": {
-      "types": "./lib/esm/components/Dropdown/index.d.ts",
-      "default": "./lib/cjs/components/Dropdown/index.js"
-    },
-    "./Input": {
-      "types": "./lib/esm/components/Input/index.d.ts",
-      "default": "./lib/cjs/components/Input/index.js"
-    },
-    "./Masonry": {
-      "types": "./lib/esm/components/Masonry/index.d.ts",
-      "default": "./lib/cjs/components/Masonry/index.js"
-    },
-    "./Modal": {
-      "types": "./lib/esm/components/Modal/index.d.ts",
-      "default": "./lib/cjs/components/Modal/index.js"
-    },
-    "./Navbar": {
-      "types": "./lib/esm/components/Navbar/index.d.ts",
-      "default": "./lib/cjs/components/Navbar/index.js"
-    },
-    "./NumberCounter": {
-      "types": "./lib/esm/components/NumberCounter/index.d.ts",
-      "default": "./lib/cjs/components/NumberCounter/index.js"
-    },
-    "./Pagination": {
-      "types": "./lib/esm/components/Pagination/index.d.ts",
-      "default": "./lib/cjs/components/Pagination/index.js"
-    },
-    "./Popover": {
-      "types": "./lib/esm/components/Popover/index.d.ts",
-      "default": "./lib/cjs/components/Popover/index.js"
-    },
-    "./ProgressBar": {
-      "types": "./lib/esm/components/ProgressBar/index.d.ts",
-      "default": "./lib/cjs/components/ProgressBar/index.js"
-    },
-    "./Radio": {
-      "types": "./lib/esm/components/Radio/index.d.ts",
-      "default": "./lib/cjs/components/Radio/index.js"
-    },
-    "./Rating": {
-      "types": "./lib/esm/components/Rating/index.d.ts",
-      "default": "./lib/cjs/components/Rating/index.js"
-    },
-    "./Sidebar": {
-      "types": "./lib/esm/components/Sidebar/index.d.ts",
-      "default": "./lib/cjs/components/Sidebar/index.js"
-    },
-    "./Skeleton": {
-      "types": "./lib/esm/components/Skeleton/index.d.ts",
-      "default": "./lib/cjs/components/Skeleton/index.js"
-    },
-    "./Slider": {
-      "types": "./lib/esm/components/Slider/index.d.ts",
-      "default": "./lib/cjs/components/Slider/index.js"
-    },
-    "./Spinner": {
-      "types": "./lib/esm/components/Spinner/index.d.ts",
-      "default": "./lib/cjs/components/Spinner/index.js"
-    },
-    "./Stepper": {
-      "types": "./lib/esm/components/Stepper/index.d.ts",
-      "default": "./lib/cjs/components/Stepper/index.js"
-    },
-    "./Switch": {
-      "types": "./lib/esm/components/Switch/index.d.ts",
-      "default": "./lib/cjs/components/Switch/index.js"
-    },
-    "./Table": {
-      "types": "./lib/esm/components/Table/index.d.ts",
-      "default": "./lib/cjs/components/Table/index.js"
-    },
-    "./Tabs": {
-      "types": "./lib/esm/components/Tabs/index.d.ts",
-      "default": "./lib/cjs/components/Tabs/index.js"
-    },
-    "./Textarea": {
-      "types": "./lib/esm/components/Textarea/index.d.ts",
-      "default": "./lib/cjs/components/Textarea/index.js"
-    },
-    "./Timeline": {
-      "types": "./lib/esm/components/Timeline/index.d.ts",
-      "default": "./lib/cjs/components/Timeline/index.js"
-    },
-    "./Toast": {
-      "types": "./lib/esm/components/Toast/index.d.ts",
-      "default": "./lib/cjs/components/Toast/index.js"
-    },
-    "./ToggleButton": {
-      "types": "./lib/esm/components/ToggleButton/index.d.ts",
-      "default": "./lib/cjs/components/ToggleButton/index.js"
-    },
-    "./Tooltip": {
-      "types": "./lib/esm/components/Tooltip/index.d.ts",
-      "default": "./lib/cjs/components/Tooltip/index.js"
-    },
-    "./Typography": {
-      "types": "./lib/esm/components/Typography/index.d.ts",
-      "default": "./lib/cjs/components/Typography/index.js"
-    },
-    "./Upload": {
-      "types": "./lib/esm/components/Upload/index.d.ts",
-      "default": "./lib/cjs/components/Upload/index.js"
-    },
-    "./AspectUITheme": {
-      "types": "./lib/esm/theme/AspectUITheme.d.ts",
-      "default": "./lib/cjs/theme/AspectUITheme.js"
-    },
-    "./css": {
-      "default": "./lib/cjs/theme/index.min.css"
     }
   },
   "scripts": {
@@ -193,6 +59,7 @@
     "watch": "npx tailwindcss -i ./app/src/input.css -o ./app/src/index.css",
     "watch:lib": "npx tailwindcss -c ./app/src/tailwind.config.ts -i ./app/src/input.css -o ./app/src/index.css",
     "build:lib:cjs": "tsc -p tsconfig.lib.json",
+    "build:cli": "tsc cli/index.ts --outDir dist/cli --esModuleInterop --module commonjs",
     "build:lib:esm": "tsc -p tsconfig.lib.json --module esnext --declaration --outDir ./lib/esm",
     "lint": "eslint app --ext ts,tsx,js,jsx,cjs --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint app --ext js,jsx,ts,tsx,cjs --fix",
