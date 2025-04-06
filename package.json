@@ -1,6 +1,6 @@
 {
   "name": "aspect-ui",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "description": "A React component library for building user interfaces",
   "files": [
     "./lib/",
