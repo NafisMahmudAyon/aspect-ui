@@ -12,7 +12,7 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "bin": {
-    "aspect-ui": "./cli/index.js"
+    "aspect-ui": "./dist/cli/index.js"
   },
   "exports": {
     ".": {
