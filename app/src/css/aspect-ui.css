@@ -72,64 +72,64 @@
   --color-info-950: #172554;
 
   --text-display1: 6rem;
-  --text-display1-line-height: 6.875rem;
-  --text-display1-letter-spacing: -2.5px;
-  --text-display1-font-weight: 700;
+  --text-display1--line-height: 6.875rem;
+  --text-display1--letter-spacing: -2.5px;
+  --text-display1--font-weight: 700;
 
   --text-display2: 5rem;
-  --text-display2-line-height: 5.75rem;
-  --text-display2-letter-spacing: -2.875px;
-  --text-display2-font-weight: 700;
+  --text-display2--line-height: 5.75rem;
+  --text-display2--letter-spacing: -2.875px;
+  --text-display2--font-weight: 700;
 
   --text-h1: 3rem;
-  --text-h1-line-height: 3.6rem;
-  --text-h1-letter-spacing: -1.5px;
-  --text-h1-font-weight: 700;
+  --text-h1--line-height: 3.6rem;
+  --text-h1--letter-spacing: -1.5px;
+  --text-h1--font-weight: 700;
 
   --text-h2: 2.5rem;
-  --text-h2-line-height: 3.25rem;
-  --text-h2-letter-spacing: -1.9px;
-  --text-h2-font-weight: 700;
+  --text-h2--line-height: 3.25rem;
+  --text-h2--letter-spacing: -1.9px;
+  --text-h2--font-weight: 700;
 
   --text-h3: 2rem;
-  --text-h3-line-height: 2.8rem;
-  --text-h3-letter-spacing: -1.5px;
-  --text-h3-font-weight: 600;
+  --text-h3--line-height: 2.8rem;
+  --text-h3--letter-spacing: -1.5px;
+  --text-h3--font-weight: 600;
 
   --text-h4: 1.75rem;
-  --text-h4-line-height: 2.625rem;
-  --text-h4-letter-spacing: -1.3px;
-  --text-h4-font-weight: 600;
+  --text-h4--line-height: 2.625rem;
+  --text-h4--letter-spacing: -1.3px;
+  --text-h4--font-weight: 600;
 
   --text-h5: 1.5rem;
-  --text-h5-line-height: 2.25rem;
-  --text-h5-letter-spacing: -1.1px;
-  --text-h5-font-weight: 500;
+  --text-h5--line-height: 2.25rem;
+  --text-h5--letter-spacing: -1.1px;
+  --text-h5--font-weight: 500;
 
   --text-h6: 1.25rem;
-  --text-h6-line-height: 1.875rem;
-  --text-h6-letter-spacing: -0.9px;
-  --text-h6-font-weight: 500;
+  --text-h6--line-height: 1.875rem;
+  --text-h6--letter-spacing: -0.9px;
+  --text-h6--font-weight: 500;
 
   --text-body1: 1rem;
-  --text-body1-line-height: 1.5rem;
-  --text-body1-letter-spacing: -0.7px;
-  --text-body1-font-weight: 400;
+  --text-body1--line-height: 1.5rem;
+  --text-body1--letter-spacing: -0.7px;
+  --text-body1--font-weight: 400;
 
   --text-body2: 0.875rem;
-  --text-body2-line-height: 1.25rem;
-  --text-body2-letter-spacing: -0.75px;
-  --text-body2-font-weight: 400;
+  --text-body2--line-height: 1.25rem;
+  --text-body2--letter-spacing: -0.75px;
+  --text-body2--font-weight: 400;
 
   --text-caption: 0.75rem;
-  --text-caption-line-height: 1.66rem;
-  --text-caption-letter-spacing: -0.5px;
-  --text-caption-font-weight: 400;
+  --text-caption--line-height: 1.66rem;
+  --text-caption--letter-spacing: -0.5px;
+  --text-caption--font-weight: 400;
 
   --text-p: 1rem;
-  --text-p-line-height: 1.5rem;
-  --text-p-letter-spacing: -0.7px;
-  --text-p-font-weight: 400;
+  --text-p--line-height: 1.5rem;
+  --text-p--letter-spacing: -0.7px;
+  --text-p--font-weight: 400;
 
   --shadow-small: 0px 1px 2px rgba(45, 54, 67, 0.05);
   --shadow-default: 0px 2px 4px rgba(45, 54, 67, 0.08),
