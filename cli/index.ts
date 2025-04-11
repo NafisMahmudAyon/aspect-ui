@@ -19,15 +19,18 @@ const isVite =
 // 3. Decide target directories based on framework
 let targetComponentDir = path.join(projectRoot, 'components/aspect-ui')
 let targetUtilsDir = path.join(projectRoot, 'components/utils')
+let targetCSSDir = path.join(projectRoot, 'components/aspect-ui')
 
 if (isVite) {
   targetComponentDir = path.join(projectRoot, 'src/components/aspect-ui')
   targetUtilsDir = path.join(projectRoot, 'src/components/utils')
+  targetCSSDir = path.join(projectRoot, 'src/components/aspect-ui')
 }
 
 // 4. Component and utils source
 const componentsSrc = path.join(__dirname, '../../app/src/components')
 const utilsSrc = path.join(__dirname, '../../app/src/utils')
+const CSSSrc = path.join(__dirname, '../../app/src/css')
 
 // 5. Copy files recursively and adapt TSX to JSX if needed
 function copyRecursiveSync(src: string, dest: string): void {
@@ -62,8 +65,9 @@ function copyRecursiveSync(src: string, dest: string): void {
 console.log('⚙️  Initializing Aspect UI components...')
 copyRecursiveSync(componentsSrc, targetComponentDir)
 copyRecursiveSync(utilsSrc, targetUtilsDir)
+copyRecursiveSync(CSSSrc, targetCSSDir)
 console.log(
-  `✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}`
+  `✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}\n - CSS: ${targetCSSDir}`
 )
 
 syncDependencies()

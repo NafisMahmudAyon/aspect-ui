@@ -6,6 +6,7 @@
     "./lib/",
     "./app/src/components",
     "./app/src/utils",
+    "./app/src/css",
     "./dist/",
     ".cli/"
   ],

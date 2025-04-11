@@ -1,0 +1,157 @@
+@theme {
+  --color-primary-50: #edf6f7;
+  --color-primary-100: #cbe2e2;
+  --color-primary-200: #a9cdcf;
+  --color-primary-300: #87b8bc;
+  --color-primary-400: #65a3a9;
+  --color-primary-500: #438e96;
+  --color-primary-600: #38757a;
+  --color-primary-700: #2c5c60;
+  --color-primary-800: #204346;
+  --color-primary-900: #142a2c;
+  --color-primary-950: #081112;
+
+  --color-secondary-50: #f0f2f5;
+  --color-secondary-100: #dadee6;
+  --color-secondary-200: #c4cbd7;
+  --color-secondary-300: #aeb8c8;
+  --color-secondary-400: #98a5b9;
+  --color-secondary-500: #8292aa;
+  --color-secondary-600: #6a788b;
+  --color-secondary-700: #525d6c;
+  --color-secondary-800: #3a424d;
+  --color-secondary-900: #22272e;
+  --color-secondary-950: #0a0c0f;
+
+  --color-error-50: #fde8e8;
+  --color-error-100: #fbc8c8;
+  --color-error-200: #f8a7a7;
+  --color-error-300: #f58686;
+  --color-error-400: #f26565;
+  --color-error-500: #ef4444;
+  --color-error-600: #c33636;
+  --color-error-700: #982929;
+  --color-error-800: #6d1c1c;
+  --color-error-900: #420f0f;
+  --color-error-950: #170202;
+
+  --color-success-50: #e8fdf6;
+  --color-success-100: #bcf1dd;
+  --color-success-200: #91e3c6;
+  --color-success-300: #66d5af;
+  --color-success-400: #3bc798;
+  --color-success-500: #10b981;
+  --color-success-600: #0e976c;
+  --color-success-700: #0b7755;
+  --color-success-800: #08573e;
+  --color-success-900: #053727;
+  --color-success-950: #021710;
+
+  --color-warning-50: #fef8e6;
+  --color-warning-100: #faebb8;
+  --color-warning-200: #f6dd8c;
+  --color-warning-300: #f2cf60;
+  --color-warning-400: #eec134;
+  --color-warning-500: #eab308;
+  --color-warning-600: #c19305;
+  --color-warning-700: #977304;
+  --color-warning-800: #6d5303;
+  --color-warning-900: #433302;
+  --color-warning-950: #191301;
+
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-200: #bfdbfe;
+  --color-info-300: #93c5fd;
+  --color-info-400: #60a5fa;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+  --color-info-800: #1e40af;
+  --color-info-900: #1e3a8a;
+  --color-info-950: #172554;
+
+  --text-display1: 6rem;
+  --text-display1-line-height: 6.875rem;
+  --text-display1-letter-spacing: -2.5px;
+  --text-display1-font-weight: 700;
+
+  --text-display2: 5rem;
+  --text-display2-line-height: 5.75rem;
+  --text-display2-letter-spacing: -2.875px;
+  --text-display2-font-weight: 700;
+
+  --text-h1: 3rem;
+  --text-h1-line-height: 3.6rem;
+  --text-h1-letter-spacing: -1.5px;
+  --text-h1-font-weight: 700;
+
+  --text-h2: 2.5rem;
+  --text-h2-line-height: 3.25rem;
+  --text-h2-letter-spacing: -1.9px;
+  --text-h2-font-weight: 700;
+
+  --text-h3: 2rem;
+  --text-h3-line-height: 2.8rem;
+  --text-h3-letter-spacing: -1.5px;
+  --text-h3-font-weight: 600;
+
+  --text-h4: 1.75rem;
+  --text-h4-line-height: 2.625rem;
+  --text-h4-letter-spacing: -1.3px;
+  --text-h4-font-weight: 600;
+
+  --text-h5: 1.5rem;
+  --text-h5-line-height: 2.25rem;
+  --text-h5-letter-spacing: -1.1px;
+  --text-h5-font-weight: 500;
+
+  --text-h6: 1.25rem;
+  --text-h6-line-height: 1.875rem;
+  --text-h6-letter-spacing: -0.9px;
+  --text-h6-font-weight: 500;
+
+  --text-body1: 1rem;
+  --text-body1-line-height: 1.5rem;
+  --text-body1-letter-spacing: -0.7px;
+  --text-body1-font-weight: 400;
+
+  --text-body2: 0.875rem;
+  --text-body2-line-height: 1.25rem;
+  --text-body2-letter-spacing: -0.75px;
+  --text-body2-font-weight: 400;
+
+  --text-caption: 0.75rem;
+  --text-caption-line-height: 1.66rem;
+  --text-caption-letter-spacing: -0.5px;
+  --text-caption-font-weight: 400;
+
+  --text-p: 1rem;
+  --text-p-line-height: 1.5rem;
+  --text-p-letter-spacing: -0.7px;
+  --text-p-font-weight: 400;
+
+  --shadow-small: 0px 1px 2px rgba(45, 54, 67, 0.05);
+  --shadow-default: 0px 2px 4px rgba(45, 54, 67, 0.08),
+    0px 1px 2px rgba(45, 54, 67, 0.04);
+  --shadow-medium: 0px 4px 8px -2px rgba(45, 54, 67, 0.08),
+    0px 2px 4px -2px rgba(45, 54, 67, 0.06);
+  --shadow-large: 0px 20px 24px -4px rgba(45, 54, 67, 0.04),
+    0px 8px 11px -4px rgba(45, 54, 67, 0.04);
+  --shadow-xLarge: 0px 24px 50px -12px rgba(45, 54, 67, 0.12);
+  --shadow-2xLarge: 0px 32px 64px -12px rgba(45, 54, 67, 0.14);
+
+  --animate-zoomIn: zoomIn 0.3s ease-in-out;
+
+  @keyframes zoomIn {
+    0% {
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
