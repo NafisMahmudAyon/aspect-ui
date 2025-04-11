@@ -89,6 +89,7 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.0.3",
     "@types/mdx": "^2.0.13",
+    "child_process": "^1.0.2",
     "clsx": "^2.1.1",
     "deepmerge": "^4.3.1",
     "embla-carousel": "^8.3.0",
