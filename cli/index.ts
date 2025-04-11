@@ -18,11 +18,11 @@ const isVite =
 
 // 3. Decide target directories based on framework
 let targetComponentDir = path.join(projectRoot, 'components/aspect-ui')
-let targetUtilsDir = path.join(projectRoot, 'components/aspect-ui/utils')
+let targetUtilsDir = path.join(projectRoot, 'components/utils')
 
 if (isVite) {
   targetComponentDir = path.join(projectRoot, 'src/components/aspect-ui')
-  targetUtilsDir = path.join(projectRoot, 'src/components/aspect-ui/utils')
+  targetUtilsDir = path.join(projectRoot, 'src/components/utils')
 }
 
 // 4. Component and utils source
