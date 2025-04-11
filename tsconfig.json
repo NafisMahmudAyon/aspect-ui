@@ -28,6 +28,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/index.ts"],
+  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/**/*"],
   "exclude": ["node_modules", "./build/", "./lib/", "./.next/"]
 }
