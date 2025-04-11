@@ -5,7 +5,7 @@
   "files": [
     "./lib/",
     "./app/src/components",
-    ".dist/",
+    "./dist/",
     ".cli/"
   ],
   "main": "./lib/cjs/index.js",
