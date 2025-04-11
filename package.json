@@ -5,6 +5,7 @@
   "files": [
     "./lib/",
     "./app/src/components",
+    "./app/src/utils",
     "./dist/",
     ".cli/"
   ],

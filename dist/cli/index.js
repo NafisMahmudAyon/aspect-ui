@@ -17,10 +17,10 @@ var isVite = fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.conf
     fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.ts'));
 // 3. Decide target directories based on framework
 var targetComponentDir = path_1.default.join(projectRoot, 'components/aspect-ui');
-var targetUtilsDir = path_1.default.join(projectRoot, 'utils/aspect-ui');
+var targetUtilsDir = path_1.default.join(projectRoot, 'components/aspect-ui/utils');
 if (isVite) {
     targetComponentDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
-    targetUtilsDir = path_1.default.join(projectRoot, 'src/utils/aspect-ui');
+    targetUtilsDir = path_1.default.join(projectRoot, 'src/components/aspect-ui/utils');
 }
 // 4. Component and utils source
 var componentsSrc = path_1.default.join(__dirname, '../../app/src/components');
