@@ -16,14 +16,16 @@ const isVite =
   fs.existsSync(path.join(projectRoot, 'vite.config.js')) ||
   fs.existsSync(path.join(projectRoot, 'vite.config.ts'))
 
-// 3. Decide target directory based on framework
-let targetDir = path.join(projectRoot, 'components')
-if (isVite) targetDir = path.join(projectRoot, 'src/components/aspect-ui')
-  if (isNextAppRouter) targetDir = path.join(projectRoot, 'components/aspect-ui') // stays in root
+// 3. Decide target directories based on framework
+let targetComponentDir = path.join(projectRoot, 'components/aspect-ui')
+let targetUtilsDir = path.join(projectRoot, 'utils/aspect-ui')
 
-let targetUtilsDir = path.join(projectRoot, 'utils')
+if (isVite) {
+  targetComponentDir = path.join(projectRoot, 'src/components/aspect-ui')
+  targetUtilsDir = path.join(projectRoot, 'src/utils/aspect-ui')
+}
 
-// 4. Component source (your library's components)
+// 4. Component and utils source
 const componentsSrc = path.join(__dirname, '../../app/src/components')
 const utilsSrc = path.join(__dirname, '../../app/src/utils')
 
@@ -58,8 +60,10 @@ function copyRecursiveSync(src: string, dest: string): void {
 
 // 🚀 Run the script
 console.log('⚙️  Initializing Aspect UI components...')
-copyRecursiveSync(componentsSrc, targetDir)
+copyRecursiveSync(componentsSrc, targetComponentDir)
 copyRecursiveSync(utilsSrc, targetUtilsDir)
-console.log(`✅ Components added to ${targetDir}`)
+console.log(
+  `✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}`
+)
 
 syncDependencies()

@@ -15,14 +15,14 @@ var isTS = fs_1.default.existsSync(path_1.default.join(projectRoot, 'tsconfig.js
 var isNextAppRouter = fs_1.default.existsSync(path_1.default.join(projectRoot, 'app'));
 var isVite = fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.js')) ||
     fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.ts'));
-// 3. Decide target directory based on framework
-var targetDir = path_1.default.join(projectRoot, 'components');
-if (isVite)
-    targetDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
-if (isNextAppRouter)
-    targetDir = path_1.default.join(projectRoot, 'components/aspect-ui'); // stays in root
-var targetUtilsDir = path_1.default.join(projectRoot, 'utils');
-// 4. Component source (your library's components)
+// 3. Decide target directories based on framework
+var targetComponentDir = path_1.default.join(projectRoot, 'components/aspect-ui');
+var targetUtilsDir = path_1.default.join(projectRoot, 'utils/aspect-ui');
+if (isVite) {
+    targetComponentDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
+    targetUtilsDir = path_1.default.join(projectRoot, 'src/utils/aspect-ui');
+}
+// 4. Component and utils source
 var componentsSrc = path_1.default.join(__dirname, '../../app/src/components');
 var utilsSrc = path_1.default.join(__dirname, '../../app/src/utils');
 // 5. Copy files recursively and adapt TSX to JSX if needed
@@ -55,7 +55,7 @@ function copyRecursiveSync(src, dest) {
 }
 // 🚀 Run the script
 console.log('⚙️  Initializing Aspect UI components...');
-copyRecursiveSync(componentsSrc, targetDir);
+copyRecursiveSync(componentsSrc, targetComponentDir);
 copyRecursiveSync(utilsSrc, targetUtilsDir);
-console.log("\u2705 Components added to ".concat(targetDir));
+console.log("\u2705 Components added to:\n - Components: ".concat(targetComponentDir, "\n - Utils: ").concat(targetUtilsDir));
 (0, syncDependencies_1.syncDependencies)();
