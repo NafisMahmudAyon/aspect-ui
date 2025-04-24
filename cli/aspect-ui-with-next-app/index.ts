@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 
 import inquirer from 'inquirer'
-import simpleGit from 'simple-git'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
+import { execSync } from 'child_process'
 
-// Define the supported repo URLs
-const REPOS: Record<'typescript' | 'javascript', string> = {
-  typescript: 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts',
-  javascript: 'https://github.com/your-username/aspect-ui-next-js'
+interface Answers {
+  directory: string
+  language: 'TypeScript' | 'JavaScript'
+}
+
+function printFinalInstructions(directory: string) {
+  console.log('\n✅ Project setup complete!')
+  if (directory !== '.') console.log(`📂 cd ${directory}`)
+  console.log('📦 npm install')
+  console.log('🚀 npm run dev')
 }
 
 async function main() {
-  console.log('🧩 Welcome to Aspect UI + Next.js app installer!')
+  console.log('🚀 Welcome to Aspect UI with Next.js App Generator!')
 
-  interface CliAnswers {
-    directory: string
-    language: 'TypeScript' | 'JavaScript'
-  }
-
-  const answers = await inquirer.prompt<CliAnswers>([
+  const answers = await inquirer.prompt<Answers>([
     {
       type: 'input',
       name: 'directory',
@@ -34,28 +35,60 @@ async function main() {
     }
   ])
 
-  const directory: string = answers.directory
-  const language: 'typescript' | 'javascript' =
-    answers.language === 'TypeScript' ? 'typescript' : 'javascript'
+  const { directory, language } = answers
+  const isCurrentDir = directory === '.'
+  const targetDir = path.resolve(process.cwd(), directory)
 
-  const targetPath = path.resolve(process.cwd(), directory)
-  const repoUrl = REPOS[language]
-
-  if (fs.existsSync(targetPath)) {
-    console.error(`❌ Directory "${directory}" already exists.`)
+  if (!isCurrentDir && fs.existsSync(targetDir)) {
+    console.error('❌ Directory already exists.')
     process.exit(1)
   }
 
-  const git = simpleGit()
+  if (isCurrentDir) {
+    const confirm = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'proceed',
+        message:
+          '⚠️  This will install files into the current directory. Continue?',
+        default: false
+      }
+    ])
 
-  console.log(`⏳ Cloning ${language} repo into ${directory}...`)
+    if (!confirm.proceed) {
+      console.log('❌ Installation cancelled.')
+      process.exit(0)
+    }
+  }
+
+  const repo =
+    language === 'TypeScript'
+      ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
+      : 'https://github.com/your-org/aspect-ui-next-javascript.git'
+
+  console.log(`⬇️  Cloning ${language} repo into "${directory}"...`)
+
   try {
-    await git.clone(repoUrl, targetPath)
-    console.log('✅ Project setup complete!')
-    console.log(`➡️  cd ${directory}`)
-    console.log('📦 Run `npm install` or `pnpm install` to get started.')
-  } catch (err: any) {
-    console.error(`❌ Failed to clone repo: ${err.message}`)
+    execSync(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' })
+
+    console.log('✅ Repo cloned successfully.')
+
+    // Wait 1 second before removing .git
+    setTimeout(() => {
+      try {
+        fs.rmSync(path.join(targetDir, '.git'), {
+          recursive: true,
+          force: true
+        })
+        console.log('🧹 Removed .git folder to detach from original repo.')
+        printFinalInstructions(directory)
+      } catch (error: any) {
+        console.warn('⚠️ Could not remove .git folder:', error.message)
+        printFinalInstructions(directory)
+      }
+    }, 1000)
+  } catch (error) {
+    console.error('❌ Failed to clone repo:', error)
     process.exit(1)
   }
 }

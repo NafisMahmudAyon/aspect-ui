@@ -5,16 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer_1 = __importDefault(require("inquirer"));
-const simple_git_1 = __importDefault(require("simple-git"));
-const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
-// Define the supported repo URLs
-const REPOS = {
-    typescript: 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts',
-    javascript: 'https://github.com/your-username/aspect-ui-next-js'
-};
+const path_1 = __importDefault(require("path"));
+const child_process_1 = require("child_process");
+function printFinalInstructions(directory) {
+    console.log('\n✅ Project setup complete!');
+    if (directory !== '.')
+        console.log(`📂 cd ${directory}`);
+    console.log('📦 npm install');
+    console.log('🚀 npm run dev');
+}
 async function main() {
-    console.log('🧩 Welcome to Aspect UI + Next.js app installer!');
+    console.log('🚀 Welcome to Aspect UI with Next.js App Generator!');
     const answers = await inquirer_1.default.prompt([
         {
             type: 'input',
@@ -29,24 +31,52 @@ async function main() {
             choices: ['TypeScript', 'JavaScript']
         }
     ]);
-    const directory = answers.directory;
-    const language = answers.language === 'TypeScript' ? 'typescript' : 'javascript';
-    const targetPath = path_1.default.resolve(process.cwd(), directory);
-    const repoUrl = REPOS[language];
-    if (fs_1.default.existsSync(targetPath)) {
-        console.error(`❌ Directory "${directory}" already exists.`);
+    const { directory, language } = answers;
+    const isCurrentDir = directory === '.';
+    const targetDir = path_1.default.resolve(process.cwd(), directory);
+    if (!isCurrentDir && fs_1.default.existsSync(targetDir)) {
+        console.error('❌ Directory already exists.');
         process.exit(1);
     }
-    const git = (0, simple_git_1.default)();
-    console.log(`⏳ Cloning ${language} repo into ${directory}...`);
-    try {
-        await git.clone(repoUrl, targetPath);
-        console.log('✅ Project setup complete!');
-        console.log(`➡️  cd ${directory}`);
-        console.log('📦 Run `npm install` or `pnpm install` to get started.');
+    if (isCurrentDir) {
+        const confirm = await inquirer_1.default.prompt([
+            {
+                type: 'confirm',
+                name: 'proceed',
+                message: '⚠️  This will install files into the current directory. Continue?',
+                default: false
+            }
+        ]);
+        if (!confirm.proceed) {
+            console.log('❌ Installation cancelled.');
+            process.exit(0);
+        }
     }
-    catch (err) {
-        console.error(`❌ Failed to clone repo: ${err.message}`);
+    const repo = language === 'TypeScript'
+        ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
+        : 'https://github.com/your-org/aspect-ui-next-javascript.git';
+    console.log(`⬇️  Cloning ${language} repo into "${directory}"...`);
+    try {
+        (0, child_process_1.execSync)(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' });
+        console.log('✅ Repo cloned successfully.');
+        // Wait 1 second before removing .git
+        setTimeout(() => {
+            try {
+                fs_1.default.rmSync(path_1.default.join(targetDir, '.git'), {
+                    recursive: true,
+                    force: true
+                });
+                console.log('🧹 Removed .git folder to detach from original repo.');
+                printFinalInstructions(directory);
+            }
+            catch (error) {
+                console.warn('⚠️ Could not remove .git folder:', error.message);
+                printFinalInstructions(directory);
+            }
+        }, 1000);
+    }
+    catch (error) {
+        console.error('❌ Failed to clone repo:', error);
         process.exit(1);
     }
 }
