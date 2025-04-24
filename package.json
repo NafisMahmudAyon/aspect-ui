@@ -14,7 +14,8 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "bin": {
-    "aspect-ui": "./dist/cli/index.js"
+    "aspect-ui": "./dist/cli/index.js",
+    "aspect-ui-with-next-app": "./dist/cli/index.js"
   },
   "exports": {
     ".": {
@@ -192,7 +193,7 @@
     "watch": "npx tailwindcss -i ./app/src/input.css -o ./app/src/index.css",
     "watch:lib": "npx tailwindcss -c ./app/src/tailwind.config.ts -i ./app/src/input.css -o ./app/src/index.css",
     "build:lib:cjs": "tsc -p tsconfig.lib.json",
-    "build:cli": "tsc cli/index.ts --outDir dist/cli --esModuleInterop --module commonjs",
+    "build:cli": "tsc --project tsconfig.cli.json",
     "build:lib:esm": "tsc -p tsconfig.lib.json --module esnext --declaration --outDir ./lib/esm",
     "lint": "eslint app --ext ts,tsx,js,jsx,cjs --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint app --ext js,jsx,ts,tsx,cjs --fix",
@@ -228,11 +229,13 @@
     "embla-carousel": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.11.9",
+    "inquirer": "^12.6.0",
     "react-focus-lock": "^2.13.2",
     "react-remove-scroll": "^2.5.9",
     "react-syntax-highlighter": "^15.6.1",
     "rehype-slug": "^6.0.0",
     "remark-toc": "^9.0.0",
+    "simple-git": "^3.27.0",
     "tailwind-merge": "^2.5.4",
     "uuid": "^11.0.3"
   },

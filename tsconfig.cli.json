@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "dist/cli",
+    "module": "commonjs",
+    "target": "ES2020",
+    "rootDir": "cli",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true
+  },
+  "include": ["cli/**/*"]
+}
