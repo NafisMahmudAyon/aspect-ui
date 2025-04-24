@@ -15,7 +15,7 @@
   "types": "./lib/esm/index.d.ts",
   "bin": {
     "aspect-ui": "./dist/cli/index.js",
-    "aspect-ui-with-next-app": "./dist/cli/index.js"
+    "aspect-ui-with-next-app": "./dist/cli/aspect-ui-with-next-app/index.js"
   },
   "exports": {
     ".": {
