@@ -5,6 +5,8 @@ import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
 import chalk from 'chalk'
+import ora from 'ora'
+import chalkAnimation from 'chalk-animation'
 
 interface Answers {
   directory: string
@@ -20,9 +22,11 @@ function printFinalInstructions(directory: string) {
 }
 
 async function main() {
-  console.log(
-    `${chalk.magentaBright('🚀 Welcome to Aspect UI with Vite.js App Generator!')}`
+  const welcome = chalkAnimation.rainbow(
+    '🚀 Welcome to Aspect UI with Next.js App Generator!'
   )
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  welcome.stop()
 
   const answers = await inquirer.prompt<Answers>([
     {
@@ -71,14 +75,14 @@ async function main() {
       ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-ts'
       : 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-js'
 
-  console.log(
+  const spinner = ora(
     `⬇️  Cloning ${chalk.blue(language)} repo into "${chalk.green(directory)}"...`
-  )
+  ).start()
 
   try {
-    execSync(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' })
+    execSync(`git clone ${repo} "${targetDir}"`, { stdio: 'ignore' })
 
-    console.log(chalk.green('✅ Repo cloned successfully.'))
+    spinner.succeed('✅ Repo cloned successfully.')
 
     setTimeout(() => {
       try {
@@ -99,7 +103,8 @@ async function main() {
       }
     }, 1000)
   } catch (error) {
-    console.error(chalk.red('❌ Failed to clone repo:'), error)
+    spinner.fail(chalk.red('❌ Failed to clone repo.'))
+    console.error(error)
     process.exit(1)
   }
 }

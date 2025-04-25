@@ -9,6 +9,8 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
 const chalk_1 = __importDefault(require("chalk"));
+const ora_1 = __importDefault(require("ora"));
+const chalk_animation_1 = __importDefault(require("chalk-animation"));
 function printFinalInstructions(directory) {
     console.log(`\n${chalk_1.default.green('✅ Project setup complete!')}`);
     if (directory !== '.')
@@ -17,7 +19,9 @@ function printFinalInstructions(directory) {
     console.log(`${chalk_1.default.cyan('🚀 npm run dev')}`);
 }
 async function main() {
-    console.log(`${chalk_1.default.magentaBright('🚀 Welcome to Aspect UI with Vite.js App Generator!')}`);
+    const welcome = chalk_animation_1.default.rainbow('🚀 Welcome to Aspect UI with Next.js App Generator!');
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    welcome.stop();
     const answers = await inquirer_1.default.prompt([
         {
             type: 'input',
@@ -56,10 +60,10 @@ async function main() {
     const repo = language === 'TypeScript'
         ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-ts'
         : 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-js';
-    console.log(`⬇️  Cloning ${chalk_1.default.blue(language)} repo into "${chalk_1.default.green(directory)}"...`);
+    const spinner = (0, ora_1.default)(`⬇️  Cloning ${chalk_1.default.blue(language)} repo into "${chalk_1.default.green(directory)}"...`).start();
     try {
-        (0, child_process_1.execSync)(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' });
-        console.log(chalk_1.default.green('✅ Repo cloned successfully.'));
+        (0, child_process_1.execSync)(`git clone ${repo} "${targetDir}"`, { stdio: 'ignore' });
+        spinner.succeed('✅ Repo cloned successfully.');
         setTimeout(() => {
             try {
                 fs_1.default.rmSync(path_1.default.join(targetDir, '.git'), {
@@ -76,7 +80,8 @@ async function main() {
         }, 1000);
     }
     catch (error) {
-        console.error(chalk_1.default.red('❌ Failed to clone repo:'), error);
+        spinner.fail(chalk_1.default.red('❌ Failed to clone repo.'));
+        console.error(error);
         process.exit(1);
     }
 }
