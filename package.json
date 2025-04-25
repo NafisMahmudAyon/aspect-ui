@@ -15,8 +15,8 @@
   "types": "./lib/esm/index.d.ts",
   "bin": {
     "aspect-ui": "./dist/cli/index.js",
-    "aspect-ui-with-next-app": "./dist/cli/aspect-ui-with-next-app/index.js",
-    "aspect-ui-with-vite-app": "./dist/cli/aspect-ui-with-vite-app/index.js"
+    "next-app": "./dist/cli/aspect-ui-with-next-app/index.js",
+    "vite-app": "./dist/cli/aspect-ui-with-vite-app/index.js"
   },
   "exports": {
     ".": {

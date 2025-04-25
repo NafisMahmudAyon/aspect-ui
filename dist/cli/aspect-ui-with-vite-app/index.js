@@ -16,7 +16,7 @@ function printFinalInstructions(directory) {
     console.log('🚀 npm run dev');
 }
 async function main() {
-    console.log('🚀 Welcome to Aspect UI with Next.js App Generator!');
+    console.log('🚀 Welcome to Aspect UI with Vite.js App Generator!');
     const answers = await inquirer_1.default.prompt([
         {
             type: 'input',
