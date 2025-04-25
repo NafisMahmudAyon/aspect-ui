@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
-import inquirer from 'inquirer'
-import fs from 'fs'
-import path from 'path'
 import { execSync } from 'child_process'
-import chalk from 'chalk'
-import ora from 'ora'
-import chalkAnimation from 'chalk-animation'
+import fs from 'fs'
+import inquirer from 'inquirer'
+import path from 'path'
 
 interface Answers {
   directory: string
@@ -14,19 +11,14 @@ interface Answers {
 }
 
 function printFinalInstructions(directory: string) {
-  console.log(`\n${chalk.green('✅ Project setup complete!')}`)
-  if (directory !== '.')
-    console.log(`${chalk.cyan('📂 cd')} ${chalk.bold(directory)}`)
-  console.log(`${chalk.cyan('📦 npm install')}`)
-  console.log(`${chalk.cyan('🚀 npm run dev')}`)
+  console.log('\n✅ Project setup complete!')
+  if (directory !== '.') console.log(`📂 cd ${directory}`)
+  console.log('📦 npm install')
+  console.log('🚀 npm run dev')
 }
 
 async function main() {
-  const welcome = chalkAnimation.rainbow(
-    '🚀 Welcome to Aspect UI with Next.js App Generator!'
-  )
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  welcome.stop()
+  console.log('🚀 Welcome to Aspect UI with Next.js App Generator!')
 
   const answers = await inquirer.prompt<Answers>([
     {
@@ -48,7 +40,7 @@ async function main() {
   const targetDir = path.resolve(process.cwd(), directory)
 
   if (!isCurrentDir && fs.existsSync(targetDir)) {
-    console.error(chalk.red('❌ Directory already exists.'))
+    console.error('❌ Directory already exists.')
     process.exit(1)
   }
 
@@ -57,15 +49,14 @@ async function main() {
       {
         type: 'confirm',
         name: 'proceed',
-        message: chalk.yellow(
-          '⚠️  This will install files into the current directory. Continue?'
-        ),
+        message:
+          '⚠️  This will install files into the current directory. Continue?',
         default: false
       }
     ])
 
     if (!confirm.proceed) {
-      console.log(chalk.red('❌ Installation cancelled.'))
+      console.log('❌ Installation cancelled.')
       process.exit(0)
     }
   }
@@ -73,38 +64,31 @@ async function main() {
   const repo =
     language === 'TypeScript'
       ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
-      : 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-js'
+      : 'https://github.com/your-org/aspect-ui-with-next-app-js'
 
-  const spinner = ora(
-    `⬇️  Cloning ${chalk.blue(language)} repo into "${chalk.green(directory)}"...`
-  ).start()
+  console.log(`⬇️  Cloning ${language} repo into "${directory}"...`)
 
   try {
-    execSync(`git clone ${repo} "${targetDir}"`, { stdio: 'ignore' })
+    execSync(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' })
 
-    spinner.succeed('✅ Repo cloned successfully.')
+    console.log('✅ Repo cloned successfully.')
 
+    // Wait 1 second before removing .git
     setTimeout(() => {
       try {
         fs.rmSync(path.join(targetDir, '.git'), {
           recursive: true,
           force: true
         })
-        console.log(
-          chalk.gray('🧹 Removed .git folder to detach from original repo.')
-        )
+        console.log('🧹 Removed .git folder to detach from original repo.')
         printFinalInstructions(directory)
       } catch (error: any) {
-        console.warn(
-          chalk.yellow('⚠️ Could not remove .git folder:'),
-          chalk.gray(error.message)
-        )
+        console.warn('⚠️ Could not remove .git folder:', error.message)
         printFinalInstructions(directory)
       }
     }, 1000)
   } catch (error) {
-    spinner.fail(chalk.red('❌ Failed to clone repo.'))
-    console.error(error)
+    console.error('❌ Failed to clone repo:', error)
     process.exit(1)
   }
 }
