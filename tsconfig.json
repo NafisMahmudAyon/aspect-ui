@@ -28,6 +28,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/**/*"],
+  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/**/*", "cli/aspect-ui-with-next-app"],
   "exclude": ["node_modules", "./build/", "./lib/", "./.next/"]
 }

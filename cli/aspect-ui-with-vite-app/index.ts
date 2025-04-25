@@ -21,7 +21,7 @@ function printFinalInstructions(directory: string) {
 
 async function main() {
   console.log(
-    `${chalk.magentaBright('🚀 Welcome to Aspect UI with Next.js App Generator!')}`
+    `${chalk.magentaBright('🚀 Welcome to Aspect UI with Vite.js App Generator!')}`
   )
 
   const answers = await inquirer.prompt<Answers>([
@@ -68,8 +68,8 @@ async function main() {
 
   const repo =
     language === 'TypeScript'
-      ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
-      : 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-js'
+      ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-ts'
+      : 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-js'
 
   console.log(
     `⬇️  Cloning ${chalk.blue(language)} repo into "${chalk.green(directory)}"...`

@@ -222,7 +222,9 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.0.3",
+    "@types/inquirer": "^9.0.7",
     "@types/mdx": "^2.0.13",
+    "chalk": "^5.4.1",
     "child_process": "^1.0.2",
     "clsx": "^2.1.1",
     "deepmerge": "^4.3.1",
@@ -237,7 +239,8 @@
     "remark-toc": "^9.0.0",
     "simple-git": "^3.27.0",
     "tailwind-merge": "^2.5.4",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@splidejs/react-splide": "^0.7.12",
@@ -246,6 +249,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@types/yargs": "^17.0.33",
     "css-minify": "^2.0.0",
     "embla-carousel-autoplay": "^8.3.0",
     "eslint": "^8",

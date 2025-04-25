@@ -17,7 +17,7 @@ function printFinalInstructions(directory) {
     console.log(`${chalk_1.default.cyan('🚀 npm run dev')}`);
 }
 async function main() {
-    console.log(`${chalk_1.default.magentaBright('🚀 Welcome to Aspect UI with Next.js App Generator!')}`);
+    console.log(`${chalk_1.default.magentaBright('🚀 Welcome to Aspect UI with Vite.js App Generator!')}`);
     const answers = await inquirer_1.default.prompt([
         {
             type: 'input',
@@ -54,8 +54,8 @@ async function main() {
         }
     }
     const repo = language === 'TypeScript'
-        ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
-        : 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-js';
+        ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-ts'
+        : 'https://github.com/NafisMahmudAyon/aspect-ui-with-vite-app-js';
     console.log(`⬇️  Cloning ${chalk_1.default.blue(language)} repo into "${chalk_1.default.green(directory)}"...`);
     try {
         (0, child_process_1.execSync)(`git clone ${repo} "${targetDir}"`, { stdio: 'inherit' });
