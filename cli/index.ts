@@ -11,7 +11,7 @@ const projectRoot = process.cwd()
 const isTS = fs.existsSync(path.join(projectRoot, 'tsconfig.json'))
 
 // 2. Detect framework
-const isNextAppRouter = fs.existsSync(path.join(projectRoot, 'app'))
+// const isNextAppRouter = fs.existsSync(path.join(projectRoot, 'app'))
 const isVite =
   fs.existsSync(path.join(projectRoot, 'vite.config.js')) ||
   fs.existsSync(path.join(projectRoot, 'vite.config.ts'))

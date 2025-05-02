@@ -11,17 +11,17 @@ import { TableHeadCell } from '@/app/src/components/Table/TableHeadCell'
 import React from 'react'
 
 const TableDemo = () => {
-  const data = [
-    { id: 1, name: 'John Doe', age: 30 },
-    { id: 2, name: 'Jane Smith', age: 25 }
-    // ... more data
-  ]
+  // const data = [
+  //   { id: 1, name: 'John Doe', age: 30 },
+  //   { id: 2, name: 'Jane Smith', age: 25 }
+  //   // ... more data
+  // ]
 
-  const columns = [
-    { key: 'id', label: 'ID' },
-    { key: 'name', label: 'Name' },
-    { key: 'age', label: 'Age' }
-  ]
+  // const columns = [
+  //   { key: 'id', label: 'ID' },
+  //   { key: 'name', label: 'Name' },
+  //   { key: 'age', label: 'Age' }
+  // ]
   return (
     <div>
       {/* <Table

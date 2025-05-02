@@ -4,11 +4,11 @@ import React from 'react'
 import { FileUpload } from '@/app/src/components/Upload'
 
 const FileUploadDemo = () => {
-  const handleFileSelect = (file: File) => {
-    console.log('Selected file:', file)
-    // Here you can implement your file upload logic
-    // For example, you might want to send the file to a server using an API call
-  }
+  // const handleFileSelect = (file: File) => {
+  //   console.log('Selected file:', file)
+  //   // Here you can implement your file upload logic
+  //   // For example, you might want to send the file to a server using an API call
+  // }
   return (
     <div>
       <h1 className='mb-4 text-3xl font-bold'>File Upload Example</h1>

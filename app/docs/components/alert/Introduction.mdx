@@ -1,0 +1,44 @@
+import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
+import EditPage from '@/components/EditPage'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultAccordion,DefaultAccordion, multipleOpenAccordion,MultipleOpenAccordion,customIconAccordion,CustomIconAccordion,accordionPropsData, accordionItemPropsData, accordionHeaderPropsData, accordionContentPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Accordion
+---
+<CodeSnippets styles="mt-4" content={defaultAccordion} lang="javascript" url="examples/components/accordion/default-accordion" >
+</CodeSnippets>
+
+## Multiple Open
+---
+<CodeSnippets styles="mt-4" content={multipleOpenAccordion} lang="javascript" url="examples/components/accordion/multiple-open-accordion" >
+</CodeSnippets>
+
+## Custom Icon
+---
+<CodeSnippets styles="mt-4" content={customIconAccordion} lang="javascript" url="examples/components/accordion/custom-icon-accordion" >
+</CodeSnippets>
+
+
+## Accordion Props
+---
+<ComponentTable data={accordionPropsData} />
+
+## Accordion Item Props
+---
+<ComponentTable data={accordionItemPropsData} />
+
+## Accordion Header Props
+---
+<ComponentTable data={accordionHeaderPropsData} />
+
+## Accordion Content Props
+---
+<ComponentTable data={accordionContentPropsData} />
+
+
+
+
+

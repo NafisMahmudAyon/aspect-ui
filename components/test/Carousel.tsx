@@ -18,43 +18,43 @@ import autoPlay from 'embla-carousel-autoplay'
 import React from 'react'
 
 const CarouselDemo = () => {
-  const items = [
-    {
-      id: 1,
-      title: 'A',
-      content: 'A',
-      image: 'https://picsum.photos/600/400'
-    },
-    {
-      id: 2,
-      title: 'B',
-      content: 'B',
-      image: 'https://picsum.photos/600/400'
-    },
-    {
-      id: 3,
-      title: 'C',
-      content: 'C',
-      image: 'https://picsum.photos/600/400'
-    },
-    {
-      id: 4,
-      title: 'D',
-      content: 'D',
-      image: 'https://picsum.photos/600/400'
-    },
-    {
-      id: 5,
-      title: 'E',
-      content: 'E',
-      image: 'https://picsum.photos/600/400'
-    }
-  ]
-  const images = [
-    'https://via.placeholder.com/600x300?text=Slide+1',
-    'https://via.placeholder.com/600x300?text=Slide+2',
-    'https://via.placeholder.com/600x300?text=Slide+3'
-  ]
+  // const items = [
+  //   {
+  //     id: 1,
+  //     title: 'A',
+  //     content: 'A',
+  //     image: 'https://picsum.photos/600/400'
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'B',
+  //     content: 'B',
+  //     image: 'https://picsum.photos/600/400'
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'C',
+  //     content: 'C',
+  //     image: 'https://picsum.photos/600/400'
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'D',
+  //     content: 'D',
+  //     image: 'https://picsum.photos/600/400'
+  //   },
+  //   {
+  //     id: 5,
+  //     title: 'E',
+  //     content: 'E',
+  //     image: 'https://picsum.photos/600/400'
+  //   }
+  // ]
+  // const images = [
+  //   'https://via.placeholder.com/600x300?text=Slide+1',
+  //   'https://via.placeholder.com/600x300?text=Slide+2',
+  //   'https://via.placeholder.com/600x300?text=Slide+3'
+  // ]
   return (
     <div>
       <Carousel options={{ loop: true }} plugins={[autoPlay()]}>
@@ -68,12 +68,12 @@ const CarouselDemo = () => {
           ))}
         </CarouselSlides>
         <CarouselControl className='z-50'>
-          {/* <CarouselButtons> */}
+          <CarouselButtons>
             <div>
               <CarouselPrevButton />
               <CarouselNextButton />
             </div>
-          {/* </CarouselButtons> */}
+          </CarouselButtons>
           {/* <CarouselIndicators className='' /> */}
         </CarouselControl>
         {/* <CarouselControl className='bottom-3 left-1/2 -translate-x-1/2 top-'> */}

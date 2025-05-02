@@ -1,5 +1,4 @@
-import { Right } from '@/app/src/components/Icon/Arrow'
-import { Mail } from '@/app/src/components/Icon/Form'
+
 import { Input } from '@/app/src/components/Input'
 import React from 'react'
 

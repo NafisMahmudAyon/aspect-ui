@@ -5,10 +5,10 @@ import {Rating} from '@/app/src/components/Rating/Rating'
 import React from 'react'
 
 const RatingDemo = () => {
-  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>, rating: number) => {
-    console.log('Selected rating:', rating);
-    console.log('Event:', event);
-  };
+  // const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>, rating: number) => {
+  //   console.log('Selected rating:', rating);
+  //   console.log('Event:', event);
+  // };
 
   return (
     <div className='p-4'>
