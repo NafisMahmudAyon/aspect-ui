@@ -14,7 +14,15 @@ export const DocsContentLayout: FC<DocsContentLayoutProps> = ({ title, descripti
         <Typography variant='h1' className="mb-2 inline-block w-full text-h3 font-semibold">
           {title}
         </Typography>
-        <p className="text-body-3 text-metal-500 dark:text-metal-300">{description}</p>
+        <p className="text-body-3 text-metal-500 dark:text-metal-300">
+          {description.split(/(`[^`]+`)/).map((part, index) =>
+            part.startsWith('`') && part.endsWith('`') ? (
+              <span key={index} className="code">{part.slice(1, -1)}</span>
+            ) : (
+              part
+            )
+          )}
+        </p>
       </div>
       <div id="mainContent">{children}</div>
     </div>

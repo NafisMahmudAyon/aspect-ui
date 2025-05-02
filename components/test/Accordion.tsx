@@ -16,12 +16,9 @@ const AccordionDemo = () => {
     {
       title: 'Accordion Item #1',
       content: (
-        <div>
-          <p>This is the content of Accordion Item #1.</p>
-          <button className='mt-2 rounded-sm bg-blue-500 p-2 text-white'>
-            Click me
-          </button>
-        </div>
+        <>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis in nisi minima quaerat eaque adipisci expedita quis corrupti debitis, sint repellendus. Inventore eum vitae ipsa alias unde perspiciatis exercitationem iusto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam voluptatibus praesentium mollitia dolorum, veritatis nesciunt deleniti nostrum hic? Iste sint at vel dolore sed, consectetur cum! Minus, laudantium cupiditate. Eveniet.
+        </>
       )
     },
     {
@@ -43,7 +40,7 @@ const AccordionDemo = () => {
     }
   ]
   return (
-    <div>
+    <div className='max-w-[360px]'>
       <h2 className='mb-4 text-xl font-semibold'>Multiple Open Accordions</h2>
 
       {/* <Accordion

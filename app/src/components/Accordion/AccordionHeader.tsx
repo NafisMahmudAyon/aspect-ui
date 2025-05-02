@@ -121,7 +121,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const labelClassName = headerLabelClassName ?? accordionLabelClassName
   const activeLabelClassName =
     headerActiveLabelClassName ?? accordionActiveLabelClassName
-  const headerClassName = headerHeaderClassName ?? accordionHeaderClassName
+    const headerClassName = cn(headerHeaderClassName, accordionHeaderClassName)
   const activeHeaderClassName =
     headerActiveHeaderClassName ?? accordionActiveHeaderClassName
 

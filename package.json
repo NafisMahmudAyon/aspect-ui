@@ -235,6 +235,7 @@
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.11.9",
     "inquirer": "^12.6.0",
+    "lucide-react": "^0.503.0",
     "ora": "^8.2.0",
     "react-focus-lock": "^2.13.2",
     "react-remove-scroll": "^2.5.9",

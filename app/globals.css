@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Nova+Mono&display=swap');
 @import './index.css';
 @import 'tailwindcss';
+
+@import './src/css/aspect-ui.css';
 
 @config '../tailwind.config.ts';
 
@@ -34,8 +37,49 @@
         scrollbar-width: none;  
   } */
 
+.font-mono {
+  font-family: 'Nova Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-sans {
+  font-family: 'Metrophobic', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .section-title {
   padding-top: 90px;
+}
+
+#mainContent > #table-of-contents {
+  display: none;
+}
+#mainContent > #table-of-contents + ul {
+  display: none;
+}
+
+#visible-table-of-contents li:has(.active-link) {
+    @apply border-l-primary-800 dark:border-l-primary-50 text-primary-800 dark:text-primary-50;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .3s;
+    animation-duration: .3s;
+}
+#visible-table-of-contents li {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    margin-left: -1px;
+    border-left-width: 1px;
+    border-left-color: transparent;
+    padding-left: .75rem;
+    font-size: .875rem;
+    line-height: 1.375rem;
+    letter-spacing: -.2px;
+    --tw-text-opacity: 1;
+    @apply text-primary-700 dark:text-primary-300;
+    /* color: rgb(94 113 141 / var(--tw-text-opacity, 1)); */
 }
 
 .code {
@@ -60,7 +104,6 @@
   background-color: red;
 } */
 
-
 @layer base {
   *,
   ::after,
@@ -69,4 +112,8 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+}
+
+iframe body {
+  background-color: red !important;
 }

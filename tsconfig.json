@@ -28,6 +28,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/**/*", "cli/aspect-ui-with-next-app"],
+  "include": [".next/types/**/*.ts", "**/*.mdx", "**/*.ts", "**/*.tsx", "cli/**/*", "cli/aspect-ui-with-next-app", "app/docs/components/accordion/Code/Code.tsx"],
   "exclude": ["node_modules", "./build/", "./lib/", "./.next/"]
 }

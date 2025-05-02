@@ -40,23 +40,29 @@ import TimelineDemo from '@/components/test/Timeline'
 import TypographyDemo from '@/components/test/Typography'
 import MasonryDemo from '@/components/test/Masonry'
 import AccordionDemo from '@/components/test/Accordion'
+import SelectDemo from '@/components/test/Select'
+import PopoverDemo from '@/components/test/Popover'
 export default function Home() {
   return (
-    <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950'>
+    <main className='mx-auto min-h-screen bg-secondary-100 px-20 py-24 dark:bg-secondary-950  '>
       <Dark />
       <AccordionDemo />
       <ButtonDemo />
       <CardDemo />
-      {/* <ImageDemo /> */}
+      <ImageDemo />
       <AvatarDemo />
       <ProgressBarDemo />
       <CircularProgressDemo />
       <CarouselDemo />
       <BreadcrumbDemo />
       <ModalDemo />
-      <TabsDemo />
-      <TableDemo />
       <DropdownDemo />
+      <DatePickerDemo />
+      <TabsDemo />
+      <SelectDemo />
+      <PopoverDemo />
+      <TooltipDemo />
+      <TableDemo />
       <NavbarDemo />
       <SidebarDemo />
       <InputDemo />
@@ -67,8 +73,6 @@ export default function Home() {
       <UploadDemo />
       <ToggleButtonDemo />
       <PaginationDemo />
-      <DatePickerDemo />
-      <TooltipDemo />
       <SpinnerDemo />
       <StepperDemo />
       <RatingDemo />
@@ -82,7 +86,7 @@ export default function Home() {
       <TimelineDemo />
       <TypographyDemo />
       <MasonryDemo />
-      {/* <p className='text-body2  '>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni delectus ab commodi est. Deserunt quos necessitatibus corporis sint hic, nulla fugit tenetur nam perspiciatis maiores aliquid veniam. Nisi, quae modi!</p> */}
+      <p className='text-body2  '>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni delectus ab commodi est. Deserunt quos necessitatibus corporis sint hic, nulla fugit tenetur nam perspiciatis maiores aliquid veniam. Nisi, quae modi!</p>
     </main>
   )
 }

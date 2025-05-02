@@ -12,5 +12,5 @@ export const TableRow: React.FC<TableRowProps> = ({
   children,
   className = ''
 }) => {
-  return <tr className={cn("hover:bg-primary-50 data-[state=selected]:bg-primary-100 dark:border-b-primary-800 dark:hover:bg-primary-800",className)}>{children}</tr>
+  return <tr className={cn("hover:bg-primary-100 data-[state=selected]:bg-primary-100 dark:border-b-primary-800 dark:hover:bg-primary-800",className)}>{children}</tr>
 }

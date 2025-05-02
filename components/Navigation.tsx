@@ -6,6 +6,9 @@ import MobileMenu from './MobileMenu'
 
 const Navbar = () => {
   const pathname = usePathname()
+  if (pathname.match('/examples')) {
+    return (<></>)
+  }
   return (
     <header
       className={`fixed top-0 z-50 w-full border-b border-primary-100 bg-primary-100 dark:border-primary-800 text-primary-600 dark:text-primary-100 ${pathname === '/' ? 'dark:bg-primary-900' : 'dark:bg-primary-900'}`}>

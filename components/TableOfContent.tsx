@@ -15,14 +15,14 @@ const TableOfContent = () => {
   const [tableOfContents, setTableOfContents] = useState<HTMLUListElement | null>(null)
 
   useEffect(() => {
-    const sectionss = document.querySelector<HTMLUListElement>('.section-title')
+    const toc = document.querySelector<HTMLUListElement>('#table-of-contents + ul')
     const sections: NodeListOf<Element> = document?.querySelectorAll('.section-title')
 
     if (sections !== null && sections.length > 0) {
       setAllSection(sections)
     }
 
-    setTableOfContents(sectionss)
+    setTableOfContents(toc)
   }, [pathname])
 
   const newIdArr: Sections[] = Array.from(allSection).map((section, index) => ({
@@ -73,13 +73,13 @@ const TableOfContent = () => {
       <aside id="linkPage" className="sticky top-28 h-[80vh] 2xl:top-60">
         <div className="2xl:pl-5">
           <div className="flex flex-col justify-between overflow-y-auto">
-            <h4 className="mb-2 text-body-4 font-semibold uppercase text-black/100 dark:text-white">On this page</h4>
+            <h4 className="mb-2 text-body-4 font-semibold uppercase text-primary-900 dark:text-primary-200">On this page</h4>
             <nav id="visible-table-of-contents">
               <ul
                 dangerouslySetInnerHTML={{
                   __html: innerHtml ?? '',
                 }}
-                className="border-l border-l-metal-100 dark:border-l-metal-800"
+                className="border-l border-l-primary-200 dark:border-l-primary-800"
               />
             </nav>
           </div>

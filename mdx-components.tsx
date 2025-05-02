@@ -15,6 +15,18 @@ export const useMDXComponents: (components: MDXComponents) => MDXComponents = (c
         </a>
       </h2>
     ),
+    table: (props) => (
+      <table className="w-full text-sm text-left border border-border mt-4" {...props} />
+    ),
+    thead: (props) => <thead className="bg-muted" {...props} />,
+    tr: (props) => <tr className="border-b border-border" {...props} />,
+    th: (props) => (
+      <th className="px-4 py-2 font-semibold text-muted-foreground whitespace-nowrap" {...props} />
+    ),
+    td: (props) => (
+      <td className="px-4 py-2 whitespace-nowrap" {...props} />
+    ),
+
     ...components,
   }
 }
