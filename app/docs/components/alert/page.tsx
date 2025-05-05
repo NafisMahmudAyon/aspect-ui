@@ -4,10 +4,10 @@ import { DocsContentLayout } from '@/components/DocContentLayout'
 import EditPage from '@/components/EditPage'
 
 export const metadata: Metadata = {
+  title: 'Alert - Aspect UI',
   description:
-    'The `Accordion` component allows you to display collapsible content panels that users can expand and collapse individually. It is ideal for organizing large amounts of content into a clean, user-friendly format, such as FAQs, menus, or detailed information sections. Each accordion item includes a trigger (header) and a content panel, supporting smooth transitions and optional control over multiple open panels. The component is fully accessible and customizable, supporting icons, animation, nested items, and more.',
-  title: 'Accordion - Aspect UI',
-}
+    'The `Alert` component is used to display important messages or status updates to users, such as success, warning, error, or informational messages. It supports different variants with corresponding icons and colors, ensuring clear and effective communication. Alerts can be styled, dismissed, or customized for different use cases, including system notifications, form feedback, or contextual messages. Fully accessible and easy to integrate into any UI.',
+};
 
 const page: NextPage = () => {
   return (

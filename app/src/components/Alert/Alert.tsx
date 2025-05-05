@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, type JSX } from 'react';
-import { cn } from '../../utils/cn'
+import { cn } from '../../utils/cn';
 
 type AlertType = 'success' | 'warning' | 'error' | 'info'
 
@@ -23,10 +23,9 @@ export const Alert: React.FC<AlertProps> = ({
   const [isVisible, setIsVisible] = useState(true)
 
   const handleClose = () => {
-    setIsVisible(false)
     if (onClose) {
       onClose()
-    }
+    } setIsVisible(false)
   }
 
   if (!isVisible) return null

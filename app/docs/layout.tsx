@@ -3,6 +3,7 @@ import Navbar from '@/components/Navigation'
 // import RightSideBar from '@/components/RightSideBar'
 import TableOfContent from '@/components/TableOfContent'
 import { AspectThemeProvider } from '@/components/ThemeProvider'
+import TopProgressBar from '@/components/TopProgressBar'
 import { ReactNode } from 'react'
 
 const DocsLayout = ({ children }: { children: ReactNode }) => {
@@ -25,6 +26,7 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
               <TableOfContent />
             </div>
           </section>
+          <TopProgressBar />
         </AspectThemeProvider>
       </body>
     </html>

@@ -3,7 +3,7 @@
 import { Button, Dropdown, DropdownAction, DropdownContent, DropdownItem, DropdownList } from "@/app/src";
 import { cn } from "@/app/src/utils/cn";
 import { Monitor, Smartphone, Tablet } from "lucide-react";
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 
 // import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -23,6 +23,7 @@ interface CodeSnippetProps {
   bodyStyles?: string;
   children?: React.ReactNode
   url?: string
+  height?: number
 }
 
 const CodeSnippets: React.FC<CodeSnippetProps> = ({
@@ -33,6 +34,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
   bodyStyles = "",
   children,
   url,
+  height = 400,
 }) => {
   const [copySuccess, setCopySuccess] = useState<boolean | null>(null);
   const [width, setWidth] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
@@ -52,7 +54,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
   const [preview, setPreview] = useState((children || url) ? true : false)
 
   return (
-    <Code styles={cn(styles, "my-4 rounded-t-lg rounded-b-lg relative")}>
+    <Code styles={cn(styles, "my-4 rounded-t-lg rounded-b-lg relative bg-primary-50 dark:bg-primary-950 hover:shadow-md")}>
       <CodeHeader
         styles={cn(headerStyles, "flex items-center justify-between w-full bg-primary-100 dark:bg-primary-900 py-1 px-2 text-white rounded-t-lg hover:bg-primary-100 dark:hover:bg-primary-900")}>
         <div className="">
@@ -134,6 +136,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
         url={url}
         preview={preview}
         width={width}
+        height={height}
       />
     </Code>
   );
@@ -179,11 +182,12 @@ interface CodeBodyProps {
   preview?: boolean;
   url?: string
   width?: 'mobile' | 'tablet' | 'desktop'
+  height?: number
 }
 
-const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview, url, width }) => {
-  const iframeRef = useRef(null);
-  const [iframeHeight, setIframeHeight] = useState(500); // default height
+const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview, url, width, height = 400  }) => {
+  // const iframeRef = useRef(null);
+  // const [iframeHeight, setIframeHeight] = useState(500); // default height
 
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -195,46 +199,46 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
     }
   }, [theme])
 
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'resize-iframe' && event.data.height) {
-        setIframeHeight(event.data.height);
-      }
-    };
+  // useEffect(() => {
+  //   const handleMessage = (event: MessageEvent) => {
+  //     if (event.data.type === 'resize-iframe' && event.data.height) {
+  //       setIframeHeight(event.data.height);
+  //     }
+  //   };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  //   window.addEventListener('message', handleMessage);
+  //   return () => window.removeEventListener('message', handleMessage);
+  // }, []);
   // const iframe = document.querySelector('iframe');
 
   // if (iframe) iframe.onload = () => {
   //   const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
   //   if (iframeDoc) iframeDoc.body.style.backgroundColor = 'transparent';
   // };
-  useEffect(() => {
-    const iframe = document.querySelector("iframe");
+  // useEffect(() => {
+  //   const iframe = document.querySelector("iframe");
 
-    if (iframe) {
-      iframe.onload = () => {
-        try {
-          // Access the iframe's document to adjust height dynamically
-          const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-          if (iframeDoc && iframeDoc.body) {
-            iframe.style.height = iframeDoc.body.scrollHeight + "px";
-          }
-        } catch (error) {
-          console.warn("Can't access iframe content due to cross-origin restrictions", error);
-        }
-      };
-    }
-  }, []);
+  //   if (iframe) {
+  //     iframe.onload = () => {
+  //       try {
+  //         // Access the iframe's document to adjust height dynamically
+  //         const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+  //         if (iframeDoc && iframeDoc.body) {
+  //           iframe.style.height = iframeDoc.body.scrollHeight + "px";
+  //         }
+  //       } catch (error) {
+  //         console.warn("Can't access iframe content due to cross-origin restrictions", error);
+  //       }
+  //     };
+  //   }
+  // }, []);
   return (
     <>
       {children && preview && <div className="w-full h-full bg-[#121c29] px-[40px] py-[20px] rounded-b-lg">{children}</div>}
       {url && preview && (
         <>
-          <div className="py-[20px] bg-[#121c29] rounded-b-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
-            <iframe ref={iframeRef} style={{ height: `${iframeHeight}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out `}
+          <div className="py-[20px] border border-t-0 border-primary-100 dark:border-primary-900 rounded-b-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
+            <iframe style={{ height: `${height}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out `}
               // src="http://localhost:3000/examples/components/accordion/default-accordion"
               src={process.env.NEXT_PUBLIC_BASE_URL ?
                 `${process.env.NEXT_PUBLIC_BASE_URL}${url}` :

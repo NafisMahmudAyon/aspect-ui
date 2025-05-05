@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { gettingStartedRoutes, layoutRoutes, routes } from '@/routes/routes'
+import { gettingStartedRoutes, routes } from '@/routes/routes'
 // import { Accordion
 //   // AccordionContainer, AccordionContent, AccordionPanel, AccordionTitle 
 // } from ''
@@ -45,7 +45,7 @@ const DocSidebar = () => {
             </AccordionContent>
           </AccordionItem>
           {/* </AccordionPanel> */}
-          <AccordionItem id="item-2" className="p-0 border-none mb-3">
+          {/* <AccordionItem id="item-2" className="p-0 border-none mb-3">
             <AccordionHeader className="text-body1 font-semibold text-primary-900 dark:text-primary-100 bg-transparent dark:bg-transparent px-0 py-2 hover:bg-transparent dark:hover:bg-transparent">
               Layout
             </AccordionHeader>
@@ -65,7 +65,7 @@ const DocSidebar = () => {
                 ))}
               </ul>
             </AccordionContent>
-          </AccordionItem>
+          </AccordionItem> */}
           <AccordionItem id="item-3" className="p-0 border-none mb-3">
             <AccordionHeader className="text-body1 font-semibold text-primary-900 dark:text-primary-100 bg-transparent dark:bg-transparent px-0 py-2 hover:bg-transparent dark:hover:bg-transparent">
               Components

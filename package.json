@@ -236,6 +236,7 @@
     "framer-motion": "^11.11.9",
     "inquirer": "^12.6.0",
     "lucide-react": "^0.503.0",
+    "next-nprogress-bar": "^2.4.7",
     "ora": "^8.2.0",
     "react-focus-lock": "^2.13.2",
     "react-remove-scroll": "^2.5.9",
@@ -266,7 +267,7 @@
     "prettier-plugin-tailwindcss": "^0.6.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.1.5",
     "typescript": "^5"
   }
 }

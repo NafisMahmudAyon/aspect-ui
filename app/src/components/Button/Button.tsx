@@ -113,7 +113,7 @@ export const Button: React.FC<ButtonProps> = ({
       {icon && iconPosition === 'left' && !loading && (
         <span className={`${iconClassName}`}>{icon}</span>
       )}
-      {!loading && children}
+      {children}
       {icon && iconPosition === 'right' && !loading && (
         <span className={`${iconClassName}`}>{icon}</span>
       )}

@@ -1,0 +1,434 @@
+I'll create the documentation for the Card component similar to the Accordion component, along with examples. Let me start by checking the Card component in your project and then create the necessary files.
+
+Based on the project's structure, I'll create:
+1. Documentation for the Card component at `/docs/components/card`
+2. Card examples in the `/examples/components/card/` directory
+3. Following the same pattern used in accordion, alert, and avatar docs
+
+Let's begin:
+
+## 1. First, let's update the Card Introduction.mdx file:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultCard,
+  withHeaderFooterCard,
+  simpleCard,
+  interactiveCard,
+  cardPropsData,
+  cardHeaderPropsData,
+  cardTitlePropsData,
+  cardDescriptionPropsData,
+  cardContentPropsData,
+  cardFooterPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Card
+---
+<CodeSnippets styles="mt-4" content={defaultCard} lang="javascript" url="examples/components/card/default-card">
+</CodeSnippets>
+
+## With Header and Footer
+---
+<CodeSnippets styles="mt-4" content={withHeaderFooterCard} lang="javascript" url="examples/components/card/with-header-footer-card">
+</CodeSnippets>
+
+## Simple Card
+---
+<CodeSnippets styles="mt-4" content={simpleCard} lang="javascript" url="examples/components/card/simple-card">
+</CodeSnippets>
+
+## Interactive Card
+---
+<CodeSnippets styles="mt-4" content={interactiveCard} lang="javascript" url="examples/components/card/interactive-card">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Card Props
+<ComponentTable data={cardPropsData} />
+
+### CardHeader Props
+<ComponentTable data={cardHeaderPropsData} />
+
+### CardTitle Props
+<ComponentTable data={cardTitlePropsData} />
+
+### CardDescription Props
+<ComponentTable data={cardDescriptionPropsData} />
+
+### CardContent Props
+<ComponentTable data={cardContentPropsData} />
+
+### CardFooter Props
+<ComponentTable data={cardFooterPropsData} />
+```
+
+## 2. Now, let's create the Code.tsx file for the card examples:
+
+```tsx
+// In /docs/components/card/Code/Code.tsx
+
+export const defaultCard = `import { Card, CardContent } from "@/components/ui/card";
+
+export default function DefaultCard() {
+  return (
+    <Card className="max-w-md">
+      <CardContent className="p-6">
+        <p>This is a basic card with some content. Cards can be used to group related information and actions.</p>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+export const simpleCard = `import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+
+export default function SimpleCard() {
+  return (
+    <Card className="max-w-md">
+      <CardContent className="p-6">
+        <CardTitle>Aspect UI design system</CardTitle>
+        <CardDescription>
+          Component design systems can help developers to be more productive by providing them with a ready-made set of
+          components to use.
+        </CardDescription>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+export const withHeaderFooterCard = `import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription, 
+  CardContent,
+  CardFooter 
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function CardWithHeaderFooter() {
+  return (
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>
+          Deploy your new project in one-click.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Your new project will be available to all team members.</p>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
+export const interactiveCard = `import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function InteractiveCard() {
+  return (
+    <Card className="relative w-[350px]">
+      <a href="#" className="absolute inset-0 z-10" />
+      <CardHeader>
+        <CardTitle>Interactive Card</CardTitle>
+        <CardDescription>
+          The entire card is clickable while buttons remain interactive.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Click anywhere on the card to follow the main link.</p>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button
+          variant="outline"
+          className="relative z-20"
+          onClick={(e) => {
+            e.stopPropagation();
+            alert('Cancel button clicked!');
+          }}
+        >
+          Cancel
+        </Button>
+        <Button 
+          className="relative z-20"
+          onClick={(e) => {
+            e.stopPropagation();
+            alert('Deploy button clicked!');
+          }}
+        >
+          Deploy
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
+export const cardPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card',
+  },
+];
+
+export const cardHeaderPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card header',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card header',
+  },
+];
+
+export const cardTitlePropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card title',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card title',
+  },
+];
+
+export const cardDescriptionPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card description',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card description',
+  },
+];
+
+export const cardContentPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card content',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card content area',
+  },
+];
+
+export const cardFooterPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the card footer',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the card footer',
+  },
+];
+```
+
+## 3. Now let's create example files for the card component:
+
+For each example, we'll create a file in the `examples/components/card/` directory:
+
+1. **default-card.tsx**:
+```tsx
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function DefaultCard() {
+  return (
+    <Card className="max-w-md">
+      <CardContent className="p-6">
+        <p>This is a basic card with some content. Cards can be used to group related information and actions.</p>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+2. **simple-card.tsx**:
+```tsx
+import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+
+export default function SimpleCard() {
+  return (
+    <Card className="max-w-md">
+      <CardContent className="p-6">
+        <CardTitle>Aspect UI design system</CardTitle>
+        <CardDescription>
+          Component design systems can help developers to be more productive by providing them with a ready-made set of
+          components to use.
+        </CardDescription>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+3. **with-header-footer-card.tsx**:
+```tsx
+import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription, 
+  CardContent,
+  CardFooter 
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function CardWithHeaderFooter() {
+  return (
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>
+          Deploy your new project in one-click.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Your new project will be available to all team members.</p>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+4. **interactive-card.tsx**:
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function InteractiveCard() {
+  return (
+    <Card className="relative w-[350px]">
+      <a href="#" className="absolute inset-0 z-10" />
+      <CardHeader>
+        <CardTitle>Interactive Card</CardTitle>
+        <CardDescription>
+          The entire card is clickable while buttons remain interactive.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Click anywhere on the card to follow the main link.</p>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button
+          variant="outline"
+          className="relative z-20"
+          onClick={(e) => {
+            e.stopPropagation();
+            alert('Cancel button clicked!');
+          }}
+        >
+          Cancel
+        </Button>
+        <Button 
+          className="relative z-20"
+          onClick={(e) => {
+            e.stopPropagation();
+            alert('Deploy button clicked!');
+          }}
+        >
+          Deploy
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+## 4. Finally, let's update the Card page.tsx file:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Card - Aspect UI',
+  description:
+    'The `Card` component is a container for displaying content in a structured, elegant layout. It supports headers, footers, media, and custom styling for building dashboards, listings, and feature sections.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/card"
+        nextPageLink="/docs/components/checkbox"
+        nextPageName="Checkbox"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+The documentation for the Card component is now complete, following the same pattern as the accordion, alert, and avatar components. This provides comprehensive documentation with examples showcasing the different ways to use the Card component.
+
+For the implementation to be fully complete, you would need to:
+
+1. Create the directories and files as outlined above
+2. Ensure the imports point to the correct locations in your project structure
+3. Adjust any component properties based on your actual implementation
+
+Let me know if you need any adjustments or have questions about any part of the implementation!

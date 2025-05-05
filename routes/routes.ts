@@ -21,8 +21,7 @@ export const routes: routerPath[] = [
     href: '/docs/components/accordion',
     tag: false,
     deprecate: false,
-    folderName: 'Accordion',
-    // Icon: Browsers,
+    folderName: 'Accordion'
   },
   {
     id: generatedID(),
@@ -30,44 +29,7 @@ export const routes: routerPath[] = [
     href: '/docs/components/alert',
     tag: false,
     deprecate: false,
-    folderName: 'Alert',
-    // Icon: Warning,
-  },
-  {
-    id: generatedID(),
-    name: 'Area Chart',
-    href: '/docs/components/areaChart',
-    tag: false,
-    deprecate: false,
-    folderName: 'Chart',
-    // Icon: ChartLineUp,
-  },
-  {
-    id: generatedID(),
-    name: 'Bar Chart',
-    folderName: 'Chart',
-    href: '/docs/components/barChart',
-    tag: false,
-    deprecate: false,
-    // Icon: ChartBar,
-  },
-  {
-    id: generatedID(),
-    name: 'Line Chart',
-    folderName: 'Chart',
-    href: '/docs/components/lineChart',
-    tag: false,
-    deprecate: false,
-    // Icon: ChartLine,
-  },
-  {
-    id: generatedID(),
-    name: 'Pie Chart',
-    folderName: 'Chart',
-    href: '/docs/components/pieChart',
-    tag: false,
-    deprecate: false,
-    // Icon: ChartPie,
+    folderName: 'Alert'
   },
   {
     id: generatedID(),
@@ -75,307 +37,304 @@ export const routes: routerPath[] = [
     href: '/docs/components/avatar',
     tag: false,
     deprecate: false,
-    folderName: 'Avatar',
-    // Icon: User,
+    folderName: 'Avatar'
   },
   {
     id: generatedID(),
-    name: 'Badge',
-    folderName: 'Badge',
-    href: '/docs/components/badge',
+    name: 'BackToTop',
+    href: '/docs/components/back-to-top',
     tag: false,
     deprecate: false,
-    // Icon: Notification,
+    folderName: 'BackToTop'
   },
-
   {
     id: generatedID(),
-    name: 'BreadCrumb',
-    folderName: 'Breadcrumb',
+    name: 'Breadcrumb',
     href: '/docs/components/breadcrumb',
     tag: false,
     deprecate: false,
-    // Icon: CaretDoubleRight,
+    folderName: 'Breadcrumb'
   },
   {
     id: generatedID(),
     name: 'Button',
-    folderName: 'Button',
     href: '/docs/components/button',
     tag: false,
     deprecate: false,
-    // Icon: RadioButton,
-  },
-  {
-    id: generatedID(),
-    name: 'Button Group',
-    folderName: 'Button',
-    href: '/docs/components/buttonGroup',
-    tag: false,
-    deprecate: false,
-    // Icon: DotsThreeCircle,
+    folderName: 'Button'
   },
   {
     id: generatedID(),
     name: 'Card',
-    folderName: 'Card',
     href: '/docs/components/card',
     tag: false,
     deprecate: false,
-    // Icon: Cards,
+    folderName: 'Card'
   },
   {
     id: generatedID(),
     name: 'Carousel',
-    folderName: 'Carousel',
     href: '/docs/components/carousel',
     tag: false,
     deprecate: false,
-    // Icon: SlidersHorizontal,
+    folderName: 'Carousel'
   },
   {
     id: generatedID(),
     name: 'Checkbox',
-    folderName: 'Checkbox',
     href: '/docs/components/checkbox',
     tag: false,
     deprecate: false,
-    // Icon: CheckCircle,
+    folderName: 'Checkbox'
+  },
+  {
+    id: generatedID(),
+    name: 'CircularProgress',
+    href: '/docs/components/circular-progress',
+    tag: false,
+    deprecate: false,
+    folderName: 'CircularProgress'
+  },
+  {
+    id: generatedID(),
+    name: 'DatePicker',
+    href: '/docs/components/date-picker',
+    tag: false,
+    deprecate: false,
+    folderName: 'DatePicker'
   },
   {
     id: generatedID(),
     name: 'Divider',
-    folderName: 'Divider',
     href: '/docs/components/divider',
     tag: false,
     deprecate: false,
-    // Icon: Minus,
-  },
-  {
-    id: generatedID(),
-    name: 'Date Picker',
-    folderName: 'DatePicker',
-    href: '/docs/components/datePicker',
-    tag: false,
-    deprecate: false,
-    // Icon: Calendar,
+    folderName: 'Divider'
   },
   {
     id: generatedID(),
     name: 'Dropdown',
-    folderName: 'Dropdown',
     href: '/docs/components/dropdown',
     tag: false,
     deprecate: false,
-    // Icon: Option,
+    folderName: 'Dropdown'
   },
   {
     id: generatedID(),
-    name: 'Drawer',
-    folderName: 'Drawer',
-    href: '/docs/components/drawer',
+    name: 'Image',
+    href: '/docs/components/image',
     tag: false,
     deprecate: false,
-    // Icon: Sidebar,
+    folderName: 'Image'
   },
   {
     id: generatedID(),
-    name: 'Empty',
-    folderName: 'Empty',
-    href: '/docs/components/empty',
+    name: 'Input',
+    href: '/docs/components/input',
     tag: false,
     deprecate: false,
-    // Icon: BatteryWarning,
+    folderName: 'Input'
+  },
+  {
+    id: generatedID(),
+    name: 'Masonry',
+    href: '/docs/components/masonry',
+    tag: false,
+    deprecate: false,
+    folderName: 'Masonry'
   },
   {
     id: generatedID(),
     name: 'Modal',
-    folderName: 'Modal',
     href: '/docs/components/modal',
     tag: false,
     deprecate: false,
-    // Icon: PictureInPicture,
+    folderName: 'Modal'
   },
   {
     id: generatedID(),
     name: 'Navbar',
-    folderName: 'Navbar',
     href: '/docs/components/navbar',
     tag: false,
     deprecate: false,
-    // Icon: Browser,
+    folderName: 'Navbar'
   },
   {
     id: generatedID(),
-    name: 'Notification',
-    folderName: 'Notification',
-    href: '/docs/components/notification',
+    name: 'NumberCounter',
+    href: '/docs/components/number-counter',
     tag: false,
     deprecate: false,
-    // Icon: BellRinging,
-  },
-  {
-    id: generatedID(),
-    name: 'Number Input',
-    folderName: 'FormControls',
-    href: '/docs/components/numberInput',
-    tag: false,
-    deprecate: false,
-    // Icon: ListNumbers,
-  },
-  {
-    id: generatedID(),
-    name: 'Progress',
-    folderName: 'Progress',
-    href: '/docs/components/progress',
-    tag: false,
-    deprecate: false,
+    folderName: 'NumberCounter'
   },
   {
     id: generatedID(),
     name: 'Pagination',
-    folderName: 'Pagination',
     href: '/docs/components/pagination',
     tag: false,
     deprecate: false,
+    folderName: 'Pagination'
   },
   {
     id: generatedID(),
     name: 'Popover',
-    folderName: 'Popover',
     href: '/docs/components/popover',
     tag: false,
     deprecate: false,
+    folderName: 'Popover'
+  },
+  {
+    id: generatedID(),
+    name: 'ProgressBar',
+    href: '/docs/components/progressbar',
+    tag: false,
+    deprecate: false,
+    folderName: 'ProgressBar'
   },
   {
     id: generatedID(),
     name: 'Radio',
-    folderName: 'FormControls',
     href: '/docs/components/radio',
     tag: false,
     deprecate: false,
+    folderName: 'Radio'
   },
   {
     id: generatedID(),
     name: 'Rating',
-    folderName: 'Rating',
     href: '/docs/components/rating',
     tag: false,
     deprecate: false,
+    folderName: 'Rating'
+  },
+  {
+    id: generatedID(),
+    name: 'Select',
+    href: '/docs/components/select',
+    tag: false,
+    deprecate: false,
+    folderName: 'Select'
   },
   {
     id: generatedID(),
     name: 'Sidebar',
-    folderName: 'Sidebar',
     href: '/docs/components/sidebar',
     tag: false,
     deprecate: false,
+    folderName: 'Sidebar'
   },
   {
     id: generatedID(),
     name: 'Skeleton',
-    folderName: 'Skeleton',
     href: '/docs/components/skeleton',
     tag: false,
     deprecate: false,
+    folderName: 'Skeleton'
   },
   {
     id: generatedID(),
     name: 'Slider',
-    folderName: 'Slider',
     href: '/docs/components/slider',
     tag: false,
     deprecate: false,
+    folderName: 'Slider'
   },
   {
     id: generatedID(),
     name: 'Spinner',
-    folderName: 'Spinner',
     href: '/docs/components/spinner',
     tag: false,
     deprecate: false,
+    folderName: 'Spinner'
   },
   {
     id: generatedID(),
-    name: 'Steps',
-    folderName: 'Steps',
-    href: '/docs/components/steps',
+    name: 'Stepper',
+    href: '/docs/components/stepper',
     tag: false,
     deprecate: false,
+    folderName: 'Stepper'
   },
   {
     id: generatedID(),
     name: 'Switch',
-    folderName: 'FormControls',
     href: '/docs/components/switch',
     tag: false,
     deprecate: false,
+    folderName: 'Switch'
   },
   {
     id: generatedID(),
     name: 'Table',
-    folderName: 'Table',
     href: '/docs/components/table',
     tag: false,
     deprecate: false,
+    folderName: 'Table'
   },
   {
     id: generatedID(),
     name: 'Tabs',
-    folderName: 'Tabs',
     href: '/docs/components/tabs',
     tag: false,
     deprecate: false,
+    folderName: 'Tabs'
   },
   {
     id: generatedID(),
-    name: 'Text Area',
-    folderName: 'FormControls',
-    href: '/docs/components/textArea',
+    name: 'Textarea',
+    href: '/docs/components/textarea',
     tag: false,
     deprecate: false,
-  },
-  {
-    id: generatedID(),
-    name: 'Toast',
-    folderName: 'Toast',
-    href: '/docs/components/toast',
-    tag: false,
-    deprecate: false,
-  },
-
-  {
-    id: generatedID(),
-    name: 'Input',
-    folderName: 'Input',
-    href: '/docs/components/input',
-    tag: false,
-    deprecate: false,
+    folderName: 'Textarea'
   },
   {
     id: generatedID(),
     name: 'Timeline',
-    folderName: 'Timeline',
     href: '/docs/components/timeline',
     tag: false,
     deprecate: false,
+    folderName: 'Timeline'
+  },
+  {
+    id: generatedID(),
+    name: 'Toast',
+    href: '/docs/components/toast',
+    tag: false,
+    deprecate: false,
+    folderName: 'Toast'
+  },
+  {
+    id: generatedID(),
+    name: 'ToggleButton',
+    href: '/docs/components/toggle-button',
+    tag: false,
+    deprecate: false,
+    folderName: 'ToggleButton'
   },
   {
     id: generatedID(),
     name: 'Tooltip',
-    folderName: 'Tooltip',
     href: '/docs/components/tooltip',
     tag: false,
     deprecate: false,
+    folderName: 'Tooltip'
+  },
+  {
+    id: generatedID(),
+    name: 'Typography',
+    href: '/docs/components/typography',
+    tag: false,
+    deprecate: false,
+    folderName: 'Typography'
   },
   {
     id: generatedID(),
     name: 'Upload',
-    folderName: 'Upload',
     href: '/docs/components/upload',
     tag: false,
     deprecate: false,
-  },
+    folderName: 'Upload'
+  }
 ]
 
 export const gettingStartedRoutes: routerPath[] = [
@@ -466,19 +425,19 @@ export const navbarRoutes: routerPath[] = [
   },
   {
     id: generatedID(),
-    href: '/variations',
+    href: '#',
     name: 'Variations',
     redirect: true,
   },
   {
     id: generatedID(),
-    href: '/template',
+    href: '#',
     name: 'Template',
     redirect: false,
   },
   {
     id: generatedID(),
-    href: '/full-page',
+    href: '#',
     name: 'Full Page',
     redirect: false,
   },
