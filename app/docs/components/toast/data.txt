@@ -1,0 +1,564 @@
+I'll create the Toast component documentation and examples based on the existing Toast component in your project. I'll structure it similar to your Accordion, Alert, and Avatar components.
+
+First, let's create the Toast documentation:
+
+## 1. Create/Update the Toast Introduction.mdx file
+
+```markdown
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import { basicToast, toastTypes, toastWithAction, toastWithDescription, promiseToast, toastPropsData } from './Code/Code.tsx'
+
+# Toast
+
+The Toast component displays brief notifications or feedback messages to users about app events or actions. Toasts appear temporarily and dismiss automatically after a set duration or can be dismissed manually.
+
+## Import
+
+```tsx
+import { useToast } from '@/app/src/components/Toast'
+```
+
+## Basic Usage
+
+Create a basic toast notification with a simple message.
+
+<CodeSnippets styles="mt-4" content={basicToast} lang="javascript" url="examples/components/toast/basic-toast">
+</CodeSnippets>
+
+## Toast Types
+
+Toasts come in different types to represent different message contexts: success, error, info, and warning.
+
+<CodeSnippets styles="mt-4" content={toastTypes} lang="javascript" url="examples/components/toast/toast-types">
+</CodeSnippets>
+
+## Toast with Action
+
+Add interactive action buttons to your toasts for quick user responses.
+
+<CodeSnippets styles="mt-4" content={toastWithAction} lang="javascript" url="examples/components/toast/toast-with-action">
+</CodeSnippets>
+
+## Toast with Description
+
+For more detailed notifications, add descriptions to your toast messages.
+
+<CodeSnippets styles="mt-4" content={toastWithDescription} lang="javascript" url="examples/components/toast/toast-with-description">
+</CodeSnippets>
+
+## Promise Toast
+
+Track asynchronous operations with loading, success, and error states automatically.
+
+<CodeSnippets styles="mt-4" content={promiseToast} lang="javascript" url="examples/components/toast/promise-toast">
+</CodeSnippets>
+
+## API Reference
+
+### useToast
+
+The Toast component is accessed through the `useToast` hook which returns:
+
+- `addToast`: Function to add a new toast
+- `ToastContainer`: Component that renders all toast notifications
+- `promise`: Function to track promise states with toast notifications
+
+### Toast Props
+
+<ComponentTable data={toastPropsData} />
+```
+
+## 2. Create the Code.tsx file for Toast examples
+
+```tsx
+// In /docs/components/toast/Code/Code.tsx
+
+export const basicToast = `
+import { useToast } from '@/app/src/components/Toast'
+
+const ToastExample = () => {
+  const { addToast, ToastContainer } = useToast()
+
+  const showToast = () => {
+    addToast({
+      message: 'This is a basic toast message',
+      duration: 3000
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showToast}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Show Toast
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+`
+
+export const toastTypes = `
+import { useToast } from '@/app/src/components/Toast'
+
+const ToastTypesExample = () => {
+  const { addToast, ToastContainer } = useToast()
+
+  const showToast = (type) => {
+    addToast({
+      message: \`This is a \${type} toast message\`,
+      type,
+      duration: 3000
+    })
+  }
+
+  return (
+    <div className="flex gap-2 flex-wrap">
+      <button 
+        onClick={() => showToast('success')}
+        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Success Toast
+      </button>
+      <button 
+        onClick={() => showToast('error')}
+        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+      >
+        Error Toast
+      </button>
+      <button 
+        onClick={() => showToast('warning')}
+        className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      >
+        Warning Toast
+      </button>
+      <button 
+        onClick={() => showToast('info')}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Info Toast
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+`
+
+export const toastWithAction = `
+import { useToast } from '@/app/src/components/Toast'
+
+const ToastWithActionExample = () => {
+  const { addToast, ToastContainer } = useToast()
+
+  const showActionToast = () => {
+    addToast({
+      message: 'This is a toast with an action',
+      type: 'info',
+      action: {
+        label: 'Undo',
+        onClick: () => console.log('Undo action clicked'),
+        buttonClassName: "px-2 py-1 ml-2 bg-white text-blue-500 rounded hover:bg-gray-100"
+      }
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showActionToast}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Show Toast with Action
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+`
+
+export const toastWithDescription = `
+import { useToast } from '@/app/src/components/Toast'
+
+const ToastWithDescriptionExample = () => {
+  const { addToast, ToastContainer } = useToast()
+
+  const showDescriptionToast = () => {
+    addToast({
+      message: 'File uploaded successfully',
+      description: 'Your document has been processed and is now available in your library.',
+      type: 'success',
+      duration: 5000
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showDescriptionToast}
+        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Show Toast with Description
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+`
+
+export const promiseToast = `
+import { useToast } from '@/app/src/components/Toast'
+
+const PromiseToastExample = () => {
+  const { promise, ToastContainer } = useToast()
+
+  const simulateAsyncOperation = () => {
+    return new Promise((resolve, reject) => {
+      // Simulate an API call
+      setTimeout(() => {
+        // 80% chance of success for demo purposes
+        if (Math.random() > 0.2) {
+          resolve('Operation completed successfully')
+        } else {
+          reject(new Error('Operation failed'))
+        }
+      }, 2000)
+    })
+  }
+
+  const handlePromiseToast = () => {
+    promise(
+      simulateAsyncOperation(),
+      {
+        loading: 'Processing your request...',
+        loadingDescription: 'Please wait while we complete your operation.',
+        success: 'Success!',
+        successDescription: 'Your request was processed successfully.',
+        error: 'Error occurred',
+        errorDescription: 'We could not complete your request. Please try again.'
+      }
+    )
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={handlePromiseToast}
+        className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+      >
+        Start Promise Operation
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+`
+
+export const toastPropsData = [
+  {
+    prop: 'message',
+    type: 'string',
+    default: '-',
+    description: 'The primary content of the toast notification.',
+    required: true
+  },
+  {
+    prop: 'description',
+    type: 'string',
+    default: '-',
+    description: 'Additional information displayed below the main message.',
+    required: false
+  },
+  {
+    prop: 'type',
+    type: "'success' | 'error' | 'info' | 'warning'",
+    default: "'info'",
+    description: 'Sets the visual style and icon of the toast.',
+    required: false
+  },
+  {
+    prop: 'duration',
+    type: 'number',
+    default: '3000',
+    description: 'How long the toast remains visible in milliseconds.',
+    required: false
+  },
+  {
+    prop: 'action',
+    type: 'ToastAction',
+    default: '-',
+    description: 'Interactive button added to the toast with a callback function.',
+    required: false
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the toast component.',
+    required: false
+  },
+  {
+    prop: 'containerClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the toast container.',
+    required: false
+  },
+  {
+    prop: 'messageClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the toast message.',
+    required: false
+  },
+  {
+    prop: 'messageAreaClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the message area.',
+    required: false
+  },
+  {
+    prop: 'descriptionClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the toast description.',
+    required: false
+  }
+]
+```
+
+## 3. Create Example Components for Toast
+
+First, create the folder structure:
+```
+/example/components/toast/
+```
+
+Then create the following examples:
+
+### 1. basic-toast.tsx
+```tsx
+'use client'
+import { useToast } from '@/app/src/components/Toast'
+
+export default function BasicToastExample() {
+  const { addToast, ToastContainer } = useToast()
+
+  const showToast = () => {
+    addToast({
+      message: 'This is a basic toast message',
+      duration: 3000
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showToast}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Show Toast
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+### 2. toast-types.tsx
+```tsx
+'use client'
+import { useToast } from '@/app/src/components/Toast'
+
+export default function ToastTypesExample() {
+  const { addToast, ToastContainer } = useToast()
+
+  const showToast = (type) => {
+    addToast({
+      message: `This is a ${type} toast message`,
+      type,
+      duration: 3000
+    })
+  }
+
+  return (
+    <div className="flex gap-2 flex-wrap">
+      <button 
+        onClick={() => showToast('success')}
+        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Success Toast
+      </button>
+      <button 
+        onClick={() => showToast('error')}
+        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+      >
+        Error Toast
+      </button>
+      <button 
+        onClick={() => showToast('warning')}
+        className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      >
+        Warning Toast
+      </button>
+      <button 
+        onClick={() => showToast('info')}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Info Toast
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+### 3. toast-with-action.tsx
+```tsx
+'use client'
+import { useToast } from '@/app/src/components/Toast'
+
+export default function ToastWithActionExample() {
+  const { addToast, ToastContainer } = useToast()
+
+  const showActionToast = () => {
+    addToast({
+      message: 'This is a toast with an action',
+      type: 'info',
+      action: {
+        label: 'Undo',
+        onClick: () => console.log('Undo action clicked'),
+        buttonClassName: "px-2 py-1 ml-2 bg-white text-blue-500 rounded hover:bg-gray-100"
+      }
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showActionToast}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Show Toast with Action
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+### 4. toast-with-description.tsx
+```tsx
+'use client'
+import { useToast } from '@/app/src/components/Toast'
+
+export default function ToastWithDescriptionExample() {
+  const { addToast, ToastContainer } = useToast()
+
+  const showDescriptionToast = () => {
+    addToast({
+      message: 'File uploaded successfully',
+      description: 'Your document has been processed and is now available in your library.',
+      type: 'success',
+      duration: 5000
+    })
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={showDescriptionToast}
+        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Show Toast with Description
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+### 5. promise-toast.tsx
+```tsx
+'use client'
+import { useToast } from '@/app/src/components/Toast'
+
+export default function PromiseToastExample() {
+  const { promise, ToastContainer } = useToast()
+
+  const simulateAsyncOperation = () => {
+    return new Promise((resolve, reject) => {
+      // Simulate an API call
+      setTimeout(() => {
+        // 80% chance of success for demo purposes
+        if (Math.random() > 0.2) {
+          resolve('Operation completed successfully')
+        } else {
+          reject(new Error('Operation failed'))
+        }
+      }, 2000)
+    })
+  }
+
+  const handlePromiseToast = () => {
+    promise(
+      simulateAsyncOperation(),
+      {
+        loading: 'Processing your request...',
+        loadingDescription: 'Please wait while we complete your operation.',
+        success: 'Success!',
+        successDescription: 'Your request was processed successfully.',
+        error: 'Error occurred',
+        errorDescription: 'We could not complete your request. Please try again.'
+      }
+    )
+  }
+
+  return (
+    <div>
+      <button 
+        onClick={handlePromiseToast}
+        className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+      >
+        Start Promise Operation
+      </button>
+      <ToastContainer />
+    </div>
+  )
+}
+```
+
+## 4. Update the Toast page.tsx file
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './Introduction.mdx'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Toast - Aspect UI',
+  description:
+    'The `Toast` component displays brief messages to notify users about app events or actions. It supports different types (success, error, info, warning), animations, positioning, and auto-dismiss.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/toast"
+        nextPageLink="/docs/components/tooltip"
+        nextPageName="Tooltip"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+This completes the documentation for the Toast component. The structure follows the same pattern as your existing components like Accordion, Alert, and Avatar. The examples demonstrate all the key features of your Toast component including basic usage, different types, actions, descriptions, and promise tracking.

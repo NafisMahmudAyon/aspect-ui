@@ -1,0 +1,516 @@
+I'll create the documentation for the Tabs component similar to the Accordion component, and also set up the necessary examples. Let me implement this for you.
+
+## 1. First, I'll create the Tabs Introduction.mdx file:
+
+```tsx
+// In /docs/components/tabs/Introduction.mdx
+import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultTabs, DefaultTabs, verticalTabs, VerticalTabs, iconTabs, IconTabs, tabsPropsData, tabListPropsData, tabPropsData, tabPanelPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Tabs
+---
+<CodeSnippets styles="mt-4" content={defaultTabs} lang="javascript" url="examples/components/tabs/default-tabs">
+</CodeSnippets>
+
+## Vertical Tabs
+---
+<CodeSnippets styles="mt-4" content={verticalTabs} lang="javascript" url="examples/components/tabs/vertical-tabs">
+</CodeSnippets>
+
+## Tabs with Icons
+---
+<CodeSnippets styles="mt-4" content={iconTabs} lang="javascript" url="examples/components/tabs/icon-tabs">
+</CodeSnippets>
+```
+
+## 2. Now let's create the Code.tsx file for the Tabs component:
+
+```tsx
+// In /docs/components/tabs/Code/Code.tsx
+import React from 'react'
+
+// Default Tabs Example
+export const defaultTabs = `import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+
+export default function DefaultTabs() {
+  return (
+    <Tabs defaultValue="tab1">
+      <TabList>
+        <Tab value="tab1">Tab 1</Tab>
+        <Tab value="tab2">Tab 2</Tab>
+        <Tab value="tab3">Tab 3</Tab>
+      </TabList>
+      <TabPanel value="tab1">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 1 Content</h3>
+          <p>This is the content for the first tab panel.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="tab2">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 2 Content</h3>
+          <p>This is the content for the second tab panel.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="tab3">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 3 Content</h3>
+          <p>This is the content for the third tab panel.</p>
+        </div>
+      </TabPanel>
+    </Tabs>
+  )
+}`
+
+// Vertical Tabs Example
+export const verticalTabs = `import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+
+export default function VerticalTabs() {
+  return (
+    <Tabs defaultValue="tab1" orientation="vertical">
+      <div className="flex">
+        <TabList className="border-r border-gray-200 pr-4 min-w-[150px]">
+          <Tab value="tab1" className="justify-start">Tab 1</Tab>
+          <Tab value="tab2" className="justify-start">Tab 2</Tab>
+          <Tab value="tab3" className="justify-start">Tab 3</Tab>
+        </TabList>
+        <div className="flex-1">
+          <TabPanel value="tab1">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 1 Content</h3>
+              <p>This is the content for the first tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+          <TabPanel value="tab2">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 2 Content</h3>
+              <p>This is the content for the second tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+          <TabPanel value="tab3">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 3 Content</h3>
+              <p>This is the content for the third tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+        </div>
+      </div>
+    </Tabs>
+  )
+}`
+
+// Tabs with Icons Example
+export const iconTabs = `import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+import { Home, Settings, User } from 'lucide-react'
+
+export default function IconTabs() {
+  return (
+    <Tabs defaultValue="home">
+      <TabList>
+        <Tab value="home">
+          <Home className="w-4 h-4 mr-2" />
+          Home
+        </Tab>
+        <Tab value="profile">
+          <User className="w-4 h-4 mr-2" />
+          Profile
+        </Tab>
+        <Tab value="settings">
+          <Settings className="w-4 h-4 mr-2" />
+          Settings
+        </Tab>
+      </TabList>
+      <TabPanel value="home">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Home</h3>
+          <p>Welcome to the home tab. This tab shows your dashboard.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="profile">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Profile</h3>
+          <p>This is your user profile information.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="settings">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Settings</h3>
+          <p>Configure your application settings here.</p>
+        </div>
+      </TabPanel>
+    </Tabs>
+  )
+}`
+
+// Define component props tables
+export const tabsPropsData = [
+  {
+    name: 'defaultValue',
+    type: 'string',
+    default: '-',
+    description: 'The initial active tab value.',
+  },
+  {
+    name: 'value',
+    type: 'string',
+    default: '-',
+    description: 'The controlled active tab value.',
+  },
+  {
+    name: 'onValueChange',
+    type: '(value: string) => void',
+    default: '-',
+    description: 'Callback fired when the active tab changes.',
+  },
+  {
+    name: 'orientation',
+    type: '"horizontal" | "vertical"',
+    default: '"horizontal"',
+    description: 'The orientation of the tabs component.',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'The content of the tabs component.',
+  },
+]
+
+export const tabListPropsData = [
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'The content of the tab list.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS class for the tab list.',
+  },
+]
+
+export const tabPropsData = [
+  {
+    name: 'value',
+    type: 'string',
+    default: '-',
+    description: 'Unique identifier for the tab.',
+    required: true,
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the tab is disabled.',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'The content of the tab.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS class for the tab.',
+  },
+]
+
+export const tabPanelPropsData = [
+  {
+    name: 'value',
+    type: 'string',
+    default: '-',
+    description: 'Identifier matching a tab value to associate this panel with.',
+    required: true,
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'The content of the tab panel.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS class for the tab panel.',
+  },
+]
+
+// Component examples for rendering in docs
+export function DefaultTabs() {
+  return (
+    <div className="w-full border rounded-md">
+      {/* Implementation of default tabs example */}
+    </div>
+  )
+}
+
+export function VerticalTabs() {
+  return (
+    <div className="w-full border rounded-md">
+      {/* Implementation of vertical tabs example */}
+    </div>
+  )
+}
+
+export function IconTabs() {
+  return (
+    <div className="w-full border rounded-md">
+      {/* Implementation of icon tabs example */}
+    </div>
+  )
+}
+```
+
+## 3. Now let's create the examples for the Tabs component:
+
+### Default Tabs Example:
+
+```tsx
+// In /examples/components/tabs/default-tabs.tsx
+import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+
+export default function DefaultTabs() {
+  return (
+    <Tabs defaultValue="tab1">
+      <TabList>
+        <Tab value="tab1">Tab 1</Tab>
+        <Tab value="tab2">Tab 2</Tab>
+        <Tab value="tab3">Tab 3</Tab>
+      </TabList>
+      <TabPanel value="tab1">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 1 Content</h3>
+          <p>This is the content for the first tab panel.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="tab2">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 2 Content</h3>
+          <p>This is the content for the second tab panel.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="tab3">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Tab 3 Content</h3>
+          <p>This is the content for the third tab panel.</p>
+        </div>
+      </TabPanel>
+    </Tabs>
+  )
+}
+```
+
+### Vertical Tabs Example:
+
+```tsx
+// In /examples/components/tabs/vertical-tabs.tsx
+import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+
+export default function VerticalTabs() {
+  return (
+    <Tabs defaultValue="tab1" orientation="vertical">
+      <div className="flex">
+        <TabList className="border-r border-gray-200 pr-4 min-w-[150px]">
+          <Tab value="tab1" className="justify-start">Tab 1</Tab>
+          <Tab value="tab2" className="justify-start">Tab 2</Tab>
+          <Tab value="tab3" className="justify-start">Tab 3</Tab>
+        </TabList>
+        <div className="flex-1">
+          <TabPanel value="tab1">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 1 Content</h3>
+              <p>This is the content for the first tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+          <TabPanel value="tab2">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 2 Content</h3>
+              <p>This is the content for the second tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+          <TabPanel value="tab3">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Tab 3 Content</h3>
+              <p>This is the content for the third tab panel in vertical layout.</p>
+            </div>
+          </TabPanel>
+        </div>
+      </div>
+    </Tabs>
+  )
+}
+```
+
+### Icon Tabs Example:
+
+```tsx
+// In /examples/components/tabs/icon-tabs.tsx
+import React from 'react'
+import { Tabs, TabList, Tab, TabPanel } from '@aspect-ui/react'
+import { Home, Settings, User } from 'lucide-react'
+
+export default function IconTabs() {
+  return (
+    <Tabs defaultValue="home">
+      <TabList>
+        <Tab value="home">
+          <Home className="w-4 h-4 mr-2" />
+          Home
+        </Tab>
+        <Tab value="profile">
+          <User className="w-4 h-4 mr-2" />
+          Profile
+        </Tab>
+        <Tab value="settings">
+          <Settings className="w-4 h-4 mr-2" />
+          Settings
+        </Tab>
+      </TabList>
+      <TabPanel value="home">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Home</h3>
+          <p>Welcome to the home tab. This tab shows your dashboard.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="profile">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Profile</h3>
+          <p>This is your user profile information.</p>
+        </div>
+      </TabPanel>
+      <TabPanel value="settings">
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">Settings</h3>
+          <p>Configure your application settings here.</p>
+        </div>
+      </TabPanel>
+    </Tabs>
+  )
+}
+```
+
+## 4. Create index.ts file for the Tabs documentation:
+
+```tsx
+// In /docs/components/tabs/index.ts
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+```
+
+Now, for the Divider component examples that you also requested, I'll implement an example for the Tabs documentation:
+
+```tsx
+// In /examples/components/tabs/divider-tabs.tsx
+import React from 'react'
+import { Tabs, TabList, Tab, TabPanel, Divider } from '@aspect-ui/react'
+
+export default function DividerTabs() {
+  return (
+    <div className="space-y-4">
+      <Tabs defaultValue="tab1">
+        <TabList>
+          <Tab value="tab1">Section 1</Tab>
+          <Tab value="tab2">Section 2</Tab>
+          <Tab value="tab3">Section 3</Tab>
+        </TabList>
+        
+        <Divider className="my-2" />
+        
+        <TabPanel value="tab1">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 1 Content</h3>
+            <p>This is the content for the first section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+        <TabPanel value="tab2">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 2 Content</h3>
+            <p>This is the content for the second section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+        <TabPanel value="tab3">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 3 Content</h3>
+            <p>This is the content for the third section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+      </Tabs>
+    </div>
+  )
+}
+```
+
+Then, I'd update the Introduction.mdx file to include this new example:
+
+```mdx
+// Add this to Introduction.mdx after the icon tabs section
+## Tabs with Divider
+---
+<CodeSnippets styles="mt-4" content={dividerTabs} lang="javascript" url="examples/components/tabs/divider-tabs">
+</CodeSnippets>
+```
+
+And update the Code.tsx file to include the divider example:
+
+```tsx
+// Add this to Code.tsx
+// Tabs with Divider Example
+export const dividerTabs = `import React from 'react'
+import { Tabs, TabList, Tab, TabPanel, Divider } from '@aspect-ui/react'
+
+export default function DividerTabs() {
+  return (
+    <div className="space-y-4">
+      <Tabs defaultValue="tab1">
+        <TabList>
+          <Tab value="tab1">Section 1</Tab>
+          <Tab value="tab2">Section 2</Tab>
+          <Tab value="tab3">Section 3</Tab>
+        </TabList>
+        
+        <Divider className="my-2" />
+        
+        <TabPanel value="tab1">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 1 Content</h3>
+            <p>This is the content for the first section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+        <TabPanel value="tab2">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 2 Content</h3>
+            <p>This is the content for the second section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+        <TabPanel value="tab3">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold">Section 3 Content</h3>
+            <p>This is the content for the third section, with a divider between tabs and content.</p>
+          </div>
+        </TabPanel>
+      </Tabs>
+    </div>
+  )
+}`
+
+// Add this to the imports at the top of Introduction.mdx
+import {defaultTabs, DefaultTabs, verticalTabs, VerticalTabs, iconTabs, IconTabs, dividerTabs, DividerTabs, tabsPropsData, tabListPropsData, tabPropsData, tabPanelPropsData} from './Code/Code.tsx'
+```
+
+With these implementations, you'll have a complete documentation for the Tabs component similar to the Accordion component, including examples of default tabs, vertical tabs, tabs with icons, and a special example showing tabs with a divider.

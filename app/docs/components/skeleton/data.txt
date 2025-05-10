@@ -1,0 +1,307 @@
+I'll create the necessary files for the Skeleton component documentation. Let me start by creating the structure for the Skeleton component documentation and examples.
+
+First, let's look at the content needed for the documentation:
+
+## 1. Complete the Skeleton Page and Introduction Files
+
+Let me create the files for the Skeleton component documentation:
+
+### For the Skeleton Page
+
+First, I notice the page.tsx file already exists with basic metadata, but we need to complete it:
+
+```tsx
+// File: app/docs/components/skeleton/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Skeleton - Aspect UI',
+  description:
+    'The `Skeleton` component displays placeholder loading states that mimic content layout. It improves perceived performance during data fetching or loading screens by showing a preview of the UI before the data arrives, reducing perceived loading times and improving user experience.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/skeleton"
+        nextPageLink="/docs/components/slider"
+        nextPageName="Slider"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### For the Introduction.mdx file
+
+```mdx
+// File: app/docs/components/skeleton/Introduction.mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultSkeleton, textSkeleton, imageSkeleton, cardSkeleton, skeletonPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Skeleton
+---
+<CodeSnippets styles="mt-4" content={defaultSkeleton} lang="javascript" url="examples/components/skeleton/default-skeleton">
+</CodeSnippets>
+
+## Text Skeleton
+---
+<CodeSnippets styles="mt-4" content={textSkeleton} lang="javascript" url="examples/components/skeleton/text-skeleton">
+</CodeSnippets>
+
+## Image Skeleton
+---
+<CodeSnippets styles="mt-4" content={imageSkeleton} lang="javascript" url="examples/components/skeleton/image-skeleton">
+</CodeSnippets>
+
+## Card Skeleton
+---
+<CodeSnippets styles="mt-4" content={cardSkeleton} lang="javascript" url="examples/components/skeleton/card-skeleton">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Skeleton Props
+<ComponentTable data={skeletonPropsData} />
+```
+
+### For the Code.tsx file
+
+```tsx
+// File: app/docs/components/skeleton/Code/Code.tsx
+export const defaultSkeleton = `import { Skeleton } from "@aspect-ui/react";
+
+export default function DefaultSkeleton() {
+  return (
+    <div className="flex flex-col space-y-4">
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-3/4" />
+      <Skeleton className="h-4 w-1/2" />
+    </div>
+  );
+}`;
+
+export const textSkeleton = `import { Skeleton } from "@aspect-ui/react";
+
+export default function TextSkeleton() {
+  return (
+    <div className="space-y-2">
+      <Skeleton className="h-6 w-1/4 mb-4" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-3/4" />
+    </div>
+  );
+}`;
+
+export const imageSkeleton = `import { Skeleton } from "@aspect-ui/react";
+
+export default function ImageSkeleton() {
+  return (
+    <div className="flex flex-col space-y-4">
+      <Skeleton className="h-40 w-full rounded-md" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </div>
+  );
+}`;
+
+export const cardSkeleton = `import { Skeleton } from "@aspect-ui/react";
+
+export default function CardSkeleton() {
+  return (
+    <div className="border rounded-lg p-4 max-w-sm w-full">
+      <div className="flex space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="flex-1 space-y-2 py-1">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      </div>
+      <div className="mt-4 space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </div>
+  );
+}`;
+
+export const skeletonPropsData = [
+  {
+    attribute: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional classes to be added to the skeleton component',
+  },
+  {
+    attribute: 'animate',
+    type: 'boolean',
+    default: 'true',
+    description: 'Whether the skeleton should have an animation effect',
+  },
+  {
+    attribute: 'variant',
+    type: '"rectangular" | "circular" | "text"',
+    default: '"rectangular"',
+    description: 'The shape of the skeleton',
+  },
+  {
+    attribute: 'height',
+    type: 'string | number',
+    default: '',
+    description: 'Height of the skeleton',
+  },
+  {
+    attribute: 'width',
+    type: 'string | number',
+    default: '',
+    description: 'Width of the skeleton',
+  },
+];
+```
+
+## 2. Create Example Files for Skeleton Component
+
+Now, I'll create the example files for the Skeleton component:
+
+### Default Skeleton Example
+
+```tsx
+// File: app/examples/components/skeleton/default-skeleton/page.tsx
+import DefaultSkeleton from './DefaultSkeleton';
+
+export default function Page() {
+  return <DefaultSkeleton />;
+}
+```
+
+```tsx
+// File: app/examples/components/skeleton/default-skeleton/DefaultSkeleton.tsx
+import { Skeleton } from "@/app/src";
+
+export default function DefaultSkeleton() {
+  return (
+    <div className="flex flex-col space-y-4">
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-3/4" />
+      <Skeleton className="h-4 w-1/2" />
+    </div>
+  );
+}
+```
+
+### Text Skeleton Example
+
+```tsx
+// File: app/examples/components/skeleton/text-skeleton/page.tsx
+import TextSkeleton from './TextSkeleton';
+
+export default function Page() {
+  return <TextSkeleton />;
+}
+```
+
+```tsx
+// File: app/examples/components/skeleton/text-skeleton/TextSkeleton.tsx
+import { Skeleton } from "@/app/src";
+
+export default function TextSkeleton() {
+  return (
+    <div className="space-y-2">
+      <Skeleton className="h-6 w-1/4 mb-4" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-3/4" />
+    </div>
+  );
+}
+```
+
+### Image Skeleton Example
+
+```tsx
+// File: app/examples/components/skeleton/image-skeleton/page.tsx
+import ImageSkeleton from './ImageSkeleton';
+
+export default function Page() {
+  return <ImageSkeleton />;
+}
+```
+
+```tsx
+// File: app/examples/components/skeleton/image-skeleton/ImageSkeleton.tsx
+import { Skeleton } from "@/app/src";
+
+export default function ImageSkeleton() {
+  return (
+    <div className="flex flex-col space-y-4">
+      <Skeleton className="h-40 w-full rounded-md" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </div>
+  );
+}
+```
+
+### Card Skeleton Example
+
+```tsx
+// File: app/examples/components/skeleton/card-skeleton/page.tsx
+import CardSkeleton from './CardSkeleton';
+
+export default function Page() {
+  return <CardSkeleton />;
+}
+```
+
+```tsx
+// File: app/examples/components/skeleton/card-skeleton/CardSkeleton.tsx
+import { Skeleton } from "@/app/src";
+
+export default function CardSkeleton() {
+  return (
+    <div className="border rounded-lg p-4 max-w-sm w-full">
+      <div className="flex space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="flex-1 space-y-2 py-1">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      </div>
+      <div className="mt-4 space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+    </div>
+  );
+}
+```
+
+## 3. Create an Index File to Export the Introduction
+
+```tsx
+// File: app/docs/components/skeleton/index.tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+These files complete the documentation for the Skeleton component, following the same structure as the Accordion component documentation. The examples demonstrate different use cases for the Skeleton component, including default skeletons, text skeletons, image skeletons, and card skeletons.
+
+The examples can be accessed through the URLs mentioned in the Introduction.mdx file, providing a comprehensive guide to using the Skeleton component in your application.

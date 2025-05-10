@@ -1,0 +1,521 @@
+I'll help you create the documentation and examples for the Rating component following the structure used in accordion, alert, and avatar components. Let me analyze the existing Rating component files and create the required documentation and examples.
+
+## 1. First, let's create/update the Rating documentation files
+
+### 1.1 Creating/Updating index.tsx in /docs/components/rating
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+### 1.2 Creating the Introduction.mdx file
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultRating,
+  readOnlyRating,
+  customSizeRating,
+  customColorRating,
+  customIconRating,
+  ratingPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Rating
+---
+<CodeSnippets styles="mt-4" content={defaultRating} lang="tsx" url="examples/components/rating/default-rating">
+</CodeSnippets>
+
+## Read-Only Rating
+---
+<CodeSnippets styles="mt-4" content={readOnlyRating} lang="tsx" url="examples/components/rating/read-only-rating">
+</CodeSnippets>
+
+## Custom Size Rating
+---
+<CodeSnippets styles="mt-4" content={customSizeRating} lang="tsx" url="examples/components/rating/custom-size-rating">
+</CodeSnippets>
+
+## Custom Color Rating
+---
+<CodeSnippets styles="mt-4" content={customColorRating} lang="tsx" url="examples/components/rating/custom-color-rating">
+</CodeSnippets>
+
+## Custom Icon Rating
+---
+<CodeSnippets styles="mt-4" content={customIconRating} lang="tsx" url="examples/components/rating/custom-icon-rating">
+</CodeSnippets>
+
+## Rating Props
+---
+<ComponentTable data={ratingPropsData} />
+```
+
+### 1.3 Creating the Code/Code.tsx file
+
+```tsx
+// In /docs/components/rating/Code/Code.tsx
+import React from 'react'
+
+// Default Rating example code
+export const defaultRating = `import React, { useState } from 'react'
+import { Rating } from 'aspect-ui'
+
+const DefaultRating = () => {
+  const [rating, setRating] = useState(0)
+
+  const handleChange = (event, value) => {
+    setRating(value)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <Rating onChange={handleChange} />
+      </div>
+      <div>
+        <p>Selected Rating: {rating}</p>
+      </div>
+    </div>
+  )
+}
+
+export default DefaultRating`
+
+// Read-Only Rating example code
+export const readOnlyRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const ReadOnlyRating = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Product Rating</h3>
+        <Rating initialRating={4.5} readOnly={true} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">User Satisfaction</h3>
+        <Rating initialRating={3} readOnly={true} />
+      </div>
+    </div>
+  )
+}
+
+export default ReadOnlyRating`
+
+// Custom Size Rating example code
+export const customSizeRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const CustomSizeRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Small Size (16px)</h3>
+        <Rating size={16} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Medium Size (24px - Default)</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Large Size (32px)</h3>
+        <Rating size={32} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Extra Large Size (48px)</h3>
+        <Rating size={48} initialRating={3} />
+      </div>
+    </div>
+  )
+}
+
+export default CustomSizeRating`
+
+// Custom Color Rating example code
+export const customColorRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const CustomColorRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Default Colors</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Gold Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#FFD700" 
+          hoverColor="#FFE866" 
+          unratedColor="#E5E7EB" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Red Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#DC2626" 
+          hoverColor="#EF4444" 
+          unratedColor="#FECACA" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Purple Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#7C3AED" 
+          hoverColor="#8B5CF6" 
+          unratedColor="#DDD6FE" 
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomColorRating`
+
+// Custom Icon Rating example code
+export const customIconRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+import { HeartIcon } from '@heroicons/react/solid'
+
+const CustomIconRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Custom Heart Icon</h3>
+        <Rating 
+          initialRating={3} 
+          icon={<HeartIcon className="w-full h-full" />}
+          starColor="#F87171"
+          hoverColor="#FCA5A5"
+          unratedColor="#FEE2E2"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomIconRating`
+
+// Component props data for documentation
+export const ratingPropsData = [
+  {
+    name: 'maxRating',
+    type: 'number',
+    default: '5',
+    description: 'Maximum rating value (number of stars)',
+    required: false,
+  },
+  {
+    name: 'initialRating',
+    type: 'number',
+    default: '0',
+    description: 'Initial rating value',
+    required: false,
+  },
+  {
+    name: 'size',
+    type: 'number',
+    default: '24',
+    description: 'Size of the rating icons (in pixels)',
+    required: false,
+  },
+  {
+    name: 'onChange',
+    type: '(event: React.ChangeEvent<HTMLInputElement>, rating: number) => void',
+    default: '-',
+    description: 'Callback fired when the rating changes',
+    required: false,
+  },
+  {
+    name: 'starColor',
+    type: 'string',
+    default: '#438e96',
+    description: 'Color of the rated stars',
+    required: false,
+  },
+  {
+    name: 'hoverColor',
+    type: 'string',
+    default: '#65a3a9',
+    description: 'Color of the stars on hover',
+    required: false,
+  },
+  {
+    name: 'unratedColor',
+    type: 'string',
+    default: '#a9cdcf',
+    description: 'Color of the unrated stars',
+    required: false,
+  },
+  {
+    name: 'ratingTexts',
+    type: 'string[]',
+    default: "['Terrible', 'Bad', 'OK', 'Good', 'Excellent']",
+    description: 'Texts to display for different rating levels',
+    required: false,
+  },
+  {
+    name: 'readOnly',
+    type: 'boolean',
+    default: 'false',
+    description: 'If true, the rating is read-only and cannot be changed',
+    required: false,
+  },
+  {
+    name: 'icon',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Custom icon to use instead of the default star',
+    required: false,
+  },
+  {
+    name: 'theme',
+    type: "'default' | 'dark'",
+    default: 'default',
+    description: 'Theme for the rating component',
+    required: false,
+  }
+]
+```
+
+## 2. Let's create the example files for Rating
+
+### 2.1 Create default-rating.tsx
+
+```tsx
+// In /examples/components/rating/default-rating.tsx
+import React, { useState } from 'react'
+import { Rating } from '@/app/src'
+
+const DefaultRating = () => {
+  const [rating, setRating] = useState(0)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, value: number) => {
+    setRating(value)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <Rating onChange={handleChange} />
+      </div>
+      <div>
+        <p>Selected Rating: {rating}</p>
+      </div>
+    </div>
+  )
+}
+
+export default DefaultRating
+```
+
+### 2.2 Create read-only-rating.tsx
+
+```tsx
+// In /examples/components/rating/read-only-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const ReadOnlyRating = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Product Rating</h3>
+        <Rating initialRating={4.5} readOnly={true} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">User Satisfaction</h3>
+        <Rating initialRating={3} readOnly={true} />
+      </div>
+    </div>
+  )
+}
+
+export default ReadOnlyRating
+```
+
+### 2.3 Create custom-size-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-size-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const CustomSizeRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Small Size (16px)</h3>
+        <Rating size={16} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Medium Size (24px - Default)</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Large Size (32px)</h3>
+        <Rating size={32} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Extra Large Size (48px)</h3>
+        <Rating size={48} initialRating={3} />
+      </div>
+    </div>
+  )
+}
+
+export default CustomSizeRating
+```
+
+### 2.4 Create custom-color-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-color-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const CustomColorRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Default Colors</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Gold Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#FFD700" 
+          hoverColor="#FFE866" 
+          unratedColor="#E5E7EB" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Red Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#DC2626" 
+          hoverColor="#EF4444" 
+          unratedColor="#FECACA" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Purple Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#7C3AED" 
+          hoverColor="#8B5CF6" 
+          unratedColor="#DDD6FE" 
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomColorRating
+```
+
+### 2.5 Create custom-icon-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-icon-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+// Note: You'll need to ensure you have access to a Heart icon component
+// This is a placeholder - replace with an actual icon from your project
+const HeartIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.003-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+  </svg>
+)
+
+const CustomIconRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Custom Heart Icon</h3>
+        <Rating 
+          initialRating={3} 
+          icon={<HeartIcon />}
+          starColor="#F87171"
+          hoverColor="#FCA5A5"
+          unratedColor="#FEE2E2"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomIconRating
+```
+
+### 2.6 Create page.tsx files for each example
+
+```tsx
+// In /examples/components/rating/default-rating/page.tsx
+import DefaultRating from '../default-rating'
+
+export default function Page() {
+  return <DefaultRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/read-only-rating/page.tsx
+import ReadOnlyRating from '../read-only-rating'
+
+export default function Page() {
+  return <ReadOnlyRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-size-rating/page.tsx
+import CustomSizeRating from '../custom-size-rating'
+
+export default function Page() {
+  return <CustomSizeRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-color-rating/page.tsx
+import CustomColorRating from '../custom-color-rating'
+
+export default function Page() {
+  return <CustomColorRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-icon-rating/page.tsx
+import CustomIconRating from '../custom-icon-rating'
+
+export default function Page() {
+  return <CustomIconRating />
+}
+```
+
+Now you have complete documentation and examples for the Rating component following the same structure as accordion, alert, and avatar components. This includes:
+
+1. Updated page.tsx file in /docs/components/rating with appropriate metadata
+2. An Introduction.mdx file with examples and documentation
+3. A Code/Code.tsx file with example code and props data
+4. Example files in the /examples/components/rating directory
+
+The documentation showcases:
+- Basic rating usage
+- Read-only ratings for displaying static ratings
+- Custom sized ratings
+- Custom colored ratings
+- Custom icon ratings
+
+You can now integrate these examples into your documentation to provide a comprehensive guide for using the Rating component.

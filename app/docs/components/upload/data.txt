@@ -1,0 +1,179 @@
+I'll create the documentation and examples for the Upload component following the same structure as the accordion, alert, and avatar components. Let's begin by setting up the necessary files.
+
+## Step 1: Complete the Upload component documentation page
+
+First, let's complete the page.tsx file that already exists:
+
+```tsx
+// File: /docs/components/upload/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Upload - Aspect UI',
+  description:
+    'The `Upload` component enables users to upload files via drag-and-drop or selection. It supports validation, progress display, previews, and multiple file handling.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/upload"
+        nextPageLink="/docs/components/avatar"
+        nextPageName="Avatar"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+## Step 2: Create the Introduction.mdx file for Upload component
+
+Now, let's create the Introduction.mdx file:
+
+```mdx
+// File: /docs/components/upload/Introduction.mdx
+
+## Table of Contents
+
+## Upload Component
+---
+
+The Upload component allows users to upload files through drag-and-drop or file selection. It provides features like file validation, multiple file upload, and customizable UI.
+
+## Basic Upload
+---
+<CodeSnippets styles="mt-4" content={basicUpload} lang="tsx" url="examples/components/upload/basic-upload">
+</CodeSnippets>
+
+## Multiple File Upload
+---
+<CodeSnippets styles="mt-4" content={multipleUpload} lang="tsx" url="examples/components/upload/multiple-upload">
+</CodeSnippets>
+
+## File Validation
+---
+<CodeSnippets styles="mt-4" content={validationUpload} lang="tsx" url="examples/components/upload/validation-upload">
+</CodeSnippets>
+
+## Custom Styled Upload
+---
+<CodeSnippets styles="mt-4" content={customStyledUpload} lang="tsx" url="examples/components/upload/custom-styled-upload">
+</CodeSnippets>
+```
+
+## Step 3: Create the Code.tsx file to export code snippets
+
+```tsx
+// File: /docs/components/upload/Code/Code.tsx
+import basicUpload from '@/app/examples/components/upload/basic-upload';
+import multipleUpload from '@/app/examples/components/upload/multiple-upload';
+import validationUpload from '@/app/examples/components/upload/validation-upload';
+import customStyledUpload from '@/app/examples/components/upload/custom-styled-upload';
+
+export {
+  basicUpload,
+  multipleUpload,
+  validationUpload,
+  customStyledUpload
+};
+```
+
+## Step 4: Create the index.tsx file
+
+```tsx
+// File: /docs/components/upload/index.tsx
+'use client'
+
+import { basicUpload, multipleUpload, validationUpload, customStyledUpload } from './Code/Code'
+import Introduction from './Introduction.mdx'
+
+export default function UploadDoc() {
+  return <Introduction />
+}
+```
+
+## Step 5: Create the example files in examples/components/upload/
+
+### Basic Upload Example
+
+```tsx
+// File: /examples/components/upload/basic-upload.tsx
+import { FileUpload } from '@aspect-ui/react'
+
+export default function BasicUpload() {
+  return (
+    <FileUpload 
+      onFileSelect={(files) => console.log('Selected files:', files)}
+      accept=".jpg,.jpeg,.png"
+    />
+  )
+}
+```
+
+### Multiple Upload Example
+
+```tsx
+// File: /examples/components/upload/multiple-upload.tsx
+import { FileUpload } from '@aspect-ui/react'
+
+export default function MultipleUpload() {
+  return (
+    <FileUpload
+      onFileSelect={(files) => console.log('Selected files:', files)}
+      accept="image/*"
+      multiple={true}
+      maxFiles={5}
+    />
+  )
+}
+```
+
+### Validation Upload Example
+
+```tsx
+// File: /examples/components/upload/validation-upload.tsx
+import { FileUpload } from '@aspect-ui/react'
+
+export default function ValidationUpload() {
+  return (
+    <FileUpload
+      onFileSelect={(files) => console.log('Selected files:', files)}
+      accept=".pdf,.doc,.docx"
+      multiple={true}
+      maxFiles={3}
+      maxFileSize={5} // 5MB
+    />
+  )
+}
+```
+
+### Custom Styled Upload Example
+
+```tsx
+// File: /examples/components/upload/custom-styled-upload.tsx
+import { FileUpload } from '@aspect-ui/react'
+
+export default function CustomStyledUpload() {
+  return (
+    <FileUpload
+      onFileSelect={(files) => console.log('Selected files:', files)}
+      accept="image/*"
+      multiple={true}
+      className="border-2 border-blue-500 rounded-lg p-8 bg-blue-50"
+      labelText="Drop your images here or click to browse"
+      labelClassName="text-blue-700 font-bold text-lg"
+    />
+  )
+}
+```
+
+These files create comprehensive documentation for the Upload component, demonstrating its various features including basic usage, multiple file uploads, file validation, and custom styling. The examples show how to use the component with different props to meet various use cases.
+
+Let me know if you need any adjustments to these files or have questions about the implementation!

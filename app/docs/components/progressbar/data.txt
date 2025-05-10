@@ -1,0 +1,439 @@
+I'll help you create the documentation and examples for the ProgressBar component following the structure used in accordion, alert, and avatar components. Let me put this together for you.
+
+## 1. First, let's create the documentation files for ProgressBar
+
+### 1.1 Creating page.tsx file
+
+```tsx
+// In /docs/components/progressbar/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'ProgressBar - Aspect UI',
+  description:
+    'The `ProgressBar` component visually represents progress completion or loading state. It supports customizable values, animations, labels, and styling options to effectively communicate progress to users.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/progressbar"
+        nextPageLink="/docs/components/accordion"
+        nextPageName="Typography"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### 1.2 Creating Introduction.mdx file
+
+```mdx
+// In /docs/components/progressbar/Introduction.mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultProgressBar,
+  animatedProgressBar,
+  customStyleProgressBar,
+  progressBarPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default ProgressBar
+---
+<CodeSnippets styles="mt-4" content={defaultProgressBar} lang="tsx" url="examples/components/progressbar/default-progressbar" >
+</CodeSnippets>
+
+## Animated ProgressBar
+---
+<CodeSnippets styles="mt-4" content={animatedProgressBar} lang="tsx" url="examples/components/progressbar/animated-progressbar" >
+</CodeSnippets>
+
+## Custom Styled ProgressBar
+---
+<CodeSnippets styles="mt-4" content={customStyleProgressBar} lang="tsx" url="examples/components/progressbar/custom-style-progressbar" >
+</CodeSnippets>
+
+## ProgressBar Props
+---
+<ComponentTable data={progressBarPropsData} />
+```
+
+### 1.3 Creating Code/Code.tsx file
+
+```tsx
+// In /docs/components/progressbar/Code/Code.tsx
+import React from 'react'
+
+// Default ProgressBar example code
+export const defaultProgressBar = `import React from 'react'
+import { ProgressBar } from 'aspect-ui'
+
+const DefaultProgressBar = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm font-medium mb-1">25% Complete</p>
+        <ProgressBar value={25} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">50% Complete</p>
+        <ProgressBar value={50} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">75% Complete</p>
+        <ProgressBar value={75} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">100% Complete</p>
+        <ProgressBar value={100} />
+      </div>
+    </div>
+  )
+}
+
+export default DefaultProgressBar`
+
+// Animated ProgressBar example code
+export const animatedProgressBar = `import React, { useState, useEffect } from 'react'
+import { ProgressBar, Button } from 'aspect-ui'
+
+const AnimatedProgressBar = () => {
+  const [progress, setProgress] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    
+    if (isAnimating && progress < 100) {
+      timer = setTimeout(() => {
+        setProgress(prev => Math.min(prev + 5, 100))
+      }, 200)
+    } else if (progress >= 100) {
+      setIsAnimating(false)
+    }
+    
+    return () => clearTimeout(timer)
+  }, [progress, isAnimating])
+  
+  const startAnimation = () => {
+    setProgress(0)
+    setIsAnimating(true)
+  }
+  
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm font-medium mb-1">Progress: {progress}%</p>
+        <ProgressBar 
+          value={progress} 
+          duration={0.5} 
+          animateOnVisible
+        />
+      </div>
+      
+      <Button onClick={startAnimation} disabled={isAnimating}>
+        {isAnimating ? 'Loading...' : 'Start Animation'}
+      </Button>
+    </div>
+  )
+}
+
+export default AnimatedProgressBar`
+
+// Custom Style ProgressBar example code
+export const customStyleProgressBar = `import React from 'react'
+import { ProgressBar } from 'aspect-ui'
+
+const CustomStyleProgressBar = () => {
+  return (
+    <div className="space-y-8">
+      <div>
+        <p className="text-sm font-medium mb-1">Success Progress (60%)</p>
+        <ProgressBar 
+          value={60} 
+          containerClassName="h-4 bg-green-100 rounded-full"
+          fillClassName="bg-green-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Warning Progress (40%)</p>
+        <ProgressBar 
+          value={40} 
+          containerClassName="h-4 bg-yellow-100 rounded-full"
+          fillClassName="bg-yellow-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Error Progress (80%)</p>
+        <ProgressBar 
+          value={80} 
+          containerClassName="h-4 bg-red-100 rounded-full"
+          fillClassName="bg-red-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Gradient Progress (75%)</p>
+        <ProgressBar 
+          value={75} 
+          containerClassName="h-6 bg-gray-200 rounded-md"
+          fillClassName="bg-gradient-to-r from-blue-500 to-purple-600 rounded-md"
+          contentClassName="text-xs font-medium text-white px-2"
+        >
+          {75}%
+        </ProgressBar>
+      </div>
+    </div>
+  )
+}
+
+export default CustomStyleProgressBar`
+
+// Component props data for documentation
+export const progressBarPropsData = [
+  {
+    name: 'value',
+    type: 'number',
+    default: '0',
+    description: 'The current progress value (0-100).',
+    required: true,
+  },
+  {
+    name: 'animateOnVisible',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to animate the progress bar when it becomes visible in the viewport.',
+    required: false,
+  },
+  {
+    name: 'duration',
+    type: 'number',
+    default: '0.5',
+    description: 'Animation duration in seconds.',
+    required: false,
+  },
+  {
+    name: 'containerClassName',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS class for the progress bar container.',
+    required: false,
+  },
+  {
+    name: 'fillClassName',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS class for the progress bar fill element.',
+    required: false,
+  },
+  {
+    name: 'contentClassName',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS class for the progress bar content wrapper.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS class for the component root element.',
+    required: false,
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Optional content to render inside the progress bar.',
+    required: false,
+  }
+]
+```
+
+## 2. Let's create the example files for ProgressBar
+
+### 2.1 Creating default-progressbar.tsx
+
+```tsx
+// In /examples/components/progressbar/default-progressbar.tsx
+import React from 'react'
+import { ProgressBar } from '@/app/src'
+
+const DefaultProgressBar = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm font-medium mb-1">25% Complete</p>
+        <ProgressBar value={25} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">50% Complete</p>
+        <ProgressBar value={50} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">75% Complete</p>
+        <ProgressBar value={75} />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">100% Complete</p>
+        <ProgressBar value={100} />
+      </div>
+    </div>
+  )
+}
+
+export default DefaultProgressBar
+```
+
+### 2.2 Creating animated-progressbar.tsx
+
+```tsx
+// In /examples/components/progressbar/animated-progressbar.tsx
+import React, { useState, useEffect } from 'react'
+import { ProgressBar, Button } from '@/app/src'
+
+const AnimatedProgressBar = () => {
+  const [progress, setProgress] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    
+    if (isAnimating && progress < 100) {
+      timer = setTimeout(() => {
+        setProgress(prev => Math.min(prev + 5, 100))
+      }, 200)
+    } else if (progress >= 100) {
+      setIsAnimating(false)
+    }
+    
+    return () => clearTimeout(timer)
+  }, [progress, isAnimating])
+  
+  const startAnimation = () => {
+    setProgress(0)
+    setIsAnimating(true)
+  }
+  
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm font-medium mb-1">Progress: {progress}%</p>
+        <ProgressBar 
+          value={progress} 
+          duration={0.5} 
+          animateOnVisible
+        />
+      </div>
+      
+      <Button onClick={startAnimation} disabled={isAnimating}>
+        {isAnimating ? 'Loading...' : 'Start Animation'}
+      </Button>
+    </div>
+  )
+}
+
+export default AnimatedProgressBar
+```
+
+### 2.3 Creating custom-style-progressbar.tsx
+
+```tsx
+// In /examples/components/progressbar/custom-style-progressbar.tsx
+import React from 'react'
+import { ProgressBar } from '@/app/src'
+
+const CustomStyleProgressBar = () => {
+  return (
+    <div className="space-y-8">
+      <div>
+        <p className="text-sm font-medium mb-1">Success Progress (60%)</p>
+        <ProgressBar 
+          value={60} 
+          containerClassName="h-4 bg-green-100 rounded-full"
+          fillClassName="bg-green-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Warning Progress (40%)</p>
+        <ProgressBar 
+          value={40} 
+          containerClassName="h-4 bg-yellow-100 rounded-full"
+          fillClassName="bg-yellow-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Error Progress (80%)</p>
+        <ProgressBar 
+          value={80} 
+          containerClassName="h-4 bg-red-100 rounded-full"
+          fillClassName="bg-red-500 rounded-full"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm font-medium mb-1">Gradient Progress (75%)</p>
+        <ProgressBar 
+          value={75} 
+          containerClassName="h-6 bg-gray-200 rounded-md"
+          fillClassName="bg-gradient-to-r from-blue-500 to-purple-600 rounded-md"
+          contentClassName="text-xs font-medium text-white px-2"
+        >
+          {75}%
+        </ProgressBar>
+      </div>
+    </div>
+  )
+}
+
+export default CustomStyleProgressBar
+```
+
+### 2.4 Creating index.tsx in examples directory
+
+```tsx
+// In /examples/components/progressbar/index.tsx
+import DefaultProgressBar from './default-progressbar'
+import AnimatedProgressBar from './animated-progressbar'
+import CustomStyleProgressBar from './custom-style-progressbar'
+
+export {
+  DefaultProgressBar,
+  AnimatedProgressBar,
+  CustomStyleProgressBar
+}
+```
+
+These files follow the structure used in other components like accordion, alert, and avatar. The documentation includes:
+
+1. A page.tsx file with metadata and page structure
+2. An Introduction.mdx file with examples and documentation
+3. A Code/Code.tsx file with example code and props data
+4. Example files in the examples/components/progressbar directory
+
+The examples showcase:
+- Basic usage with different progress values
+- Animated progress bars with state management
+- Custom styled progress bars with different color schemes and appearances
+
+This should provide a comprehensive documentation and example set for the ProgressBar component.

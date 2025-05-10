@@ -1,0 +1,865 @@
+I'll create the necessary documentation and examples for the Input component following the structure used for the accordion component. Let me start by analyzing the Input component and creating the required files.
+
+## 1. First, let's create the Input component documentation
+
+### Creating the page.tsx file for Input
+
+Let's start with creating the page.tsx file at [/docs/components/input/page.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\input\page.tsx):
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Input - Aspect UI',
+  description:
+    'The `Input` component allows users to enter text, numbers, or other data in a form. It supports various styles, sizes, states, and validation options, making it versatile for different form requirements. The component can be customized with icons, placeholders, and labels to enhance usability and visual appeal.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/input"
+        nextPageLink="/docs/components/modal"
+        nextPageName="Modal"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### Creating the Introduction.mdx file for Input
+
+Now, let's create the Introduction.mdx at [/docs/components/input/Introduction.mdx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\input\Introduction.mdx):
+
+```markdown
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultInput,
+  inputWithIcon,
+  inputWithLabel,
+  inputSizes,
+  disabledInput,
+  inputVariants,
+  inputValidation,
+  inputWithAddon,
+  requiredInput,
+  inputPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Input
+---
+The basic input field for collecting user data.
+
+<CodeSnippets styles="mt-4" content={defaultInput} lang="javascript" url="examples/components/input/default-input">
+</CodeSnippets>
+
+## Input with Icon
+---
+Add icons to enhance visual context and improve user experience.
+
+<CodeSnippets styles="mt-4" content={inputWithIcon} lang="javascript" url="examples/components/input/input-with-icon">
+</CodeSnippets>
+
+## Input with Label
+---
+Labels provide clear identification of input purpose for better accessibility.
+
+<CodeSnippets styles="mt-4" content={inputWithLabel} lang="javascript" url="examples/components/input/input-with-label">
+</CodeSnippets>
+
+## Input Sizes
+---
+Different sizes to fit various layout requirements.
+
+<CodeSnippets styles="mt-4" content={inputSizes} lang="javascript" url="examples/components/input/input-sizes">
+</CodeSnippets>
+
+## Disabled Input
+---
+Use disabled state to indicate non-interactive inputs.
+
+<CodeSnippets styles="mt-4" content={disabledInput} lang="javascript" url="examples/components/input/disabled-input">
+</CodeSnippets>
+
+## Input Variants
+---
+Multiple variants for different visual styles and emphasis.
+
+<CodeSnippets styles="mt-4" content={inputVariants} lang="javascript" url="examples/components/input/input-variants">
+</CodeSnippets>
+
+## Input Validation
+---
+Provide feedback on input validity with different states.
+
+<CodeSnippets styles="mt-4" content={inputValidation} lang="javascript" url="examples/components/input/input-validation">
+</CodeSnippets>
+
+## Input with Addon
+---
+Combine input with buttons or other elements for enhanced functionality.
+
+<CodeSnippets styles="mt-4" content={inputWithAddon} lang="javascript" url="examples/components/input/input-with-addon">
+</CodeSnippets>
+
+## Required Input
+---
+Mark inputs as required for form validation.
+
+<CodeSnippets styles="mt-4" content={requiredInput} lang="javascript" url="examples/components/input/required-input">
+</CodeSnippets>
+
+## Input Props
+---
+<ComponentTable data={inputPropsData} />
+```
+
+### Creating the Code.tsx file for Input
+
+Now, let's create the Code.tsx file at [/docs/components/input/Code/Code.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\input\Code\Code.tsx):
+
+```tsx
+// Default Input example
+export const defaultInput = `import { Input } from 'aspect-ui';
+
+export const DefaultInput = () => {
+  return (
+    <Input
+      placeholder="Enter your text here"
+      onChange={(e) => console.log('Input value:', e.target.value)}
+    />
+  );
+};
+`
+
+// Input with Icon example
+export const inputWithIcon = `import { Input } from 'aspect-ui';
+import { Search, Mail, Lock } from 'lucide-react';
+
+export const InputWithIcon = () => {
+  return (
+    <div className="space-y-4">
+      <Input
+        placeholder="Search..."
+        icon={<Search className="h-4 w-4" />}
+      />
+      
+      <Input
+        placeholder="Email address"
+        icon={<Mail className="h-4 w-4" />}
+        type="email"
+      />
+      
+      <Input
+        placeholder="Password"
+        icon={<Lock className="h-4 w-4" />}
+        type="password"
+      />
+    </div>
+  );
+};
+`
+
+// Input with Label example
+export const inputWithLabel = `import { Input } from 'aspect-ui';
+
+export const InputWithLabel = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium mb-1">
+          Full Name
+        </label>
+        <Input
+          id="name"
+          placeholder="John Doe"
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-1">
+          Email Address
+        </label>
+        <Input
+          id="email"
+          placeholder="johndoe@example.com"
+          type="email"
+        />
+      </div>
+    </div>
+  );
+};
+`
+
+// Input Sizes example
+export const inputSizes = `import { Input } from 'aspect-ui';
+
+export const InputSizes = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Small</p>
+        <Input
+          placeholder="Small input"
+          size="sm"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Medium (Default)</p>
+        <Input
+          placeholder="Medium input"
+          size="md"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Large</p>
+        <Input
+          placeholder="Large input"
+          size="lg"
+        />
+      </div>
+    </div>
+  );
+};
+`
+
+// Disabled Input example
+export const disabledInput = `import { Input } from 'aspect-ui';
+
+export const DisabledInput = () => {
+  return (
+    <div className="space-y-4">
+      <Input
+        placeholder="Disabled input"
+        disabled
+      />
+      
+      <Input
+        value="Read-only input"
+        readOnly
+      />
+    </div>
+  );
+};
+`
+
+// Input Variants example
+export const inputVariants = `import { Input } from 'aspect-ui';
+
+export const InputVariants = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Default</p>
+        <Input
+          placeholder="Default variant"
+          variant="default"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Filled</p>
+        <Input
+          placeholder="Filled variant"
+          variant="filled"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Outline</p>
+        <Input
+          placeholder="Outline variant"
+          variant="outline"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Underlined</p>
+        <Input
+          placeholder="Underlined variant"
+          variant="underlined"
+        />
+      </div>
+    </div>
+  );
+};
+`
+
+// Input Validation example
+export const inputValidation = `import { Input } from 'aspect-ui';
+import { CheckCircle, AlertCircle } from 'lucide-react';
+
+export const InputValidation = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Valid Input</p>
+        <Input
+          placeholder="Valid input"
+          value="correct@email.com"
+          isValid={true}
+          icon={<CheckCircle className="h-4 w-4 text-green-500" />}
+        />
+        <p className="text-sm text-green-500 mt-1">Email is valid</p>
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Invalid Input</p>
+        <Input
+          placeholder="Invalid input"
+          value="invalid-email"
+          isValid={false}
+          icon={<AlertCircle className="h-4 w-4 text-red-500" />}
+        />
+        <p className="text-sm text-red-500 mt-1">Please enter a valid email address</p>
+      </div>
+    </div>
+  );
+};
+`
+
+// Input with Addon example
+export const inputWithAddon = `import { Input, Button } from 'aspect-ui';
+import { Search, Send } from 'lucide-react';
+
+export const InputWithAddon = () => {
+  return (
+    <div className="space-y-4">
+      <div className="flex">
+        <Input
+          placeholder="Search..."
+          className="rounded-r-none"
+        />
+        <Button className="rounded-l-none">
+          <Search className="h-4 w-4" />
+        </Button>
+      </div>
+      
+      <div className="flex">
+        <span className="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md text-gray-500 text-sm">
+          https://
+        </span>
+        <Input
+          placeholder="www.example.com"
+          className="rounded-l-none"
+        />
+      </div>
+      
+      <div className="flex">
+        <Input
+          placeholder="Type a message..."
+          className="rounded-r-none"
+        />
+        <Button variant="primary" className="rounded-l-none">
+          <Send className="h-4 w-4" />
+          Send
+        </Button>
+      </div>
+    </div>
+  );
+};
+`
+
+// Required Input example
+export const requiredInput = `import { Input } from 'aspect-ui';
+
+export const RequiredInput = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <label htmlFor="req-name" className="block text-sm font-medium mb-1">
+          Username <span className="text-red-500">*</span>
+        </label>
+        <Input
+          id="req-name"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="req-email" className="block text-sm font-medium mb-1">
+          Email <span className="text-red-500">*</span>
+        </label>
+        <Input
+          id="req-email"
+          placeholder="Enter email"
+          type="email"
+          required
+        />
+      </div>
+    </div>
+  );
+};
+`
+
+// Input Props data
+export const inputPropsData = [
+  {
+    attribute: 'id',
+    type: 'string',
+    default: '',
+    description: 'Unique identifier for the input element',
+  },
+  {
+    attribute: 'name',
+    type: 'string',
+    default: '',
+    description: 'Name attribute for the input element, important for form submission',
+  },
+  {
+    attribute: 'type',
+    type: 'string',
+    default: 'text',
+    description: 'Type of the input (text, password, email, number, etc.)',
+  },
+  {
+    attribute: 'value',
+    type: 'string',
+    default: '',
+    description: 'Current value of the input',
+  },
+  {
+    attribute: 'defaultValue',
+    type: 'string',
+    default: '',
+    description: 'Default value for uncontrolled input',
+  },
+  {
+    attribute: 'placeholder',
+    type: 'string',
+    default: '',
+    description: 'Placeholder text displayed when input is empty',
+  },
+  {
+    attribute: 'size',
+    type: '"sm" | "md" | "lg"',
+    default: 'md',
+    description: 'Size of the input field',
+  },
+  {
+    attribute: 'variant',
+    type: '"default" | "filled" | "outline" | "underlined"',
+    default: 'default',
+    description: 'Visual style variant of the input',
+  },
+  {
+    attribute: 'icon',
+    type: 'ReactNode',
+    default: '',
+    description: 'Icon element to display within the input',
+  },
+  {
+    attribute: 'isValid',
+    type: 'boolean',
+    default: '',
+    description: 'Indicates whether the input value is valid',
+  },
+  {
+    attribute: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Disables the input, preventing user interaction',
+  },
+  {
+    attribute: 'readOnly',
+    type: 'boolean',
+    default: 'false',
+    description: 'Makes the input read-only, value cannot be modified',
+  },
+  {
+    attribute: 'required',
+    type: 'boolean',
+    default: 'false',
+    description: 'Marks the input as required for form validation',
+  },
+  {
+    attribute: 'autoFocus',
+    type: 'boolean',
+    default: 'false',
+    description: 'Automatically focuses the input when the component mounts',
+  },
+  {
+    attribute: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the component',
+  },
+  {
+    attribute: 'onChange',
+    type: '(e: React.ChangeEvent<HTMLInputElement>) => void',
+    default: '',
+    description: 'Callback function triggered when input value changes',
+  },
+  {
+    attribute: 'onFocus',
+    type: '(e: React.FocusEvent<HTMLInputElement>) => void',
+    default: '',
+    description: 'Callback function triggered when input receives focus',
+  },
+  {
+    attribute: 'onBlur',
+    type: '(e: React.FocusEvent<HTMLInputElement>) => void',
+    default: '',
+    description: 'Callback function triggered when input loses focus',
+  },
+]
+```
+
+### Creating the index.tsx file for Input
+
+Now, let's create the index.tsx file at [/docs/components/input/index.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\input\index.tsx):
+
+```tsx
+import { FC } from 'react'
+import dynamic from 'next/dynamic'
+
+const Introduction = dynamic(() => import('./Introduction.mdx'), { ssr: true })
+
+const InputDocs: FC = () => {
+  return (
+    <>
+      <Introduction />
+    </>
+  )
+}
+
+export default InputDocs
+```
+
+## 2. Next, let's create the example files
+
+Now, let's create the example files in the examples/components/input directory:
+
+### Default Input Example
+
+For [examples/components/input/default-input.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\default-input.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const DefaultInput = () => {
+  return (
+    <Input
+      placeholder="Enter your text here"
+      onChange={(e) => console.log('Input value:', e.target.value)}
+    />
+  );
+};
+```
+
+### Input with Icon Example
+
+For [examples/components/input/input-with-icon.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-with-icon.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+import { Search, Mail, Lock } from 'lucide-react';
+
+export const InputWithIcon = () => {
+  return (
+    <div className="space-y-4">
+      <Input
+        placeholder="Search..."
+        icon={<Search className="h-4 w-4" />}
+      />
+      
+      <Input
+        placeholder="Email address"
+        icon={<Mail className="h-4 w-4" />}
+        type="email"
+      />
+      
+      <Input
+        placeholder="Password"
+        icon={<Lock className="h-4 w-4" />}
+        type="password"
+      />
+    </div>
+  );
+};
+```
+
+### Input with Label Example
+
+For [examples/components/input/input-with-label.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-with-label.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const InputWithLabel = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium mb-1">
+          Full Name
+        </label>
+        <Input
+          id="name"
+          placeholder="John Doe"
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-1">
+          Email Address
+        </label>
+        <Input
+          id="email"
+          placeholder="johndoe@example.com"
+          type="email"
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+### Input Sizes Example
+
+For [examples/components/input/input-sizes.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-sizes.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const InputSizes = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Small</p>
+        <Input
+          placeholder="Small input"
+          size="sm"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Medium (Default)</p>
+        <Input
+          placeholder="Medium input"
+          size="md"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Large</p>
+        <Input
+          placeholder="Large input"
+          size="lg"
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+### Disabled Input Example
+
+For [examples/components/input/disabled-input.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\disabled-input.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const DisabledInput = () => {
+  return (
+    <div className="space-y-4">
+      <Input
+        placeholder="Disabled input"
+        disabled
+      />
+      
+      <Input
+        value="Read-only input"
+        readOnly
+      />
+    </div>
+  );
+};
+```
+
+### Input Variants Example
+
+For [examples/components/input/input-variants.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-variants.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const InputVariants = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Default</p>
+        <Input
+          placeholder="Default variant"
+          variant="default"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Filled</p>
+        <Input
+          placeholder="Filled variant"
+          variant="filled"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Outline</p>
+        <Input
+          placeholder="Outline variant"
+          variant="outline"
+        />
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Underlined</p>
+        <Input
+          placeholder="Underlined variant"
+          variant="underlined"
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+### Input Validation Example
+
+For [examples/components/input/input-validation.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-validation.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+import { CheckCircle, AlertCircle } from 'lucide-react';
+
+export const InputValidation = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="text-sm mb-1">Valid Input</p>
+        <Input
+          placeholder="Valid input"
+          value="correct@email.com"
+          isValid={true}
+          icon={<CheckCircle className="h-4 w-4 text-green-500" />}
+        />
+        <p className="text-sm text-green-500 mt-1">Email is valid</p>
+      </div>
+      
+      <div>
+        <p className="text-sm mb-1">Invalid Input</p>
+        <Input
+          placeholder="Invalid input"
+          value="invalid-email"
+          isValid={false}
+          icon={<AlertCircle className="h-4 w-4 text-red-500" />}
+        />
+        <p className="text-sm text-red-500 mt-1">Please enter a valid email address</p>
+      </div>
+    </div>
+  );
+};
+```
+
+### Input with Addon Example
+
+For [examples/components/input/input-with-addon.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\input-with-addon.tsx):
+
+```tsx
+import { Input, Button } from 'aspect-ui';
+import { Search, Send } from 'lucide-react';
+
+export const InputWithAddon = () => {
+  return (
+    <div className="space-y-4">
+      <div className="flex">
+        <Input
+          placeholder="Search..."
+          className="rounded-r-none"
+        />
+        <Button className="rounded-l-none">
+          <Search className="h-4 w-4" />
+        </Button>
+      </div>
+      
+      <div className="flex">
+        <span className="inline-flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md text-gray-500 text-sm">
+          https://
+        </span>
+        <Input
+          placeholder="www.example.com"
+          className="rounded-l-none"
+        />
+      </div>
+      
+      <div className="flex">
+        <Input
+          placeholder="Type a message..."
+          className="rounded-r-none"
+        />
+        <Button variant="primary" className="rounded-l-none">
+          <Send className="h-4 w-4" />
+          Send
+        </Button>
+      </div>
+    </div>
+  );
+};
+```
+
+### Required Input Example
+
+For [examples/components/input/required-input.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\examples\components\input\required-input.tsx):
+
+```tsx
+import { Input } from 'aspect-ui';
+
+export const RequiredInput = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <label htmlFor="req-name" className="block text-sm font-medium mb-1">
+          Username <span className="text-red-500">*</span>
+        </label>
+        <Input
+          id="req-name"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="req-email" className="block text-sm font-medium mb-1">
+          Email <span className="text-red-500">*</span>
+        </label>
+        <Input
+          id="req-email"
+          placeholder="Enter email"
+          type="email"
+          required
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+These files create a comprehensive documentation for the Input component, including various examples that showcase its features like different sizes, variants, validation states, and more. The structure follows the same pattern as the accordion, alert, and avatar components.
+
+The documentation includes:
+1. A page.tsx file defining the metadata and layout
+2. Introduction.mdx with all component examples and props table
+3. Code.tsx with code snippets for each example
+4. index.tsx to dynamically import the Introduction.mdx file
+5. Example files showing different Input component implementations

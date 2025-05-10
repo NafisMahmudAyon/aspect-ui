@@ -1,0 +1,393 @@
+I'll create the Switch component documentation and examples for you. Let's start by examining the existing Switch component files and then create the required documentation and examples.
+
+First, I need to create:
+1. The Switch documentation page at `/docs/components/switch/`
+2. Example files in `/examples/components/switch/`
+
+Let's start with creating the documentation structure:
+
+## 1. Create or Complete the Switch Documentation Page
+
+I'll create/update the following files:
+
+### 1.1. Creating the Switch Introduction MDX file
+
+Let's create a file at `/docs/components/switch/Introduction.mdx`:
+
+```markdown
+# Switch
+
+A Switch is a UI component that toggles between two states: on and off. It's commonly used in settings or preferences to enable or disable features.
+
+## Import
+
+```jsx
+import { Switch } from '@/app/src'
+```
+
+## Basic Switch
+
+---
+<CodeSnippets styles="mt-4" content={basicSwitch} lang="javascript" url="examples/components/switch/basic-switch" >
+</CodeSnippets>
+
+## Switch Sizes
+
+---
+<CodeSnippets styles="mt-4" content={switchSizes} lang="javascript" url="examples/components/switch/switch-sizes" >
+</CodeSnippets>
+
+## Switch with Label
+
+---
+<CodeSnippets styles="mt-4" content={switchWithLabel} lang="javascript" url="examples/components/switch/switch-with-label" >
+</CodeSnippets>
+
+## Switch with Custom Colors
+
+---
+<CodeSnippets styles="mt-4" content={switchWithCustomColors} lang="javascript" url="examples/components/switch/switch-with-custom-colors" >
+</CodeSnippets>
+
+## Disabled Switch
+
+---
+<CodeSnippets styles="mt-4" content={disabledSwitch} lang="javascript" url="examples/components/switch/disabled-switch" >
+</CodeSnippets>
+```
+
+### 1.2. Creating the Switch Code Component
+
+Next, let's create the Code.tsx file for the Switch examples:
+
+```typescript
+// In /docs/components/switch/Code/Code.tsx
+import { basicSwitch } from './basicSwitch'
+import { switchSizes } from './switchSizes'
+import { switchWithLabel } from './switchWithLabel'
+import { switchWithCustomColors } from './switchWithCustomColors'
+import { disabledSwitch } from './disabledSwitch'
+
+export { 
+  basicSwitch,
+  switchSizes,
+  switchWithLabel,
+  switchWithCustomColors,
+  disabledSwitch
+}
+```
+
+### 1.3. Creating the Code Examples
+
+Let's create the example code snippets:
+
+#### Basic Switch
+```typescript
+// In /docs/components/switch/Code/basicSwitch.ts
+export const basicSwitch = `import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+export const BasicSwitch = () => {
+  const [checked, setChecked] = useState(false)
+  
+  return (
+    <Switch checked={checked} onChange={setChecked} />
+  )
+}
+`
+```
+
+#### Switch Sizes
+```typescript
+// In /docs/components/switch/Code/switchSizes.ts
+export const switchSizes = `import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+export const SwitchSizes = () => {
+  const [checkedSm, setCheckedSm] = useState(false)
+  const [checkedMd, setCheckedMd] = useState(false)
+  const [checkedLg, setCheckedLg] = useState(false)
+  
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2">
+        <span>Small:</span>
+        <Switch size="sm" checked={checkedSm} onChange={setCheckedSm} />
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Medium:</span>
+        <Switch size="md" checked={checkedMd} onChange={setCheckedMd} />
+      </div>
+      <div className="flex items-center gap-2">
+        <span>Large:</span>
+        <Switch size="lg" checked={checkedLg} onChange={setCheckedLg} />
+      </div>
+    </div>
+  )
+}
+`
+```
+
+#### Switch with Label
+```typescript
+// In /docs/components/switch/Code/switchWithLabel.ts
+export const switchWithLabel = `import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+export const SwitchWithLabel = () => {
+  const [checked, setChecked] = useState(false)
+  
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch 
+        checked={checked} 
+        onChange={setChecked} 
+        label="Enable notifications" 
+      />
+      
+      <Switch 
+        checked={checked} 
+        onChange={setChecked} 
+        label="Enable notifications" 
+        labelPosition="left"
+      />
+    </div>
+  )
+}
+`
+```
+
+#### Switch with Custom Colors
+```typescript
+// In /docs/components/switch/Code/switchWithCustomColors.ts
+export const switchWithCustomColors = `import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+export const SwitchWithCustomColors = () => {
+  const [checked1, setChecked1] = useState(true)
+  const [checked2, setChecked2] = useState(true)
+  const [checked3, setChecked3] = useState(true)
+  
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch 
+        checked={checked1} 
+        onChange={setChecked1} 
+        color="success"
+        label="Success Theme" 
+      />
+      
+      <Switch 
+        checked={checked2} 
+        onChange={setChecked2} 
+        color="warning"
+        label="Warning Theme" 
+      />
+      
+      <Switch 
+        checked={checked3} 
+        onChange={setChecked3} 
+        color="error"
+        label="Error Theme" 
+      />
+    </div>
+  )
+}
+`
+```
+
+#### Disabled Switch
+```typescript
+// In /docs/components/switch/Code/disabledSwitch.ts
+export const disabledSwitch = `import { Switch } from '@/app/src'
+
+export const DisabledSwitch = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch disabled checked={false} label="Disabled unchecked" />
+      <Switch disabled checked={true} label="Disabled checked" />
+    </div>
+  )
+}
+`
+```
+
+### 1.4. Creating the Index.tsx file
+
+```typescript
+// In /docs/components/switch/index.tsx
+import { basicSwitch, switchSizes, switchWithLabel, switchWithCustomColors, disabledSwitch } from './Code/Code'
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+export { basicSwitch, switchSizes, switchWithLabel, switchWithCustomColors, disabledSwitch }
+```
+
+## 2. Creating Example Files
+
+Now let's create the example files in `/examples/components/switch/`:
+
+### 2.1. Basic Switch Example
+
+```tsx
+// In /examples/components/switch/basic-switch.tsx
+'use client'
+import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+const BasicSwitch = () => {
+  const [checked, setChecked] = useState(false)
+  
+  return (
+    <div className="flex items-center justify-center p-6 bg-white rounded-md shadow">
+      <Switch checked={checked} onChange={setChecked} />
+    </div>
+  )
+}
+
+export default BasicSwitch
+```
+
+### 2.2. Switch Sizes Example
+
+```tsx
+// In /examples/components/switch/switch-sizes.tsx
+'use client'
+import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+const SwitchSizes = () => {
+  const [checkedSm, setCheckedSm] = useState(false)
+  const [checkedMd, setCheckedMd] = useState(false)
+  const [checkedLg, setCheckedLg] = useState(false)
+  
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2">
+          <span>Small:</span>
+          <Switch size="sm" checked={checkedSm} onChange={setCheckedSm} />
+        </div>
+        <div className="flex items-center gap-2">
+          <span>Medium:</span>
+          <Switch size="md" checked={checkedMd} onChange={setCheckedMd} />
+        </div>
+        <div className="flex items-center gap-2">
+          <span>Large:</span>
+          <Switch size="lg" checked={checkedLg} onChange={setCheckedLg} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default SwitchSizes
+```
+
+### 2.3. Switch with Label Example
+
+```tsx
+// In /examples/components/switch/switch-with-label.tsx
+'use client'
+import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+const SwitchWithLabel = () => {
+  const [checked, setChecked] = useState(false)
+  
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <div className="flex flex-col gap-4">
+        <Switch 
+          checked={checked} 
+          onChange={setChecked} 
+          label="Enable notifications" 
+        />
+        
+        <Switch 
+          checked={checked} 
+          onChange={setChecked} 
+          label="Enable notifications" 
+          labelPosition="left"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default SwitchWithLabel
+```
+
+### 2.4. Switch with Custom Colors Example
+
+```tsx
+// In /examples/components/switch/switch-with-custom-colors.tsx
+'use client'
+import { useState } from 'react'
+import { Switch } from '@/app/src'
+
+const SwitchWithCustomColors = () => {
+  const [checked1, setChecked1] = useState(true)
+  const [checked2, setChecked2] = useState(true)
+  const [checked3, setChecked3] = useState(true)
+  
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <div className="flex flex-col gap-4">
+        <Switch 
+          checked={checked1} 
+          onChange={setChecked1} 
+          color="success"
+          label="Success Theme" 
+        />
+        
+        <Switch 
+          checked={checked2} 
+          onChange={setChecked2} 
+          color="warning"
+          label="Warning Theme" 
+        />
+        
+        <Switch 
+          checked={checked3} 
+          onChange={setChecked3} 
+          color="error"
+          label="Error Theme" 
+        />
+      </div>
+    </div>
+  )
+}
+
+export default SwitchWithCustomColors
+```
+
+### 2.5. Disabled Switch Example
+
+```tsx
+// In /examples/components/switch/disabled-switch.tsx
+'use client'
+import { Switch } from '@/app/src'
+
+const DisabledSwitch = () => {
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <div className="flex flex-col gap-4">
+        <Switch disabled checked={false} label="Disabled unchecked" />
+        <Switch disabled checked={true} label="Disabled checked" />
+      </div>
+    </div>
+  )
+}
+
+export default DisabledSwitch
+```
+
+The structure I've created follows the same pattern as the accordion and alert components, with:
+
+1. A main documentation page (`/docs/components/switch/page.tsx`) that was already in place
+2. An introduction MDX file that displays all the examples
+3. Code snippet files for each example
+4. Actual working example files in the examples directory
+
+This documentation covers the basic functionality, different sizes, labels, custom colors, and disabled states of the Switch component. Each example is both shown in the documentation and available as a standalone component.

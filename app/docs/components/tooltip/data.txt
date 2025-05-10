@@ -1,0 +1,183 @@
+I need to create documentation and examples for the Tooltip component, following the structure used for other components like Accordion. Let me create these files for you.
+
+First, let's create the tooltip documentation and examples:
+
+## 1. Create the `/docs/components/tooltip/index.tsx` (or `Introduction.mdx`) file:
+
+```tsx
+## Table of Contents
+
+## Default Tooltip
+---
+<CodeSnippets styles="mt-4" content={defaultTooltip} lang="tsx" url="examples/components/tooltip/default-tooltip">
+</CodeSnippets>
+
+## Tooltip Placement
+---
+<CodeSnippets styles="mt-4" content={tooltipPlacement} lang="tsx" url="examples/components/tooltip/tooltip-placement">
+</CodeSnippets>
+
+## Tooltip with Delay
+---
+<CodeSnippets styles="mt-4" content={tooltipWithDelay} lang="tsx" url="examples/components/tooltip/tooltip-with-delay">
+</CodeSnippets>
+
+## Tooltip with Rich Content
+---
+<CodeSnippets styles="mt-4" content={tooltipWithRichContent} lang="tsx" url="examples/components/tooltip/tooltip-with-rich-content">
+</CodeSnippets>
+```
+
+## 2. Create examples in `/examples/components/tooltip/`:
+
+### a. Default Tooltip Example (`default-tooltip.tsx`):
+
+```tsx
+import { Button, Tooltip } from '@aspect-ui/react'
+
+export default function DefaultTooltip() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <Tooltip content="This is a tooltip">
+        <Button>Hover me</Button>
+      </Tooltip>
+      
+      <Tooltip content="Disabled button tooltip" placement="top">
+        <Button variant="outline" disabled>Disabled button</Button>
+      </Tooltip>
+      
+      <Tooltip content="Info tooltip" placement="bottom">
+        <Button variant="ghost" size="sm">More info</Button>
+      </Tooltip>
+    </div>
+  )
+}
+```
+
+### b. Tooltip Placement Example (`tooltip-placement.tsx`):
+
+```tsx
+import { Button, Tooltip } from '@aspect-ui/react'
+
+export default function TooltipPlacement() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-4">
+      <Tooltip content="Tooltip on top" placement="top">
+        <Button size="sm">Top</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on right" placement="right">
+        <Button size="sm">Right</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on bottom" placement="bottom">
+        <Button size="sm">Bottom</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on left" placement="left">
+        <Button size="sm">Left</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on top-start" placement="top-start">
+        <Button size="sm">Top Start</Button>
+      </Tooltip>
+      
+      <Tooltip content="Tooltip on top-end" placement="top-end">
+        <Button size="sm">Top End</Button>
+      </Tooltip>
+    </div>
+  )
+}
+```
+
+### c. Tooltip with Delay Example (`tooltip-with-delay.tsx`):
+
+```tsx
+import { Button, Tooltip } from '@aspect-ui/react'
+
+export default function TooltipWithDelay() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <Tooltip content="No delay tooltip" placement="top">
+        <Button variant="outline">No delay</Button>
+      </Tooltip>
+      
+      <Tooltip 
+        content="Shows after 500ms" 
+        placement="top" 
+        delayDuration={500}
+      >
+        <Button variant="outline">500ms delay</Button>
+      </Tooltip>
+      
+      <Tooltip 
+        content="Shows after 1000ms" 
+        placement="top" 
+        delayDuration={1000}
+      >
+        <Button variant="outline">1000ms delay</Button>
+      </Tooltip>
+    </div>
+  )
+}
+```
+
+### d. Tooltip with Rich Content Example (`tooltip-with-rich-content.tsx`):
+
+```tsx
+import { Button, Tooltip } from '@aspect-ui/react'
+
+export default function TooltipWithRichContent() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <Tooltip 
+        content={
+          <div className="max-w-xs">
+            <h3 className="text-sm font-semibold mb-1">Advanced tooltip</h3>
+            <p className="text-xs text-gray-400">
+              Tooltips can include rich content including headings, 
+              paragraphs, and other elements.
+            </p>
+          </div>
+        } 
+        placement="top"
+      >
+        <Button>Rich content</Button>
+      </Tooltip>
+      
+      <Tooltip 
+        content={
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-green-500"></span>
+            <span>Status: Online</span>
+          </div>
+        } 
+        placement="top"
+      >
+        <Button variant="outline">Status info</Button>
+      </Tooltip>
+    </div>
+  )
+}
+```
+
+## 3. Create a Code.tsx file in `/docs/components/tooltip/Code/`:
+
+```tsx
+// In /docs/components/tooltip/Code/Code.tsx
+import defaultTooltip from '@/app/examples/components/tooltip/default-tooltip'
+import tooltipPlacement from '@/app/examples/components/tooltip/tooltip-placement'
+import tooltipWithDelay from '@/app/examples/components/tooltip/tooltip-with-delay'
+import tooltipWithRichContent from '@/app/examples/components/tooltip/tooltip-with-rich-content'
+
+export { 
+  defaultTooltip, 
+  tooltipPlacement, 
+  tooltipWithDelay, 
+  tooltipWithRichContent 
+}
+```
+
+The [page.tsx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\tooltip\page.tsx) file for the Tooltip component already exists with the correct metadata and structure, so you don't need to create it.
+
+Make sure to update the tooltip documentation to follow the same pattern as the other components, with clear examples and explanations. The examples should showcase different usage scenarios of the Tooltip component, including various placements, delays, and content types.

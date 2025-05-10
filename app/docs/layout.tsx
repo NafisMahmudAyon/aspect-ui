@@ -17,7 +17,7 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
             <div className="docs-page"></div>
             <div className="container relative z-20 grid grid-cols-12 lg:grid-cols-14 gap-5 px-2 bg-primary-50 dark:bg-primary-950 mt-[70px] mx-auto">
               <DocSidebar />
-              <div className="col-span-12  py-6 pt-6 2xl:pt-10 lg:col-span-11 xl:col-span-10 2xl:py-4 text-primary-900 dark:text-primary-200">
+              <div className="col-span-12  py-6 pt-6 2xl:pt-10 lg:col-span-8 xl:col-span-10 2xl:py-4 text-primary-900 dark:text-primary-200">
                 <div id="linkPage" className="overflow-y-auto">
                   {children}
                 </div>

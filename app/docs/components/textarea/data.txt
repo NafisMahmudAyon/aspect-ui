@@ -1,0 +1,239 @@
+I'll create the necessary documentation for the Textarea component based on the Accordion component's structure. Let me handle this step by step.
+
+## 1. First, let's create the Introduction.mdx file for the Textarea component
+
+Let's create a `/docs/components/textarea/Introduction.mdx` file:
+
+```mdx
+import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultTextarea, textareaWithError, resizableTextarea, textareaPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Textarea
+---
+<CodeSnippets styles="mt-4" content={defaultTextarea} lang="javascript" url="examples/components/textarea/default-textarea">
+</CodeSnippets>
+
+## Textarea with Error
+---
+<CodeSnippets styles="mt-4" content={textareaWithError} lang="javascript" url="examples/components/textarea/textarea-with-error">
+</CodeSnippets>
+
+## Resizable Textarea
+---
+<CodeSnippets styles="mt-4" content={resizableTextarea} lang="javascript" url="examples/components/textarea/resizable-textarea">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Textarea Props
+<ComponentTable data={textareaPropsData} />
+```
+
+## 2. Now, let's create the Code.tsx file for the Textarea component
+
+Let's create a `/docs/components/textarea/Code/Code.tsx` file:
+
+```tsx
+import TextareaDefault from 'examples/components/textarea/default-textarea'
+import TextareaWithError from 'examples/components/textarea/textarea-with-error'
+import ResizableTextarea from 'examples/components/textarea/resizable-textarea'
+
+// Default Textarea code snippet
+export const defaultTextarea = `import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const DefaultTextarea = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Comments"
+        placeholder="Enter your comments here"
+        rows={4}
+      />
+    </div>
+  )
+}
+
+export default DefaultTextarea`
+
+// Textarea with error code snippet
+export const textareaWithError = `import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const TextareaWithError = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Feedback"
+        placeholder="Provide your feedback"
+        error="This field is required"
+        rows={4}
+      />
+    </div>
+  )
+}
+
+export default TextareaWithError`
+
+// Resizable textarea code snippet
+export const resizableTextarea = `import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const ResizableTextarea = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Description"
+        placeholder="Type your description here"
+        className="resize-y"
+        rows={3}
+      />
+    </div>
+  )
+}
+
+export default ResizableTextarea`
+
+// Define props data for component table
+export const textareaPropsData = [
+  {
+    name: 'label',
+    type: 'string',
+    default: 'undefined',
+    description: 'Label text for the textarea',
+  },
+  {
+    name: 'error',
+    type: 'string',
+    default: 'undefined',
+    description: 'Error message to display below the textarea',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional classes for the textarea element',
+  },
+  {
+    name: 'labelClassName',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional classes for the label element',
+  },
+  {
+    name: 'wrapperClassName',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional classes for the wrapper element',
+  },
+  {
+    name: 'errorClassName',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional classes for the error message element',
+  },
+  {
+    name: 'placeholder',
+    type: 'string',
+    default: 'undefined',
+    description: 'Placeholder text for the textarea',
+  },
+  {
+    name: 'rows',
+    type: 'number',
+    default: '3',
+    description: 'Number of visible text lines for the textarea',
+  }
+]
+
+export { TextareaDefault as DefaultTextarea, TextareaWithError, ResizableTextarea }
+```
+
+## 3. Let's create the index.ts file for the Textarea component documentation
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+## 4. Now, let's create the example components in examples/components/textarea/
+
+### 4.1. Create a default-textarea.tsx file
+
+```tsx
+import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const DefaultTextarea = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Comments"
+        placeholder="Enter your comments here"
+        rows={4}
+      />
+    </div>
+  )
+}
+
+export default DefaultTextarea
+```
+
+### 4.2. Create a textarea-with-error.tsx file
+
+```tsx
+import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const TextareaWithError = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Feedback"
+        placeholder="Provide your feedback"
+        error="This field is required"
+        rows={4}
+      />
+    </div>
+  )
+}
+
+export default TextareaWithError
+```
+
+### 4.3. Create a resizable-textarea.tsx file
+
+```tsx
+import { Textarea } from '@/app/src/components/Textarea'
+import React from 'react'
+
+const ResizableTextarea = () => {
+  return (
+    <div className="max-w-md mx-auto">
+      <Textarea
+        label="Description"
+        placeholder="Type your description here"
+        className="resize-y"
+        rows={3}
+      />
+    </div>
+  )
+}
+
+export default ResizableTextarea
+```
+
+The page.tsx file for the Textarea component is already created with the correct metadata. The examples created above demonstrate different usages of the Textarea component:
+
+1. Basic textarea with a label
+2. Textarea with error state
+3. Resizable textarea
+
+These examples follow the same structure as the Accordion, Alert, and Avatar components, making the documentation consistent across the component library.
+
+Let me know if you need any adjustments to the documentation or examples!

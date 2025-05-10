@@ -1,5 +1,5 @@
 export const defaultCard = {
-  'CardComponent.tsx': `import { Card, CardContent } from "@/components/ui/card";
+  'CardComponent.tsx': `import { Card, CardContent } from "@/components/aspect-ui/card";
 
 export default function DefaultCard() {
   return (
@@ -10,7 +10,7 @@ export default function DefaultCard() {
     </Card>
   );
 }`,
-  'CardComponent.jsx': `import { Card, CardContent } from "@/components/ui/card";
+  'CardComponent.jsx': `import { Card, CardContent } from "@/components/aspect-ui/card";
 
 export default function DefaultCard() {
   return (
@@ -24,7 +24,7 @@ export default function DefaultCard() {
 }
 
 export const simpleCard = {
-  'CardComponent.tsx': `import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+  'CardComponent.tsx': `import { Card, CardContent, CardTitle, CardDescription } from "@/components/aspect-ui/card";
 
 export default function SimpleCard() {
   return (
@@ -39,7 +39,7 @@ export default function SimpleCard() {
     </Card>
   );
 }`,
-  'CardComponent.jsx': `import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+  'CardComponent.jsx': `import { Card, CardContent, CardTitle, CardDescription } from "@/components/aspect-ui/card";
 
 export default function SimpleCard() {
   return (
@@ -64,8 +64,8 @@ export const withHeaderFooterCard = {
   CardDescription, 
   CardContent,
   CardFooter 
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/aspect-ui/card";
+import { Button } from "@/components/aspect-ui/button";
 
 export default function CardWithHeaderFooter() {
   return (
@@ -93,8 +93,8 @@ export default function CardWithHeaderFooter() {
   CardDescription, 
   CardContent,
   CardFooter 
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/aspect-ui/card";
+import { Button } from "@/components/aspect-ui/button";
 
 export default function CardWithHeaderFooter() {
   return (
@@ -125,8 +125,8 @@ export const interactiveCard = {
   CardDescription,
   CardContent,
   CardFooter
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/aspect-ui/card";
+import { Button } from "@/components/aspect-ui/button";
 
 export default function InteractiveCard() {
   return (
@@ -172,8 +172,8 @@ export default function InteractiveCard() {
   CardDescription,
   CardContent,
   CardFooter
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/aspect-ui/card";
+import { Button } from "@/components/aspect-ui/button";
 
 export default function InteractiveCard() {
   return (

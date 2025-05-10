@@ -1,0 +1,313 @@
+I'll create the documentation for the Divider component based on the project structure. Let me first examine the Divider component and then build the documentation.
+
+## 1. First, let's complete the page.tsx for the Divider component:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Divider - Aspect UI',
+  description:
+    'The `Divider` component is a thin line used to visually separate content. It supports horizontal or vertical orientation and customizable spacing and colors for better layout structure.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/divider"
+        nextPageLink="/docs/components/dropdown"
+        nextPageName="Dropdown"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+## 2. Now, let's create the index.js file:
+
+```js
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+```
+
+## 3. Let's create the Code.tsx file for the examples:
+
+```tsx
+// In /docs/components/divider/Code/Code.tsx
+
+export const defaultDivider = `import { Divider } from "@/app/src";
+
+export default function DefaultDivider() {
+  return (
+    <div className="space-y-4">
+      <div>Content above the divider</div>
+      <Divider />
+      <div>Content below the divider</div>
+    </div>
+  );
+}`;
+
+export const differentSizesDivider = `import { Divider } from "@/app/src";
+
+export default function DifferentSizesDivider() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Small:</span>
+        <Divider size="sm" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Medium:</span>
+        <Divider size="md" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Large:</span>
+        <Divider size="lg" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">X-Large:</span>
+        <Divider size="xl" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">2X-Large:</span>
+        <Divider size="2xl" className="flex-grow" />
+      </div>
+    </div>
+  );
+}`;
+
+export const borderStylesDivider = `import { Divider } from "@/app/src";
+
+export default function BorderStylesDivider() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Solid:</span>
+        <Divider borderStyle="solid" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Dashed:</span>
+        <Divider borderStyle="dashed" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Dotted:</span>
+        <Divider borderStyle="dotted" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Double:</span>
+        <Divider borderStyle="double" className="flex-grow" />
+      </div>
+    </div>
+  );
+}`;
+
+export const verticalDivider = `import { Divider } from "@/app/src";
+
+export default function VerticalDivider() {
+  return (
+    <div className="flex items-center justify-center h-40">
+      <div className="px-4">Left Content</div>
+      <Divider orientation="vertical" className="h-full" />
+      <div className="px-4">Right Content</div>
+    </div>
+  );
+}`;
+
+export const dividerPropsData = [
+  {
+    name: 'size',
+    type: "'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+    default: "'md'",
+    description: 'Thickness of the divider line',
+  },
+  {
+    name: 'orientation',
+    type: "'horizontal' | 'vertical'",
+    default: "'horizontal'",
+    description: 'Direction of the divider',
+  },
+  {
+    name: 'borderStyle',
+    type: "'solid' | 'dashed' | 'dotted' | 'double'",
+    default: "'solid'",
+    description: 'Style of the divider line',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes for the component',
+  },
+];
+```
+
+## 4. Let's create the Introduction.mdx file:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultDivider,
+  differentSizesDivider,
+  borderStylesDivider,
+  verticalDivider,
+  dividerPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Divider
+---
+<CodeSnippets styles="mt-4" content={defaultDivider} lang="javascript" url="examples/components/divider/default-divider">
+</CodeSnippets>
+
+## Different Sizes
+---
+<CodeSnippets styles="mt-4" content={differentSizesDivider} lang="javascript" url="examples/components/divider/different-sizes-divider">
+</CodeSnippets>
+
+## Border Styles
+---
+<CodeSnippets styles="mt-4" content={borderStylesDivider} lang="javascript" url="examples/components/divider/border-styles-divider">
+</CodeSnippets>
+
+## Vertical Divider
+---
+<CodeSnippets styles="mt-4" content={verticalDivider} lang="javascript" url="examples/components/divider/vertical-divider">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Divider Props
+<ComponentTable data={dividerPropsData} />
+```
+
+## 5. Now, let's create the example files in examples/components/divider:
+
+### 1. default-divider.tsx:
+```tsx
+import { Divider } from "@/app/src";
+
+export default function DefaultDivider() {
+  return (
+    <div className="space-y-4">
+      <div>Content above the divider</div>
+      <Divider />
+      <div>Content below the divider</div>
+    </div>
+  );
+}
+```
+
+### 2. different-sizes-divider.tsx:
+```tsx
+import { Divider } from "@/app/src";
+
+export default function DifferentSizesDivider() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Small:</span>
+        <Divider size="sm" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Medium:</span>
+        <Divider size="md" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Large:</span>
+        <Divider size="lg" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">X-Large:</span>
+        <Divider size="xl" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">2X-Large:</span>
+        <Divider size="2xl" className="flex-grow" />
+      </div>
+    </div>
+  );
+}
+```
+
+### 3. border-styles-divider.tsx:
+```tsx
+import { Divider } from "@/app/src";
+
+export default function BorderStylesDivider() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Solid:</span>
+        <Divider borderStyle="solid" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Dashed:</span>
+        <Divider borderStyle="dashed" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Dotted:</span>
+        <Divider borderStyle="dotted" className="flex-grow" />
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <span className="w-20 text-sm font-medium">Double:</span>
+        <Divider borderStyle="double" className="flex-grow" />
+      </div>
+    </div>
+  );
+}
+```
+
+### 4. vertical-divider.tsx:
+```tsx
+import { Divider } from "@/app/src";
+
+export default function VerticalDivider() {
+  return (
+    <div className="flex items-center justify-center h-40">
+      <div className="px-4">Left Content</div>
+      <Divider orientation="vertical" className="h-full" />
+      <div className="px-4">Right Content</div>
+    </div>
+  );
+}
+```
+
+This completes the documentation for the Divider component. I've created all the necessary files following the same structure as the other components in the project:
+
+1. A page.tsx file with proper metadata
+2. An index.js file that exports the Introduction component
+3. A Code.tsx file with example code snippets
+4. An Introduction.mdx file with documentation and usage examples
+5. Example component files in examples/components/divider directory
+
+The documentation showcases different aspects of the Divider component including:
+- Basic usage
+- Different sizes
+- Various border styles
+- Vertical orientation
+- API reference with props documentation

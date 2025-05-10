@@ -1,0 +1,542 @@
+I'll help you create the documentation and examples for the Radio component following the structure used in accordion, alert, and avatar components. Let me analyze the Radio component first and then create the necessary files.
+
+## 1. First, let's create the Radio documentation files
+
+### 1.1 Create/Update index.tsx file in /docs/components/radio
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+### 1.2 Create Introduction.mdx file
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultRadio,
+  customStyleRadio,
+  disabledRadio,
+  radioGroupExample,
+  radioPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Radio
+---
+<CodeSnippets styles="mt-4" content={defaultRadio} lang="tsx" url="examples/components/radio/default-radio">
+</CodeSnippets>
+
+## Radio Group
+---
+<CodeSnippets styles="mt-4" content={radioGroupExample} lang="tsx" url="examples/components/radio/radio-group">
+</CodeSnippets>
+
+## Custom Styled Radio
+---
+<CodeSnippets styles="mt-4" content={customStyleRadio} lang="tsx" url="examples/components/radio/custom-style-radio">
+</CodeSnippets>
+
+## Disabled Radio
+---
+<CodeSnippets styles="mt-4" content={disabledRadio} lang="tsx" url="examples/components/radio/disabled-radio">
+</CodeSnippets>
+
+## Radio Props
+---
+<ComponentTable data={radioPropsData} />
+```
+
+### 1.3 Create Code/Code.tsx file
+
+```tsx
+// In /docs/components/radio/Code/Code.tsx
+import React from 'react'
+
+// Default Radio example code
+export const defaultRadio = `import React, { useState } from 'react'
+import { Radio } from 'aspect-ui'
+
+const DefaultRadio = () => {
+  const [selectedValue, setSelectedValue] = useState('')
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value)
+  }
+
+  return (
+    <div className="space-y-2">
+      <Radio
+        id="option1"
+        name="radioOptions"
+        value="option1"
+        label="Option 1"
+        checked={selectedValue === 'option1'}
+        onChange={handleChange}
+      />
+      <Radio
+        id="option2"
+        name="radioOptions"
+        value="option2"
+        label="Option 2"
+        checked={selectedValue === 'option2'}
+        onChange={handleChange}
+      />
+    </div>
+  )
+}
+
+export default DefaultRadio`
+
+// Radio Group example code
+export const radioGroupExample = `import React, { useState } from 'react'
+import { Radio } from 'aspect-ui'
+
+const RadioGroup = () => {
+  const [selectedFruit, setSelectedFruit] = useState('')
+
+  const handleChange = (event) => {
+    setSelectedFruit(event.target.value)
+  }
+
+  return (
+    <div>
+      <h3 className="mb-3 font-medium">Select your favorite fruit:</h3>
+      <div className="space-y-2">
+        <Radio
+          id="apple"
+          name="fruit"
+          value="apple"
+          label="Apple"
+          checked={selectedFruit === 'apple'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="banana"
+          name="fruit"
+          value="banana"
+          label="Banana"
+          checked={selectedFruit === 'banana'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="orange"
+          name="fruit"
+          value="orange"
+          label="Orange"
+          checked={selectedFruit === 'orange'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="strawberry"
+          name="fruit"
+          value="strawberry"
+          label="Strawberry"
+          checked={selectedFruit === 'strawberry'}
+          onChange={handleChange}
+        />
+      </div>
+      {selectedFruit && (
+        <p className="mt-4">You selected: <strong>{selectedFruit}</strong></p>
+      )}
+    </div>
+  )
+}
+
+export default RadioGroup`
+
+// Custom Styled Radio example code
+export const customStyleRadio = `import React, { useState } from 'react'
+import { Radio } from 'aspect-ui'
+
+const CustomStyleRadio = () => {
+  const [selectedOption, setSelectedOption] = useState('')
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value)
+  }
+
+  return (
+    <div className="space-y-3">
+      <Radio
+        id="custom1"
+        name="customRadio"
+        value="option1"
+        label="Primary Style"
+        checked={selectedOption === 'option1'}
+        onChange={handleChange}
+        className="text-blue-600 focus:ring-blue-500"
+      />
+      <Radio
+        id="custom2"
+        name="customRadio"
+        value="option2"
+        label="Success Style"
+        checked={selectedOption === 'option2'}
+        onChange={handleChange}
+        className="text-green-600 focus:ring-green-500"
+      />
+      <Radio
+        id="custom3"
+        name="customRadio"
+        value="option3"
+        label="Warning Style"
+        checked={selectedOption === 'option3'}
+        onChange={handleChange}
+        className="text-yellow-600 focus:ring-yellow-500"
+      />
+      <Radio
+        id="custom4"
+        name="customRadio"
+        value="option4"
+        label="Danger Style"
+        checked={selectedOption === 'option4'}
+        onChange={handleChange}
+        className="text-red-600 focus:ring-red-500"
+      />
+    </div>
+  )
+}
+
+export default CustomStyleRadio`
+
+// Disabled Radio example code
+export const disabledRadio = `import React from 'react'
+import { Radio } from 'aspect-ui'
+
+const DisabledRadio = () => {
+  return (
+    <div className="space-y-3">
+      <Radio
+        id="disabled1"
+        name="disabledRadio"
+        value="disabled1"
+        label="Disabled Radio (Unchecked)"
+        disabled
+        onChange={() => {}}
+      />
+      <Radio
+        id="disabled2"
+        name="disabledRadio"
+        value="disabled2"
+        label="Disabled Radio (Checked)"
+        disabled
+        checked
+        onChange={() => {}}
+      />
+    </div>
+  )
+}
+
+export default DisabledRadio`
+
+// Component props data for documentation
+export const radioPropsData = [
+  {
+    name: 'id',
+    type: 'string',
+    default: '',
+    description: 'Unique identifier for the radio input.',
+    required: true,
+  },
+  {
+    name: 'name',
+    type: 'string',
+    default: '',
+    description: 'Name attribute for the radio input, used for form submission.',
+    required: true,
+  },
+  {
+    name: 'value',
+    type: 'string',
+    default: '',
+    description: 'Value of the radio input.',
+    required: true,
+  },
+  {
+    name: 'label',
+    type: 'string',
+    default: '',
+    description: 'Label text displayed next to the radio input.',
+    required: true,
+  },
+  {
+    name: 'checked',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the radio input is checked.',
+    required: false,
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the radio input is disabled.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS class for the radio input.',
+    required: false,
+  },
+  {
+    name: 'onChange',
+    type: '(event: React.ChangeEvent<HTMLInputElement>) => void',
+    default: '',
+    description: 'Function called when the radio input value changes.',
+    required: true,
+  }
+]
+```
+
+## 2. Let's create the example files for Radio
+
+### 2.1 Create default-radio.tsx
+
+```tsx
+// In /examples/components/radio/default-radio.tsx
+import React, { useState } from 'react'
+import { Radio } from '@/app/src'
+
+const DefaultRadio = () => {
+  const [selectedValue, setSelectedValue] = useState('')
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(event.target.value)
+  }
+
+  return (
+    <div className="space-y-2">
+      <Radio
+        id="option1"
+        name="radioOptions"
+        value="option1"
+        label="Option 1"
+        checked={selectedValue === 'option1'}
+        onChange={handleChange}
+      />
+      <Radio
+        id="option2"
+        name="radioOptions"
+        value="option2"
+        label="Option 2"
+        checked={selectedValue === 'option2'}
+        onChange={handleChange}
+      />
+    </div>
+  )
+}
+
+export default DefaultRadio
+```
+
+### 2.2 Create radio-group.tsx
+
+```tsx
+// In /examples/components/radio/radio-group.tsx
+import React, { useState } from 'react'
+import { Radio } from '@/app/src'
+
+const RadioGroup = () => {
+  const [selectedFruit, setSelectedFruit] = useState('')
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedFruit(event.target.value)
+  }
+
+  return (
+    <div>
+      <h3 className="mb-3 font-medium">Select your favorite fruit:</h3>
+      <div className="space-y-2">
+        <Radio
+          id="apple"
+          name="fruit"
+          value="apple"
+          label="Apple"
+          checked={selectedFruit === 'apple'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="banana"
+          name="fruit"
+          value="banana"
+          label="Banana"
+          checked={selectedFruit === 'banana'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="orange"
+          name="fruit"
+          value="orange"
+          label="Orange"
+          checked={selectedFruit === 'orange'}
+          onChange={handleChange}
+        />
+        <Radio
+          id="strawberry"
+          name="fruit"
+          value="strawberry"
+          label="Strawberry"
+          checked={selectedFruit === 'strawberry'}
+          onChange={handleChange}
+        />
+      </div>
+      {selectedFruit && (
+        <p className="mt-4">You selected: <strong>{selectedFruit}</strong></p>
+      )}
+    </div>
+  )
+}
+
+export default RadioGroup
+```
+
+### 2.3 Create custom-style-radio.tsx
+
+```tsx
+// In /examples/components/radio/custom-style-radio.tsx
+import React, { useState } from 'react'
+import { Radio } from '@/app/src'
+
+const CustomStyleRadio = () => {
+  const [selectedOption, setSelectedOption] = useState('')
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value)
+  }
+
+  return (
+    <div className="space-y-3">
+      <Radio
+        id="custom1"
+        name="customRadio"
+        value="option1"
+        label="Primary Style"
+        checked={selectedOption === 'option1'}
+        onChange={handleChange}
+        className="text-blue-600 focus:ring-blue-500"
+      />
+      <Radio
+        id="custom2"
+        name="customRadio"
+        value="option2"
+        label="Success Style"
+        checked={selectedOption === 'option2'}
+        onChange={handleChange}
+        className="text-green-600 focus:ring-green-500"
+      />
+      <Radio
+        id="custom3"
+        name="customRadio"
+        value="option3"
+        label="Warning Style"
+        checked={selectedOption === 'option3'}
+        onChange={handleChange}
+        className="text-yellow-600 focus:ring-yellow-500"
+      />
+      <Radio
+        id="custom4"
+        name="customRadio"
+        value="option4"
+        label="Danger Style"
+        checked={selectedOption === 'option4'}
+        onChange={handleChange}
+        className="text-red-600 focus:ring-red-500"
+      />
+    </div>
+  )
+}
+
+export default CustomStyleRadio
+```
+
+### 2.4 Create disabled-radio.tsx
+
+```tsx
+// In /examples/components/radio/disabled-radio.tsx
+import React from 'react'
+import { Radio } from '@/app/src'
+
+const DisabledRadio = () => {
+  return (
+    <div className="space-y-3">
+      <Radio
+        id="disabled1"
+        name="disabledRadio"
+        value="disabled1"
+        label="Disabled Radio (Unchecked)"
+        disabled
+        onChange={() => {}}
+      />
+      <Radio
+        id="disabled2"
+        name="disabledRadio"
+        value="disabled2"
+        label="Disabled Radio (Checked)"
+        disabled
+        checked
+        onChange={() => {}}
+      />
+    </div>
+  )
+}
+
+export default DisabledRadio
+```
+
+### 2.5 Create page.tsx files for each example
+
+```tsx
+// In /examples/components/radio/default-radio/page.tsx
+import DefaultRadio from '../default-radio'
+
+export default function Page() {
+  return <DefaultRadio />
+}
+```
+
+```tsx
+// In /examples/components/radio/radio-group/page.tsx
+import RadioGroup from '../radio-group'
+
+export default function Page() {
+  return <RadioGroup />
+}
+```
+
+```tsx
+// In /examples/components/radio/custom-style-radio/page.tsx
+import CustomStyleRadio from '../custom-style-radio'
+
+export default function Page() {
+  return <CustomStyleRadio />
+}
+```
+
+```tsx
+// In /examples/components/radio/disabled-radio/page.tsx
+import DisabledRadio from '../disabled-radio'
+
+export default function Page() {
+  return <DisabledRadio />
+}
+```
+
+The documentation and examples I've created follow the structure used in other components like accordion, alert, and avatar. The Radio component documentation includes:
+
+1. A page.tsx file with metadata and page structure (already exists in your project)
+2. An Introduction.mdx file with examples and documentation
+3. A Code/Code.tsx file with example code and props data
+4. Example files in the examples/components/radio directory
+
+These examples showcase:
+- Basic radio button usage
+- Radio groups for selecting from multiple options
+- Custom styled radio buttons
+- Disabled radio buttons
+
+This should provide comprehensive documentation and examples for the Radio component.

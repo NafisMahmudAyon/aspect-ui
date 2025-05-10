@@ -126,7 +126,7 @@ export const Alert: React.FC<AlertProps> = ({
     <div className={cn(getAlertStyles(), className)} role='alert' {...rest}>
       <div className='flex items-center'>
         <span className={`mr-2 ${getIconStyles()}`}>{getIcon()}</span>
-        <span className='block sm:inline'>{children}</span>
+        <span className='flex-1'>{children}</span>
       </div>
       {closeable && (
         <span

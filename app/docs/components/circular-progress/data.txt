@@ -1,0 +1,420 @@
+I'll create the documentation for the Circular Progress Bar component similar to the Accordion component. I'll look at the existing CircularProgressBar component files and create the necessary documentation and examples.
+
+## 1. First, I'll create the CircularProgressBar documentation and examples structure:
+
+Let me start by creating the page.tsx file for the circular - progress - bar:
+
+  ```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Circular Progress Bar - Aspect UI',
+  description:
+    'The `CircularProgressBar` component displays progress in a circular format. It supports customizable colors, animations, and can show progress values or custom content within the circle.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${ metadata.description } `} title={`${ metadata.title } `}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/circular-progress-bar"
+        nextPageLink="/docs/components/progress-bar"
+        nextPageName="Progress Bar"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+Now let's create the Introduction.mdx file for the circular-progress-bar:
+
+  ```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultCircularProgressBar,
+  customColorsCircularProgressBar,
+  animatedCircularProgressBar,
+  customContentCircularProgressBar,
+  circularProgressBarPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Circular Progress Bar
+---
+<CodeSnippets styles="mt-4" content={defaultCircularProgressBar} lang="javascript" url="examples/components/circular-progress-bar/default-circular-progress-bar">
+</CodeSnippets>
+
+## Custom Colors
+---
+<CodeSnippets styles="mt-4" content={customColorsCircularProgressBar} lang="javascript" url="examples/components/circular-progress-bar/custom-colors-circular-progress-bar">
+</CodeSnippets>
+
+## Animated on Visibility
+---
+<CodeSnippets styles="mt-4" content={animatedCircularProgressBar} lang="javascript" url="examples/components/circular-progress-bar/animated-circular-progress-bar">
+</CodeSnippets>
+
+## Custom Content
+---
+<CodeSnippets styles="mt-4" content={customContentCircularProgressBar} lang="javascript" url="examples/components/circular-progress-bar/custom-content-circular-progress-bar">
+</CodeSnippets>
+
+## API Reference
+---
+
+### CircularProgressBar Props
+<ComponentTable data={circularProgressBarPropsData} />
+```
+
+Now let's create the Code.tsx file for the examples:
+
+  ```tsx
+// In /docs/components/circular-progress-bar/Code/Code.tsx
+
+export const defaultCircularProgressBar = `import { CircularProgressBar } from "@/app/src";
+
+export default function DefaultCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar value={25} />
+      <CircularProgressBar value={50} />
+      <CircularProgressBar value={75} />
+      <CircularProgressBar value={100} />
+    </div>
+  );
+} `;
+
+export const customColorsCircularProgressBar = `import { CircularProgressBar } from "@/app/src";
+
+export default function CustomColorsCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar
+        value={65}
+        strokeColor="#e0e0e0"
+        strokeFillColor="#3b82f6"
+      />
+
+      <CircularProgressBar
+        value={65}
+        strokeColor="#f0f0f0"
+        strokeFillColor="#10b981"
+      />
+
+      <CircularProgressBar
+        value={65}
+        strokeColor="#f0f0f0"
+        strokeFillColor="#ef4444"
+      />
+
+      <CircularProgressBar
+        value={65}
+        strokeColor="#f0f0f0"
+        strokeFillColor="#f59e0b"
+      />
+    </div>
+  );
+} `;
+
+export const animatedCircularProgressBar = `import { CircularProgressBar } from "@/app/src";
+
+export default function AnimatedCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar
+        value={85}
+        onVisible={true}
+        duration={2}
+      />
+
+      <CircularProgressBar
+        value={85}
+        onVisible={true}
+        duration={4}
+      />
+
+      <CircularProgressBar
+        value={85}
+        onVisible={true}
+        duration={6}
+      />
+    </div>
+  );
+} `;
+
+export const customContentCircularProgressBar = `import { CircularProgressBar } from "@/app/src";
+
+export default function CustomContentCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar
+        value={75}
+        hideValue={true}
+        className="size-24"
+      >
+        <div className="flex flex-col items-center">
+          <span className="text-xl font-bold">75%</span>
+          <span className="text-xs">Complete</span>
+        </div>
+      </CircularProgressBar>
+
+      <CircularProgressBar
+        value={50}
+        hideValue={true}
+        className="size-24"
+      >
+        <div className="flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+      </CircularProgressBar>
+
+      <CircularProgressBar
+        value={30}
+        hideValue={true}
+        className="size-24"
+      >
+        <div className="text-xs font-medium">
+          Almost there!
+        </div>
+      </CircularProgressBar>
+    </div>
+  );
+} `;
+
+export const circularProgressBarPropsData = [
+  {
+    name: 'value',
+    type: 'number',
+    default: '75',
+    description: 'The progress value (0-100)',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS classes for the component',
+  },
+  {
+    name: 'onVisible',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to animate the progress when the component becomes visible in the viewport',
+  },
+  {
+    name: 'duration',
+    type: 'number',
+    default: '2',
+    description: 'Duration of the progress animation in seconds',
+  },
+  {
+    name: 'strokeColor',
+    type: 'string',
+    default: '#CCCCCC',
+    description: 'Color of the background circle',
+  },
+  {
+    name: 'strokeFillColor',
+    type: 'string',
+    default: '#333333',
+    description: 'Color of the progress arc',
+  },
+  {
+    name: 'strokeWidth',
+    type: 'number',
+    default: '2',
+    description: 'Width of the circle stroke',
+  },
+  {
+    name: 'contentClassName',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS classes for the content container',
+  },
+  {
+    name: 'hideValue',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to hide the percentage value',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'Custom content to display inside the circle',
+  },
+  {
+    name: 'onClick',
+    type: '() => void',
+    default: '',
+    description: 'Function called when the progress bar is clicked',
+  },
+];
+```
+
+Now let's create the example files for the circular-progress-bar component:
+
+1. **default -circular - progress - bar.tsx **:
+```tsx
+import { CircularProgressBar } from "@/app/src";
+
+export default function DefaultCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar value={25} />
+      <CircularProgressBar value={50} />
+      <CircularProgressBar value={75} />
+      <CircularProgressBar value={100} />
+    </div>
+  );
+}
+```
+
+2. ** custom - colors - circular - progress - bar.tsx **:
+```tsx
+import { CircularProgressBar } from "@/app/src";
+
+export default function CustomColorsCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar 
+        value={65} 
+        strokeColor="#e0e0e0" 
+        strokeFillColor="#3b82f6" 
+      />
+      
+      <CircularProgressBar 
+        value={65} 
+        strokeColor="#f0f0f0" 
+        strokeFillColor="#10b981" 
+      />
+      
+      <CircularProgressBar 
+        value={65} 
+        strokeColor="#f0f0f0" 
+        strokeFillColor="#ef4444" 
+      />
+      
+      <CircularProgressBar 
+        value={65} 
+        strokeColor="#f0f0f0" 
+        strokeFillColor="#f59e0b" 
+      />
+    </div>
+  );
+}
+```
+
+3. ** animated - circular - progress - bar.tsx **:
+```tsx
+import { CircularProgressBar } from "@/app/src";
+
+export default function AnimatedCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar 
+        value={85} 
+        onVisible={true} 
+        duration={2} 
+      />
+      
+      <CircularProgressBar 
+        value={85} 
+        onVisible={true} 
+        duration={4} 
+      />
+      
+      <CircularProgressBar 
+        value={85} 
+        onVisible={true} 
+        duration={6} 
+      />
+    </div>
+  );
+}
+```
+
+4. ** custom - content - circular - progress - bar.tsx **:
+```tsx
+import { CircularProgressBar } from "@/app/src";
+
+export default function CustomContentCircularProgressBar() {
+  return (
+    <div className="flex space-x-6 items-center">
+      <CircularProgressBar 
+        value={75} 
+        hideValue={true} 
+        className="size-24"
+      >
+        <div className="flex flex-col items-center">
+          <span className="text-xl font-bold">75%</span>
+          <span className="text-xs">Complete</span>
+        </div>
+      </CircularProgressBar>
+      
+      <CircularProgressBar 
+        value={50} 
+        hideValue={true}
+        className="size-24"
+      >
+        <div className="flex items-center justify-center">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+      </CircularProgressBar>
+      
+      <CircularProgressBar 
+        value={30} 
+        hideValue={true}
+        className="size-24"
+      >
+        <div className="text-xs font-medium">
+          Almost there!
+        </div>
+      </CircularProgressBar>
+    </div>
+  );
+}
+```
+
+Finally, let's create the index.js file that exports the Introduction component:
+
+  ```js
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+```
+
+These files complete the documentation for the CircularProgressBar component.The structure follows the same pattern as the accordion component, with examples showing different use cases and a complete API reference section.

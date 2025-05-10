@@ -3,12 +3,12 @@ import React from 'react'
 
 const NumberCounterDemo = () => {
   return (
-    <div className='p-4'>
+    <div className='p-4 text-white'>
       <h1 className='mb-4 text-2xl font-bold'>Number Counter Examples</h1>
 
       <div className='mb-4'>
         <h2 className='text-xl font-semibold'>Integer Counter (Immediate)</h2>
-        <NumberCounter end={1000} duration={2000} />
+        <NumberCounter end={1000} duration={20} />
       </div>
 
       <div className='mb-4 h-[100vh]'>

@@ -1,0 +1,551 @@
+I'll create the documentation for the Checkbox component similar to the Accordion component. I'll look at the existing Checkbox component files and create the necessary documentation and examples.
+
+Let me start by examining the structure needed and implementing it:
+
+## 1. First, I'll create the Checkbox Introduction.mdx file:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultCheckbox,
+  checkboxWithLabel,
+  disabledCheckbox,
+  indeterminateCheckbox,
+  checkboxSizes,
+  checkboxGroup,
+  checkboxPropsData,
+  checkboxGroupPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Checkbox
+---
+<CodeSnippets styles="mt-4" content={defaultCheckbox} lang="javascript" url="examples/components/checkbox/default-checkbox">
+</CodeSnippets>
+
+## Checkbox with Label
+---
+<CodeSnippets styles="mt-4" content={checkboxWithLabel} lang="javascript" url="examples/components/checkbox/checkbox-with-label">
+</CodeSnippets>
+
+## Disabled Checkbox
+---
+<CodeSnippets styles="mt-4" content={disabledCheckbox} lang="javascript" url="examples/components/checkbox/disabled-checkbox">
+</CodeSnippets>
+
+## Indeterminate Checkbox
+---
+<CodeSnippets styles="mt-4" content={indeterminateCheckbox} lang="javascript" url="examples/components/checkbox/indeterminate-checkbox">
+</CodeSnippets>
+
+## Checkbox Sizes
+---
+<CodeSnippets styles="mt-4" content={checkboxSizes} lang="javascript" url="examples/components/checkbox/checkbox-sizes">
+</CodeSnippets>
+
+## Checkbox Group
+---
+<CodeSnippets styles="mt-4" content={checkboxGroup} lang="javascript" url="examples/components/checkbox/checkbox-group">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Checkbox Props
+<ComponentTable data={checkboxPropsData} />
+
+### CheckboxGroup Props
+<ComponentTable data={checkboxGroupPropsData} />
+```
+
+## 2. Now, I'll create the Code.tsx file for the checkbox examples:
+
+```tsx
+// In /docs/components/checkbox/Code/Code.tsx
+
+export const defaultCheckbox = `import { Checkbox } from "@/app/src";
+
+export default function DefaultCheckbox() {
+  return (
+    <div className="flex space-x-4">
+      <Checkbox id="default-checkbox" />
+    </div>
+  );
+}`;
+
+export const checkboxWithLabel = `import { Checkbox } from "@/app/src";
+
+export default function CheckboxWithLabel() {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="terms" />
+        <label htmlFor="terms" className="text-sm font-medium">
+          I agree to the terms and conditions
+        </label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="newsletter" />
+        <label htmlFor="newsletter" className="text-sm font-medium">
+          Subscribe to newsletter
+        </label>
+      </div>
+    </div>
+  );
+}`;
+
+export const disabledCheckbox = `import { Checkbox } from "@/app/src";
+
+export default function DisabledCheckbox() {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="disabled-unchecked" disabled />
+        <label htmlFor="disabled-unchecked" className="text-sm font-medium text-gray-400">
+          Disabled unchecked
+        </label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="disabled-checked" disabled defaultChecked />
+        <label htmlFor="disabled-checked" className="text-sm font-medium text-gray-400">
+          Disabled checked
+        </label>
+      </div>
+    </div>
+  );
+}`;
+
+export const indeterminateCheckbox = `import { Checkbox } from "@/app/src";
+import { useState } from "react";
+
+export default function IndeterminateCheckbox() {
+  const [checkedItems, setCheckedItems] = useState({
+    option1: false,
+    option2: false,
+    option3: false,
+  });
+  
+  const allChecked = Object.values(checkedItems).every(Boolean);
+  const indeterminate = Object.values(checkedItems).some(Boolean) && !allChecked;
+  
+  const handleParentChange = () => {
+    const newValue = !allChecked;
+    setCheckedItems({
+      option1: newValue,
+      option2: newValue,
+      option3: newValue,
+    });
+  };
+  
+  const handleChildChange = (option) => {
+    setCheckedItems({
+      ...checkedItems,
+      [option]: !checkedItems[option],
+    });
+  };
+  
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox 
+          id="parent" 
+          checked={allChecked}
+          indeterminate={indeterminate}
+          onChange={handleParentChange}
+        />
+        <label htmlFor="parent" className="font-medium">
+          Select all options
+        </label>
+      </div>
+      
+      <div className="ml-6 space-y-1">
+        {Object.keys(checkedItems).map((option) => (
+          <div key={option} className="flex items-center space-x-2">
+            <Checkbox 
+              id={option} 
+              checked={checkedItems[option]}
+              onChange={() => handleChildChange(option)}
+            />
+            <label htmlFor={option} className="text-sm">
+              {option}
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`;
+
+export const checkboxSizes = `import { Checkbox } from "@/app/src";
+
+export default function CheckboxSizes() {
+  return (
+    <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="small-checkbox" size="sm" />
+        <label htmlFor="small-checkbox" className="text-sm">Small</label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="medium-checkbox" size="md" />
+        <label htmlFor="medium-checkbox" className="text-sm">Medium</label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="large-checkbox" size="lg" />
+        <label htmlFor="large-checkbox" className="text-sm">Large</label>
+      </div>
+    </div>
+  );
+}`;
+
+export const checkboxGroup = `import { Checkbox, CheckboxGroup } from "@/app/src";
+import { useState } from "react";
+
+export default function CheckboxGroupExample() {
+  const [selectedFruits, setSelectedFruits] = useState(['apple']);
+  
+  const handleSelectionChange = (values) => {
+    setSelectedFruits(values);
+    console.log('Selected fruits:', values);
+  };
+  
+  return (
+    <div className="space-y-4">
+      <CheckboxGroup 
+        label="Select your favorite fruits"
+        value={selectedFruits}
+        onChange={handleSelectionChange}
+      >
+        <div className="space-y-2 mt-2">
+          <Checkbox value="apple" id="apple">Apple</Checkbox>
+          <Checkbox value="banana" id="banana">Banana</Checkbox>
+          <Checkbox value="orange" id="orange">Orange</Checkbox>
+          <Checkbox value="strawberry" id="strawberry">Strawberry</Checkbox>
+        </div>
+      </CheckboxGroup>
+      
+      <div>
+        Selected fruits: {selectedFruits.join(', ')}
+      </div>
+    </div>
+  );
+}`;
+
+export const checkboxPropsData = [
+  {
+    name: 'id',
+    type: 'string',
+    default: '',
+    description: 'Unique identifier for the checkbox',
+  },
+  {
+    name: 'checked',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the checkbox is checked (controlled)',
+  },
+  {
+    name: 'defaultChecked',
+    type: 'boolean',
+    default: 'false',
+    description: 'Initial checked state (uncontrolled)',
+  },
+  {
+    name: 'indeterminate',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the checkbox is in an indeterminate state',
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the checkbox is disabled',
+  },
+  {
+    name: 'required',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the checkbox is required',
+  },
+  {
+    name: 'size',
+    type: '"sm" | "md" | "lg"',
+    default: '"md"',
+    description: 'Size of the checkbox',
+  },
+  {
+    name: 'value',
+    type: 'string',
+    default: '',
+    description: 'Value associated with the checkbox, used with CheckboxGroup',
+  },
+  {
+    name: 'onChange',
+    type: '(event: React.ChangeEvent<HTMLInputElement>) => void',
+    default: '',
+    description: 'Callback fired when the state changes',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'Label content for the checkbox (alternative to using a separate label element)',
+  },
+];
+
+export const checkboxGroupPropsData = [
+  {
+    name: 'label',
+    type: 'string',
+    default: '',
+    description: 'Label for the checkbox group',
+  },
+  {
+    name: 'value',
+    type: 'string[]',
+    default: '[]',
+    description: 'Array of selected values',
+  },
+  {
+    name: 'onChange',
+    type: '(values: string[]) => void',
+    default: '',
+    description: 'Callback fired when selection changes',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'Checkbox components to render in the group',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply',
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Disables all checkboxes in the group',
+  },
+];
+```
+
+## 3. Now I'll create example files for the checkbox component:
+
+For each example, I'll create a file in the `examples/components/checkbox/` directory:
+
+1. **default-checkbox.tsx**:
+```tsx
+import { Checkbox } from "@/app/src";
+
+export default function DefaultCheckbox() {
+  return (
+    <div className="flex space-x-4">
+      <Checkbox id="default-checkbox" />
+    </div>
+  );
+}
+```
+
+2. **checkbox-with-label.tsx**:
+```tsx
+import { Checkbox } from "@/app/src";
+
+export default function CheckboxWithLabel() {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="terms" />
+        <label htmlFor="terms" className="text-sm font-medium">
+          I agree to the terms and conditions
+        </label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="newsletter" />
+        <label htmlFor="newsletter" className="text-sm font-medium">
+          Subscribe to newsletter
+        </label>
+      </div>
+    </div>
+  );
+}
+```
+
+3. **disabled-checkbox.tsx**:
+```tsx
+import { Checkbox } from "@/app/src";
+
+export default function DisabledCheckbox() {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="disabled-unchecked" disabled />
+        <label htmlFor="disabled-unchecked" className="text-sm font-medium text-gray-400">
+          Disabled unchecked
+        </label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="disabled-checked" disabled defaultChecked />
+        <label htmlFor="disabled-checked" className="text-sm font-medium text-gray-400">
+          Disabled checked
+        </label>
+      </div>
+    </div>
+  );
+}
+```
+
+4. **indeterminate-checkbox.tsx**:
+```tsx
+import { Checkbox } from "@/app/src";
+import { useState } from "react";
+
+export default function IndeterminateCheckbox() {
+  const [checkedItems, setCheckedItems] = useState({
+    option1: false,
+    option2: false,
+    option3: false,
+  });
+  
+  const allChecked = Object.values(checkedItems).every(Boolean);
+  const indeterminate = Object.values(checkedItems).some(Boolean) && !allChecked;
+  
+  const handleParentChange = () => {
+    const newValue = !allChecked;
+    setCheckedItems({
+      option1: newValue,
+      option2: newValue,
+      option3: newValue,
+    });
+  };
+  
+  const handleChildChange = (option) => {
+    setCheckedItems({
+      ...checkedItems,
+      [option]: !checkedItems[option],
+    });
+  };
+  
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center space-x-2">
+        <Checkbox 
+          id="parent" 
+          checked={allChecked}
+          indeterminate={indeterminate}
+          onChange={handleParentChange}
+        />
+        <label htmlFor="parent" className="font-medium">
+          Select all options
+        </label>
+      </div>
+      
+      <div className="ml-6 space-y-1">
+        {Object.keys(checkedItems).map((option) => (
+          <div key={option} className="flex items-center space-x-2">
+            <Checkbox 
+              id={option} 
+              checked={checkedItems[option]}
+              onChange={() => handleChildChange(option)}
+            />
+            <label htmlFor={option} className="text-sm">
+              {option}
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+5. **checkbox-sizes.tsx**:
+```tsx
+import { Checkbox } from "@/app/src";
+
+export default function CheckboxSizes() {
+  return (
+    <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2">
+        <Checkbox id="small-checkbox" size="sm" />
+        <label htmlFor="small-checkbox" className="text-sm">Small</label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="medium-checkbox" size="md" />
+        <label htmlFor="medium-checkbox" className="text-sm">Medium</label>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Checkbox id="large-checkbox" size="lg" />
+        <label htmlFor="large-checkbox" className="text-sm">Large</label>
+      </div>
+    </div>
+  );
+}
+```
+
+6. **checkbox-group.tsx**:
+```tsx
+import { Checkbox, CheckboxGroup } from "@/app/src";
+import { useState } from "react";
+
+export default function CheckboxGroupExample() {
+  const [selectedFruits, setSelectedFruits] = useState(['apple']);
+  
+  const handleSelectionChange = (values) => {
+    setSelectedFruits(values);
+    console.log('Selected fruits:', values);
+  };
+  
+  return (
+    <div className="space-y-4">
+      <CheckboxGroup 
+        label="Select your favorite fruits"
+        value={selectedFruits}
+        onChange={handleSelectionChange}
+      >
+        <div className="space-y-2 mt-2">
+          <Checkbox value="apple" id="apple">Apple</Checkbox>
+          <Checkbox value="banana" id="banana">Banana</Checkbox>
+          <Checkbox value="orange" id="orange">Orange</Checkbox>
+          <Checkbox value="strawberry" id="strawberry">Strawberry</Checkbox>
+        </div>
+      </CheckboxGroup>
+      
+      <div>
+        Selected fruits: {selectedFruits.join(', ')}
+      </div>
+    </div>
+  );
+}
+```
+
+The page.tsx file for the Checkbox component already exists in your project structure, and it looks good with the correct metadata.
+
+This completes the documentation for the Checkbox component, with examples showcasing the different ways to use the component. The structure follows the same pattern as the accordion component, with examples and API reference sections.
+
+To summarize what I've created:
+1. Introduction.mdx file with component usage examples and API reference
+2. Code.tsx file with the code snippets for the examples
+3. Example files in the examples/components/checkbox/ directory
+4. Verified the page.tsx file which was already created
+
+These files follow the same pattern as the accordion component documentation, making it consistent with your project's documentation style.

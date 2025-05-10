@@ -1,13 +1,67 @@
 import CodeSnippets from '@/components/CodeSnippets'
-import EditPage from '@/components/EditPage'
-import ComingSoon from '@/components/ComingSoon'
 import ComponentTable from '@/components/ComponentTable'
-import {defaultAvatar,avatarGroup, alertPropsData} from './Code/Code.tsx'
+import {
+  defaultCard,
+  withHeaderFooterCard,
+  simpleCard,
+  interactiveCard,
+  cardPropsData,
+  cardHeaderPropsData,
+  cardTitlePropsData,
+  cardDescriptionPropsData,
+  cardContentPropsData,
+  cardFooterPropsData
+} from './Code/Code.tsx'
 
 ## Table of Contents
 
+## Default Card
+---
+<CodeSnippets styles="mt-4" content={defaultCard} lang="javascript" url="examples/components/card/default-card">
+</CodeSnippets>
 
-<ComingSoon/>
+## With Header and Footer
+---
+<CodeSnippets styles="mt-4" content={withHeaderFooterCard} lang="javascript" url="examples/components/card/with-header-footer-card">
+</CodeSnippets>
+
+## Simple Card
+---
+<CodeSnippets styles="mt-4" content={simpleCard} lang="javascript" url="examples/components/card/simple-card">
+</CodeSnippets>
+
+## Interactive Card
+---
+<CodeSnippets styles="mt-4" content={interactiveCard} lang="javascript" url="examples/components/card/interactive-card">
+</CodeSnippets>
+
+
+
+## Card Props
+---
+<ComponentTable data={cardPropsData} />
+
+## CardHeader Props
+---
+<ComponentTable data={cardHeaderPropsData} />
+
+## CardTitle Props
+---
+<ComponentTable data={cardTitlePropsData} />
+
+## CardDescription Props
+---
+<ComponentTable data={cardDescriptionPropsData} />
+
+## CardContent Props
+---
+<ComponentTable data={cardContentPropsData} />
+
+## CardFooter Props
+---
+<ComponentTable data={cardFooterPropsData} />
+
+
 
 
 

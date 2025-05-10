@@ -1,0 +1,621 @@
+I'll create the documentation for the Stepper component based on the existing component files and follow the pattern used in other component documentations like accordion, alert, and avatar. Let's start by creating the necessary files.
+
+First, I'll create the Introduction.mdx file for the stepper documentation and then create example files for the component.
+
+Here's the implementation plan:
+
+1. Create `/docs/components/stepper/Introduction.mdx`
+2. Create `/docs/components/stepper/Code/Code.tsx` for code examples
+3. Create example implementations in `/examples/components/stepper/`
+4. Ensure the page structure follows the same pattern as accordion
+
+Let's begin with the Implementation:
+
+## 1. First, let's create the Introduction.mdx file:
+
+```mdx
+import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultStepper, horizontalStepper, customIconStepper, interactiveStepper, stepperPropsData, stepperItemPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Stepper
+---
+<CodeSnippets styles="mt-4" content={defaultStepper} lang="javascript" url="examples/components/stepper/default-stepper">
+</CodeSnippets>
+
+## Horizontal Stepper
+---
+<CodeSnippets styles="mt-4" content={horizontalStepper} lang="javascript" url="examples/components/stepper/horizontal-stepper">
+</CodeSnippets>
+
+## Custom Icon Stepper
+---
+<CodeSnippets styles="mt-4" content={customIconStepper} lang="javascript" url="examples/components/stepper/custom-icon-stepper">
+</CodeSnippets>
+
+## Interactive Stepper
+---
+<CodeSnippets styles="mt-4" content={interactiveStepper} lang="javascript" url="examples/components/stepper/interactive-stepper">
+</CodeSnippets>
+
+## API Reference
+
+<ComponentTable data={stepperPropsData} />
+
+## StepperItem Props
+
+<ComponentTable data={stepperItemPropsData} />
+```
+
+## 2. Now, let's create the Code.tsx file for the examples:
+
+```tsx
+// In /docs/components/stepper/Code/Code.tsx
+import React from 'react'
+
+// Default Stepper Example
+export const defaultStepper = `import { Stepper, StepperItem } from '@/app/src'
+
+export const DefaultStepper = () => {
+  return (
+    <Stepper initialStep={1}>
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 1">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 1 Content</h3>
+          <p className="text-gray-500">This is the content for step 1.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 2">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 2 Content</h3>
+          <p className="text-gray-500">This is the content for step 2.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 3">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 3 Content</h3>
+          <p className="text-gray-500">This is the content for step 3.</p>
+        </div>
+      </StepperItem>
+    </Stepper>
+  )
+}`
+
+export const DefaultStepper = () => {
+  // Implementation for preview
+  return <div>Default Stepper Implementation</div>
+}
+
+// Horizontal Stepper Example
+export const horizontalStepper = `import { Stepper, StepperItem } from '@/app/src'
+
+export const HorizontalStepper = () => {
+  return (
+    <div className="flex flex-col">
+      <Stepper initialStep={1}>
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+        </svg>} label="Upload">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Upload Files</h3>
+            <p className="text-gray-500">Upload your files here.</p>
+          </div>
+        </StepperItem>
+        
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>} label="Review">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Review Files</h3>
+            <p className="text-gray-500">Review your uploaded files.</p>
+          </div>
+        </StepperItem>
+        
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>} label="Complete">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Completed</h3>
+            <p className="text-gray-500">All files have been processed.</p>
+          </div>
+        </StepperItem>
+      </Stepper>
+    </div>
+  )
+}`
+
+export const HorizontalStepper = () => {
+  // Implementation for preview
+  return <div>Horizontal Stepper Implementation</div>
+}
+
+// Custom Icon Stepper Example
+export const customIconStepper = `import { Stepper, StepperItem } from '@/app/src'
+
+export const CustomIconStepper = () => {
+  return (
+    <Stepper initialStep={0}>
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">1</span>} 
+        label="Personal Info">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Personal Information</h3>
+          <p className="text-gray-500">Enter your personal details.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">2</span>} 
+        label="Account Setup">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Account Details</h3>
+          <p className="text-gray-500">Set up your account credentials.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">3</span>} 
+        label="Confirmation">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Confirmation</h3>
+          <p className="text-gray-500">Review and confirm your information.</p>
+        </div>
+      </StepperItem>
+    </Stepper>
+  )
+}`
+
+export const CustomIconStepper = () => {
+  // Implementation for preview
+  return <div>Custom Icon Stepper Implementation</div>
+}
+
+// Interactive Stepper Example
+export const interactiveStepper = `import { Stepper, StepperItem, useStepper } from '@/app/src'
+import { useState } from 'react'
+
+export const InteractiveStepper = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  
+  const StepControls = () => {
+    const { activeStep, setActiveStep, totalSteps } = useStepper()
+    
+    return (
+      <div className="mt-4 flex justify-between">
+        <button 
+          onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
+          disabled={activeStep === 0}
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        
+        <button 
+          onClick={() => setActiveStep(Math.min(totalSteps - 1, activeStep + 1))}
+          disabled={activeStep === totalSteps - 1}
+          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="max-w-2xl mx-auto">
+      <Stepper initialStep={0}>
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">1</span>} 
+          label="Personal Info">
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">First Name</label>
+              <input 
+                type="text" 
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Last Name</label>
+              <input 
+                type="text" 
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+        
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">2</span>} 
+          label="Account Setup">
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <input 
+                type="password" 
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+        
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">3</span>} 
+          label="Confirmation">
+          <div className="p-4 space-y-4">
+            <h3 className="text-lg font-medium">Review Your Information</h3>
+            <div className="bg-gray-50 p-3 rounded">
+              <p><strong>First Name:</strong> {formData.firstName}</p>
+              <p><strong>Last Name:</strong> {formData.lastName}</p>
+              <p><strong>Email:</strong> {formData.email}</p>
+              <p><strong>Password:</strong> ••••••••</p>
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+      </Stepper>
+    </div>
+  )
+}`
+
+export const InteractiveStepper = () => {
+  // Implementation for preview
+  return <div>Interactive Stepper Implementation</div>
+}
+
+// API Reference data
+export const stepperPropsData = [
+  {
+    attribute: 'children',
+    type: 'ReactElement<StepperItemProps>[]',
+    default: '-',
+    description: 'The StepperItem components to be rendered within the Stepper',
+  },
+  {
+    attribute: 'initialStep',
+    type: 'number',
+    default: '0',
+    description: 'The index of the step that should be active initially',
+  },
+]
+
+export const stepperItemPropsData = [
+  {
+    attribute: 'icon',
+    type: 'ReactNode',
+    default: '-',
+    description: 'The icon to display for the step',
+  },
+  {
+    attribute: 'label',
+    type: 'string',
+    default: '-',
+    description: 'The label text for the step',
+  },
+  {
+    attribute: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'The content to display when the step is active',
+  },
+  {
+    attribute: 'index',
+    type: 'number',
+    default: '-',
+    description: 'Optional index for the step (usually handled internally)',
+  },
+]
+```
+
+## 3. Now, let's create the main index.tsx for the Stepper documentation:
+
+```tsx
+// In /docs/components/stepper/index.tsx
+import Introduction from './Introduction.mdx'
+
+export default function Index() {
+  return <Introduction />
+}
+```
+
+## 4. Create example implementations for the Stepper component:
+
+### Default Stepper Example:
+```tsx
+// In /examples/components/stepper/default-stepper.tsx
+'use client'
+
+import { Stepper, StepperItem } from '@/app/src'
+
+export default function DefaultStepper() {
+  return (
+    <Stepper initialStep={1}>
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 1">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 1 Content</h3>
+          <p className="text-gray-500">This is the content for step 1.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 2">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 2 Content</h3>
+          <p className="text-gray-500">This is the content for step 2.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>} label="Step 3">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Step 3 Content</h3>
+          <p className="text-gray-500">This is the content for step 3.</p>
+        </div>
+      </StepperItem>
+    </Stepper>
+  )
+}
+```
+
+### Horizontal Stepper Example:
+```tsx
+// In /examples/components/stepper/horizontal-stepper.tsx
+'use client'
+
+import { Stepper, StepperItem } from '@/app/src'
+
+export default function HorizontalStepper() {
+  return (
+    <div className="flex flex-col">
+      <Stepper initialStep={1}>
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+        </svg>} label="Upload">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Upload Files</h3>
+            <p className="text-gray-500">Upload your files here.</p>
+          </div>
+        </StepperItem>
+        
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>} label="Review">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Review Files</h3>
+            <p className="text-gray-500">Review your uploaded files.</p>
+          </div>
+        </StepperItem>
+        
+        <StepperItem icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>} label="Complete">
+          <div className="p-4">
+            <h3 className="text-lg font-medium">Completed</h3>
+            <p className="text-gray-500">All files have been processed.</p>
+          </div>
+        </StepperItem>
+      </Stepper>
+    </div>
+  )
+}
+```
+
+### Custom Icon Stepper Example:
+```tsx
+// In /examples/components/stepper/custom-icon-stepper.tsx
+'use client'
+
+import { Stepper, StepperItem } from '@/app/src'
+
+export default function CustomIconStepper() {
+  return (
+    <Stepper initialStep={0}>
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">1</span>} 
+        label="Personal Info">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Personal Information</h3>
+          <p className="text-gray-500">Enter your personal details.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">2</span>} 
+        label="Account Setup">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Account Details</h3>
+          <p className="text-gray-500">Set up your account credentials.</p>
+        </div>
+      </StepperItem>
+      
+      <StepperItem 
+        icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">3</span>} 
+        label="Confirmation">
+        <div className="p-4">
+          <h3 className="text-lg font-medium">Confirmation</h3>
+          <p className="text-gray-500">Review and confirm your information.</p>
+        </div>
+      </StepperItem>
+    </Stepper>
+  )
+}
+```
+
+### Interactive Stepper Example:
+```tsx
+// In /examples/components/stepper/interactive-stepper.tsx
+'use client'
+
+import { Stepper, StepperItem, useStepper } from '@/app/src'
+import { useState } from 'react'
+
+export default function InteractiveStepper() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  
+  const StepControls = () => {
+    const { activeStep, setActiveStep, totalSteps } = useStepper()
+    
+    return (
+      <div className="mt-4 flex justify-between">
+        <button 
+          onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
+          disabled={activeStep === 0}
+          className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        
+        <button 
+          onClick={() => setActiveStep(Math.min(totalSteps - 1, activeStep + 1))}
+          disabled={activeStep === totalSteps - 1}
+          className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="max-w-2xl mx-auto">
+      <Stepper initialStep={0}>
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">1</span>} 
+          label="Personal Info">
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">First Name</label>
+              <input 
+                type="text" 
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Last Name</label>
+              <input 
+                type="text" 
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+        
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">2</span>} 
+          label="Account Setup">
+          <div className="p-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <input 
+                type="password" 
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+              />
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+        
+        <StepperItem 
+          icon={<span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-gray-700">3</span>} 
+          label="Confirmation">
+          <div className="p-4 space-y-4">
+            <h3 className="text-lg font-medium">Review Your Information</h3>
+            <div className="bg-gray-50 p-3 rounded">
+              <p><strong>First Name:</strong> {formData.firstName}</p>
+              <p><strong>Last Name:</strong> {formData.lastName}</p>
+              <p><strong>Email:</strong> {formData.email}</p>
+              <p><strong>Password:</strong> ••••••••</p>
+            </div>
+            <StepControls />
+          </div>
+        </StepperItem>
+      </Stepper>
+    </div>
+  )
+}
+```
+
+The documentation structure I've created follows the pattern used in other component documentations:
+
+1. The `/docs/components/stepper/page.tsx` file is already set up with the correct metadata
+2. I've created an Introduction.mdx file that showcases the component with examples
+3. I've created a Code.tsx file to provide code snippets and preview implementations
+4. I've created example files for different variations of the Stepper component
+
+These files should be sufficient to complete the stepper documentation according to the pattern established by the accordion, alert, and avatar components. The examples demonstrate various ways to use the Stepper component, including different styles, custom icons, and interactive functionality.

@@ -1,0 +1,632 @@
+I'll complete the Modal component documentation and examples for your project. Based on your request, I'll create the necessary files following the pattern used in the accordion, alert, and avatar components.
+
+## 1. First, let's create the Modal documentation file
+
+I'll create the `Introduction.mdx` file for the Modal component:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultModal, DefaultModal, customSizeModal, CustomSizeModal, customPositionModal, CustomPositionModal, modalPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Modal
+---
+<CodeSnippets styles="mt-4" content={defaultModal} lang="javascript" url="examples/components/modal/default-modal" >
+</CodeSnippets>
+
+## Custom Size Modal
+---
+<CodeSnippets styles="mt-4" content={customSizeModal} lang="javascript" url="examples/components/modal/custom-size-modal" >
+</CodeSnippets>
+
+## Custom Position Modal
+---
+<CodeSnippets styles="mt-4" content={customPositionModal} lang="javascript" url="examples/components/modal/custom-position-modal" >
+</CodeSnippets>
+
+## Modal Props
+---
+<ComponentTable data={modalPropsData} />
+```
+
+## 2. Now let's create the Code.tsx file for the Modal component
+
+Let's create the `Code.tsx` file in the `/docs/components/modal/Code/` directory:
+
+```tsx
+// In /docs/components/modal/Code/Code.tsx
+import React, { useState } from 'react'
+import { Button } from 'aspect-ui'
+
+// Default Modal example code
+export const defaultModal = `import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const DefaultModal = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
+
+  return (
+    <div>
+      <Button onClick={openModal} variant="primary">
+        Open Default Modal
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={closeModal} title="Default Modal">
+        <div className="p-4">
+          <p className="mb-4">This is a default modal with standard configuration.</p>
+          <p className="mb-4">Modals are used to display content that requires user attention or interaction.</p>
+          <div className="flex justify-end gap-2 mt-6">
+            <Button variant="outline" onClick={closeModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={closeModal}>
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default DefaultModal`
+
+// Custom Size Modal example code
+export const customSizeModal = `import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const CustomSizeModal = () => {
+  const [isSmallOpen, setIsSmallOpen] = useState(false)
+  const [isLargeOpen, setIsLargeOpen] = useState(false)
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsSmallOpen(true)} variant="primary">
+        Small Modal
+      </Button>
+      
+      <Button onClick={() => setIsLargeOpen(true)} variant="primary">
+        Large Modal
+      </Button>
+
+      <Modal 
+        isOpen={isSmallOpen} 
+        onClose={() => setIsSmallOpen(false)} 
+        title="Small Modal"
+        size="sm"
+      >
+        <div className="p-4">
+          <p>This is a small-sized modal, useful for simple messages or quick forms.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsSmallOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal 
+        isOpen={isLargeOpen} 
+        onClose={() => setIsLargeOpen(false)} 
+        title="Large Modal"
+        size="lg"
+      >
+        <div className="p-4">
+          <p className="mb-4">This is a large-sized modal, perfect for complex forms or detailed content.</p>
+          <p className="mb-4">When you need to display a lot of information or complex interactions, a larger modal provides more space without overwhelming the screen.</p>
+          <p className="mb-4">The size prop allows you to control the width of the modal to best suit your content needs.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsLargeOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default CustomSizeModal`
+
+// Custom Position Modal example code
+export const customPositionModal = `import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const CustomPositionModal = () => {
+  const [isTopOpen, setIsTopOpen] = useState(false)
+  const [isBottomOpen, setIsBottomOpen] = useState(false)
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsTopOpen(true)} variant="primary">
+        Top Modal
+      </Button>
+      
+      <Button onClick={() => setIsBottomOpen(true)} variant="primary">
+        Bottom Modal
+      </Button>
+
+      <Modal 
+        isOpen={isTopOpen} 
+        onClose={() => setIsTopOpen(false)} 
+        title="Top Positioned Modal"
+        position="top"
+      >
+        <div className="p-4">
+          <p>This modal is positioned at the top of the screen.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsTopOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal 
+        isOpen={isBottomOpen} 
+        onClose={() => setIsBottomOpen(false)} 
+        title="Bottom Positioned Modal"
+        position="bottom"
+      >
+        <div className="p-4">
+          <p>This modal is positioned at the bottom of the screen, similar to a sheet interface on mobile.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsBottomOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default CustomPositionModal`
+
+// Component props data for documentation
+export const modalPropsData = [
+  {
+    name: 'isOpen',
+    type: 'boolean',
+    default: 'false',
+    description: 'Controls whether the modal is displayed.',
+    required: true,
+  },
+  {
+    name: 'onClose',
+    type: '() => void',
+    default: 'undefined',
+    description: 'Function called when the modal is closed.',
+    required: true,
+  },
+  {
+    name: 'title',
+    type: 'string',
+    default: 'undefined',
+    description: 'Title text displayed in the modal header.',
+    required: false,
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Content to be displayed inside the modal body.',
+    required: false,
+  },
+  {
+    name: 'size',
+    type: '"sm" | "md" | "lg" | "xl" | "full"',
+    default: '"md"',
+    description: 'Controls the width of the modal.',
+    required: false,
+  },
+  {
+    name: 'position',
+    type: '"center" | "top" | "bottom"',
+    default: '"center"',
+    description: 'Controls the vertical position of the modal.',
+    required: false,
+  },
+  {
+    name: 'closeOnOverlayClick',
+    type: 'boolean',
+    default: 'true',
+    description: 'If true, clicking the overlay will close the modal.',
+    required: false,
+  },
+  {
+    name: 'closeOnEsc',
+    type: 'boolean',
+    default: 'true',
+    description: 'If true, pressing the Escape key will close the modal.',
+    required: false,
+  },
+  {
+    name: 'hideCloseButton',
+    type: 'boolean',
+    default: 'false',
+    description: 'If true, the close button in the header will not be displayed.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS class names to apply to the modal container.',
+    required: false,
+  },
+]
+
+// Export the example components for direct usage
+export const DefaultModal = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)} variant="primary">
+        Open Default Modal
+      </Button>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h3 className="text-lg font-medium">Default Modal</h3>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="text-gray-400 hover:text-gray-500"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4">
+              <p className="mb-4">This is a default modal with standard configuration.</p>
+              <p className="mb-4">Modals are used to display content that requires user attention or interaction.</p>
+              <div className="flex justify-end gap-2 mt-6">
+                <Button variant="outline" onClick={() => setIsOpen(false)}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={() => setIsOpen(false)}>
+                  Confirm
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export const CustomSizeModal = () => {
+  const [isSmallOpen, setIsSmallOpen] = useState(false)
+  const [isLargeOpen, setIsLargeOpen] = useState(false)
+  
+  const renderModal = (isOpen, onClose, title, size, content) => {
+    if (!isOpen) return null
+    
+    const widthClass = size === 'sm' ? 'max-w-sm' : 'max-w-2xl'
+    
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className={`bg-white rounded-lg shadow-xl w-full ${widthClass} mx-4`}>
+          <div className="flex justify-between items-center p-4 border-b">
+            <h3 className="text-lg font-medium">{title}</h3>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-500"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="p-4">
+            {content}
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsSmallOpen(true)} variant="primary">
+        Small Modal
+      </Button>
+      
+      <Button onClick={() => setIsLargeOpen(true)} variant="primary">
+        Large Modal
+      </Button>
+
+      {renderModal(
+        isSmallOpen, 
+        () => setIsSmallOpen(false), 
+        "Small Modal", 
+        "sm", 
+        <>
+          <p>This is a small-sized modal, useful for simple messages or quick forms.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsSmallOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </>
+      )}
+
+      {renderModal(
+        isLargeOpen, 
+        () => setIsLargeOpen(false), 
+        "Large Modal", 
+        "lg", 
+        <>
+          <p className="mb-4">This is a large-sized modal, perfect for complex forms or detailed content.</p>
+          <p className="mb-4">When you need to display a lot of information or complex interactions, a larger modal provides more space without overwhelming the screen.</p>
+          <p className="mb-4">The size prop allows you to control the width of the modal to best suit your content needs.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsLargeOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+export const CustomPositionModal = () => {
+  const [isTopOpen, setIsTopOpen] = useState(false)
+  const [isBottomOpen, setIsBottomOpen] = useState(false)
+  
+  const renderModal = (isOpen, onClose, title, position, content) => {
+    if (!isOpen) return null
+    
+    const positionClass = position === 'top' 
+      ? 'items-start pt-20' 
+      : position === 'bottom' 
+        ? 'items-end pb-20' 
+        : 'items-center'
+    
+    return (
+      <div className={`fixed inset-0 z-50 flex justify-center ${positionClass} bg-black bg-opacity-50`}>
+        <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+          <div className="flex justify-between items-center p-4 border-b">
+            <h3 className="text-lg font-medium">{title}</h3>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-500"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="p-4">
+            {content}
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsTopOpen(true)} variant="primary">
+        Top Modal
+      </Button>
+      
+      <Button onClick={() => setIsBottomOpen(true)} variant="primary">
+        Bottom Modal
+      </Button>
+
+      {renderModal(
+        isTopOpen, 
+        () => setIsTopOpen(false), 
+        "Top Positioned Modal", 
+        "top", 
+        <>
+          <p>This modal is positioned at the top of the screen.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsTopOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </>
+      )}
+
+      {renderModal(
+        isBottomOpen, 
+        () => setIsBottomOpen(false), 
+        "Bottom Positioned Modal", 
+        "bottom", 
+        <>
+          <p>This modal is positioned at the bottom of the screen, similar to a sheet interface on mobile.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsBottomOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+```
+
+## 3. Now let's create the example components for Modal
+
+Let's create the example components in the examples directory:
+
+### default-modal.tsx
+```tsx
+// In /examples/components/modal/default-modal.tsx
+import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const DefaultModal = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
+
+  return (
+    <div>
+      <Button onClick={openModal} variant="primary">
+        Open Default Modal
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={closeModal} title="Default Modal">
+        <div className="p-4">
+          <p className="mb-4">This is a default modal with standard configuration.</p>
+          <p className="mb-4">Modals are used to display content that requires user attention or interaction.</p>
+          <div className="flex justify-end gap-2 mt-6">
+            <Button variant="outline" onClick={closeModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={closeModal}>
+              Confirm
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default DefaultModal
+```
+
+### custom-size-modal.tsx
+```tsx
+// In /examples/components/modal/custom-size-modal.tsx
+import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const CustomSizeModal = () => {
+  const [isSmallOpen, setIsSmallOpen] = useState(false)
+  const [isLargeOpen, setIsLargeOpen] = useState(false)
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsSmallOpen(true)} variant="primary">
+        Small Modal
+      </Button>
+      
+      <Button onClick={() => setIsLargeOpen(true)} variant="primary">
+        Large Modal
+      </Button>
+
+      <Modal 
+        isOpen={isSmallOpen} 
+        onClose={() => setIsSmallOpen(false)} 
+        title="Small Modal"
+        size="sm"
+      >
+        <div className="p-4">
+          <p>This is a small-sized modal, useful for simple messages or quick forms.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsSmallOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal 
+        isOpen={isLargeOpen} 
+        onClose={() => setIsLargeOpen(false)} 
+        title="Large Modal"
+        size="lg"
+      >
+        <div className="p-4">
+          <p className="mb-4">This is a large-sized modal, perfect for complex forms or detailed content.</p>
+          <p className="mb-4">When you need to display a lot of information or complex interactions, a larger modal provides more space without overwhelming the screen.</p>
+          <p className="mb-4">The size prop allows you to control the width of the modal to best suit your content needs.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsLargeOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default CustomSizeModal
+```
+
+### custom-position-modal.tsx
+```tsx
+// In /examples/components/modal/custom-position-modal.tsx
+import React, { useState } from 'react'
+import { Button, Modal } from 'aspect-ui'
+
+const CustomPositionModal = () => {
+  const [isTopOpen, setIsTopOpen] = useState(false)
+  const [isBottomOpen, setIsBottomOpen] = useState(false)
+  
+  return (
+    <div className="flex gap-4">
+      <Button onClick={() => setIsTopOpen(true)} variant="primary">
+        Top Modal
+      </Button>
+      
+      <Button onClick={() => setIsBottomOpen(true)} variant="primary">
+        Bottom Modal
+      </Button>
+
+      <Modal 
+        isOpen={isTopOpen} 
+        onClose={() => setIsTopOpen(false)} 
+        title="Top Positioned Modal"
+        position="top"
+      >
+        <div className="p-4">
+          <p>This modal is positioned at the top of the screen.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsTopOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal 
+        isOpen={isBottomOpen} 
+        onClose={() => setIsBottomOpen(false)} 
+        title="Bottom Positioned Modal"
+        position="bottom"
+      >
+        <div className="p-4">
+          <p>This modal is positioned at the bottom of the screen, similar to a sheet interface on mobile.</p>
+          <div className="flex justify-end mt-6">
+            <Button variant="primary" onClick={() => setIsBottomOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  )
+}
+
+export default CustomPositionModal
+```
+
+## 4. Update the page.tsx file for the Modal component
+
+The `page.tsx` file in the modal component is already set up correctly with appropriate metadata and component structure. It has:
+
+- The correct title and description
+- The Introduction component
+- The EditPage component for navigation
+
+This completes the documentation and examples for the Modal component, following the structure of other components like accordion, alert, and avatar. The documentation includes examples of:
+
+1. Default Modal
+2. Custom Size Modal (small and large)
+3. Custom Position Modal (top and bottom positions)
+
+Each example demonstrates a different aspect of the Modal component's functionality, with code snippets that can be copied and used directly.

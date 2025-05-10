@@ -16,7 +16,6 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean
   loading?: boolean
-  onClick?: () => void
   children?: ReactNode
   icon?: ReactNode
   className?: string
@@ -32,7 +31,6 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'medium',
   disabled = false,
   loading = false,
-  onClick,
   children,
   icon,
   iconPosition = 'left',
@@ -90,7 +88,6 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      onClick={onClick}
       disabled={disabled || loading}
       className={cn(
         baseStyles,

@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+/* @config '../tailwind.config.ts'; */
+@theme{
+  --breakpoint-lg: 60rem;
+  --breakpoint-md: 44rem;
+  --breakpoint-sm: 60rem;
+}

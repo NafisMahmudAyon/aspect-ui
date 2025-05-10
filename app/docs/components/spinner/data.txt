@@ -1,0 +1,665 @@
+I'll create or complete the documentation for the Spinner component by following the same structure as the Accordion component documentation. Let me start by analyzing the Spinner component files and creating the necessary documentation.
+
+First, I need to check what's available in the Spinner component files to understand its functionality and properties. Based on the project context, I can see that the Spinner component has properties for size, thickness, and className.
+
+Let's create the documentation files for the Spinner component:
+
+## 1. Create/Complete Spinner Documentation Files
+
+### For the Spinner Page (already exists, but I'll enhance it)
+
+```tsx
+// File: app/docs/components/spinner/page.tsx (exists but will be enhanced)
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Spinner - Aspect UI',
+  description:
+    'The `Spinner` component indicates loading or ongoing processes using a circular motion. It's lightweight, customizable, and suitable for both small and large loading contexts.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/spinner"
+        nextPageLink="/docs/components/stepper"
+        nextPageName="Stepper"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### For the Introduction.mdx file
+
+```mdx
+// File: app/docs/components/spinner/Introduction.mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultSpinner, sizeVariants, colorVariants, thicknessVariants, spinnerPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Spinner
+---
+<CodeSnippets styles="mt-4" content={defaultSpinner} lang="javascript" url="examples/components/spinner/default-spinner">
+</CodeSnippets>
+
+## Spinner Sizes
+---
+<CodeSnippets styles="mt-4" content={sizeVariants} lang="javascript" url="examples/components/spinner/size-variants">
+</CodeSnippets>
+
+## Spinner Colors
+---
+<CodeSnippets styles="mt-4" content={colorVariants} lang="javascript" url="examples/components/spinner/color-variants">
+</CodeSnippets>
+
+## Spinner Thickness
+---
+<CodeSnippets styles="mt-4" content={thicknessVariants} lang="javascript" url="examples/components/spinner/thickness-variants">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Spinner Props
+<ComponentTable data={spinnerPropsData} />
+```
+
+### For the Code.tsx file
+
+```tsx
+// File: app/docs/components/spinner/Code/Code.tsx
+export const defaultSpinner = `import { Spinner } from "@aspect-ui/react";
+
+export default function DefaultSpinner() {
+  return (
+    <div className="flex justify-center">
+      <Spinner />
+    </div>
+  );
+}`;
+
+export const sizeVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerSizes() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner size="small" />
+        <span className="mt-2 text-sm">Small</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="medium" />
+        <span className="mt-2 text-sm">Medium</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="large" />
+        <span className="mt-2 text-sm">Large</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const colorVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerColors() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner className="text-blue-500" />
+        <span className="mt-2 text-sm">Blue</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-red-500" />
+        <span className="mt-2 text-sm">Red</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-green-500" />
+        <span className="mt-2 text-sm">Green</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-purple-500" />
+        <span className="mt-2 text-sm">Purple</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const thicknessVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerThickness() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner thickness={1} />
+        <span className="mt-2 text-sm">Thin (1px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={2} />
+        <span className="mt-2 text-sm">Default (2px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={4} />
+        <span className="mt-2 text-sm">Thick (4px)</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const spinnerPropsData = [
+  {
+    attribute: "size",
+    type: "'small' | 'medium' | 'large'",
+    default: "'medium'",
+    description: "Sets the size of the spinner"
+  },
+  {
+    attribute: "thickness",
+    type: "number",
+    default: "2",
+    description: "Sets the thickness of the spinner's stroke width"
+  },
+  {
+    attribute: "className",
+    type: "string",
+    default: "",
+    description: "Additional CSS class for styling, including text color"
+  }
+];
+```
+
+### Create an Index File
+
+```tsx
+// File: app/docs/components/spinner/index.tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+## 2. Create Example Files
+
+Now let's create the example files for the Spinner component:
+
+### Default Spinner Example
+
+```tsx
+// File: app/examples/components/spinner/default-spinner/page.tsx
+import DefaultSpinner from './DefaultSpinner';
+
+export default function Page() {
+  return <DefaultSpinner />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/default-spinner/DefaultSpinner.tsx
+import { Spinner } from "@/app/src";
+
+export default function DefaultSpinner() {
+  return (
+    <div className="flex justify-center">
+      <Spinner />
+    </div>
+  );
+}
+```
+
+### Spinner Sizes Example
+
+```tsx
+// File: app/examples/components/spinner/size-variants/page.tsx
+import SpinnerSizes from './SpinnerSizes';
+
+export default function Page() {
+  return <SpinnerSizes />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/size-variants/SpinnerSizes.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerSizes() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner size="small" />
+        <span className="mt-2 text-sm">Small</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="medium" />
+        <span className="mt-2 text-sm">Medium</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="large" />
+        <span className="mt-2 text-sm">Large</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Spinner Colors Example
+
+```tsx
+// File: app/examples/components/spinner/color-variants/page.tsx
+import SpinnerColors from './SpinnerColors';
+
+export default function Page() {
+  return <SpinnerColors />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/color-variants/SpinnerColors.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerColors() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner className="text-blue-500" />
+        <span className="mt-2 text-sm">Blue</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-red-500" />
+        <span className="mt-2 text-sm">Red</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-green-500" />
+        <span className="mt-2 text-sm">Green</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-purple-500" />
+        <span className="mt-2 text-sm">Purple</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Spinner Thickness Example
+
+```tsx
+// File: app/examples/components/spinner/thickness-variants/page.tsx
+import SpinnerThickness from './SpinnerThickness';
+
+export default function Page() {
+  return <SpinnerThickness />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/thickness-variants/SpinnerThickness.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerThickness() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner thickness={1} />
+        <span className="mt-2 text-sm">Thin (1px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={2} />
+        <span className="mt-2 text-sm">Default (2px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={4} />
+        <span className="mt-2 text-sm">Thick (4px)</span>
+      </div>
+    </div>
+  );
+}
+```
+
+With these files, I've completed the documentation for the Spinner component following the same structure as the Accordion component. The documentation includes:
+
+1. A main page with metadata
+2. An Introduction.mdx file with examples and API reference
+3. A Code.tsx file with example code snippets
+4. Example components in the examples directory
+
+These resources provide comprehensive documentation for the Spinner component, showcasing its various features like size variants, color options, and thickness customization.
+
+A: I'll create or complete the documentation for the Spinner component by following the same structure as the Accordion component documentation. Let me start by analyzing the Spinner component files and creating the necessary documentation.
+
+First, I need to check what's available in the Spinner component files to understand its functionality and properties. Based on the project context, I can see that the Spinner component has properties for size, thickness, and className.
+
+Let's create the documentation files for the Spinner component:
+
+## 1. Create/Complete Spinner Documentation Files
+
+### For the Spinner Page (already exists, but I'll enhance it)
+
+```tsx
+// File: app/docs/components/spinner/page.tsx (exists but will be enhanced)
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Spinner - Aspect UI',
+  description:
+    'The `Spinner` component indicates loading or ongoing processes using a circular motion. It's lightweight, customizable, and suitable for both small and large loading contexts.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/spinner"
+        nextPageLink="/docs/components/stepper"
+        nextPageName="Stepper"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### For the Introduction.mdx file
+
+```mdx
+// File: app/docs/components/spinner/Introduction.mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultSpinner, sizeVariants, colorVariants, thicknessVariants, spinnerPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Spinner
+---
+<CodeSnippets styles="mt-4" content={defaultSpinner} lang="javascript" url="examples/components/spinner/default-spinner">
+</CodeSnippets>
+
+## Spinner Sizes
+---
+<CodeSnippets styles="mt-4" content={sizeVariants} lang="javascript" url="examples/components/spinner/size-variants">
+</CodeSnippets>
+
+## Spinner Colors
+---
+<CodeSnippets styles="mt-4" content={colorVariants} lang="javascript" url="examples/components/spinner/color-variants">
+</CodeSnippets>
+
+## Spinner Thickness
+---
+<CodeSnippets styles="mt-4" content={thicknessVariants} lang="javascript" url="examples/components/spinner/thickness-variants">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Spinner Props
+<ComponentTable data={spinnerPropsData} />
+```
+
+### For the Code.tsx file
+
+```tsx
+// File: app/docs/components/spinner/Code/Code.tsx
+export const defaultSpinner = `import { Spinner } from "@aspect-ui/react";
+
+export default function DefaultSpinner() {
+  return (
+    <div className="flex justify-center">
+      <Spinner />
+    </div>
+  );
+}`;
+
+export const sizeVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerSizes() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner size="small" />
+        <span className="mt-2 text-sm">Small</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="medium" />
+        <span className="mt-2 text-sm">Medium</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="large" />
+        <span className="mt-2 text-sm">Large</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const colorVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerColors() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner className="text-blue-500" />
+        <span className="mt-2 text-sm">Blue</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-red-500" />
+        <span className="mt-2 text-sm">Red</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-green-500" />
+        <span className="mt-2 text-sm">Green</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-purple-500" />
+        <span className="mt-2 text-sm">Purple</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const thicknessVariants = `import { Spinner } from "@aspect-ui/react";
+
+export default function SpinnerThickness() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner thickness={1} />
+        <span className="mt-2 text-sm">Thin (1px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={2} />
+        <span className="mt-2 text-sm">Default (2px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={4} />
+        <span className="mt-2 text-sm">Thick (4px)</span>
+      </div>
+    </div>
+  );
+}`;
+
+export const spinnerPropsData = [
+  {
+    attribute: "size",
+    type: "'small' | 'medium' | 'large'",
+    default: "'medium'",
+    description: "Sets the size of the spinner"
+  },
+  {
+    attribute: "thickness",
+    type: "number",
+    default: "2",
+    description: "Sets the thickness of the spinner's stroke width"
+  },
+  {
+    attribute: "className",
+    type: "string",
+    default: "",
+    description: "Additional CSS class for styling, including text color"
+  }
+];
+```
+
+### Create an Index File
+
+```tsx
+// File: app/docs/components/spinner/index.tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+## 2. Create Example Files
+
+Now let's create the example files for the Spinner component:
+
+### Default Spinner Example
+
+```tsx
+// File: app/examples/components/spinner/default-spinner/page.tsx
+import DefaultSpinner from './DefaultSpinner';
+
+export default function Page() {
+  return <DefaultSpinner />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/default-spinner/DefaultSpinner.tsx
+import { Spinner } from "@/app/src";
+
+export default function DefaultSpinner() {
+  return (
+    <div className="flex justify-center">
+      <Spinner />
+    </div>
+  );
+}
+```
+
+### Spinner Sizes Example
+
+```tsx
+// File: app/examples/components/spinner/size-variants/page.tsx
+import SpinnerSizes from './SpinnerSizes';
+
+export default function Page() {
+  return <SpinnerSizes />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/size-variants/SpinnerSizes.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerSizes() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner size="small" />
+        <span className="mt-2 text-sm">Small</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="medium" />
+        <span className="mt-2 text-sm">Medium</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner size="large" />
+        <span className="mt-2 text-sm">Large</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Spinner Colors Example
+
+```tsx
+// File: app/examples/components/spinner/color-variants/page.tsx
+import SpinnerColors from './SpinnerColors';
+
+export default function Page() {
+  return <SpinnerColors />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/color-variants/SpinnerColors.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerColors() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner className="text-blue-500" />
+        <span className="mt-2 text-sm">Blue</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-red-500" />
+        <span className="mt-2 text-sm">Red</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-green-500" />
+        <span className="mt-2 text-sm">Green</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner className="text-purple-500" />
+        <span className="mt-2 text-sm">Purple</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Spinner Thickness Example
+
+```tsx
+// File: app/examples/components/spinner/thickness-variants/page.tsx
+import SpinnerThickness from './SpinnerThickness';
+
+export default function Page() {
+  return <SpinnerThickness />;
+}
+```
+
+```tsx
+// File: app/examples/components/spinner/thickness-variants/SpinnerThickness.tsx
+import { Spinner } from "@/app/src";
+
+export default function SpinnerThickness() {
+  return (
+    <div className="flex items-center justify-center space-x-4">
+      <div className="flex flex-col items-center">
+        <Spinner thickness={1} />
+        <span className="mt-2 text-sm">Thin (1px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={2} />
+        <span className="mt-2 text-sm">Default (2px)</span>
+      </div>
+      <div className="flex flex-col items-center">
+        <Spinner thickness={4} />
+        <span className="mt-2 text-sm">Thick (4px)</span>
+      </div>
+    </div>
+  );
+}
+```
+
+With these files, I've completed the documentation for the Spinner component following the same structure as the Accordion component. The documentation includes:
+
+1. A main page with metadata
+2. An Introduction.mdx file with examples and API reference
+3. A Code.tsx file with example code snippets
+4. Example components in the examples directory
+
+These resources provide comprehensive documentation for the Spinner component, showcasing its various features like size variants, color options, and thickness customization.

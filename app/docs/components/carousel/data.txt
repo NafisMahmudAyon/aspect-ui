@@ -1,0 +1,483 @@
+I'll create the documentation for the Carousel component similar to the Accordion component. Let me start by creating the necessary files for the carousel component documentation.
+
+Based on your project structure, I'll need to:
+1. Create/complete the docs for carousel at `/docs/components/carousel`
+2. Add examples in the `/examples/components/carousel/` directory 
+3. Follow the pattern of existing components (accordion, alert, avatar)
+
+## 1. First, let's create the Carousel Introduction.mdx file:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultCarousel,
+  customControlsCarousel,
+  autoplayCarousel,
+  carouselPropsData,
+  carouselItemPropsData,
+  carouselControlsPropsData,
+  carouselIndicatorsPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Carousel
+---
+<CodeSnippets styles="mt-4" content={defaultCarousel} lang="javascript" url="examples/components/carousel/default-carousel">
+</CodeSnippets>
+
+## Custom Controls
+---
+<CodeSnippets styles="mt-4" content={customControlsCarousel} lang="javascript" url="examples/components/carousel/custom-controls-carousel">
+</CodeSnippets>
+
+## Autoplay Carousel
+---
+<CodeSnippets styles="mt-4" content={autoplayCarousel} lang="javascript" url="examples/components/carousel/autoplay-carousel">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Carousel Props
+<ComponentTable data={carouselPropsData} />
+
+### CarouselItem Props
+<ComponentTable data={carouselItemPropsData} />
+
+### CarouselControls Props
+<ComponentTable data={carouselControlsPropsData} />
+
+### CarouselIndicators Props
+<ComponentTable data={carouselIndicatorsPropsData} />
+```
+
+## 2. Now, let's create the Code.tsx file for the carousel examples:
+
+```tsx
+// In /docs/components/carousel/Code/Code.tsx
+
+export const defaultCarousel = `import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+
+export default function DefaultCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+
+  return (
+    <Carousel className="w-full max-w-3xl">
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls />
+      <CarouselIndicators className="mt-4" />
+    </Carousel>
+  );
+}`;
+
+export const customControlsCarousel = `import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+export default function CustomControlsCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+
+  return (
+    <Carousel className="w-full max-w-3xl">
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls
+        prevIcon={<ChevronLeft className="w-6 h-6" />} 
+        nextIcon={<ChevronRight className="w-6 h-6" />}
+        className="bg-black/50 text-white rounded-full p-2"
+      />
+      <CarouselIndicators 
+        className="mt-4"
+        activeClassName="bg-blue-600 w-3 h-3" 
+        inactiveClassName="bg-gray-300 w-2 h-2"
+      />
+    </Carousel>
+  );
+}`;
+
+export const autoplayCarousel = `import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+import { useState, useEffect } from "react";
+
+export default function AutoplayCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+  
+  return (
+    <Carousel 
+      className="w-full max-w-3xl"
+      autoplay
+      interval={3000}
+      pauseOnHover
+    >
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls />
+      <CarouselIndicators className="mt-4" />
+    </Carousel>
+  );
+}`;
+
+export const carouselPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the carousel',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the carousel (CarouselItems, Controls, etc.)',
+  },
+  {
+    name: 'autoplay',
+    type: 'boolean',
+    default: 'false',
+    description: 'Enables automatic slide transitions',
+  },
+  {
+    name: 'interval',
+    type: 'number',
+    default: '5000',
+    description: 'Time in milliseconds between slide transitions (when autoplay is enabled)',
+  },
+  {
+    name: 'pauseOnHover',
+    type: 'boolean',
+    default: 'true',
+    description: 'Pauses autoplay when mouse hovers over the carousel',
+  },
+  {
+    name: 'defaultIndex',
+    type: 'number',
+    default: '0',
+    description: 'The initial active slide index',
+  },
+];
+
+export const carouselItemPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the carousel item',
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'The content of the carousel item',
+  },
+];
+
+export const carouselControlsPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the controls container',
+  },
+  {
+    name: 'prevIcon',
+    type: 'React.ReactNode',
+    default: '<LeftArrow />',
+    description: 'Custom icon for the previous button',
+  },
+  {
+    name: 'nextIcon',
+    type: 'React.ReactNode',
+    default: '<RightArrow />',
+    description: 'Custom icon for the next button',
+  },
+  {
+    name: 'prevClassName',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes for the previous button',
+  },
+  {
+    name: 'nextClassName',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes for the next button',
+  },
+];
+
+export const carouselIndicatorsPropsData = [
+  {
+    name: 'className',
+    type: 'string',
+    default: '',
+    description: 'Additional CSS classes to apply to the indicators container',
+  },
+  {
+    name: 'activeClassName',
+    type: 'string',
+    default: '',
+    description: 'CSS classes for the active indicator',
+  },
+  {
+    name: 'inactiveClassName',
+    type: 'string',
+    default: '',
+    description: 'CSS classes for inactive indicators',
+  },
+];
+```
+
+## 3. Now let's create example files for the carousel component:
+
+For each example, we'll create a file in the `examples/components/carousel/` directory:
+
+1. **default-carousel.tsx**:
+```tsx
+import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+
+export default function DefaultCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+
+  return (
+    <Carousel className="w-full max-w-3xl">
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls />
+      <CarouselIndicators className="mt-4" />
+    </Carousel>
+  );
+}
+```
+
+2. **custom-controls-carousel.tsx**:
+```tsx
+import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+export default function CustomControlsCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+
+  return (
+    <Carousel className="w-full max-w-3xl">
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls
+        prevIcon={<ChevronLeft className="w-6 h-6" />} 
+        nextIcon={<ChevronRight className="w-6 h-6" />}
+        className="bg-black/50 text-white rounded-full p-2"
+      />
+      <CarouselIndicators 
+        className="mt-4"
+        activeClassName="bg-blue-600 w-3 h-3" 
+        inactiveClassName="bg-gray-300 w-2 h-2"
+      />
+    </Carousel>
+  );
+}
+```
+
+3. **autoplay-carousel.tsx**:
+```tsx
+import { Carousel, CarouselItem, CarouselControls, CarouselIndicators } from "@/app/src";
+
+export default function AutoplayCarousel() {
+  const items = [
+    {
+      id: 1,
+      image: "/images/carousel/slide1.jpg",
+      alt: "Slide 1"
+    },
+    {
+      id: 2,
+      image: "/images/carousel/slide2.jpg",
+      alt: "Slide 2"
+    },
+    {
+      id: 3,
+      image: "/images/carousel/slide3.jpg",
+      alt: "Slide 3"
+    }
+  ];
+  
+  return (
+    <Carousel 
+      className="w-full max-w-3xl"
+      autoplay
+      interval={3000}
+      pauseOnHover
+    >
+      {items.map((item) => (
+        <CarouselItem key={item.id}>
+          <img 
+            src={item.image} 
+            alt={item.alt} 
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </CarouselItem>
+      ))}
+      <CarouselControls />
+      <CarouselIndicators className="mt-4" />
+    </Carousel>
+  );
+}
+```
+
+## 4. Finally, verify the Carousel page.tsx file (which I can see is already created in your project):
+
+The existing file looks good with the following content:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Carousel - Aspect UI',
+  description:
+    'The `Carousel` component lets you display a series of images or content in a slider format. It supports autoplay, swipe gestures, navigation arrows, and custom transitions for engaging UI experiences.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/accordion"
+        nextPageLink="/docs/components/accordion"
+        nextPageName="Typography"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+You might want to update the `pageLink`, `nextPageLink`, and `nextPageName` values to point to the correct pages in your navigation structure.
+
+The documentation for the Carousel component is now complete, following the same pattern as the accordion, alert, and avatar components. This provides comprehensive documentation with examples showcasing the different ways to use the Carousel component.
+
+To fully complete the implementation, you should:
+
+1. Create the directories and files as outlined above
+2. Ensure the imports point to the correct locations in your project structure
+3. Adjust any component properties based on your actual Carousel implementation
+4. Update the navigation links in the page.tsx file if needed
+
+Let me know if you need any adjustments or have questions about any part of the implementation!

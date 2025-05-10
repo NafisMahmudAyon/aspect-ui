@@ -1,0 +1,886 @@
+I'll create the Table component documentation and examples for you. Let me first check the structure and content of the existing components, and then create the required documentation for the Table component.
+
+Let's complete the following steps:
+
+1. Create/update the documentation in `/docs/components/table/`
+2. Create examples in `/examples/components/table/`
+
+## 1. Table Documentation
+
+First, let's create the Table documentation files:
+
+### 1.1. Creating the Table Introduction MDX file
+
+```markdown
+# Table
+
+The Table component displays structured data in rows and columns, providing a clean and organized way to present information. It supports features like sorting, pagination, and custom cell rendering for enhanced user experience.
+
+## Import
+
+```jsx
+import { Table } from '@/app/src'
+```
+
+## Basic Table
+
+A simple table to display data in rows and columns.
+
+---
+<CodeSnippets styles="mt-4" content={basicTable} lang="javascript" url="examples/components/table/basic-table" >
+</CodeSnippets>
+
+## Striped Table
+
+A table with alternating row colors for better readability.
+
+---
+<CodeSnippets styles="mt-4" content={stripedTable} lang="javascript" url="examples/components/table/striped-table" >
+</CodeSnippets>
+
+## Bordered Table
+
+A table with visible borders around cells.
+
+---
+<CodeSnippets styles="mt-4" content={borderedTable} lang="javascript" url="examples/components/table/bordered-table" >
+</CodeSnippets>
+
+## Hoverable Table
+
+A table with row highlighting on hover.
+
+---
+<CodeSnippets styles="mt-4" content={hoverableTable} lang="javascript" url="examples/components/table/hoverable-table" >
+</CodeSnippets>
+
+## Compact Table
+
+A table with reduced padding for denser data display.
+
+---
+<CodeSnippets styles="mt-4" content={compactTable} lang="javascript" url="examples/components/table/compact-table" >
+</CodeSnippets>
+
+## Table with Pagination
+
+A table with pagination for handling large datasets.
+
+---
+<CodeSnippets styles="mt-4" content={paginatedTable} lang="javascript" url="examples/components/table/paginated-table" >
+</CodeSnippets>
+
+## Sortable Table
+
+A table with sortable columns.
+
+---
+<CodeSnippets styles="mt-4" content={sortableTable} lang="javascript" url="examples/components/table/sortable-table" >
+</CodeSnippets>
+
+## Table with Selection
+
+A table with row selection capability.
+
+---
+<CodeSnippets styles="mt-4" content={selectableTable} lang="javascript" url="examples/components/table/selectable-table" >
+</CodeSnippets>
+```
+
+### 1.2. Creating the Table Code Component
+
+```typescript
+// In /docs/components/table/Code/Code.tsx
+import { basicTable } from './basicTable'
+import { stripedTable } from './stripedTable'
+import { borderedTable } from './borderedTable'
+import { hoverableTable } from './hoverableTable'
+import { compactTable } from './compactTable'
+import { paginatedTable } from './paginatedTable'
+import { sortableTable } from './sortableTable'
+import { selectableTable } from './selectableTable'
+
+export { 
+  basicTable,
+  stripedTable,
+  borderedTable,
+  hoverableTable,
+  compactTable,
+  paginatedTable,
+  sortableTable,
+  selectableTable
+}
+```
+
+### 1.3. Creating the Code Examples
+
+#### Basic Table
+```typescript
+// In /docs/components/table/Code/basicTable.ts
+export const basicTable = `import { Table } from '@/app/src'
+
+export const BasicTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <Table columns={columns} data={data} />
+  )
+}
+`
+```
+
+#### Striped Table
+```typescript
+// In /docs/components/table/Code/stripedTable.ts
+export const stripedTable = `import { Table } from '@/app/src'
+
+export const StripedTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+  ]
+
+  return (
+    <Table 
+      columns={columns} 
+      data={data} 
+      striped={true}
+    />
+  )
+}
+`
+```
+
+#### Bordered Table
+```typescript
+// In /docs/components/table/Code/borderedTable.ts
+export const borderedTable = `import { Table } from '@/app/src'
+
+export const BorderedTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <Table 
+      columns={columns} 
+      data={data} 
+      bordered={true}
+    />
+  )
+}
+`
+```
+
+#### Hoverable Table
+```typescript
+// In /docs/components/table/Code/hoverableTable.ts
+export const hoverableTable = `import { Table } from '@/app/src'
+
+export const HoverableTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <Table 
+      columns={columns} 
+      data={data} 
+      hoverable={true}
+    />
+  )
+}
+`
+```
+
+#### Compact Table
+```typescript
+// In /docs/components/table/Code/compactTable.ts
+export const compactTable = `import { Table } from '@/app/src'
+
+export const CompactTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+    { header: 'Email', accessorKey: 'email' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active', email: 'john@example.com' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive', email: 'jane@example.com' },
+    { name: 'Robert Johnson', age: 45, status: 'Active', email: 'robert@example.com' },
+    { name: 'Emily Davis', age: 22, status: 'Pending', email: 'emily@example.com' },
+    { name: 'Michael Brown', age: 37, status: 'Active', email: 'michael@example.com' },
+  ]
+
+  return (
+    <Table 
+      columns={columns} 
+      data={data} 
+      size="sm"
+    />
+  )
+}
+`
+```
+
+#### Paginated Table
+```typescript
+// In /docs/components/table/Code/paginatedTable.ts
+export const paginatedTable = `import { useState } from 'react'
+import { Table } from '@/app/src'
+
+export const PaginatedTable = () => {
+  const [page, setPage] = useState(0)
+  const pageSize = 3
+
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const allData = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+    { name: 'Sarah Wilson', age: 29, status: 'Inactive' },
+    { name: 'David Taylor', age: 41, status: 'Active' },
+    { name: 'Jennifer Garcia', age: 35, status: 'Pending' },
+  ]
+
+  const totalPages = Math.ceil(allData.length / pageSize)
+  const data = allData.slice(page * pageSize, (page + 1) * pageSize)
+
+  return (
+    <div>
+      <Table 
+        columns={columns} 
+        data={data} 
+      />
+      <div className="flex justify-between items-center mt-4">
+        <button 
+          onClick={() => setPage(prev => Math.max(0, prev - 1))}
+          disabled={page === 0}
+          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span>Page {page + 1} of {totalPages}</span>
+        <button 
+          onClick={() => setPage(prev => Math.min(totalPages - 1, prev + 1))}
+          disabled={page === totalPages - 1}
+          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  )
+}
+`
+```
+
+#### Sortable Table
+```typescript
+// In /docs/components/table/Code/sortableTable.ts
+export const sortableTable = `import { useState } from 'react'
+import { Table } from '@/app/src'
+
+export const SortableTable = () => {
+  const [sortField, setSortField] = useState('')
+  const [sortDirection, setSortDirection] = useState('asc')
+
+  const columns = [
+    { 
+      header: 'Name', 
+      accessorKey: 'name',
+      sortable: true,
+    },
+    { 
+      header: 'Age', 
+      accessorKey: 'age',
+      sortable: true,
+    },
+    { 
+      header: 'Status', 
+      accessorKey: 'status',
+      sortable: true,
+    },
+  ]
+
+  const unsortedData = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+  ]
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortField(field)
+      setSortDirection('asc')
+    }
+  }
+
+  const data = [...unsortedData].sort((a, b) => {
+    if (!sortField) return 0
+    
+    if (sortDirection === 'asc') {
+      return a[sortField] > b[sortField] ? 1 : -1
+    } else {
+      return a[sortField] < b[sortField] ? 1 : -1
+    }
+  })
+
+  return (
+    <Table 
+      columns={columns} 
+      data={data}
+      sortable={true}
+      sortField={sortField}
+      sortDirection={sortDirection}
+      onSort={handleSort}
+    />
+  )
+}
+`
+```
+
+#### Selectable Table
+```typescript
+// In /docs/components/table/Code/selectableTable.ts
+export const selectableTable = `import { useState } from 'react'
+import { Table } from '@/app/src'
+
+export const SelectableTable = () => {
+  const [selectedRows, setSelectedRows] = useState([])
+
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { id: 1, name: 'John Doe', age: 28, status: 'Active' },
+    { id: 2, name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { id: 3, name: 'Robert Johnson', age: 45, status: 'Active' },
+    { id: 4, name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  const handleRowSelect = (rowId) => {
+    setSelectedRows(prev => {
+      if (prev.includes(rowId)) {
+        return prev.filter(id => id !== rowId)
+      } else {
+        return [...prev, rowId]
+      }
+    })
+  }
+
+  const handleSelectAll = () => {
+    if (selectedRows.length === data.length) {
+      setSelectedRows([])
+    } else {
+      setSelectedRows(data.map(row => row.id))
+    }
+  }
+
+  return (
+    <div>
+      <Table 
+        columns={columns} 
+        data={data}
+        selectable={true}
+        selectedRows={selectedRows}
+        onRowSelect={handleRowSelect}
+        onSelectAll={handleSelectAll}
+      />
+      <div className="mt-4">
+        <p>Selected rows: {selectedRows.length ? selectedRows.join(', ') : 'None'}</p>
+      </div>
+    </div>
+  )
+}
+`
+```
+
+### 1.4. Creating the Index.tsx file
+
+```typescript
+// In /docs/components/table/index.tsx
+import { basicTable, stripedTable, borderedTable, hoverableTable, compactTable, paginatedTable, sortableTable, selectableTable } from './Code/Code'
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+export { basicTable, stripedTable, borderedTable, hoverableTable, compactTable, paginatedTable, sortableTable, selectableTable }
+```
+
+### 1.5. Updating the Page.tsx file
+
+```typescript
+// In /docs/components/table/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Table - Aspect UI',
+  description:
+    'The `Table` component displays structured data in rows and columns, with support for features like sorting, pagination, and custom rendering. It offers various visual styles including striped, bordered, and hoverable rows, as well as size options for different density needs. Tables can be enhanced with row selection, custom cell formatting, and responsive behaviors to ensure optimal display across devices.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/table"
+        nextPageLink="/docs/components/tabs"
+        nextPageName="Tabs"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+## 2. Creating Example Files
+
+Now let's create the example files in `/examples/components/table/`:
+
+### 2.1. Basic Table Example
+
+```tsx
+// In /examples/components/table/basic-table.tsx
+'use client'
+import { Table } from '@/app/src'
+
+const BasicTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table columns={columns} data={data} />
+    </div>
+  )
+}
+
+export default BasicTable
+```
+
+### 2.2. Striped Table Example
+
+```tsx
+// In /examples/components/table/striped-table.tsx
+'use client'
+import { Table } from '@/app/src'
+
+const StripedTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+  ]
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data} 
+        striped={true}
+      />
+    </div>
+  )
+}
+
+export default StripedTable
+```
+
+### 2.3. Bordered Table Example
+
+```tsx
+// In /examples/components/table/bordered-table.tsx
+'use client'
+import { Table } from '@/app/src'
+
+const BorderedTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data} 
+        bordered={true}
+      />
+    </div>
+  )
+}
+
+export default BorderedTable
+```
+
+### 2.4. Hoverable Table Example
+
+```tsx
+// In /examples/components/table/hoverable-table.tsx
+'use client'
+import { Table } from '@/app/src'
+
+const HoverableTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data} 
+        hoverable={true}
+      />
+    </div>
+  )
+}
+
+export default HoverableTable
+```
+
+### 2.5. Compact Table Example
+
+```tsx
+// In /examples/components/table/compact-table.tsx
+'use client'
+import { Table } from '@/app/src'
+
+const CompactTable = () => {
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+    { header: 'Email', accessorKey: 'email' },
+  ]
+
+  const data = [
+    { name: 'John Doe', age: 28, status: 'Active', email: 'john@example.com' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive', email: 'jane@example.com' },
+    { name: 'Robert Johnson', age: 45, status: 'Active', email: 'robert@example.com' },
+    { name: 'Emily Davis', age: 22, status: 'Pending', email: 'emily@example.com' },
+    { name: 'Michael Brown', age: 37, status: 'Active', email: 'michael@example.com' },
+  ]
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data} 
+        size="sm"
+      />
+    </div>
+  )
+}
+
+export default CompactTable
+```
+
+### 2.6. Paginated Table Example
+
+```tsx
+// In /examples/components/table/paginated-table.tsx
+'use client'
+import { useState } from 'react'
+import { Table } from '@/app/src'
+
+const PaginatedTable = () => {
+  const [page, setPage] = useState(0)
+  const pageSize = 3
+
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const allData = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+    { name: 'Sarah Wilson', age: 29, status: 'Inactive' },
+    { name: 'David Taylor', age: 41, status: 'Active' },
+    { name: 'Jennifer Garcia', age: 35, status: 'Pending' },
+  ]
+
+  const totalPages = Math.ceil(allData.length / pageSize)
+  const data = allData.slice(page * pageSize, (page + 1) * pageSize)
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data} 
+      />
+      <div className="flex justify-between items-center mt-4">
+        <button 
+          onClick={() => setPage(prev => Math.max(0, prev - 1))}
+          disabled={page === 0}
+          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span>Page {page + 1} of {totalPages}</span>
+        <button 
+          onClick={() => setPage(prev => Math.min(totalPages - 1, prev + 1))}
+          disabled={page === totalPages - 1}
+          className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default PaginatedTable
+```
+
+### 2.7. Sortable Table Example
+
+```tsx
+// In /examples/components/table/sortable-table.tsx
+'use client'
+import { useState } from 'react'
+import { Table } from '@/app/src'
+
+const SortableTable = () => {
+  const [sortField, setSortField] = useState('')
+  const [sortDirection, setSortDirection] = useState('asc')
+
+  const columns = [
+    { 
+      header: 'Name', 
+      accessorKey: 'name',
+      sortable: true,
+    },
+    { 
+      header: 'Age', 
+      accessorKey: 'age',
+      sortable: true,
+    },
+    { 
+      header: 'Status', 
+      accessorKey: 'status',
+      sortable: true,
+    },
+  ]
+
+  const unsortedData = [
+    { name: 'John Doe', age: 28, status: 'Active' },
+    { name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { name: 'Robert Johnson', age: 45, status: 'Active' },
+    { name: 'Emily Davis', age: 22, status: 'Pending' },
+    { name: 'Michael Brown', age: 37, status: 'Active' },
+  ]
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortField(field)
+      setSortDirection('asc')
+    }
+  }
+
+  const data = [...unsortedData].sort((a, b) => {
+    if (!sortField) return 0
+    
+    if (sortDirection === 'asc') {
+      return a[sortField] > b[sortField] ? 1 : -1
+    } else {
+      return a[sortField] < b[sortField] ? 1 : -1
+    }
+  })
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data}
+        sortable={true}
+        sortField={sortField}
+        sortDirection={sortDirection}
+        onSort={handleSort}
+      />
+    </div>
+  )
+}
+
+export default SortableTable
+```
+
+### 2.8. Selectable Table Example
+
+```tsx
+// In /examples/components/table/selectable-table.tsx
+'use client'
+import { useState } from 'react'
+import { Table } from '@/app/src'
+
+const SelectableTable = () => {
+  const [selectedRows, setSelectedRows] = useState([])
+
+  const columns = [
+    { header: 'Name', accessorKey: 'name' },
+    { header: 'Age', accessorKey: 'age' },
+    { header: 'Status', accessorKey: 'status' },
+  ]
+
+  const data = [
+    { id: 1, name: 'John Doe', age: 28, status: 'Active' },
+    { id: 2, name: 'Jane Smith', age: 32, status: 'Inactive' },
+    { id: 3, name: 'Robert Johnson', age: 45, status: 'Active' },
+    { id: 4, name: 'Emily Davis', age: 22, status: 'Pending' },
+  ]
+
+  const handleRowSelect = (rowId) => {
+    setSelectedRows(prev => {
+      if (prev.includes(rowId)) {
+        return prev.filter(id => id !== rowId)
+      } else {
+        return [...prev, rowId]
+      }
+    })
+  }
+
+  const handleSelectAll = () => {
+    if (selectedRows.length === data.length) {
+      setSelectedRows([])
+    } else {
+      setSelectedRows(data.map(row => row.id))
+    }
+  }
+
+  return (
+    <div className="p-6 bg-white rounded-md shadow">
+      <Table 
+        columns={columns} 
+        data={data}
+        selectable={true}
+        selectedRows={selectedRows}
+        onRowSelect={handleRowSelect}
+        onSelectAll={handleSelectAll}
+      />
+      <div className="mt-4">
+        <p>Selected rows: {selectedRows.length ? selectedRows.join(', ') : 'None'}</p>
+      </div>
+    </div>
+  )
+}
+
+export default SelectableTable
+```
+
+I've created a complete documentation structure for the Table component following the pattern used for accordion, alert, and avatar components. The documentation includes:
+
+1. A main Table page with metadata
+2. An Introduction MDX file with examples and descriptions
+3. Code examples for different Table variants
+4. Working examples in the examples directory
+
+The examples showcase various Table features:
+- Basic table display
+- Visual variants (striped, bordered, hoverable)
+- Compact sizing
+- Pagination
+- Sortable columns
+- Row selection
+
+Each example is provided both as a code snippet in the documentation and as a fully functional component in the examples directory.

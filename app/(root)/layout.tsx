@@ -20,8 +20,8 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`bg-primary-50 dark:bg-primary-950 font-sans`} suppressHydrationWarning={true}>
         <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <Navbar />
-          {children}
+            <Navbar />
+            {children}
         </AspectThemeProvider>
       </body>
     </html>

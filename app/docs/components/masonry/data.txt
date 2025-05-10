@@ -1,0 +1,386 @@
+I'll complete the Masonry component documentation and examples. Based on the project structure and the existing Masonry component, I'll create the required files following the pattern used in the accordion, alert, and avatar components.
+
+## 1. First, let's create the Masonry documentation
+
+Let's start by updating the `Introduction.mdx` file for the Masonry component:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import EditPage from '@/components/EditPage'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultMasonry, customColumnsMasonry, customGapMasonry, masonryPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Masonry
+---
+<CodeSnippets styles="mt-4" content={defaultMasonry} lang="tsx" url="examples/components/masonry/default-masonry">
+</CodeSnippets>
+
+## Custom Columns Masonry
+---
+<CodeSnippets styles="mt-4" content={customColumnsMasonry} lang="tsx" url="examples/components/masonry/custom-columns-masonry">
+</CodeSnippets>
+
+## Custom Gap Masonry
+---
+<CodeSnippets styles="mt-4" content={customGapMasonry} lang="tsx" url="examples/components/masonry/custom-gap-masonry">
+</CodeSnippets>
+
+## Masonry Props
+---
+<ComponentTable data={masonryPropsData} />
+```
+
+## 2. Let's create the Code.tsx file for the Masonry component
+
+Now, let's create the `Code.tsx` file in the `/docs/components/masonry/Code/` directory:
+
+```tsx
+// In /docs/components/masonry/Code/Code.tsx
+import React from 'react'
+
+// Default Masonry example code
+export const defaultMasonry = `import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const DefaultMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 12 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={\`\${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center\`}
+          style={{ height: \`\${item.height}px\` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default DefaultMasonry`
+
+// Custom Columns Masonry example code
+export const customColumnsMasonry = `import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const CustomColumnsMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 15 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry columnCount={{ sm: 1, md: 2, lg: 3, xl: 5 }}>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={\`\${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center\`}
+          style={{ height: \`\${item.height}px\` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default CustomColumnsMasonry`
+
+// Custom Gap Masonry example code
+export const customGapMasonry = `import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const CustomGapMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 10 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry gap={8}>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={\`\${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center\`}
+          style={{ height: \`\${item.height}px\` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default CustomGapMasonry`
+
+// Component props data for documentation
+export const masonryPropsData = [
+  {
+    name: 'children',
+    type: 'ReactNode[]',
+    default: 'undefined',
+    description: 'Array of React elements to be displayed in the masonry layout.',
+    required: true,
+  },
+  {
+    name: 'columnCount',
+    type: '{ sm: number; md: number; lg: number; xl: number }',
+    default: '{ sm: 1, md: 2, lg: 3, xl: 4 }',
+    description: 'Number of columns to display at different breakpoints.',
+    required: false,
+  },
+  {
+    name: 'gap',
+    type: 'number',
+    default: '4',
+    description: 'Gap size between grid items in rem units.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS class names to apply to the masonry container.',
+    required: false,
+  },
+]
+
+// Export the example components for direct usage
+export const DefaultMasonry = () => {
+  const items = Array.from({ length: 12 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100,
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const CustomColumnsMasonry = () => {
+  const items = Array.from({ length: 15 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100,
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const CustomGapMasonry = () => {
+  const items = Array.from({ length: 10 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100,
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+## 3. Let's create the example components
+
+Now, let's create the example components for the Masonry in the examples directory:
+
+### default-masonry.tsx
+```tsx
+// In /examples/components/masonry/default-masonry.tsx
+import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const DefaultMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 12 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default DefaultMasonry
+```
+
+### custom-columns-masonry.tsx
+```tsx
+// In /examples/components/masonry/custom-columns-masonry.tsx
+import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const CustomColumnsMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 15 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry columnCount={{ sm: 1, md: 2, lg: 3, xl: 5 }}>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default CustomColumnsMasonry
+```
+
+### custom-gap-masonry.tsx
+```tsx
+// In /examples/components/masonry/custom-gap-masonry.tsx
+import React from 'react'
+import { Masonry } from 'aspect-ui'
+
+const CustomGapMasonry = () => {
+  // Sample items with varying heights
+  const items = Array.from({ length: 10 }).map((_, index) => ({
+    id: index,
+    height: Math.floor(Math.random() * 200) + 100, // Random heights between 100px and 300px
+    color: ['bg-blue-100', 'bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-purple-100', 'bg-pink-100'][
+      index % 6
+    ],
+  }))
+
+  return (
+    <Masonry gap={8}>
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className={`${item.color} p-4 rounded-lg shadow-sm flex items-center justify-center`}
+          style={{ height: `${item.height}px` }}
+        >
+          <span className="text-lg font-medium">Item {item.id + 1}</span>
+        </div>
+      ))}
+    </Masonry>
+  )
+}
+
+export default CustomGapMasonry
+```
+
+## 4. Update the page.tsx file for the Masonry component
+
+Finally, let's update the `page.tsx` file for the Masonry component:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Masonry - Aspect UI',
+  description:
+    'The `Masonry` component arranges items in a responsive grid layout that optimizes vertical space, similar to Pinterest. It adapts to varying item heights for visually appealing layouts.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/masonry"
+        nextPageLink="/docs/components/modal"
+        nextPageName="Modal"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+This completes the documentation and examples for the Masonry component, following the structure of other components like accordion, alert, and avatar. The component is well documented with examples of:
+
+1. Default Masonry layout
+2. Custom column count Masonry
+3. Custom gap Masonry
+
+Each example demonstrates a different aspect of the Masonry component's functionality, with code snippets that can be copied and used directly.

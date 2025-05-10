@@ -1,0 +1,612 @@
+I'll help you create the documentation and examples for the Pagination component following the structure used in accordion, alert, and avatar components. Let me create these files for you.
+
+## 1. First, let's create the Pagination documentation file (index.mdx)
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultPagination, sizePagination, variantPagination, customPagination, paginationPropsData, paginationItemPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Pagination
+---
+<CodeSnippets styles="mt-4" content={defaultPagination} lang="tsx" url="examples/components/pagination/default-pagination" >
+</CodeSnippets>
+
+## Pagination Sizes
+---
+<CodeSnippets styles="mt-4" content={sizePagination} lang="tsx" url="examples/components/pagination/size-pagination" >
+</CodeSnippets>
+
+## Pagination Variants
+---
+<CodeSnippets styles="mt-4" content={variantPagination} lang="tsx" url="examples/components/pagination/variant-pagination" >
+</CodeSnippets>
+
+## Custom Pagination
+---
+<CodeSnippets styles="mt-4" content={customPagination} lang="tsx" url="examples/components/pagination/custom-pagination" >
+</CodeSnippets>
+
+## Pagination Props
+---
+<ComponentTable data={paginationPropsData} />
+
+## PaginationItem Props
+---
+<ComponentTable data={paginationItemPropsData} />
+```
+
+## 2. Now let's create the Code.tsx file for the Pagination component
+
+```tsx
+// In /docs/components/pagination/Code/Code.tsx
+import React from 'react'
+
+// Default Pagination example code
+export const defaultPagination = `import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const DefaultPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  )
+}
+
+export default DefaultPagination`
+
+// Pagination Sizes example code
+export const sizePagination = `import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const SizePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Small</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="sm"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Medium (Default)</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="md"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Large</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="lg"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default SizePagination`
+
+// Pagination Variants example code
+export const variantPagination = `import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const VariantPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Default</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="default"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Filled</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="filled"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Outline</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="outline"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default VariantPagination`
+
+// Custom Pagination example code
+export const customPagination = `import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+
+const CustomPagination = () => {
+  const [currentPage, setCurrentPage] = useState(5)
+  const totalPages = 20
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Custom Controls</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          className="justify-center"
+          prevButton={
+            <button className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Previous
+            </button>
+          }
+          nextButton={
+            <button className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Next
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </button>
+          }
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Jump Controls</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          showFirstButton
+          showLastButton
+          firstButton={
+            <button className="flex items-center justify-center w-9 h-9 text-sm text-gray-500 border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronsLeft className="w-4 h-4" />
+            </button>
+          }
+          lastButton={
+            <button className="flex items-center justify-center w-9 h-9 text-sm text-gray-500 border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronsRight className="w-4 h-4" />
+            </button>
+          }
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Simplified with Total</h3>
+        <div className="flex items-center justify-between">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            siblingCount={1}
+            boundaryCount={0}
+          />
+          <div className="text-sm text-gray-500">
+            Page {currentPage} of {totalPages}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CustomPagination`
+
+// Component props data for documentation
+export const paginationPropsData = [
+  {
+    name: 'currentPage',
+    type: 'number',
+    default: '1',
+    description: 'The current active page.',
+    required: true,
+  },
+  {
+    name: 'totalPages',
+    type: 'number',
+    default: '1',
+    description: 'The total number of pages.',
+    required: true,
+  },
+  {
+    name: 'onPageChange',
+    type: '(page: number) => void',
+    default: 'undefined',
+    description: 'Callback fired when the page is changed.',
+    required: true,
+  },
+  {
+    name: 'size',
+    type: '"sm" | "md" | "lg"',
+    default: '"md"',
+    description: 'The size of the pagination component.',
+    required: false,
+  },
+  {
+    name: 'variant',
+    type: '"default" | "outline" | "filled"',
+    default: '"default"',
+    description: 'The visual style of the pagination items.',
+    required: false,
+  },
+  {
+    name: 'siblingCount',
+    type: 'number',
+    default: '1',
+    description: 'Number of siblings displayed on each side of current page.',
+    required: false,
+  },
+  {
+    name: 'boundaryCount',
+    type: 'number',
+    default: '1',
+    description: 'Number of pages displayed at the start and end of pagination.',
+    required: false,
+  },
+  {
+    name: 'showPrevButton',
+    type: 'boolean',
+    default: 'true',
+    description: 'Whether to show the previous page button.',
+    required: false,
+  },
+  {
+    name: 'showNextButton',
+    type: 'boolean',
+    default: 'true',
+    description: 'Whether to show the next page button.',
+    required: false,
+  },
+  {
+    name: 'showFirstButton',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to show the first page button.',
+    required: false,
+  },
+  {
+    name: 'showLastButton',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to show the last page button.',
+    required: false,
+  },
+  {
+    name: 'prevButton',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Custom previous page button element.',
+    required: false,
+  },
+  {
+    name: 'nextButton',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Custom next page button element.',
+    required: false,
+  },
+  {
+    name: 'firstButton',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Custom first page button element.',
+    required: false,
+  },
+  {
+    name: 'lastButton',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Custom last page button element.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional CSS class for the pagination container.',
+    required: false,
+  },
+]
+
+export const paginationItemPropsData = [
+  {
+    name: 'page',
+    type: 'number | string',
+    default: 'undefined',
+    description: 'The page number or ellipsis string.',
+    required: true,
+  },
+  {
+    name: 'selected',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the item is selected/active.',
+    required: false,
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the item is disabled.',
+    required: false,
+  },
+  {
+    name: 'onClick',
+    type: '() => void',
+    default: 'undefined',
+    description: 'Callback fired when the item is clicked.',
+    required: false,
+  },
+  {
+    name: 'size',
+    type: '"sm" | "md" | "lg"',
+    default: '"md"',
+    description: 'The size of the pagination item.',
+    required: false,
+  },
+  {
+    name: 'variant',
+    type: '"default" | "outline" | "filled"',
+    default: '"default"',
+    description: 'The visual style of the pagination item.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional CSS class for the pagination item.',
+    required: false,
+  },
+]
+```
+
+## 3. Let's create the example components for Pagination
+
+### default-pagination.tsx
+```tsx
+// In /examples/components/pagination/default-pagination.tsx
+import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const DefaultPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  )
+}
+
+export default DefaultPagination
+```
+
+### size-pagination.tsx
+```tsx
+// In /examples/components/pagination/size-pagination.tsx
+import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const SizePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Small</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="sm"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Medium (Default)</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="md"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Large</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          size="lg"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default SizePagination
+```
+
+### variant-pagination.tsx
+```tsx
+// In /examples/components/pagination/variant-pagination.tsx
+import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+
+const VariantPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Default</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="default"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Filled</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="filled"
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Outline</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          variant="outline"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default VariantPagination
+```
+
+### custom-pagination.tsx
+```tsx
+// In /examples/components/pagination/custom-pagination.tsx
+import React, { useState } from 'react'
+import { Pagination } from 'aspect-ui'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+
+const CustomPagination = () => {
+  const [currentPage, setCurrentPage] = useState(5)
+  const totalPages = 20
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-lg font-medium mb-2">Custom Controls</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          className="justify-center"
+          prevButton={
+            <button className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Previous
+            </button>
+          }
+          nextButton={
+            <button className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Next
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </button>
+          }
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Jump Controls</h3>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          showFirstButton
+          showLastButton
+          firstButton={
+            <button className="flex items-center justify-center w-9 h-9 text-sm text-gray-500 border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronsLeft className="w-4 h-4" />
+            </button>
+          }
+          lastButton={
+            <button className="flex items-center justify-center w-9 h-9 text-sm text-gray-500 border border-gray-300 rounded-md hover:bg-gray-50">
+              <ChevronsRight className="w-4 h-4" />
+            </button>
+          }
+        />
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-medium mb-2">Simplified with Total</h3>
+        <div className="flex items-center justify-between">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            siblingCount={1}
+            boundaryCount={0}
+          />
+          <div className="text-sm text-gray-500">
+            Page {currentPage} of {totalPages}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CustomPagination
+```
+
+I've already noticed that the `page.tsx` file for the Pagination component is set up correctly with appropriate metadata and component structure. It includes:
+
+- The title "Pagination - Aspect UI"
+- A description of the Pagination component
+- References to the Introduction component
+- The EditPage component for navigation
+
+This completes the documentation and examples for the Pagination component, following the structure used in other components like accordion, alert, and avatar. The documentation includes examples of:
+
+1. Default Pagination - A simple pagination component
+2. Pagination Sizes - Different size variations (small, medium, large)
+3. Pagination Variants - Different visual styles (default, filled, outline)
+4. Custom Pagination - Examples of customizing controls and layouts
+
+Each example demonstrates different aspects of the Pagination component's functionality, with code snippets that can be copied and used directly in your project.

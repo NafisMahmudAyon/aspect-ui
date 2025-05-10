@@ -1,0 +1,470 @@
+I'll create or complete the documentation for the Slider component by following the same structure as the Accordion component documentation. Let me start by analyzing what needs to be done.
+
+Looking at your request, I'll need to:
+
+1. Create or complete the `app/docs/components/slider/page.tsx` file
+2. Create an `Introduction.mdx` file for the Slider component
+3. Create a `Code.tsx` file with example code snippets
+4. Create example components in the `app/examples/components/slider/` directory
+
+Let's get started:
+
+## 1. Create/Complete the Slider Documentation
+
+Based on the project structure, let's create these files:
+
+### For the Slider Page
+
+```tsx
+// File: app/docs/components/slider/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Slider - Aspect UI',
+  description:
+    'The `Slider` component allows users to select a value or range from a defined scale. It supports custom steps, marks, tooltips, vertical orientation, and is ideal for filters, settings, and interactive forms.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/slider"
+        nextPageLink="/docs/components/spinner"
+        nextPageName="Spinner"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+### For the Introduction.mdx file
+
+```mdx
+// File: app/docs/components/slider/Introduction.mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultSlider, rangeSlider, steppedSlider, verticalSlider, labeledSlider, sliderPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Slider
+---
+<CodeSnippets styles="mt-4" content={defaultSlider} lang="javascript" url="examples/components/slider/default-slider">
+</CodeSnippets>
+
+## Range Slider
+---
+<CodeSnippets styles="mt-4" content={rangeSlider} lang="javascript" url="examples/components/slider/range-slider">
+</CodeSnippets>
+
+## Stepped Slider
+---
+<CodeSnippets styles="mt-4" content={steppedSlider} lang="javascript" url="examples/components/slider/stepped-slider">
+</CodeSnippets>
+
+## Vertical Slider
+---
+<CodeSnippets styles="mt-4" content={verticalSlider} lang="javascript" url="examples/components/slider/vertical-slider">
+</CodeSnippets>
+
+## Labeled Slider
+---
+<CodeSnippets styles="mt-4" content={labeledSlider} lang="javascript" url="examples/components/slider/labeled-slider">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Slider Props
+<ComponentTable data={sliderPropsData} />
+```
+
+### For the Code.tsx file
+
+```tsx
+// File: app/docs/components/slider/Code/Code.tsx
+export const defaultSlider = `import { Slider } from "@aspect-ui/react";
+import { useState } from "react";
+
+export default function DefaultSlider() {
+  const [value, setValue] = useState(50);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}`;
+
+export const rangeSlider = `import { Slider } from "@aspect-ui/react";
+import { useState } from "react";
+
+export default function RangeSlider() {
+  const [range, setRange] = useState([20, 80]);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={range}
+        onChange={(newValue) => setRange(newValue)}
+        min={0}
+        max={100}
+        range
+      />
+      <p className="mt-2 text-center">Selected range: {range[0]} - {range[1]}</p>
+    </div>
+  );
+}`;
+
+export const steppedSlider = `import { Slider } from "@aspect-ui/react";
+import { useState } from "react";
+
+export default function SteppedSlider() {
+  const [value, setValue] = useState(25);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+        step={25}
+        marks
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}`;
+
+export const verticalSlider = `import { Slider } from "@aspect-ui/react";
+import { useState } from "react";
+
+export default function VerticalSlider() {
+  const [value, setValue] = useState(50);
+  
+  return (
+    <div className="h-64 mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+        vertical
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}`;
+
+export const labeledSlider = `import { Slider } from "@aspect-ui/react";
+import { useState } from "react";
+
+export default function LabeledSlider() {
+  const [value, setValue] = useState(3);
+  const labels = ["Very Poor", "Poor", "Average", "Good", "Excellent"];
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={4}
+        step={1}
+        marks
+        tooltip
+      />
+      <p className="mt-2 text-center">Rating: {labels[value]}</p>
+    </div>
+  );
+}`;
+
+export const sliderPropsData = [
+  {
+    attribute: "value",
+    type: "number | [number, number]",
+    default: "0",
+    description: "Current value(s) of the slider"
+  },
+  {
+    attribute: "onChange",
+    type: "(value: number | [number, number]) => void",
+    default: "",
+    description: "Callback function that is fired when the value changes"
+  },
+  {
+    attribute: "min",
+    type: "number",
+    default: "0",
+    description: "The minimum value the slider can slide to"
+  },
+  {
+    attribute: "max",
+    type: "number",
+    default: "100",
+    description: "The maximum value the slider can slide to"
+  },
+  {
+    attribute: "step",
+    type: "number",
+    default: "1",
+    description: "The granularity the slider can step through values"
+  },
+  {
+    attribute: "disabled",
+    type: "boolean",
+    default: "false",
+    description: "If true, the slider will be disabled"
+  },
+  {
+    attribute: "range",
+    type: "boolean",
+    default: "false",
+    description: "If true, the slider will be a range selector with two handles"
+  },
+  {
+    attribute: "vertical",
+    type: "boolean",
+    default: "false",
+    description: "If true, the slider will be vertical"
+  },
+  {
+    attribute: "marks",
+    type: "boolean | { [key: number]: string | React.ReactNode }",
+    default: "false",
+    description: "Marks on the slider. The key determines the position, and the value determines the content"
+  },
+  {
+    attribute: "tooltip",
+    type: "boolean",
+    default: "false",
+    description: "If true, tooltips will show when using the slider"
+  },
+  {
+    attribute: "className",
+    type: "string",
+    default: "",
+    description: "Additional CSS class for the root element"
+  },
+  {
+    attribute: "trackClassName",
+    type: "string",
+    default: "",
+    description: "Additional CSS class for the track"
+  },
+  {
+    attribute: "thumbClassName",
+    type: "string",
+    default: "",
+    description: "Additional CSS class for the thumb"
+  }
+];
+```
+
+### Create an Index File
+
+```tsx
+// File: app/docs/components/slider/index.tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+## 2. Create Example Files
+
+Now I'll create the example files for the Slider component:
+
+### Default Slider Example
+
+```tsx
+// File: app/examples/components/slider/default-slider/page.tsx
+import DefaultSlider from './DefaultSlider';
+
+export default function Page() {
+  return <DefaultSlider />;
+}
+```
+
+```tsx
+// File: app/examples/components/slider/default-slider/DefaultSlider.tsx
+import { Slider } from "@/app/src";
+import { useState } from "react";
+
+export default function DefaultSlider() {
+  const [value, setValue] = useState(50);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}
+```
+
+### Range Slider Example
+
+```tsx
+// File: app/examples/components/slider/range-slider/page.tsx
+import RangeSlider from './RangeSlider';
+
+export default function Page() {
+  return <RangeSlider />;
+}
+```
+
+```tsx
+// File: app/examples/components/slider/range-slider/RangeSlider.tsx
+import { Slider } from "@/app/src";
+import { useState } from "react";
+
+export default function RangeSlider() {
+  const [range, setRange] = useState([20, 80]);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={range}
+        onChange={(newValue) => setRange(newValue)}
+        min={0}
+        max={100}
+        range
+      />
+      <p className="mt-2 text-center">Selected range: {range[0]} - {range[1]}</p>
+    </div>
+  );
+}
+```
+
+### Stepped Slider Example
+
+```tsx
+// File: app/examples/components/slider/stepped-slider/page.tsx
+import SteppedSlider from './SteppedSlider';
+
+export default function Page() {
+  return <SteppedSlider />;
+}
+```
+
+```tsx
+// File: app/examples/components/slider/stepped-slider/SteppedSlider.tsx
+import { Slider } from "@/app/src";
+import { useState } from "react";
+
+export default function SteppedSlider() {
+  const [value, setValue] = useState(25);
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+        step={25}
+        marks
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}
+```
+
+### Vertical Slider Example
+
+```tsx
+// File: app/examples/components/slider/vertical-slider/page.tsx
+import VerticalSlider from './VerticalSlider';
+
+export default function Page() {
+  return <VerticalSlider />;
+}
+```
+
+```tsx
+// File: app/examples/components/slider/vertical-slider/VerticalSlider.tsx
+import { Slider } from "@/app/src";
+import { useState } from "react";
+
+export default function VerticalSlider() {
+  const [value, setValue] = useState(50);
+  
+  return (
+    <div className="h-64 mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={100}
+        vertical
+      />
+      <p className="mt-2 text-center">Current value: {value}</p>
+    </div>
+  );
+}
+```
+
+### Labeled Slider Example
+
+```tsx
+// File: app/examples/components/slider/labeled-slider/page.tsx
+import LabeledSlider from './LabeledSlider';
+
+export default function Page() {
+  return <LabeledSlider />;
+}
+```
+
+```tsx
+// File: app/examples/components/slider/labeled-slider/LabeledSlider.tsx
+import { Slider } from "@/app/src";
+import { useState } from "react";
+
+export default function LabeledSlider() {
+  const [value, setValue] = useState(3);
+  const labels = ["Very Poor", "Poor", "Average", "Good", "Excellent"];
+  
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <Slider
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        min={0}
+        max={4}
+        step={1}
+        marks
+        tooltip
+      />
+      <p className="mt-2 text-center">Rating: {labels[value]}</p>
+    </div>
+  );
+}
+```
+
+With these files, I've completed the documentation for the Slider component following the same structure as the Accordion component. The documentation includes:
+
+1. A main page with metadata
+2. An Introduction.mdx file with examples and API reference
+3. A Code.tsx file with example code snippets
+4. Example components in the examples directory
+
+These resources should provide comprehensive documentation for the Slider component, showcasing its various features and usage patterns.

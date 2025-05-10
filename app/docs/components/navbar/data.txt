@@ -1,0 +1,417 @@
+I'll complete the Navbar component documentation and examples for your project. Based on your request, I'll create the necessary files following the pattern used in the accordion, alert, and avatar components.
+
+First, I'll need to create:
+1. The `index.mdx` (Introduction file) for the Navbar component
+2. The `Code.tsx` file with examples and props data
+3. Example components in the examples directory
+
+Let's start with the documentation:
+
+## 1. First, let's create the Navbar documentation file (Introduction.mdx)
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {defaultNavbar, responsiveNavbar, customNavbar, navbarPropsData} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Navbar
+---
+<CodeSnippets styles="mt-4" content={defaultNavbar} lang="javascript" url="examples/components/navbar/default-navbar" >
+</CodeSnippets>
+
+## Responsive Navbar
+---
+<CodeSnippets styles="mt-4" content={responsiveNavbar} lang="javascript" url="examples/components/navbar/responsive-navbar" >
+</CodeSnippets>
+
+## Custom Navbar
+---
+<CodeSnippets styles="mt-4" content={customNavbar} lang="javascript" url="examples/components/navbar/custom-navbar" >
+</CodeSnippets>
+
+## Navbar Props
+---
+<ComponentTable data={navbarPropsData} />
+```
+
+## 2. Now let's create the Code.tsx file for the Navbar component
+
+```tsx
+// In /docs/components/navbar/Code/Code.tsx
+import React from 'react'
+
+// Default Navbar example code
+export const defaultNavbar = `import React from 'react'
+import { Navbar, Button } from 'aspect-ui'
+
+const DefaultNavbar = () => {
+  return (
+    <Navbar>
+      <Navbar.Brand href="/">
+        <img
+          src="/logo.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Home</Navbar.Link>
+        <Navbar.Link href="/features">Features</Navbar.Link>
+        <Navbar.Link href="/pricing">Pricing</Navbar.Link>
+        <Navbar.Link href="/about">About</Navbar.Link>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="outline" size="sm">Login</Button>
+        <Button variant="primary" size="sm">Sign Up</Button>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default DefaultNavbar`
+
+// Responsive Navbar example code
+export const responsiveNavbar = `import React, { useState } from 'react'
+import { Navbar, Button } from 'aspect-ui'
+
+const ResponsiveNavbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Navbar isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)}>
+      <Navbar.Brand href="/">
+        <img
+          src="/logo.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Home</Navbar.Link>
+        <Navbar.Link href="/features">Features</Navbar.Link>
+        <Navbar.Link href="/pricing">Pricing</Navbar.Link>
+        <Navbar.Link href="/about">About</Navbar.Link>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="outline" size="sm">Login</Button>
+        <Button variant="primary" size="sm">Sign Up</Button>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default ResponsiveNavbar`
+
+// Custom Navbar example code
+export const customNavbar = `import React, { useState } from 'react'
+import { Navbar, Button, Avatar, Dropdown } from 'aspect-ui'
+
+const CustomNavbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Navbar 
+      isOpen={isOpen} 
+      onToggle={() => setIsOpen(!isOpen)}
+      variant="dark"
+      sticky
+      className="bg-gradient-to-r from-blue-800 to-indigo-900"
+    >
+      <Navbar.Brand href="/">
+        <img
+          src="/logo-light.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold text-white">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Dashboard</Navbar.Link>
+        <Navbar.Link href="/features">Analytics</Navbar.Link>
+        <Navbar.Link href="/pricing">Reports</Navbar.Link>
+        
+        <Dropdown>
+          <Dropdown.Trigger>
+            <Navbar.Link as="button">
+              Products <span className="ml-1">▼</span>
+            </Navbar.Link>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item>Product 1</Dropdown.Item>
+            <Dropdown.Item>Product 2</Dropdown.Item>
+            <Dropdown.Item>Product 3</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="ghost" size="sm" className="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+          </svg>
+        </Button>
+        <Button variant="ghost" size="sm" className="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+          </svg>
+        </Button>
+        <Dropdown>
+          <Dropdown.Trigger>
+            <button className="flex items-center">
+              <Avatar
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="User"
+                size="sm"
+              />
+            </button>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item>Profile</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default CustomNavbar`
+
+// Component props data for documentation
+export const navbarPropsData = [
+  {
+    name: 'variant',
+    type: '"light" | "dark"',
+    default: '"light"',
+    description: 'Sets the color scheme of the navbar.',
+    required: false,
+  },
+  {
+    name: 'sticky',
+    type: 'boolean',
+    default: 'false',
+    description: 'If true, the navbar will stick to the top of the viewport when scrolling.',
+    required: false,
+  },
+  {
+    name: 'fixed',
+    type: 'boolean',
+    default: 'false',
+    description: 'If true, the navbar will be fixed to the top of the page.',
+    required: false,
+  },
+  {
+    name: 'isOpen',
+    type: 'boolean',
+    default: 'false',
+    description: 'Controls the mobile menu state (open/closed).',
+    required: false,
+  },
+  {
+    name: 'onToggle',
+    type: '() => void',
+    default: 'undefined',
+    description: 'Function called when the mobile menu toggle is clicked.',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS class names to apply to the navbar.',
+    required: false,
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    description: 'Content to render inside the navbar (typically Brand, Links, and Actions components).',
+    required: false,
+  },
+]
+```
+
+## 3. Let's create the example components for Navbar
+
+### default-navbar.tsx
+```tsx
+// In /examples/components/navbar/default-navbar.tsx
+import React from 'react'
+import { Navbar, Button } from 'aspect-ui'
+
+const DefaultNavbar = () => {
+  return (
+    <Navbar>
+      <Navbar.Brand href="/">
+        <img
+          src="/logo.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Home</Navbar.Link>
+        <Navbar.Link href="/features">Features</Navbar.Link>
+        <Navbar.Link href="/pricing">Pricing</Navbar.Link>
+        <Navbar.Link href="/about">About</Navbar.Link>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="outline" size="sm">Login</Button>
+        <Button variant="primary" size="sm">Sign Up</Button>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default DefaultNavbar
+```
+
+### responsive-navbar.tsx
+```tsx
+// In /examples/components/navbar/responsive-navbar.tsx
+import React, { useState } from 'react'
+import { Navbar, Button } from 'aspect-ui'
+
+const ResponsiveNavbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Navbar isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)}>
+      <Navbar.Brand href="/">
+        <img
+          src="/logo.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Home</Navbar.Link>
+        <Navbar.Link href="/features">Features</Navbar.Link>
+        <Navbar.Link href="/pricing">Pricing</Navbar.Link>
+        <Navbar.Link href="/about">About</Navbar.Link>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="outline" size="sm">Login</Button>
+        <Button variant="primary" size="sm">Sign Up</Button>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default ResponsiveNavbar
+```
+
+### custom-navbar.tsx
+```tsx
+// In /examples/components/navbar/custom-navbar.tsx
+import React, { useState } from 'react'
+import { Navbar, Button, Avatar, Dropdown } from 'aspect-ui'
+
+const CustomNavbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Navbar 
+      isOpen={isOpen} 
+      onToggle={() => setIsOpen(!isOpen)}
+      variant="dark"
+      sticky
+      className="bg-gradient-to-r from-blue-800 to-indigo-900"
+    >
+      <Navbar.Brand href="/">
+        <img
+          src="/logo-light.svg"
+          alt="Aspect UI Logo"
+          className="h-8 w-auto"
+        />
+        <span className="ml-2 text-xl font-semibold text-white">Aspect UI</span>
+      </Navbar.Brand>
+      
+      <Navbar.Links>
+        <Navbar.Link href="/home" active>Dashboard</Navbar.Link>
+        <Navbar.Link href="/features">Analytics</Navbar.Link>
+        <Navbar.Link href="/pricing">Reports</Navbar.Link>
+        
+        <Dropdown>
+          <Dropdown.Trigger>
+            <Navbar.Link as="button">
+              Products <span className="ml-1">▼</span>
+            </Navbar.Link>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item>Product 1</Dropdown.Item>
+            <Dropdown.Item>Product 2</Dropdown.Item>
+            <Dropdown.Item>Product 3</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Navbar.Links>
+      
+      <Navbar.Actions>
+        <Button variant="ghost" size="sm" className="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+          </svg>
+        </Button>
+        <Button variant="ghost" size="sm" className="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+          </svg>
+        </Button>
+        <Dropdown>
+          <Dropdown.Trigger>
+            <button className="flex items-center">
+              <Avatar
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="User"
+                size="sm"
+              />
+            </button>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item>Profile</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Navbar.Actions>
+    </Navbar>
+  )
+}
+
+export default CustomNavbar
+```
+
+## 4. The page.tsx file for the Navbar component is already set up correctly
+
+The `page.tsx` file in the navbar component is already set up with appropriate metadata and component structure. It has:
+
+- The correct title "Navbar - Aspect UI"
+- A description of the Navbar component
+- References to the Introduction component
+- The EditPage component for navigation
+
+This completes the documentation and examples for the Navbar component, following the structure of other components like accordion, alert, and avatar. The documentation includes examples of:
+
+1. Default Navbar - A simple navigation bar with brand, links, and action buttons
+2. Responsive Navbar - Navigation bar with mobile menu functionality
+3. Custom Navbar - Styled navbar with dropdowns, avatar, and custom colors
+
+Each example demonstrates different aspects of the Navbar component's functionality, with code snippets that can be copied and used directly.

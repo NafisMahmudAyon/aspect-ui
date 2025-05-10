@@ -177,7 +177,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   : false
               }
                 className={cn('rounded-md px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 disabled:opacity-50 hover:text-primary-900 dark:hover:text-primary-100', currentPage === item
-                  && 'bg-blue-500 text-white', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
+                  && 'bg-primary-500 dark:bg-primary-600 dark:text-primary-50 text-primary-200', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
             >
               {item === 'first' && firstButton}
               {item === 'previous' && previousButton}

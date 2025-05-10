@@ -1,0 +1,416 @@
+I'll create the documentation for the ToggleButton component and set up the necessary example files. Based on the provided code, I'll structure it similar to the accordion documentation.
+
+## Step 1: Create Introduction.mdx for ToggleButton
+
+Let's first create the Introduction.mdx file for the toggle button documentation:
+
+```markdown
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultToggleButton,
+  singleSelectionToggleButton,
+  multipleSelectionToggleButton,
+  outlineToggleButton,
+  disabledToggleButton,
+  toggleButtonPropsData,
+  toggleButtonGroupPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Toggle Button
+---
+<CodeSnippets styles="mt-4" content={defaultToggleButton} lang="javascript" url="examples/components/toggle-button/default-toggle-button">
+</CodeSnippets>
+
+## Single Selection Group
+---
+<CodeSnippets styles="mt-4" content={singleSelectionToggleButton} lang="javascript" url="examples/components/toggle-button/single-selection">
+</CodeSnippets>
+
+## Multiple Selection Group
+---
+<CodeSnippets styles="mt-4" content={multipleSelectionToggleButton} lang="javascript" url="examples/components/toggle-button/multiple-selection">
+</CodeSnippets>
+
+## Outline Toggle Button
+---
+<CodeSnippets styles="mt-4" content={outlineToggleButton} lang="javascript" url="examples/components/toggle-button/outline-toggle-button">
+</CodeSnippets>
+
+## Disabled Toggle Button
+---
+<CodeSnippets styles="mt-4" content={disabledToggleButton} lang="javascript" url="examples/components/toggle-button/disabled-toggle-button">
+</CodeSnippets>
+
+## Toggle Button Props
+---
+<ComponentTable data={toggleButtonPropsData} />
+
+## Toggle Button Group Props
+---
+<ComponentTable data={toggleButtonGroupPropsData} />
+```
+
+## Step 2: Create Code/Code.tsx file
+
+Now, let's create the Code.tsx file to provide code examples:
+
+```tsx
+// For defaultToggleButton
+export const defaultToggleButton = {
+  'ToggleButtonComponent.tsx': `import { Toggle } from "@/components/aspect-ui/toggle-button";
+
+export default function DefaultToggleButton() {
+  const handleClick = (clicked: boolean) => {
+    console.log('Toggle state:', clicked);
+  };
+  
+  return (
+    <Toggle onClick={handleClick}>Toggle Me</Toggle>
+  );
+}`,
+  'ToggleButtonComponent.jsx': `import { Toggle } from "@/components/aspect-ui/toggle-button";
+
+export default function DefaultToggleButton() {
+  const handleClick = (clicked) => {
+    console.log('Toggle state:', clicked);
+  };
+  
+  return (
+    <Toggle onClick={handleClick}>Toggle Me</Toggle>
+  );
+}`
+};
+
+// For singleSelectionToggleButton
+export const singleSelectionToggleButton = {
+  'SingleSelectionComponent.tsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function SingleSelectionToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`,
+  'SingleSelectionComponent.jsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function SingleSelectionToggleButton() {
+  const handleChange = (value) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`
+};
+
+// For multipleSelectionToggleButton
+export const multipleSelectionToggleButton = {
+  'MultipleSelectionComponent.tsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function MultipleSelectionToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected values:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="multiple" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`,
+  'MultipleSelectionComponent.jsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function MultipleSelectionToggleButton() {
+  const handleChange = (value) => {
+    console.log('Selected values:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="multiple" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`
+};
+
+// For outlineToggleButton
+export const outlineToggleButton = {
+  'OutlineToggleButtonComponent.tsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function OutlineToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" outline={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`,
+  'OutlineToggleButtonComponent.jsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function OutlineToggleButton() {
+  const handleChange = (value) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" outline={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`
+};
+
+// For disabledToggleButton
+export const disabledToggleButton = {
+  'DisabledToggleButtonComponent.tsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function DisabledToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" disabled={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`,
+  'DisabledToggleButtonComponent.jsx': `import { ToggleButton, ToggleButtonGroup } from "@/components/aspect-ui/toggle-button";
+
+export default function DisabledToggleButton() {
+  const handleChange = (value) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" disabled={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}`
+};
+
+// Component props data for documentation tables
+export const toggleButtonPropsData = [
+  {
+    name: 'value',
+    type: 'string',
+    default: '-',
+    description: 'Unique identifier for the toggle button',
+    required: true,
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Content to be displayed within the toggle button',
+    required: true,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS classes to apply to the toggle button',
+    required: false,
+  },
+];
+
+export const toggleButtonGroupPropsData = [
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Toggle button components to be grouped',
+    required: true,
+  },
+  {
+    name: 'type',
+    type: '"single" | "multiple"',
+    default: '-',
+    description: 'Determines selection behavior: single or multiple selection',
+    required: true,
+  },
+  {
+    name: 'defaultValue',
+    type: 'string | string[]',
+    default: 'type === "single" ? "" : []',
+    description: 'Initial selected value(s)',
+    required: false,
+  },
+  {
+    name: 'onChange',
+    type: '(value: string | string[]) => void',
+    default: '-',
+    description: 'Callback fired when selection changes',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '""',
+    description: 'Additional CSS classes to apply to the toggle button group',
+    required: false,
+  },
+  {
+    name: 'outline',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to use outline style for the toggle buttons',
+    required: false,
+  },
+  {
+    name: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the toggle buttons group is disabled',
+    required: false,
+  },
+];
+```
+
+## Step 3: Create Example Files
+
+Now, let's create the example files for the toggle button:
+
+1. Default Toggle Button example:
+
+```tsx
+// app/examples/components/toggle-button/default-toggle-button/page.tsx
+import { Toggle } from "@/app/src/components/ToggleButton";
+
+export default function DefaultToggleButton() {
+  const handleClick = (clicked: boolean) => {
+    console.log('Toggle state:', clicked);
+  };
+  
+  return (
+    <Toggle onClick={handleClick}>Toggle Me</Toggle>
+  );
+}
+```
+
+2. Single Selection example:
+
+```tsx
+// app/examples/components/toggle-button/single-selection/page.tsx
+import { ToggleButton, ToggleButtonGroup } from "@/app/src/components/ToggleButton";
+
+export default function SingleSelectionToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+3. Multiple Selection example:
+
+```tsx
+// app/examples/components/toggle-button/multiple-selection/page.tsx
+import { ToggleButton, ToggleButtonGroup } from "@/app/src/components/ToggleButton";
+
+export default function MultipleSelectionToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected values:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="multiple" onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+4. Outline Toggle Button example:
+
+```tsx
+// app/examples/components/toggle-button/outline-toggle-button/page.tsx
+import { ToggleButton, ToggleButtonGroup } from "@/app/src/components/ToggleButton";
+
+export default function OutlineToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" outline={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+5. Disabled Toggle Button example:
+
+```tsx
+// app/examples/components/toggle-button/disabled-toggle-button/page.tsx
+import { ToggleButton, ToggleButtonGroup } from "@/app/src/components/ToggleButton";
+
+export default function DisabledToggleButton() {
+  const handleChange = (value: string | string[]) => {
+    console.log('Selected value:', value);
+  };
+  
+  return (
+    <ToggleButtonGroup type="single" disabled={true} onChange={handleChange}>
+      <ToggleButton value="option1">Option 1</ToggleButton>
+      <ToggleButton value="option2">Option 2</ToggleButton>
+      <ToggleButton value="option3">Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
+}
+```
+
+## Step 4: Create/Update index.mdx file
+
+For the [/docs/components/toggle-button/index.mdx](file:///C:\All%20File\React%20Project\aspect-ui-tsx\app\docs\components\toggle-button\index.mdx) file:
+
+```mdx
+import Introduction from './Introduction.mdx'
+
+<Introduction />
+```
+
+With these files in place, your ToggleButton component documentation should be complete and structured similarly to the accordion documentation. The examples showcase different usage patterns of the ToggleButton component, and the documentation provides comprehensive information about the component's props and functionality.

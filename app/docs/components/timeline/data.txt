@@ -1,0 +1,457 @@
+I'll create the documentation for the Timeline component following the structure of the Accordion component. Let me build this for you step by step.
+
+Looking at the provided context, I can see that the Timeline component is imported from `@/app/src/components/Timeline` and has at least two parts: `Timeline` and `TimelineItem`.
+
+## 1. Let's create the Introduction.mdx file for the Timeline component
+
+First, I'll create a file for `/docs/components/timeline/Introduction.mdx`:
+
+```mdx
+import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultTimeline,
+  customIconTimeline,
+  alternateTimeline,
+  timelinePropsData,
+  timelineItemPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Timeline
+---
+<CodeSnippets styles="mt-4" content={defaultTimeline} lang="javascript" url="examples/components/timeline/default-timeline">
+</CodeSnippets>
+
+## Timeline with Custom Icons
+---
+<CodeSnippets styles="mt-4" content={customIconTimeline} lang="javascript" url="examples/components/timeline/custom-icon-timeline">
+</CodeSnippets>
+
+## Alternate Timeline Layout
+---
+<CodeSnippets styles="mt-4" content={alternateTimeline} lang="javascript" url="examples/components/timeline/alternate-timeline">
+</CodeSnippets>
+
+## API Reference
+---
+
+### Timeline Props
+<ComponentTable data={timelinePropsData} />
+
+### TimelineItem Props
+<ComponentTable data={timelineItemPropsData} />
+```
+
+## 2. Now, let's create the Code.tsx file for the Timeline component
+
+Let's create a `/docs/components/timeline/Code/Code.tsx` file:
+
+```tsx
+import DefaultTimeline from 'examples/components/timeline/default-timeline'
+import CustomIconTimeline from 'examples/components/timeline/custom-icon-timeline'
+import AlternateTimeline from 'examples/components/timeline/alternate-timeline'
+
+// Default Timeline code snippet
+export const defaultTimeline = `import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+
+const DefaultTimeline = () => {
+  return (
+    <Timeline>
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 1: Getting Started</TimelineItem.Title>
+          <TimelineItem.Description>
+            Create an account and set up your profile.
+          </TimelineItem.Description>
+          <TimelineItem.Time>January 1, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 2: Configuration</TimelineItem.Title>
+          <TimelineItem.Description>
+            Configure settings according to your preferences.
+          </TimelineItem.Description>
+          <TimelineItem.Time>February 15, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 3: Implementation</TimelineItem.Title>
+          <TimelineItem.Description>
+            Start implementing the core features.
+          </TimelineItem.Description>
+          <TimelineItem.Time>March 20, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default DefaultTimeline`
+
+// Timeline with custom icons
+export const customIconTimeline = `import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+import { FiUser, FiSettings, FiCheckCircle } from 'react-icons/fi'
+
+const CustomIconTimeline = () => {
+  return (
+    <Timeline>
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiUser className="text-blue-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Account Creation</TimelineItem.Title>
+          <TimelineItem.Description>
+            User account was successfully created.
+          </TimelineItem.Description>
+          <TimelineItem.Time>2 hours ago</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiSettings className="text-purple-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>System Configuration</TimelineItem.Title>
+          <TimelineItem.Description>
+            System settings were updated.
+          </TimelineItem.Description>
+          <TimelineItem.Time>Yesterday</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiCheckCircle className="text-green-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Task Completion</TimelineItem.Title>
+          <TimelineItem.Description>
+            All tasks were completed successfully.
+          </TimelineItem.Description>
+          <TimelineItem.Time>Last week</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default CustomIconTimeline`
+
+// Alternate layout timeline
+export const alternateTimeline = `import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+
+const AlternateTimeline = () => {
+  return (
+    <Timeline layout="alternate">
+      <TimelineItem position="left">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Project Kick-off</TimelineItem.Title>
+          <TimelineItem.Description>
+            Initial planning and team formation.
+          </TimelineItem.Description>
+          <TimelineItem.Time>January 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="right">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Development Phase</TimelineItem.Title>
+          <TimelineItem.Description>
+            Core development of the application.
+          </TimelineItem.Description>
+          <TimelineItem.Time>March 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="left">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Testing Phase</TimelineItem.Title>
+          <TimelineItem.Description>
+            QA testing and bug fixes.
+          </TimelineItem.Description>
+          <TimelineItem.Time>May 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="right">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Launch</TimelineItem.Title>
+          <TimelineItem.Description>
+            Product launch and marketing.
+          </TimelineItem.Description>
+          <TimelineItem.Time>July 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default AlternateTimeline`
+
+// Define props data for Timeline component table
+export const timelinePropsData = [
+  {
+    name: 'layout',
+    type: "'vertical' | 'horizontal' | 'alternate'",
+    default: "'vertical'",
+    description: 'Determines the orientation and layout of the timeline.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional CSS classes for the timeline container.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: 'undefined',
+    description: 'The TimelineItem components to render within the timeline.',
+  },
+]
+
+// Define props data for TimelineItem component table
+export const timelineItemPropsData = [
+  {
+    name: 'position',
+    type: "'left' | 'right'",
+    default: 'undefined',
+    description: 'Position of the item when using alternate layout.',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    description: 'Additional CSS classes for the timeline item.',
+  },
+  {
+    name: 'children',
+    type: 'ReactNode',
+    default: 'undefined',
+    description: 'Content of the timeline item (Point and Content components).',
+  },
+]
+
+export { DefaultTimeline, CustomIconTimeline, AlternateTimeline }
+```
+
+## 3. Let's create the index.ts file for the Timeline component documentation
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+## 4. Let's create the example components in examples/components/timeline/
+
+### 4.1. Create a default-timeline.tsx file
+
+```tsx
+import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+
+const DefaultTimeline = () => {
+  return (
+    <Timeline>
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 1: Getting Started</TimelineItem.Title>
+          <TimelineItem.Description>
+            Create an account and set up your profile.
+          </TimelineItem.Description>
+          <TimelineItem.Time>January 1, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 2: Configuration</TimelineItem.Title>
+          <TimelineItem.Description>
+            Configure settings according to your preferences.
+          </TimelineItem.Description>
+          <TimelineItem.Time>February 15, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Step 3: Implementation</TimelineItem.Title>
+          <TimelineItem.Description>
+            Start implementing the core features.
+          </TimelineItem.Description>
+          <TimelineItem.Time>March 20, 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default DefaultTimeline
+```
+
+### 4.2. Create a custom-icon-timeline.tsx file
+
+```tsx
+import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+import { FiUser, FiSettings, FiCheckCircle } from 'react-icons/fi'
+
+const CustomIconTimeline = () => {
+  return (
+    <Timeline>
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiUser className="text-blue-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Account Creation</TimelineItem.Title>
+          <TimelineItem.Description>
+            User account was successfully created.
+          </TimelineItem.Description>
+          <TimelineItem.Time>2 hours ago</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiSettings className="text-purple-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>System Configuration</TimelineItem.Title>
+          <TimelineItem.Description>
+            System settings were updated.
+          </TimelineItem.Description>
+          <TimelineItem.Time>Yesterday</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem>
+        <TimelineItem.Point icon={<FiCheckCircle className="text-green-500" />} />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Task Completion</TimelineItem.Title>
+          <TimelineItem.Description>
+            All tasks were completed successfully.
+          </TimelineItem.Description>
+          <TimelineItem.Time>Last week</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default CustomIconTimeline
+```
+
+### 4.3. Create an alternate-timeline.tsx file
+
+```tsx
+import { Timeline, TimelineItem } from '@/app/src'
+import React from 'react'
+
+const AlternateTimeline = () => {
+  return (
+    <Timeline layout="alternate">
+      <TimelineItem position="left">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Project Kick-off</TimelineItem.Title>
+          <TimelineItem.Description>
+            Initial planning and team formation.
+          </TimelineItem.Description>
+          <TimelineItem.Time>January 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="right">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Development Phase</TimelineItem.Title>
+          <TimelineItem.Description>
+            Core development of the application.
+          </TimelineItem.Description>
+          <TimelineItem.Time>March 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="left">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Testing Phase</TimelineItem.Title>
+          <TimelineItem.Description>
+            QA testing and bug fixes.
+          </TimelineItem.Description>
+          <TimelineItem.Time>May 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+      
+      <TimelineItem position="right">
+        <TimelineItem.Point />
+        <TimelineItem.Content>
+          <TimelineItem.Title>Launch</TimelineItem.Title>
+          <TimelineItem.Description>
+            Product launch and marketing.
+          </TimelineItem.Description>
+          <TimelineItem.Time>July 2023</TimelineItem.Time>
+        </TimelineItem.Content>
+      </TimelineItem>
+    </Timeline>
+  )
+}
+
+export default AlternateTimeline
+```
+
+## 5. Complete the page.tsx file for the Timeline component
+
+I notice that you already have a basic page.tsx file for the Timeline component. Let's update it to ensure it includes the proper imports and exports:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Timeline - Aspect UI',
+  description:
+    'The `Timeline` component visually represents a sequence of events or steps in chronological order. It supports custom icons, labels, vertical/horizontal layout, and animations.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/timeline"
+        nextPageLink="/docs/components/tooltip"
+        nextPageName="Tooltip"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+These files create a comprehensive documentation for the Timeline component following the structure of the Accordion component. The documentation includes:
+
+1. A default timeline example
+2. A timeline with custom icons
+3. An alternate layout timeline
+4. API reference for both Timeline and TimelineItem components
+
+The examples demonstrate key features of the Timeline component, providing users with a clear understanding of how to use it in different scenarios.
+
+

@@ -207,14 +207,14 @@ export const routes: routerPath[] = [
     deprecate: false,
     folderName: 'Rating'
   },
-  {
-    id: generatedID(),
-    name: 'Select',
-    href: '/docs/components/select',
-    tag: false,
-    deprecate: false,
-    folderName: 'Select'
-  },
+  // {
+  //   id: generatedID(),
+  //   name: 'Select',
+  //   href: '/docs/components/select',
+  //   tag: false,
+  //   deprecate: false,
+  //   folderName: 'Select'
+  // },
   {
     id: generatedID(),
     name: 'Sidebar',

@@ -9,7 +9,7 @@ interface CheckboxProps {
   checked: boolean;
   checkboxClassName?: string;
   // variant?: 'rounded-sm' | 'circle' | 'default'
-  onChange: (checked: boolean) => void
+  onChange?: (checked: boolean) => void
   disabled?: boolean
   className?: string
 }
@@ -17,14 +17,15 @@ interface CheckboxProps {
 export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   checked,
-  // checkboxStyle="",
+  checkboxClassName ="",
   onChange,
   disabled = false,
   // variant = 'default',
-  className = ''
+  className = '',
+  ...rest
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.checked)
+    onChange?.(event.target.checked)
   }
 
   return (
@@ -37,6 +38,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         onChange={handleChange}
         disabled={disabled}
         className=""
+        {...rest}
       />
       <span className=''>{label}</span>
     </label>

@@ -1,0 +1,237 @@
+I'll create the documentation and examples for the Typography component. Let me start by analyzing the Typography component and creating the necessary files.
+
+## 1. Create/Complete the Documentation in `/docs/components/typography/`
+
+First, let's create the Introduction.mdx file:
+
+```mdx
+// File: /docs/components/typography/Introduction.mdx
+
+## Table of Contents
+
+## Typography Component
+---
+
+The Typography component provides consistent text styles across your application, with various predefined variants for headings, body text, display text, and captions.
+
+## Heading Typography
+---
+
+<CodeSnippets styles="mt-4" content={headingTypography} lang="tsx" url="examples/components/typography/heading-typography">
+</CodeSnippets>
+
+## Body Typography
+---
+
+<CodeSnippets styles="mt-4" content={bodyTypography} lang="tsx" url="examples/components/typography/body-typography">
+</CodeSnippets>
+
+## Display Typography
+---
+
+<CodeSnippets styles="mt-4" content={displayTypography} lang="tsx" url="examples/components/typography/display-typography">
+</CodeSnippets>
+
+## Caption Typography
+---
+
+<CodeSnippets styles="mt-4" content={captionTypography} lang="tsx" url="examples/components/typography/caption-typography">
+</CodeSnippets>
+
+## Custom Element Typography
+---
+
+<CodeSnippets styles="mt-4" content={customElementTypography} lang="tsx" url="examples/components/typography/custom-element-typography">
+</CodeSnippets>
+
+## Custom Styled Typography
+---
+
+<CodeSnippets styles="mt-4" content={customStyledTypography} lang="tsx" url="examples/components/typography/custom-styled-typography">
+</CodeSnippets>
+```
+
+Now, let's create the Code.tsx file to export the code snippets:
+
+```tsx
+// File: /docs/components/typography/Code/Code.tsx
+
+import headingTypography from '@/app/examples/components/typography/heading-typography';
+import bodyTypography from '@/app/examples/components/typography/body-typography';
+import displayTypography from '@/app/examples/components/typography/display-typography';
+import captionTypography from '@/app/examples/components/typography/caption-typography';
+import customElementTypography from '@/app/examples/components/typography/custom-element-typography';
+import customStyledTypography from '@/app/examples/components/typography/custom-styled-typography';
+
+export {
+  headingTypography,
+  bodyTypography,
+  displayTypography,
+  captionTypography,
+  customElementTypography,
+  customStyledTypography
+};
+```
+
+Next, update the index.tsx file:
+
+```tsx
+// File: /docs/components/typography/index.tsx
+'use client'
+
+import { headingTypography, bodyTypography, displayTypography, captionTypography, customElementTypography, customStyledTypography } from './Code/Code'
+import Introduction from './Introduction.mdx'
+
+export default function TypographyDoc() {
+  return <Introduction />
+}
+```
+
+Update the page.tsx file:
+
+```tsx
+// File: /docs/components/typography/page.tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'Typography - Aspect UI',
+  description:
+    'The `Typography` component provides predefined styles for headings, body text, display text, and captions. It ensures consistent text rendering and semantic hierarchy throughout your application.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/typography"
+        nextPageLink="/docs/components/accordion"
+        nextPageName="Accordion"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+## 2. Create Examples in `/examples/components/typography/`
+
+Let's create the example files for Typography:
+
+```tsx
+// File: /examples/components/typography/heading-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function HeadingTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="h1">Heading 1</Typography>
+      <Typography variant="h2">Heading 2</Typography>
+      <Typography variant="h3">Heading 3</Typography>
+      <Typography variant="h4">Heading 4</Typography>
+      <Typography variant="h5">Heading 5</Typography>
+      <Typography variant="h6">Heading 6</Typography>
+    </div>
+  )
+}
+```
+
+```tsx
+// File: /examples/components/typography/body-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function BodyTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="body1">
+        Body 1 - This is a paragraph with body1 styling. It's typically used for main content text.
+        The text should be clear and readable with appropriate line height and letter spacing.
+      </Typography>
+      <Typography variant="body2">
+        Body 2 - This is a paragraph with body2 styling. It's usually smaller than body1 and can be
+        used for secondary content. It maintains readability while taking up less space.
+      </Typography>
+    </div>
+  )
+}
+```
+
+```tsx
+// File: /examples/components/typography/display-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function DisplayTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="display1">Display 1</Typography>
+      <Typography variant="display2">Display 2</Typography>
+    </div>
+  )
+}
+```
+
+```tsx
+// File: /examples/components/typography/caption-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function CaptionTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="caption">
+        Caption text is typically used for small annotations, image captions, or secondary information
+        that needs to be smaller and less prominent than regular body text.
+      </Typography>
+    </div>
+  )
+}
+```
+
+```tsx
+// File: /examples/components/typography/custom-element-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function CustomElementTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="h1" tagName="h2">
+        This is a h1 styled as h2 element
+      </Typography>
+      <Typography variant="body1" tagName="span">
+        This is body1 text rendered as a span element
+      </Typography>
+      <Typography variant="h3" tagName="p">
+        This is a h3 styled as paragraph element
+      </Typography>
+    </div>
+  )
+}
+```
+
+```tsx
+// File: /examples/components/typography/custom-styled-typography.tsx
+import { Typography } from '@aspect-ui/react'
+
+export default function CustomStyledTypography() {
+  return (
+    <div className="space-y-3">
+      <Typography variant="h1" className="text-blue-600 underline">
+        Custom styled heading
+      </Typography>
+      <Typography variant="body1" className="italic text-green-600 font-semibold">
+        Custom styled body text with custom color and emphasis
+      </Typography>
+      <Typography variant="caption" className="bg-gray-100 p-2 rounded">
+        Caption with custom background and padding
+      </Typography>
+    </div>
+  )
+}
+```
+
+These files create a comprehensive documentation for the Typography component, showing all its variants and customization options. The examples demonstrate how to use different typography variants, how to change the HTML element with the tagName prop, and how to apply custom styling with className.
+
+Let me know if you need any adjustments or have questions about the implementation!

@@ -1,0 +1,293 @@
+I'll create the documentation for the DatePicker component similar to the Accordion component. I'll look at the existing DatePicker component files and create the necessary documentation and examples.
+
+Based on the code provided, I can see that the DatePicker component allows users to select dates with features like range selection and different shape options.
+
+Let me put together all the necessary files:
+
+## 1. First, let's update the date-picker page.tsx file:
+
+```tsx
+import type { Metadata, NextPage } from 'next'
+import Introduction from './index'
+import { DocsContentLayout } from '@/components/DocContentLayout'
+import EditPage from '@/components/EditPage'
+
+export const metadata: Metadata = {
+  title: 'DatePicker - Aspect UI',
+  description:
+    'The `DatePicker` component enables users to select dates from a calendar interface. It supports ranges, disabled dates, formatting, and localization for form inputs and filtering.',
+};
+
+const page: NextPage = () => {
+  return (
+    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+      <Introduction />
+      <EditPage
+        pageLink="/docs/components/date-picker"
+        nextPageLink="/docs/components/dropdown"
+        nextPageName="Dropdown"
+      />
+    </DocsContentLayout>
+  )
+}
+
+export default page
+```
+
+## 2. Now, let's create the Introduction.mdx file:
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultDatePicker,
+  rangeDatePicker,
+  shapesDatePicker,
+  datePickerPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Date Picker
+---
+<CodeSnippets styles="mt-4" content={defaultDatePicker} lang="javascript" url="examples/components/date-picker/default-date-picker">
+</CodeSnippets>
+
+## Range Selection
+---
+<CodeSnippets styles="mt-4" content={rangeDatePicker} lang="javascript" url="examples/components/date-picker/range-date-picker">
+</CodeSnippets>
+
+## Different Shapes
+---
+<CodeSnippets styles="mt-4" content={shapesDatePicker} lang="javascript" url="examples/components/date-picker/shapes-date-picker">
+</CodeSnippets>
+
+## API Reference
+---
+
+### DatePicker Props
+<ComponentTable data={datePickerPropsData} />
+```
+
+## 3. Let's create the Code.tsx file for the examples:
+
+```tsx
+// In /docs/components/date-picker/Code/Code.tsx
+
+export const defaultDatePicker = `import { DatePicker } from "@/app/src";
+
+export default function DefaultDatePicker() {
+  const handleDateChange = (dates) => {
+    console.log('Selected date:', dates);
+  };
+  
+  return (
+    <div className="w-full max-w-xs">
+      <DatePicker 
+        onChange={handleDateChange} 
+        placeholder="Select a date"
+      />
+    </div>
+  );
+}`;
+
+export const rangeDatePicker = `import { DatePicker } from "@/app/src";
+
+export default function RangeDatePicker() {
+  const handleDateChange = (dates) => {
+    console.log('Selected date range:', dates);
+  };
+  
+  return (
+    <div className="w-full max-w-xs">
+      <DatePicker 
+        onChange={handleDateChange}
+        isRange={true}
+        placeholder="Select date range" 
+      />
+    </div>
+  );
+}`;
+
+export const shapesDatePicker = `import { DatePicker } from "@/app/src";
+
+export default function ShapesDatePicker() {
+  const handleDateChange = (dates) => {
+    console.log('Selected date:', dates);
+  };
+  
+  return (
+    <div className="flex flex-col space-y-4">
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Circle:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="circle"
+          className="w-64" 
+        />
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Rounded:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="rounded-sm"
+          className="w-64" 
+        />
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Square:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="square"
+          className="w-64" 
+        />
+      </div>
+    </div>
+  );
+}`;
+
+export const datePickerPropsData = [
+  {
+    name: 'onChange',
+    type: '(dates: Date[]) => void',
+    default: '',
+    description: 'Function called when date selection changes',
+  },
+  {
+    name: 'initialDates',
+    type: 'Date[]',
+    default: '[]',
+    description: 'Array of pre-selected dates',
+  },
+  {
+    name: 'isRange',
+    type: 'boolean',
+    default: 'false',
+    description: 'Enable date range selection mode',
+  },
+  {
+    name: 'shape',
+    type: "'rounded-sm' | 'square' | 'circle'",
+    default: "'circle'",
+    description: 'Shape of date cells in the calendar',
+  },
+  {
+    name: 'placeholder',
+    type: 'string',
+    default: "'Select your date'",
+    description: 'Placeholder text when no date is selected',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes for the component',
+  },
+];
+```
+
+## 4. Now, let's create the example files in the examples directory:
+
+### 1. default-date-picker.tsx
+```tsx
+import { DatePicker } from "@/app/src";
+
+export default function DefaultDatePicker() {
+  const handleDateChange = (dates: Date[]) => {
+    console.log('Selected date:', dates);
+  };
+  
+  return (
+    <div className="w-full max-w-xs">
+      <DatePicker 
+        onChange={handleDateChange} 
+        placeholder="Select a date"
+      />
+    </div>
+  );
+}
+```
+
+### 2. range-date-picker.tsx
+```tsx
+import { DatePicker } from "@/app/src";
+
+export default function RangeDatePicker() {
+  const handleDateChange = (dates: Date[]) => {
+    console.log('Selected date range:', dates);
+  };
+  
+  return (
+    <div className="w-full max-w-xs">
+      <DatePicker 
+        onChange={handleDateChange}
+        isRange={true}
+        placeholder="Select date range" 
+      />
+    </div>
+  );
+}
+```
+
+### 3. shapes-date-picker.tsx
+```tsx
+import { DatePicker } from "@/app/src";
+
+export default function ShapesDatePicker() {
+  const handleDateChange = (dates: Date[]) => {
+    console.log('Selected date:', dates);
+  };
+  
+  return (
+    <div className="flex flex-col space-y-4">
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Circle:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="circle"
+          className="w-64" 
+        />
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Rounded:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="rounded-sm"
+          className="w-64" 
+        />
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <span className="w-24 text-sm font-medium">Square:</span>
+        <DatePicker 
+          onChange={handleDateChange}
+          shape="square"
+          className="w-64" 
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## 5. Finally, let's create the index.js file:
+
+```js
+import Introduction from './Introduction.mdx'
+
+export default Introduction
+```
+
+These files complete the documentation for the DatePicker component. The documentation includes:
+
+1. A main page with metadata
+2. An introduction page with examples and API reference
+3. Code snippets and examples for different use cases (default, range selection, different shapes)
+4. Example files that can be executed in the app
+5. API documentation with props table
+
+This follows the same structure as the Accordion component documentation and fully documents the DatePicker component's features and usage.

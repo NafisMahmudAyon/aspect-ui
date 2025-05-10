@@ -1,0 +1,82 @@
+'use client'
+import { Button, useToast } from "@/app/src"
+import { Box, Code, Copy, Layers, Palette } from "lucide-react"
+
+const Hero = () => {
+  const { addToast, ToastContainer } = useToast()
+  
+  const handleClick = (type: 'success' | 'error', message: string) => {
+    addToast({
+      className: "",
+      message: message,
+      messageClassName: "",
+      type: type
+    })
+  }
+  return (
+    <div className="min-h-screen pt-[80px] hero">
+      <section className="container mx-auto px-4 py-16 h-[calc(100vh-80px)] flex items-center justify-center">
+        <div className="relative grid w-full h-full place-items-center">
+          {/* Feature Icons */}
+          <div className="absolute left-0 top-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+            <div className="grid h-16 w-16 place-items-center rounded-lg">
+              <Layers className="h-8 w-8" />
+            </div>
+          </div>
+
+          <div className="absolute bottom-0 left-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+            <div className="grid h-16 w-16 place-items-center rounded-lg">
+              <Code className="h-8 w-8" />
+            </div>
+          </div>
+
+          <div className="absolute right-0 top-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+            <div className="grid h-16 w-16 place-items-center rounded-lg">
+              <Palette className="h-8 w-8" />
+            </div>
+          </div>
+
+          <div className="absolute bottom-0 right-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+            <div className="grid h-16 w-16 place-items-center rounded-lg">
+              <Box className="h-8 w-8" />
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="mx-auto max-w-3xl text-center text-primary-800 dark:text-primary-200">
+            <div className="mb-6 rounded-full border border-primary-800/30 bg-primary-200/50 px-6 py-2 text-sm text-primary-800 inline-flex items-center gap-2 dark:border-primary-200/30 dark:bg-primary-800/50 dark:text-primary-200 backdrop-blur-lg">
+              React <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> TypeScript <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> Tailwind CSS <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> Accessibility
+            </div>
+
+            <h1 className="mb-6 text-h2 font-bold leading-tight md:text-6xl">
+              Build Stunning Interfaces Effortlessly With
+              <br />
+              <span className="text-primary-500">Aspect UI</span>
+            </h1>
+
+            <p className="mx-auto mb-8 max-w-2xl text-gray-500">
+              A professionally crafted component library that helps you build stunning interfaces faster. Fully customizable, accessible, and designed for modern web applications.
+            </p>
+
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button className="rounded-full bg-[#3498db] px-8 py-3 font-medium text-white transition-colors hover:bg-[#2980b9]">
+                Get Started
+              </Button>
+
+              <div className="rounded-full border border-primary-800/30 bg-primary-200/50 text-primary-800 dark:border-primary-200/30 dark:bg-primary-800/50 dark:text-primary-200 px-6 py-3 text-sm inline-flex items-center gap-2" onClick={() => {
+                navigator.clipboard.writeText('npx aspect-ui@latest init');
+                handleClick('success', 'Copied to clipboard')
+              }}>
+                npx aspect-ui@latest init <span><Copy className="size-4"/></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ToastContainer />
+        {/* <ComponentList /> */}
+      </section>
+    </div>
+  )
+}
+
+export default Hero

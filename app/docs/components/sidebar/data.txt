@@ -1,0 +1,914 @@
+I'll help you create the documentation and examples for the Rating component following the structure used in accordion, alert, and avatar components. Let me analyze the existing Rating component files and create the required documentation and examples.
+
+## 1. First, let's create/update the Rating documentation files
+
+### 1.1 Creating/Updating index.tsx in /docs/components/rating
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+### 1.2 Creating the Introduction.mdx file
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultRating,
+  readOnlyRating,
+  customSizeRating,
+  customColorRating,
+  customIconRating,
+  ratingPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Rating
+---
+<CodeSnippets styles="mt-4" content={defaultRating} lang="tsx" url="examples/components/rating/default-rating">
+</CodeSnippets>
+
+## Read-Only Rating
+---
+<CodeSnippets styles="mt-4" content={readOnlyRating} lang="tsx" url="examples/components/rating/read-only-rating">
+</CodeSnippets>
+
+## Custom Size Rating
+---
+<CodeSnippets styles="mt-4" content={customSizeRating} lang="tsx" url="examples/components/rating/custom-size-rating">
+</CodeSnippets>
+
+## Custom Color Rating
+---
+<CodeSnippets styles="mt-4" content={customColorRating} lang="tsx" url="examples/components/rating/custom-color-rating">
+</CodeSnippets>
+
+## Custom Icon Rating
+---
+<CodeSnippets styles="mt-4" content={customIconRating} lang="tsx" url="examples/components/rating/custom-icon-rating">
+</CodeSnippets>
+
+## Rating Props
+---
+<ComponentTable data={ratingPropsData} />
+```
+
+### 1.3 Creating the Code/Code.tsx file
+
+```tsx
+// In /docs/components/rating/Code/Code.tsx
+import React from 'react'
+
+// Default Rating example code
+export const defaultRating = `import React, { useState } from 'react'
+import { Rating } from 'aspect-ui'
+
+const DefaultRating = () => {
+  const [rating, setRating] = useState(0)
+
+  const handleChange = (event, value) => {
+    setRating(value)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <Rating onChange={handleChange} />
+      </div>
+      <div>
+        <p>Selected Rating: {rating}</p>
+      </div>
+    </div>
+  )
+}
+
+export default DefaultRating`
+
+// Read-Only Rating example code
+export const readOnlyRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const ReadOnlyRating = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Product Rating</h3>
+        <Rating initialRating={4.5} readOnly={true} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">User Satisfaction</h3>
+        <Rating initialRating={3} readOnly={true} />
+      </div>
+    </div>
+  )
+}
+
+export default ReadOnlyRating`
+
+// Custom Size Rating example code
+export const customSizeRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const CustomSizeRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Small Size (16px)</h3>
+        <Rating size={16} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Medium Size (24px - Default)</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Large Size (32px)</h3>
+        <Rating size={32} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Extra Large Size (48px)</h3>
+        <Rating size={48} initialRating={3} />
+      </div>
+    </div>
+  )
+}
+
+export default CustomSizeRating`
+
+// Custom Color Rating example code
+export const customColorRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+
+const CustomColorRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Default Colors</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Gold Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#FFD700" 
+          hoverColor="#FFE866" 
+          unratedColor="#E5E7EB" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Red Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#DC2626" 
+          hoverColor="#EF4444" 
+          unratedColor="#FECACA" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Purple Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#7C3AED" 
+          hoverColor="#8B5CF6" 
+          unratedColor="#DDD6FE" 
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomColorRating`
+
+// Custom Icon Rating example code
+export const customIconRating = `import React from 'react'
+import { Rating } from 'aspect-ui'
+import { HeartIcon } from '@heroicons/react/solid'
+
+const CustomIconRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Custom Heart Icon</h3>
+        <Rating 
+          initialRating={3} 
+          icon={<HeartIcon className="w-full h-full" />}
+          starColor="#F87171"
+          hoverColor="#FCA5A5"
+          unratedColor="#FEE2E2"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomIconRating`
+
+// Component props data for documentation
+export const ratingPropsData = [
+  {
+    name: 'maxRating',
+    type: 'number',
+    default: '5',
+    description: 'Maximum rating value (number of stars)',
+    required: false,
+  },
+  {
+    name: 'initialRating',
+    type: 'number',
+    default: '0',
+    description: 'Initial rating value',
+    required: false,
+  },
+  {
+    name: 'size',
+    type: 'number',
+    default: '24',
+    description: 'Size of the rating icons (in pixels)',
+    required: false,
+  },
+  {
+    name: 'onChange',
+    type: '(event: React.ChangeEvent<HTMLInputElement>, rating: number) => void',
+    default: '-',
+    description: 'Callback fired when the rating changes',
+    required: false,
+  },
+  {
+    name: 'starColor',
+    type: 'string',
+    default: '#438e96',
+    description: 'Color of the rated stars',
+    required: false,
+  },
+  {
+    name: 'hoverColor',
+    type: 'string',
+    default: '#65a3a9',
+    description: 'Color of the stars on hover',
+    required: false,
+  },
+  {
+    name: 'unratedColor',
+    type: 'string',
+    default: '#a9cdcf',
+    description: 'Color of the unrated stars',
+    required: false,
+  },
+  {
+    name: 'ratingTexts',
+    type: 'string[]',
+    default: "['Terrible', 'Bad', 'OK', 'Good', 'Excellent']",
+    description: 'Texts to display for different rating levels',
+    required: false,
+  },
+  {
+    name: 'readOnly',
+    type: 'boolean',
+    default: 'false',
+    description: 'If true, the rating is read-only and cannot be changed',
+    required: false,
+  },
+  {
+    name: 'icon',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Custom icon to use instead of the default star',
+    required: false,
+  },
+  {
+    name: 'theme',
+    type: "'default' | 'dark'",
+    default: 'default',
+    description: 'Theme for the rating component',
+    required: false,
+  }
+]
+```
+
+## 2. Let's create the example files for Rating
+
+### 2.1 Create default-rating.tsx
+
+```tsx
+// In /examples/components/rating/default-rating.tsx
+import React, { useState } from 'react'
+import { Rating } from '@/app/src'
+
+const DefaultRating = () => {
+  const [rating, setRating] = useState(0)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, value: number) => {
+    setRating(value)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <Rating onChange={handleChange} />
+      </div>
+      <div>
+        <p>Selected Rating: {rating}</p>
+      </div>
+    </div>
+  )
+}
+
+export default DefaultRating
+```
+
+### 2.2 Create read-only-rating.tsx
+
+```tsx
+// In /examples/components/rating/read-only-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const ReadOnlyRating = () => {
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Product Rating</h3>
+        <Rating initialRating={4.5} readOnly={true} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">User Satisfaction</h3>
+        <Rating initialRating={3} readOnly={true} />
+      </div>
+    </div>
+  )
+}
+
+export default ReadOnlyRating
+```
+
+### 2.3 Create custom-size-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-size-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const CustomSizeRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Small Size (16px)</h3>
+        <Rating size={16} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Medium Size (24px - Default)</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Large Size (32px)</h3>
+        <Rating size={32} initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Extra Large Size (48px)</h3>
+        <Rating size={48} initialRating={3} />
+      </div>
+    </div>
+  )
+}
+
+export default CustomSizeRating
+```
+
+### 2.4 Create custom-color-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-color-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+
+const CustomColorRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Default Colors</h3>
+        <Rating initialRating={3} />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Gold Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#FFD700" 
+          hoverColor="#FFE866" 
+          unratedColor="#E5E7EB" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Red Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#DC2626" 
+          hoverColor="#EF4444" 
+          unratedColor="#FECACA" 
+        />
+      </div>
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Purple Theme</h3>
+        <Rating 
+          initialRating={3} 
+          starColor="#7C3AED" 
+          hoverColor="#8B5CF6" 
+          unratedColor="#DDD6FE" 
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomColorRating
+```
+
+### 2.5 Create custom-icon-rating.tsx
+
+```tsx
+// In /examples/components/rating/custom-icon-rating.tsx
+import React from 'react'
+import { Rating } from '@/app/src'
+// Note: You'll need to ensure you have access to a Heart icon component
+// This is a placeholder - replace with an actual icon from your project
+const HeartIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.003-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+  </svg>
+)
+
+const CustomIconRating = () => {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">Custom Heart Icon</h3>
+        <Rating 
+          initialRating={3} 
+          icon={<HeartIcon />}
+          starColor="#F87171"
+          hoverColor="#FCA5A5"
+          unratedColor="#FEE2E2"
+        />
+      </div>
+    </div>
+  )
+}
+
+export default CustomIconRating
+```
+
+### 2.6 Create page.tsx files for each example
+
+```tsx
+// In /examples/components/rating/default-rating/page.tsx
+import DefaultRating from '../default-rating'
+
+export default function Page() {
+  return <DefaultRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/read-only-rating/page.tsx
+import ReadOnlyRating from '../read-only-rating'
+
+export default function Page() {
+  return <ReadOnlyRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-size-rating/page.tsx
+import CustomSizeRating from '../custom-size-rating'
+
+export default function Page() {
+  return <CustomSizeRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-color-rating/page.tsx
+import CustomColorRating from '../custom-color-rating'
+
+export default function Page() {
+  return <CustomColorRating />
+}
+```
+
+```tsx
+// In /examples/components/rating/custom-icon-rating/page.tsx
+import CustomIconRating from '../custom-icon-rating'
+
+export default function Page() {
+  return <CustomIconRating />
+}
+```
+
+Now you have complete documentation and examples for the Rating component following the same structure as accordion, alert, and avatar components. This includes:
+
+1. Updated page.tsx file in /docs/components/rating with appropriate metadata
+2. An Introduction.mdx file with examples and documentation
+3. A Code/Code.tsx file with example code and props data
+4. Example files in the /examples/components/rating directory
+
+The documentation showcases:
+- Basic rating usage
+- Read-only ratings for displaying static ratings
+- Custom sized ratings
+- Custom colored ratings
+- Custom icon ratings
+
+You can now integrate these examples into your documentation to provide a comprehensive guide for using the Rating component.
+
+User: create or complete the /docs/components/sidebar like docs/components/accordion first check app/src/components/Sidebar files for complete the /docs/components/sidebar and also create example (example/components/sidebar/*) for ssidebar and add this in  /docs/components/sidebar like docs => accordion, alert, avatar
+
+I'll create the documentation and examples for the Sidebar component following the same structure as the accordion, alert, and avatar components. Let me create all the necessary files.
+
+## 1. First, let's create the Sidebar documentation files
+
+### 1.1 Creating/Updating index.tsx in /docs/components/sidebar
+
+```tsx
+import Introduction from './Introduction.mdx'
+export default Introduction
+```
+
+### 1.2 Creating the Introduction.mdx file
+
+```mdx
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import {
+  defaultSidebar,
+  collapsibleSidebar,
+  customSidebar,
+  mobileSidebar,
+  sidebarWithHeader,
+  sidebarPropsData
+} from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Sidebar
+---
+<CodeSnippets styles="mt-4" content={defaultSidebar} lang="tsx" url="examples/components/sidebar/default-sidebar">
+</CodeSnippets>
+
+## Collapsible Sidebar
+---
+<CodeSnippets styles="mt-4" content={collapsibleSidebar} lang="tsx" url="examples/components/sidebar/collapsible-sidebar">
+</CodeSnippets>
+
+## Custom Styled Sidebar
+---
+<CodeSnippets styles="mt-4" content={customSidebar} lang="tsx" url="examples/components/sidebar/custom-sidebar">
+</CodeSnippets>
+
+## Mobile Responsive Sidebar
+---
+<CodeSnippets styles="mt-4" content={mobileSidebar} lang="tsx" url="examples/components/sidebar/mobile-sidebar">
+</CodeSnippets>
+
+## Sidebar With Header
+---
+<CodeSnippets styles="mt-4" content={sidebarWithHeader} lang="tsx" url="examples/components/sidebar/sidebar-with-header">
+</CodeSnippets>
+
+## Sidebar Props
+---
+<ComponentTable data={sidebarPropsData} />
+```
+
+### 1.3 Creating the Code/Code.tsx file
+
+```tsx
+// In /docs/components/sidebar/Code/Code.tsx
+import React from 'react'
+
+// Default Sidebar example code
+export const defaultSidebar = `import React from 'react'
+import { Sidebar } from 'aspect-ui'
+
+const DefaultSidebar = () => {
+  const sidebarItems = [
+    { label: 'Dashboard', icon: '📊', href: '#dashboard' },
+    { label: 'Projects', icon: '📁', href: '#projects' },
+    { label: 'Team', icon: '👥', href: '#team' },
+    { label: 'Calendar', icon: '📅', href: '#calendar' },
+    { label: 'Documents', icon: '📄', href: '#documents' },
+    { label: 'Settings', icon: '⚙️', href: '#settings' },
+  ]
+
+  return (
+    <div className="h-96 flex">
+      <Sidebar>
+        {sidebarItems.map((item, index) => (
+          <Sidebar.Item key={index} href={item.href}>
+            <span className="mr-2">{item.icon}</span>
+            {item.label}
+          </Sidebar.Item>
+        ))}
+      </Sidebar>
+      <div className="flex-1 p-4">
+        <h2 className="text-xl font-bold">Main Content</h2>
+        <p className="mt-2">Select an item from the sidebar to navigate.</p>
+      </div>
+    </div>
+  )
+}
+
+export default DefaultSidebar`
+
+// Collapsible Sidebar example code
+export const collapsibleSidebar = `import React, { useState } from 'react'
+import { Sidebar, Button } from 'aspect-ui'
+
+const CollapsibleSidebar = () => {
+  const [collapsed, setCollapsed] = useState(false)
+  
+  const sidebarItems = [
+    { label: 'Dashboard', icon: '📊', href: '#dashboard' },
+    { label: 'Projects', icon: '📁', href: '#projects' },
+    { label: 'Team', icon: '👥', href: '#team' },
+    { label: 'Calendar', icon: '📅', href: '#calendar' },
+    { label: 'Documents', icon: '📄', href: '#documents' },
+    { label: 'Settings', icon: '⚙️', href: '#settings' },
+  ]
+
+  return (
+    <div className="h-96 flex">
+      <Sidebar collapsed={collapsed}>
+        {sidebarItems.map((item, index) => (
+          <Sidebar.Item key={index} href={item.href}>
+            <span className="mr-2">{item.icon}</span>
+            {item.label}
+          </Sidebar.Item>
+        ))}
+      </Sidebar>
+      <div className="flex-1 p-4">
+        <div className="mb-4">
+          <Button onClick={() => setCollapsed(!collapsed)}>
+            {collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+          </Button>
+        </div>
+        <h2 className="text-xl font-bold">Main Content</h2>
+        <p className="mt-2">Toggle the sidebar using the button above.</p>
+      </div>
+    </div>
+  )
+}
+
+export default CollapsibleSidebar`
+
+// Custom Styled Sidebar example code
+export const customSidebar = `import React from 'react'
+import { Sidebar } from 'aspect-ui'
+
+const CustomSidebar = () => {
+  const sidebarItems = [
+    { label: 'Dashboard', icon: '📊', href: '#dashboard' },
+    { label: 'Projects', icon: '📁', href: '#projects' },
+    { label: 'Team', icon: '👥', href: '#team' },
+    { label: 'Calendar', icon: '📅', href: '#calendar' },
+    { label: 'Documents', icon: '📄', href: '#documents' },
+    { label: 'Settings', icon: '⚙️', href: '#settings' },
+  ]
+
+  return (
+    <div className="h-96 flex">
+      <Sidebar 
+        backgroundColor="#1e293b" 
+        textColor="#e2e8f0"
+        hoverColor="#334155"
+        activeColor="#475569"
+      >
+        {sidebarItems.map((item, index) => (
+          <Sidebar.Item 
+            key={index} 
+            href={item.href}
+            className="py-3 px-4"
+          >
+            <span className="mr-3">{item.icon}</span>
+            {item.label}
+          </Sidebar.Item>
+        ))}
+      </Sidebar>
+      <div className="flex-1 p-4">
+        <h2 className="text-xl font-bold">Main Content</h2>
+        <p className="mt-2">This example uses a custom dark theme for the sidebar.</p>
+      </div>
+    </div>
+  )
+}
+
+export default CustomSidebar`
+
+// Mobile Responsive Sidebar example code
+export const mobileSidebar = `import React, { useState } from 'react'
+import { Sidebar, Button } from 'aspect-ui'
+
+const MobileSidebar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const sidebarItems = [
+    { label: 'Dashboard', icon: '📊', href: '#dashboard' },
+    { label: 'Projects', icon: '📁', href: '#projects' },
+    { label: 'Team', icon: '👥', href: '#team' },
+    { label: 'Calendar', icon: '📅', href: '#calendar' },
+    { label: 'Documents', icon: '📄', href: '#documents' },
+    { label: 'Settings', icon: '⚙️', href: '#settings' },
+  ]
+
+  return (
+    <div className="h-96 relative">
+      <div className="p-4 border-b">
+        <Button 
+          onClick={() => setIsOpen(!isOpen)} 
+          className="md:hidden"
+        >
+          {isOpen ? 'Close Menu' : 'Open Menu'}
+        </Button>
+      </div>
+      
+      <div className="flex h-full">
+        <Sidebar 
+          mobile={true}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          className="md:static"
+        >
+          {sidebarItems.map((item, index) => (
+            <Sidebar.Item 
+              key={index} 
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+            >
+              <span className="mr-2">{item.icon}</span>
+              {item.label}
+            </Sidebar.Item>
+          ))}
+        </Sidebar>
+        
+        <div className="flex-1 p-4">
+          <h2 className="text-xl font-bold">Main Content</h2>
+          <p className="mt-2">
+            This sidebar is responsive and shows as an overlay on mobile devices. 
+            Try resizing your browser or toggle the menu button.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default MobileSidebar`
+
+// Sidebar With Header example code
+export const sidebarWithHeader = `import React from 'react'
+import { Sidebar } from 'aspect-ui'
+
+const SidebarWithHeader = () => {
+  const sidebarItems = [
+    { label: 'Dashboard', icon: '📊', href: '#dashboard' },
+    { label: 'Projects', icon: '📁', href: '#projects' },
+    { label: 'Team', icon: '👥', href: '#team' },
+    { label: 'Calendar', icon: '📅', href: '#calendar' },
+    { label: 'Documents', icon: '📄', href: '#documents' },
+    { label: 'Settings', icon: '⚙️', href: '#settings' },
+  ]
+
+  return (
+    <div className="h-96 flex">
+      <Sidebar>
+        <Sidebar.Header className="p-4 border-b">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-2">A</div>
+            <div>
+              <div className="font-semibold">Aspect UI</div>
+              <div className="text-xs text-gray-500">Admin Dashboard</div>
+            </div>
+          </div>
+        </Sidebar.Header>
+        
+        {sidebarItems.map((item, index) => (
+          <Sidebar.Item key={index} href={item.href}>
+            <span className="mr-2">{item.icon}</span>
+            {item.label}
+          </Sidebar.Item>
+        ))}
+        
+        <Sidebar.Footer className="mt-auto p-4 border-t">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-gray-300 mr-2"></div>
+            <div>
+              <div className="text-sm font-medium">John Doe</div>
+              <div className="text-xs text-gray-500">View Profile</div>
+            </div>
+          </div>
+        </Sidebar.Footer>
+      </Sidebar>
+      <div className="flex-1 p-4">
+        <h2 className="text-xl font-bold">Main Content</h2>
+        <p className="mt-2">This sidebar includes a header and footer section.</p>
+      </div>
+    </div>
+  )
+}
+
+export default SidebarWithHeader`
+
+// Component props data for documentation
+export const sidebarPropsData = [
+  {
+    name: 'collapsed',
+    type: 'boolean',
+    default: 'false',
+    description: 'When true, the sidebar is collapsed to show only icons',
+    required: false,
+  },
+  {
+    name: 'width',
+    type: 'string | number',
+    default: '250px',
+    description: 'Width of the expanded sidebar',
+    required: false,
+  },
+  {
+    name: 'collapsedWidth',
+    type: 'string | number',
+    default: '64px',
+    description: 'Width of the sidebar when collapsed',
+    required: false,
+  },
+  {
+    name: 'backgroundColor',
+    type: 'string',
+    default: '#ffffff',
+    description: 'Background color of the sidebar',
+    required: false,
+  },
+  {
+    name: 'textColor',
+    type: 'string',
+    default: '#333333',
+    description: 'Text color for sidebar items',
+    required: false,
+  },
+  {
+    name: 'hoverColor',
+    type: 'string',
+    default: '#f3f4f6',
+    description: 'Background color of items on hover',
+    required: false,
+  },
+  {
+    name: 'activeColor',
+    type: 'string',
+    default: '#e5e7eb',
+    description: 'Background color of the active item',
+    required: false,
+  },
+  {
+    name: 'mobile',
+    type: 'boolean',
+    default: 'false',
+    description: 'When true, sidebar is treated as a mobile sidebar (overlay)',
+    required: false,
+  },
+  {
+    name: 'isOpen',
+    type: 'boolean',
+    default: 'false',
+    description: 'Controls visibility of mobile sidebar',
+    required: false,
+  },
+  {
+    name: 'onClose',
+    type: '() => void',
+    default: '-',
+    description: 'Function called when mobile sidebar is closed',
+    required: false,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS classes to apply to the sidebar',
+    required: false,
+  },
+  {
+    name: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Sidebar content (items, header, footer)',
+    required: false,
+  }
+]
+```
+
+## 2. Let's create the example files for Sidebar
+
+### 2.1 Create default-sidebar.tsx
+
+```tsx
+// In

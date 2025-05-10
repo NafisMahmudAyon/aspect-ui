@@ -20,9 +20,6 @@ const SidebarDemo = () => {
           <SidebarItem>Dashboard</SidebarItem>
           <SidebarItem>Profile</SidebarItem>
           <SidebarItem>Settings</SidebarItem>
-          <SidebarItem>Dashboard</SidebarItem>
-          <SidebarItem>Profile</SidebarItem>
-          <SidebarItem>Settings</SidebarItem>
         </SidebarContainer>
         <SidebarFooter>
           <p>© 2024 My App</p>
