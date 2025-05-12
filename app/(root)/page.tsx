@@ -6,7 +6,8 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div><Hero />
+    <div>
+      <Hero />
     {/* <ComponentList /> */}
     <ExploreComponents />
     <div className="h-[300px]" />

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { FileUpload } from '@/app/src/components/Upload'
+import { Upload } from '@/app/src/components/Upload'
 
 const FileUploadDemo = () => {
   // const handleFileSelect = (file: File) => {
@@ -17,7 +17,7 @@ const FileUploadDemo = () => {
         accept='image/*'
         multiple={true}
       /> */}
-      <FileUpload
+      <Upload
         onFileSelect={(files) => console.log('Selected files:', files)}
         accept=".pdf,.doc,.docx"
         multiple={true}

@@ -46,7 +46,7 @@ const TooltipDemo = () => {
       <Tooltip direction="right" showOnClick reset arrowSize={10} arrowColor="#a9cdcf">
         <TooltipAction reset className="handle bg-primary-200 hover:bg-primary-200 dark:bg-primary-200 dark:hover:bg-primary-200 px-10 py-1 text-primary-900 dark:text-primary-900 hover:text-primary-900 dark:hover:text-primary-900 rounded-md cursor-move">
           {/* <Button> */}
-            aa
+          aa
           {/* </Button> */}
         </TooltipAction>
         <TooltipContent className="bg-primary-200 dark:bg-primary-200 px-4 py-2 text-primary-900 dark:text-primary-900">

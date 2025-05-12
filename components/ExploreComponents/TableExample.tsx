@@ -2,8 +2,8 @@ import { Skeleton, Table, TableBody, TableCaption, TableCell, TableHeadCell, Tab
 
 const TableExample = () => {
   return (
-    <div>
-      <Table>
+    <div className='w-full overflow-auto'>
+      <Table className='table-auto'>
         <TableCaption className='caption-bottom text-caption'>Table Caption</TableCaption>
         <TableHeader>
           <TableRow>

@@ -81,7 +81,7 @@ export const Typography: React.FC<TypographyProps> = ({
 
   return (
     <TagName
-      className={cn("text-primary-800 dark:text-primary-200", styles, className)}
+      className={cn("", styles, className)}
       {...rest}
     >
       {children}

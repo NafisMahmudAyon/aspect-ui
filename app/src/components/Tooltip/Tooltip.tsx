@@ -17,7 +17,9 @@ interface TooltipProps {
   arrowSize?: number
   contentClassName?: string
   actionClassName?: string
+  showOnLoad?: boolean
   reset?: boolean
+  closeOnClickOutside?: boolean
 }
 
 interface TooltipActionProps {
@@ -37,14 +39,16 @@ const Tooltip: React.FC<TooltipProps> = ({
   direction = 'top',
   showOnClick = false,
   className = '',
-  arrowColor = '#847ef3',
+  arrowColor = '#65a3a9',
   arrowSize = 10,
   contentClassName = '',
   actionClassName = '',
+  showOnLoad=false,
   reset = false,
+  closeOnClickOutside=true,
   ...rest
 }) => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(showOnLoad)
   const [tooltipPosition, setTooltipPosition] = useState<{ top: number; left: number } | null>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
@@ -52,6 +56,11 @@ const Tooltip: React.FC<TooltipProps> = ({
     React.ReactElement<TooltipActionProps>,
     React.ReactElement<TooltipContentProps>
   ]
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   let showTimeout: NodeJS.Timeout | null = null
   let hideTimeout: NodeJS.Timeout | null = null
@@ -111,6 +120,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (
+      closeOnClickOutside &&
       tooltipRef.current &&
       !tooltipRef.current.contains(event.target as Node) &&
       triggerRef.current &&
@@ -177,11 +187,11 @@ const Tooltip: React.FC<TooltipProps> = ({
       >
         {actionElement}
       </div>
-      {isVisible &&
+      {mounted && isVisible &&
         ReactDOM.createPortal(
           <div
             ref={tooltipRef}
-            className={cn('absolute',
+            className={cn('absolute z-[9999]',
               // 'absolute rounded-md text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
               contentClassName
             )}
@@ -204,7 +214,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
 const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '', reset = false, ...rest }) => <div className={className} {...rest}>{children}</div>
 const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '', reset = false, ...rest }) => <div className={cn(
-  'rounded-md px-2 py-1 text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
+  'rounded-md px-2 py-4 text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
   className)} {...rest}>{children}</div>
 
 export { Tooltip, TooltipAction, TooltipContent }

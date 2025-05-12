@@ -33,7 +33,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
       </div>
 
       {/* Dot */}
-      <div className={cn("z-10 absolute flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 -translate-x-1/2", isMixed ? "left-1/2" : isLeft ? "left-full" : "", dotClassName)}>
+      <div className={cn("z-10 absolute flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 -translate-x-1/2 p-1", isMixed ? "left-1/2" : isLeft ? "left-full" : "", dotClassName)}>
         {icon || <div className='h-3 w-3 rounded-full bg-primary-900 dark:bg-primary-200' />}
       </div>
     </div>

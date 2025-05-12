@@ -120,9 +120,26 @@ iframe body {
 }
 
 .hero {
-  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(1) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(240,6.7%,17.6%,0)'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(47,80.9%,61%,.30)' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(4.1,89.6%,58.4%,.35)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+  /* @apply bg-gradient-to-tl from-primary-200  via-primary-800 via-25% to-primary-200 to-85%; */
+  /* background:linear-gradient(138deg,rgba(169, 205, 207, 1) 0%, rgba(56, 117, 122, 1) 25%, rgba(56, 117, 122, 1) 70%, rgba(169, 205, 207, 1) 100%); */
+  @apply flex items-center justify-center;
+  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(1) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='none'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='%23438e9680' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(4.1,89.6%,58.4%,.25)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>"),
+    linear-gradient(
+      138deg,
+      rgba(169, 205, 207, 0.5) 0%,
+      rgba(56, 117, 122, 0.5) 25%,
+      rgba(56, 117, 122, 0.5) 70%,
+      rgba(169, 205, 207, 0.5) 100%
+    );
   &:where(.dark, .dark *) {
-    background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(1) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(240,6.7%,17.6%,0)'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(47,80.9%,61%,.10)' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(4.1,89.6%,58.4%,.15)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+    background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='32' height='32' patternTransform='scale(1) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(240,6.7%,17.6%,0)'/><path d='M37.657 10.343l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243m-20.686 0l-4.243 4.243m-2.828 2.828l-4.243 4.243m11.314 0l-4.243-4.243m-2.828-2.828l-4.243-4.243'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='%23438e9638' fill='none'/><path d='M16-8v6m0 4v6m8-8h-6m-4 0H8m8 24v6m0 4v6m8-8h-6m-4 0H8'  stroke-linejoin='round' stroke-linecap='round' stroke-width='1' stroke='hsla(4.1,89.6%,58.4%,.35)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>"),
+      linear-gradient(
+        138deg,
+        rgba(101, 163, 169, 0.5) 0%,
+        rgba(44, 92, 96, 0.5) 25%,
+        rgba(44, 92, 96, 0.5) 70%,
+        rgba(101, 163, 169, 0.5) 100%
+      );
   }
 }
 
@@ -147,8 +164,13 @@ iframe body {
 }
 
 .t-shadow {
+  --tw-text-shadow-color: #a9cdcf80;
   text-shadow:
-    0px 1px 2px rgb(0 0 0 / 0.1),
-    0px 3px 2px rgb(0 0 0 / 0.1),
-    0px 4px 8px rgb(0 0 0 / 0.1);
+    0px 1px 2px var(--tw-text-shadow-color),
+    0px 3px 2px var(--tw-text-shadow-color),
+    0px 4px 8px var(--tw-text-shadow-color);
+  &:where(.dark, .dark *) {
+    --tw-text-shadow-color: #20434680;
+  }
 }
+

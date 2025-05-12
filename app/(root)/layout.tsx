@@ -17,13 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body className={`bg-primary-50 dark:bg-primary-950 font-sans`} suppressHydrationWarning={true}>
-        <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            <Navbar />
-            {children}
-        </AspectThemeProvider>
-      </body>
-    </html>
+
+    <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+      <div className={`bg-primary-50 dark:bg-primary-950 text-primary-800 dark:text-primary-200 font-sans`}>
+        <Navbar />
+        {children}
+        </div>
+    </AspectThemeProvider>
   )
 }

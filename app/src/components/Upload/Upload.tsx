@@ -5,7 +5,7 @@
 import React, { useState, useRef, ChangeEvent } from 'react'
 import { cn } from '../../utils/cn'
 
-interface FileUploadProps {
+interface UploadProps {
   onFileSelect: (files: File[]) => void
   accept?: string
   multiple?: boolean
@@ -19,7 +19,7 @@ interface FileUploadProps {
   deleteIconClassName?: string
 }
 
-export const FileUpload: React.FC<FileUploadProps> = ({
+export const Upload: React.FC<UploadProps> = ({
   onFileSelect,
   accept = '*',
   multiple = false,
