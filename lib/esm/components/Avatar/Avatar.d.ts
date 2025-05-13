@@ -1,5 +1,5 @@
 import React from 'react';
-interface AvatarProps {
+interface AvatarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     className?: string;
     children?: React.ReactNode;
 }

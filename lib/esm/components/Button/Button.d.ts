@@ -5,7 +5,6 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     size?: 'small' | 'medium' | 'large';
     disabled?: boolean;
     loading?: boolean;
-    onClick?: () => void;
     children?: ReactNode;
     icon?: ReactNode;
     className?: string;

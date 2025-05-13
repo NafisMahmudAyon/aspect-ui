@@ -12,7 +12,7 @@ const projectRoot = process.cwd();
 // 1. Check if project uses TypeScript
 const isTS = fs_1.default.existsSync(path_1.default.join(projectRoot, 'tsconfig.json'));
 // 2. Detect framework
-const isNextAppRouter = fs_1.default.existsSync(path_1.default.join(projectRoot, 'app'));
+// const isNextAppRouter = fs.existsSync(path.join(projectRoot, 'app'))
 const isVite = fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.js')) ||
     fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.ts'));
 // 3. Decide target directories based on framework

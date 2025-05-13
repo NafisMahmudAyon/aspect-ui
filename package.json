@@ -16,7 +16,8 @@
   "bin": {
     "aspect-ui": "./dist/cli/index.js",
     "next-app": "./dist/cli/aspect-ui-with-next-app/index.js",
-    "vite-app": "./dist/cli/aspect-ui-with-vite-app/index.js"
+    "vite-app": "./dist/cli/aspect-ui-with-vite-app/index.js",
+    "add": "./dist/cli/add/index.js"
   },
   "exports": {
     ".": {
@@ -238,6 +239,7 @@
     "lucide-react": "^0.503.0",
     "mongodb": "^6.16.0",
     "next-nprogress-bar": "^2.4.7",
+    "node-fetch": "^3.3.2",
     "ora": "^8.2.0",
     "react-focus-lock": "^2.13.2",
     "react-remove-scroll": "^2.5.9",

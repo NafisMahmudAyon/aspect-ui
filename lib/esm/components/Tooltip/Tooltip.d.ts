@@ -12,7 +12,9 @@ interface TooltipProps {
     arrowSize?: number;
     contentClassName?: string;
     actionClassName?: string;
+    showOnLoad?: boolean;
     reset?: boolean;
+    closeOnClickOutside?: boolean;
 }
 interface TooltipActionProps {
     children: ReactNode;
