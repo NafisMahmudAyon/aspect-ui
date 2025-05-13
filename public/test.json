@@ -1,0 +1,15 @@
+{
+  "name": "default-accordion",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/Accordion.tsx",
+      "content": "import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from \"@/components/aspect-ui/Accordion\"\r\n\r\nexport const DefaultAccordion = () => {\r\n  return (\r\n    <Accordion className='space-y-4' activeItem={['item-1']}>\r\n      <AccordionItem id='item-1'>\r\n        <AccordionHeader>Header text 1</AccordionHeader>\r\n        <AccordionContent>\r\n          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantdium magni maiores eveniet, dignissimos fugit illo neque sunt aspernatur asperiores? Numquam commodi, cupiditate eveniet odit vitae facere quo culpa earum nostrum.\r\n        </AccordionContent>\r\n      </AccordionItem>\r\n      <AccordionItem id='item-2'>\r\n        <AccordionHeader>Header text 2</AccordionHeader>\r\n        <AccordionContent>\r\n          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt est repellat hic ab nisi. Nam inventore commodi in dolor nisi soluta deserunt, aut amet quod unde cum. Perferendis, consequatur cumque.\r\n        </AccordionContent>\r\n      </AccordionItem>\r\n    </Accordion>\r\n  )\r\n}",
+      "type": "registry:ui",
+      "target": "components/ui/Accordion.tsx"
+    }
+  ],
+  "author": "Nafis Mahmud Ayon <nafismahmudayon@gmail.com>",
+  "title": "Default Accordion"
+}
