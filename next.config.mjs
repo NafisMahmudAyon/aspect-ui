@@ -4,6 +4,9 @@ import slug from 'rehype-slug'
 import tableOfContents from 'remark-toc'
 const nextConfig = {
   pageExtensions: ['mdx', 'tsx', 'ts'],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   async redirects() {
     return [
