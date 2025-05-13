@@ -2,8 +2,8 @@
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
-import fetch from 'node-fetch'
 import process from 'process'
+import { fetch } from 'undici' // ✅ Modern & CommonJS-friendly
 
 const url = process.argv[2]
 
@@ -22,7 +22,6 @@ type ComponentJSON = {
   author: string
   title: string
 }
-
 
 if (!url) {
   console.error(

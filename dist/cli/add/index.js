@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const process_1 = __importDefault(require("process"));
+const undici_1 = require("undici"); // ✅ Modern & CommonJS-friendly
 const url = process_1.default.argv[2];
 if (!url) {
     console.error('❌ Please provide a JSON URL.\nExample: npx -p aspect-ui add <url>');
@@ -17,7 +17,7 @@ if (!url) {
 ;
 (async () => {
     try {
-        const res = await (0, node_fetch_1.default)(url);
+        const res = await (0, undici_1.fetch)(url);
         if (!res.ok)
             throw new Error(`Failed to fetch: ${res.statusText}`);
         const json = (await res.json());
