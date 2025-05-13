@@ -236,6 +236,7 @@
     "framer-motion": "^11.18.2",
     "inquirer": "^12.6.0",
     "lucide-react": "^0.503.0",
+    "mongodb": "^6.16.0",
     "next-nprogress-bar": "^2.4.7",
     "ora": "^8.2.0",
     "react-focus-lock": "^2.13.2",

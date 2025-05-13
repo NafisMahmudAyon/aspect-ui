@@ -3,7 +3,7 @@ import mdx from '@next/mdx'
 import slug from 'rehype-slug'
 import tableOfContents from 'remark-toc'
 const nextConfig = {
-  pageExtensions: ['mdx', 'tsx'],
+  pageExtensions: ['mdx', 'tsx', 'ts'],
   reactStrictMode: true,
   async redirects() {
     return [
