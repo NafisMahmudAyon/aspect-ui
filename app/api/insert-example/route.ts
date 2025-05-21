@@ -30,44 +30,54 @@ export async function GET() {
   }
 }
 
-// async function getLastInsertedId(): Promise<number> {
-//   const db = client.db('aspect-ui')
-//   const collection = db.collection<{ id: string }>('examples')
+async function getLastInsertedId(): Promise<number> {
+  const db = client.db('aspect-ui')
+  const collection = db.collection<{ id: string }>('examples')
 
-//   const lastDoc = await collection
-//     .find({})
-//     .sort({ id: -1 }) // sort by id descending
-//     .limit(1)
-//     .toArray()
+  const lastDoc = await collection
+    .find({})
+    .sort({ id: -1 }) // sort by id descending
+    .limit(1)
+    .toArray()
 
-//   const lastId = lastDoc[0]?.id ? parseInt(lastDoc[0].id) : 99999
+  const lastId = lastDoc[0]?.id ? parseInt(lastDoc[0].id) : 99999
 
-//   return lastId
-// }
-
-
+  return lastId
+}
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { id,url, codeTsx, codeJsx, pro, jsonTsx, jsonJsx, categories } = body
-
-    await client.connect()
-    const db = client.db('aspect-ui')
-    const collection = db.collection('examples')
-
-    // Get next auto-increment ID
-    // const id = await getLastInsertedId()+1
-
-    const result = await collection.insertOne({
-      id,
+    const {
+      title,
       url,
       codeTsx,
       codeJsx,
       pro,
       jsonTsx,
       jsonJsx,
-      categories
+      categories,
+      subCategories
+    } = body
+
+    await client.connect()
+    const db = client.db('aspect-ui')
+    const collection = db.collection('examples')
+
+    // Get next auto-increment ID
+    const id = (await getLastInsertedId()) + 1
+
+    const result = await collection.insertOne({
+      id,
+      title,
+      url,
+      codeTsx,
+      codeJsx,
+      pro,
+      jsonTsx,
+      jsonJsx,
+      categories,
+      subCategories
     })
 
     return new Response(
@@ -84,4 +94,3 @@ export async function POST(req: Request) {
     await client.close()
   }
 }
-

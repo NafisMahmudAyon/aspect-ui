@@ -64,7 +64,7 @@ async function main() {
   const repo =
     language === 'TypeScript'
       ? 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-ts'
-      : 'https://github.com/your-org/aspect-ui-with-next-app-js'
+      : 'https://github.com/NafisMahmudAyon/aspect-ui-with-next-app-js'
 
   console.log(`⬇️  Cloning ${language} repo into "${directory}"...`)
 

@@ -4,7 +4,7 @@ import { CircleChevronDown, CircleChevronUp } from "lucide-react"
 // https://localhost:3000/examples/components/accordion/custom-icon-accordion
 export const CustomIconAccordion = () => {
   return (
-    <Accordion className='space-y-4' activeItem={['item-1']} activeIcon={<CircleChevronUp />} inactiveIcon={<CircleChevronDown />}>
+    <Accordion className='space-y-4 custom' activeItem={['item-1']} activeIcon={<CircleChevronUp />} inactiveIcon={<CircleChevronDown />}>
       <AccordionItem id='item-1'>
         <AccordionHeader>Header text 1</AccordionHeader>
         <AccordionContent>

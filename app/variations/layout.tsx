@@ -1,9 +1,11 @@
 import DocSidebar from '@/components/DocSidebar'
+import DynamicTableOfContent from '@/components/DynamicTableOfContent'
 import Navbar from '@/components/Navigation'
 // import RightSideBar from '@/components/RightSideBar'
-import TableOfContent from '@/components/TableOfContent'
+// import TableOfContent from '@/components/TableOfContent'
 import { AspectThemeProvider } from '@/components/ThemeProvider'
 import TopProgressBar from '@/components/TopProgressBar'
+import { TOCProvider } from '@/context/TOCContext'
 import { ReactNode } from 'react'
 
 const DocsLayout = ({ children }: { children: ReactNode }) => {
@@ -11,6 +13,8 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
     <html lang='en'>
       <body className={`bg-primary-50 dark:bg-primary-950 font-sans`} suppressHydrationWarning={true}>
         <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <TOCProvider>
+
           <Navbar />
           <section>
             {/* <div className="sticky top-20 z-30 hidden h-4 w-full bg-primary-25 lg:block 2xl:h-20 dark:bg-[#0D1015]"></div> */}
@@ -23,10 +27,12 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
                 </div>
               </div>
               {/* <RightSideBar /> */}
-              <TableOfContent />
+              {/* <TableOfContent /> */}
+              <DynamicTableOfContent />
             </div>
           </section>
           <TopProgressBar />
+          </TOCProvider>
         </AspectThemeProvider>
       </body>
     </html>

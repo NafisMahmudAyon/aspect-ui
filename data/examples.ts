@@ -21,10 +21,12 @@ import DefaultCard from "@/app/examples/data/components/Card/DefaultCard";
 import SimpleCard from "@/app/examples/data/components/Card/SimpleCard";
 import WithHeaderFooterCard from "@/app/examples/data/components/Card/WithHeaderFooterCard";
 import InteractiveCard from "@/app/examples/data/components/Card/InteractiveCard";
+import DefaultCarousel from "@/app/examples/data/components/Carousel/DefaultCarousel";
 
 type ComponentCategory =
   | 'button'
   | 'card'
+  | 'carousel'
   | 'avatar'
   | 'alert'
   | 'accordion'
@@ -74,7 +76,10 @@ const exampleComponentMap: ExampleComponentMap = {
     'simple-card': SimpleCard,
     'with-header-footer-card': WithHeaderFooterCard,
     'interactive-card': InteractiveCard
-  } 
+  },
+  'carousel': {
+    'default-carousel': DefaultCarousel
+  }
 }
 
 export default exampleComponentMap
