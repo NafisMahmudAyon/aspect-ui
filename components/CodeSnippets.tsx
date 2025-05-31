@@ -24,6 +24,7 @@ interface CodeSnippetProps {
   children?: React.ReactNode
   url?: string
   height?: number
+  showCode?: boolean
 }
 
 const CodeSnippets: React.FC<CodeSnippetProps> = ({
@@ -35,6 +36,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
   children,
   url,
   height = 400,
+  showCode = true
 }) => {
   const [copySuccess, setCopySuccess] = useState<boolean | null>(null);
   const [width, setWidth] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
@@ -58,7 +60,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
       <CodeHeader
         styles={cn(headerStyles, "flex items-center justify-between w-full bg-primary-100 dark:bg-primary-900 py-1 px-2 text-white rounded-t-lg hover:bg-primary-100 dark:hover:bg-primary-900")}>
         <div className="">
-          {(children || url) && (
+          {(children || url) && showCode && (
             <Button
               onClick={() => { setPreview(true); setCodeType(999) }}
               className={cn(
@@ -69,19 +71,26 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
               <span>Preview</span>
             </Button>
           )}
-          {Object.keys(content).map((key, index) => (
-            <>
-              <Button
-                key={index}
-                onClick={() => { setPreview(false); setCodeType(index) }}
-                className={cn(
-                  'hidden md:inline-flex px-4 py-2.5 text-body2 font-normal border-b-2 rounded-none',
-                  (!preview && codeType === index) ? 'border-b-primary-900 dark:border-b-primary-100 ' : 'border-b-transparent dark:border-b-transparent',
-                )}
-              >
-                <span>{key}</span>
-              </Button>
-            </>
+
+          {!showCode && (
+            <div className="flex items-center gap-2 ml-6">
+              <span className="w-3.5 h-3.5 bg-[#ff6053] rounded-full inline-block" />
+              <span className="w-3.5 h-3.5 bg-[#ffb43e] rounded-full inline-block" />
+              <span className="w-3.5 h-3.5 bg-[#25cf3a] rounded-full inline-block" />
+            </div>
+          )}
+
+          {showCode && Object.keys(content).map((key, index) => (
+            <Button
+              key={index}
+              onClick={() => { setPreview(false); setCodeType(index) }}
+              className={cn(
+                'hidden md:inline-flex px-4 py-2.5 text-body2 font-normal border-b-2 rounded-none',
+                (!preview && codeType === index) ? 'border-b-primary-900 dark:border-b-primary-100 ' : 'border-b-transparent dark:border-b-transparent',
+              )}
+            >
+              <span>{key}</span>
+            </Button>
           ))}
           <div className="inline-flex md:hidden">
             <Dropdown>
@@ -106,7 +115,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
             <button className={`py-0.5 px-1 cursor-pointer border rounded-md border-gray-300/30 bg-gray-200/30 ${width == "tablet" ? "bg-gray-700 dark:bg-gray-200 text-inherit dark:text-primary-800" : "bg-gray-500/50 dark:bg-gray-200/30"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('tablet')}><Tablet className="size-5" /></button>
             <button className={`py-0.5 px-1 cursor-pointer border rounded-md border-gray-300/30 bg-gray-200/30 ${width == "desktop" ? "bg-gray-700 dark:bg-gray-200 text-inherit dark:text-primary-800" : "bg-gray-500/50 dark:bg-gray-200/30"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('desktop')}><Monitor className="size-5" /></button>
           </div>
-          <Button
+          {showCode && <Button
             onClick={() => {
               if (!preview)
                 handleCopyClick(Object.values(content)[codeType])
@@ -125,7 +134,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
                   ? "Code copied"
                   : "Failed to copy"
             }
-          </Button>
+          </Button>}
         </div>
       </CodeHeader>
       <CodeBody
@@ -137,6 +146,7 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
         preview={preview}
         width={width}
         height={height}
+        showCode={showCode}
       />
     </Code>
   );
@@ -183,14 +193,16 @@ interface CodeBodyProps {
   url?: string
   width?: 'mobile' | 'tablet' | 'desktop'
   height?: number
+  showCode?: boolean
 }
 
-const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview, url, width, height = 400  }) => {
+const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview, url, width, height = 400, showCode = true }) => {
   // const iframeRef = useRef(null);
   // const [iframeHeight, setIframeHeight] = useState(500); // default height
 
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isExternal, setIsExternal] = useState(false)
   useEffect(() => {
     if (theme === 'dark') {
       setIsDarkMode(true)
@@ -198,6 +210,11 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
       setIsDarkMode(false)
     }
   }, [theme])
+  useEffect(() => {
+    if (url)
+      setIsExternal(url[0] == '/' ? false : true)
+  }, [url])
+
 
   // useEffect(() => {
   //   const handleMessage = (event: MessageEvent) => {
@@ -239,16 +256,16 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
         <>
           <div className="py-[20px] border border-t-0 border-primary-100 dark:border-primary-900 rounded-b-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
             <iframe style={{ height: `${height}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out `}
-              // src="http://localhost:3000/examples/components/accordion/default-accordion"
-              src={process.env.NEXT_PUBLIC_BASE_URL ?
+              // src="https://pp01.nafisbd.com/examples/hero"
+              src={isExternal ? url : process.env.NEXT_PUBLIC_BASE_URL ?
                 `${process.env.NEXT_PUBLIC_BASE_URL}${url}` :
                 `/${url}`
-              }
+            }
             />
           </div>
         </>
       )}
-      {!preview &&
+      {!preview && showCode &&
         <div className="rounded-b-lg overflow-hidden bg-primary-50 dark:bg-[#121c29] ">
           <SyntaxHighlighter
             className={cn(

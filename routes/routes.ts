@@ -660,6 +660,17 @@ export const variationsRoutes: routerPath[] = [
   }
 ]
 
+export const templatesRoutes: routerPath[] = [
+  {
+    id: generatedID(),
+    name: 'Hero',
+    href: '/template/hero',
+    tag: false,
+    deprecate: false,
+    folderName: 'Hero'
+  },
+]
+
 export const gettingStartedRoutes: routerPath[] = [
   {
     id: generatedID(),
@@ -754,7 +765,7 @@ export const navbarRoutes: routerPath[] = [
   },
   {
     id: generatedID(),
-    href: '#',
+    href: '/template/hero',
     name: 'Template',
     redirect: false
   },

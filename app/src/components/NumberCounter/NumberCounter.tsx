@@ -61,6 +61,6 @@ export const NumberCounter: React.FC<NumberCounterProps> = ({
     }
   }, [end, duration, onVisible, repeatOnVisible])
 
-  return <div className={cn('text-primary-800 dark:text-primary-200 text-h4', className)} ref={counterRef} {...rest}>
+  return <div className={cn('text-primary-800 dark:text-primary-200 inline-block', className)} ref={counterRef} {...rest}>
     {count.toFixed(decimals)}</div>
 }

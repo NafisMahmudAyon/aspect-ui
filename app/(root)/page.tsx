@@ -10,7 +10,8 @@ const page = () => {
       <Hero />
     {/* <ComponentList /> */}
     <ExploreComponents />
-    <div className="h-[300px]" />
+    <div className="h-[300px]" /> 
+    <div className='text-primary-900 text-display1'>Explore Components</div>
     <Footer />
     </div>
   )

@@ -1,108 +1,73 @@
 
 
+export const defaultCheckbox = {
+  'CheckboxComponent.tsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
 
-export const defaultAvatar = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
+const DefaultCheckbox = () => {
   return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
+    <Checkbox label="Default Checkbox" checked={true} />
   )
 }
 
-export default DefaultAvatar
+export default DefaultCheckbox
   `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
+  'CheckboxComponent.jsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
 
-const DefaultAvatar = () => {
+const DefaultCheckbox = () => {
   return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
+    <Checkbox label="Default Checkbox" checked={true} />
   )
 }
 
-export default DefaultAvatar
+export default DefaultCheckbox
+  `
+}
+export const checkboxWithLabel = {
+  'CheckboxComponent.tsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
+
+const DefaultCheckbox = () => {
+  return (
+    <Checkbox label="Checkbox with Label" checked={true} />
+  )
+}
+
+export default DefaultCheckbox
+  `,
+  'CheckboxComponent.jsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
+
+const DefaultCheckbox = () => {
+  return (
+    <Checkbox label="Checkbox with Label" checked={true} />
+  )
+}
+
+export default DefaultCheckbox
   `
 }
 
+export const disabledCheckbox = {
+  'CheckboxComponent.tsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
 
-export const avatarGroup = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
+const DefaultCheckbox = () => {
   return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
+    <Checkbox label="Checkbox with Label" checked={true} disabled />
   )
 }
 
-export default DefaultAvatar
+export default DefaultCheckbox
   `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
+  'CheckboxComponent.jsx': `import { Checkbox } from '@/components/aspect-ui/Checkbox'
 
-const DefaultAvatar = () => {
+const DefaultCheckbox = () => {
   return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
+    <Checkbox label="Checkbox with Label" checked={true} disabled />
   )
 }
 
-export default DefaultAvatar
-  `,
+export default DefaultCheckbox
+  `
 }
+
 
 export const alertPropsData = [
   {

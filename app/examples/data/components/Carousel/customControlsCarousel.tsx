@@ -1,4 +1,5 @@
-import { Carousel, CarouselControl, CarouselIndicators, CarouselItem, CarouselSlides } from "@/app/src";
+import { Carousel, CarouselControl, CarouselIndicators, CarouselItem, CarouselNextButton, CarouselPrevButton, CarouselSlides } from "@/app/src";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { Suspense, use } from "react";
 import { fetchImages } from "./fetchImages";
 interface ImageItem {
@@ -22,13 +23,19 @@ const CarouselComponent = () => {
           </CarouselItem>
         ))}
       </CarouselSlides>
-      <CarouselControl />
+      <CarouselControl className="bottom-0 right-0 top-auto left-auto justify-center gap-6 w-max">
+        <CarouselPrevButton>
+          <ArrowBigLeft />
+        </CarouselPrevButton>
+        <CarouselNextButton>
+          <ArrowBigRight />
+        </CarouselNextButton>
+      </CarouselControl>
       <CarouselIndicators className="mt-4" />
     </Carousel>
   )
 }
-
-export default function DefaultCarousel() {
+export default function CustomControlsCarousel() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <CarouselComponent />

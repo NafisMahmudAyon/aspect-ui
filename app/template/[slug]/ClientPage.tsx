@@ -16,7 +16,7 @@ const ClientPage = ({ slug }: { slug: string }) => {
     setLoading(true)
     async function getData() {
       try {
-        const res = await fetch(`/api/get?cats=variations&subcats=${slug}&page=${page}&limit=5`)
+        const res = await fetch(`/api/get?cats=template&subcats=${slug}&page=${page}&limit=5`)
         const json = await res.json()
         setFetchedData(json.data)
         setTotalPages(json.totalPages)
@@ -40,6 +40,7 @@ const ClientPage = ({ slug }: { slug: string }) => {
     }))
     setTOC(newTOC)
   }, [fetchedData])
+  console.log(fetchedData)
   return (
     <div>
       {loading ? <div>Loading...</div> : (<>
@@ -60,7 +61,7 @@ const ClientPage = ({ slug }: { slug: string }) => {
                 </a>
               </h2>
               <Divider />
-              <CodeSnippets styles="mt-4" content={generatedContent} lang="javascript" url={item.url} >
+              <CodeSnippets styles="mt-4" content={generatedContent} lang="javascript" url={item.url} showCode={false} height={800}>
               </CodeSnippets>
             </div>
           )

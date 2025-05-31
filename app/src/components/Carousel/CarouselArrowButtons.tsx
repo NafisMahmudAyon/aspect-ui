@@ -9,8 +9,8 @@ import {
   useEffect,
   useState
 } from 'react'
-import { useCarouselContext } from './CarouselContext'
 import { cn } from '../../utils/cn'
+import { useCarouselContext } from './CarouselContext'
 
 type UsePrevNextButtonsType = {
   prevBtnDisabled: boolean
@@ -81,10 +81,10 @@ const CarouselPrevButton = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onPrevButtonClick}
         disabled={prevBtnDisabled}
         ref={ref}
-        className={cn('inline-flex items-center justify-center border border-secondary-600 dark:border-secondary-300 rounded-full size-[2rem] text-primary-800 hover:text-primary-900 hover:bg-primary-200 disabled:bg-secondary-200 disabled:opacity-50 dark:disabled:bg-primary-800 dark:hover:bg-primary-900', className)}
+        className={cn('inline-flex items-center justify-center border border-secondary-600 dark:border-secondary-300 rounded-full size-[2rem] text-primary-800 hover:text-primary-900 disabled:bg-primary-200/30 dark:disabled:bg-primary-800/30 disabled:cursor-not-allowed dark:hover:bg-primary-900/50 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 disabled:text-primary-200 dark:disabled:text-primary-800', className)}
         type='button'
       >
-        {!children && <svg className={'size-3 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100'} viewBox='0 0 532 532'>
+        {!children && <svg className={'size-3 '} viewBox='0 0 532 532'>
           <path
             fill='currentColor'
             d='M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z'
@@ -119,7 +119,7 @@ const CarouselNextButton = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onNextButtonClick}
         disabled={nextBtnDisabled}
         ref={ref}
-        className={cn('inline-flex items-center justify-center border border-secondary-600 dark:border-secondary-300 rounded-full size-[2rem] text-primary-800 hover:text-primary-900 hover:bg-primary-200 disabled:bg-secondary-200 disabled:opacity-50 dark:disabled:bg-primary-800 dark:hover:bg-primary-900', className)}
+        className={cn('inline-flex items-center justify-center border border-secondary-600 dark:border-secondary-300 rounded-full size-[2rem] text-primary-800 hover:text-primary-900 disabled:bg-primary-200/30 dark:disabled:bg-primary-800/30 disabled:cursor-not-allowed dark:hover:bg-primary-900/50 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 disabled:text-primary-200 dark:disabled:text-primary-800', className)}
         type='button'
       >
         {!children && <svg className={'size-3 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100'} viewBox='0 0 532 532'>

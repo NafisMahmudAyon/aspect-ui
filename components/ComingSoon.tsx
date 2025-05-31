@@ -1,7 +1,6 @@
 // import { Sparkles, Star } from 'lucide-react';
-import React from 'react'
 
-const ComingSoon = () => {
+const ComingSoon = ({ heading = "Working on this documentation", subHeading = "Coming Soon", description = "We are currently working on this documentation. Please check back later for updates.", showLaunchDate = true }: { heading?: string, subHeading?: string, description?: string, showLaunchDate?: boolean }) => {
   return (
     <div className="bg-gradient-to-br from-primary-100 to-primary-300 dark:from-primary-900 dark:to-primary-800 rounded-2xl shadow-2xl p-8 max-w-2xl mx-auto text-white my-10">
       <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -9,13 +8,12 @@ const ComingSoon = () => {
           <div className="mb-8">
             <div className="inline-flex items-center space-x-2 bg-primary-900/20 dark:bg-primary-100/20 px-3 py-1 rounded-full mb-6">
               <span className="w-2 h-2  bg-gradient-to-r from-indigo-800 to-purple-800 dark:from-indigo-400 dark:to-purple-400 rounded-full animate-pulse"></span>
-              <span className="text-primary-700 dark:text-primary-200 text-sm">Coming Soon</span>
+              <span className="text-primary-700 dark:text-primary-200 text-sm">{subHeading}</span>
             </div>
             <h2 className="!text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-800 to-purple-800 dark:from-indigo-400 dark:to-purple-400">
-              Working on this documentation
+              {heading}
             </h2>
-            <p className="text-primary-700 dark:text-primary-300 text-lg">We are currently working on this documentation. Please check back
-            later for updates.</p>
+            <p className="text-primary-700 dark:text-primary-300 text-lg">{description}</p>
           </div>
           {/* <div className="space-y-4 mb-8">
             <div className="flex items-center space-x-3">
@@ -39,9 +37,9 @@ const ComingSoon = () => {
               <Bell className="w-4 h-4 mr-2" />
               Get Notified
             </button> */}
-            <div className="text-primary-700 dark:text-primary-300 text-sm">
+            {showLaunchDate && <div className="text-primary-700 dark:text-primary-300 text-sm">
               Launch Date: <span className="text-indigo-600 dark:text-indigo-300">Coming Soon</span>
-            </div>
+            </div>}
           </div>
         </div>
         <div className="relative">

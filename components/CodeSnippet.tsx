@@ -2,13 +2,15 @@
 
 import { Button } from "@/app/src";
 import { cn } from "@/app/src/utils/cn";
-import React, { useState, type JSX } from "react";
+import React, { useEffect, useState, type JSX } from "react";
 
 // import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { coldarkCold, coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import { useTheme } from 'next-themes';
 
 interface CodeSnippetProps {
   content?: {
@@ -146,15 +148,24 @@ interface CodeBodyProps {
 }
 
 const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview }) => {
+  const { theme } = useTheme();
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    useEffect(() => {
+      if (theme === 'dark') {
+        setIsDarkMode(true)
+      } else {
+        setIsDarkMode(false)
+      }
+    }, [theme])
   return (
     <>
       {children && preview && <div className="w-full h-full bg-[#121c29] px-[40px] py-[20px] rounded-b-lg">{children}</div>}
       {!preview &&
-        <div className="rounded-b-lg overflow-hidden">
+        <div className="rounded-b-lg overflow-hidden bg-primary-50 dark:bg-[#121c29]">
           <SyntaxHighlighter
             className={cn(styles)}
             language={language}
-            style={coldarkDark}
+            style={isDarkMode ? coldarkDark : coldarkCold}
             customStyle={{
               maxHeight: "420px",
               borderRadius: "0px",
@@ -162,7 +173,6 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
               paddingBottom: "20px",
               marginTop: "0px",
               marginBottom: "0px",
-              background: "#121c29",
               fontSize: "14px",
               lineHeight: "22px",
               letterSpacing: "-0.2px",

@@ -1,6 +1,7 @@
 'use client'
+import Editor from '@monaco-editor/react';
 import { useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Divider, Input, Switch, Textarea, ToggleButton, ToggleButtonGroup, useToast } from '../src';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, Switch, ToggleButton, ToggleButtonGroup, useToast } from '../src';
 
 interface ComponentData {
   dependencies: string[];
@@ -16,7 +17,7 @@ interface JsonData {
 
 interface FileData {
   path: string;
-  content: string;
+  content: string | undefined;
   type: string;
   target: string;
 }
@@ -25,7 +26,7 @@ const page = () => {
   const { addToast, ToastContainer } = useToast()
   const [url, setUrl] = useState('/examples/components/accordion')
   const [codeTsx, setcodeTsx] = useState('')
-  const [codeJsx, setcodeJsx] = useState('')
+  const [codeJsx, setcodeJsx] = useState<string | undefined>('')
   const [title, setTitle] = useState('')
   const [pro, setPro] = useState(false)
   const [tsxJSON, setTsxJSON] = useState<ComponentData>({
@@ -93,34 +94,108 @@ const page = () => {
     <div className='min-h-screen pt-10 container mx-auto space-y-4'>
       <h1 className='text-h1 text-center'>Data Upload</h1>
       {/* <Input placeholder="Example-id" type="number" value={id} onChange={(e) => setId(Number(e.target.value))} /> */}
-      <Input placeholder="Title" label='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
-      <Input placeholder="Example-url" label='Example-url' value={url} onChange={(e) => setUrl(e.target.value)} />
-      <Textarea placeholder="Code TSX" label='Code TSX' value={codeTsx} onChange={(e) => setcodeTsx(e.target.value)} />
-      <Textarea placeholder="Code JSX" label='Code JSX' value={codeJsx} onChange={(e) => setcodeJsx(e.target.value)} />
-      <fieldset className='flex items-center gap-2'>
-        <label>Pro</label>
-        <Switch checked={pro} onChange={() => setPro(!pro)} />
-      </fieldset>
-      <Card className='bg-primary-100/50 dark:bg-primary-900/50'>
-        <CardHeader>
-          <CardTitle>Categories</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ToggleButtonGroup type='multiple' defaultValue={categories} outline={true} onChange={handleMultipleChange}>
-            <ToggleButton value='docs'>Docs</ToggleButton>
-            <ToggleButton value='variations'>Variations</ToggleButton>
-            <ToggleButton value='template'>Template</ToggleButton>
-            <ToggleButton value='page'>Full page</ToggleButton>
-          </ToggleButtonGroup>
-        </CardContent>
-        <CardHeader>
-          <CardTitle>Sub Categories</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Input placeholder="Sub Category" value={subCategory} onChange={(e) => setSubCategory(e.target.value)} />
-        </CardContent>
-      </Card>
-      <Card className='border rounded-lg p-4'>
+      <div className='space-y-4 border rounded-lg p-4'>
+
+        <Input placeholder="Title" label='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Input placeholder="Example-url" label='Example-url' value={url} onChange={(e) => setUrl(e.target.value)} />
+        {/* <Textarea placeholder="Code TSX" label='Code TSX' value={codeTsx} onChange={(e) => setcodeTsx(e.target.value)} /> */}
+        <div className='grid grid-cols-2 gap-4'>
+          <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+            <Editor
+              defaultLanguage="javascript"
+              defaultValue=""
+              theme="vs-dark"
+              className='rounded-none'
+              // onChange={(value) => {
+              //   update(value);
+              // }}
+              onChange={(e) => setcodeTsx(e)}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: false,
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                suggestOnTriggerCharacters: true,
+                tabSize: 2,
+                wordWrap: 'on',
+                folding: true,
+                lineDecorationsWidth: 0,
+                lineNumbersMinChars: 3,
+                renderValidationDecorations: 'on',
+                renderWhitespace: 'none',
+                scrollbar: {
+                  verticalScrollbarSize: 10,
+                  horizontalScrollbarSize: 10
+                }
+              }}
+            />
+          </div>
+          {/* <Textarea placeholder="Code JSX" label='Code JSX' value={codeJsx} onChange={(e) => setcodeJsx(e.target.value)} /> */}
+          <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+            <Editor
+              defaultLanguage="javascript"
+              defaultValue=""
+              theme="vs-dark"
+              className='rounded-none'
+              // onChange={(value) => {
+              //   update(value);
+              // }}
+              onChange={(e) => setcodeJsx(e)}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: false,
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                suggestOnTriggerCharacters: true,
+                tabSize: 2,
+                wordWrap: 'on',
+                folding: true,
+                lineDecorationsWidth: 0,
+                lineNumbersMinChars: 3,
+                renderValidationDecorations: 'on',
+                renderWhitespace: 'none',
+                scrollbar: {
+                  verticalScrollbarSize: 10,
+                  horizontalScrollbarSize: 10
+                }
+              }}
+            />
+          </div>
+        </div>
+        <Card className='bg-transparent dark:bg-transparent border'>
+          <CardHeader>
+            <CardTitle>Pro/Free</CardTitle>
+          </CardHeader>
+          <CardContent className='mb-4'>
+            <fieldset className='flex items-center gap-2'>
+              <label>Pro</label>
+              <Switch checked={pro} onChange={() => setPro(!pro)} />
+            </fieldset>
+          </CardContent>
+          <CardHeader>
+            <CardTitle>Categories</CardTitle>
+          </CardHeader>
+          <CardContent className='mb-4'>
+            <ToggleButtonGroup type='multiple' defaultValue={categories} outline={true} onChange={handleMultipleChange}>
+              <ToggleButton value='docs'>Docs</ToggleButton>
+              <ToggleButton value='variations'>Variations</ToggleButton>
+              <ToggleButton value='template'>Template</ToggleButton>
+              <ToggleButton value='page'>Full page</ToggleButton>
+            </ToggleButtonGroup>
+          </CardContent>
+          <CardHeader>
+            <CardTitle>Sub Categories</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Input placeholder="Sub Category" value={subCategory} onChange={(e) => setSubCategory(e.target.value)} />
+          </CardContent>
+        </Card>
+      </div>
+      <Card className='border rounded-lg p-4 bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent'>
         <CardHeader>
           <CardTitle>JSON Data</CardTitle>
         </CardHeader>
@@ -129,53 +204,129 @@ const page = () => {
           <Input placeholder="Type" value={jsonData?.type} onChange={(e) => setJsonData({ ...jsonData, type: e.target.value })} />
           <Input placeholder="Author" value={jsonData?.author} onChange={(e) => setJsonData({ ...jsonData, author: e.target.value })} />
           <Input placeholder="Title" value={jsonData?.title} onChange={(e) => setJsonData({ ...jsonData, title: e.target.value })} />
-          <Divider />
-          <div className='mt-4 '>
-            <h3>TSX JSON</h3>
-            <Input
-              placeholder="Dependencies (comma-separated)"
-              value={tsxJSON?.dependencies.join(',')}
-              onChange={(e) => setTsxJSON({
-                ...tsxJSON,
-                dependencies: e.target.value.split(',').map(dep => dep.trim())
-              })}
-            />
-            {tsxFiles.map((file, index) => (
-              <div key={index} className='border rounded-lg p-4'>
-                <Input placeholder="Path" value={file.path} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
-                <Textarea placeholder="Content" value={file.content} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} />
-                <Input placeholder="Type" value={file.type} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
-                <Input placeholder="Target" value={file.target} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
-              </div>
-            ))}
-            <Button variant='outline' className='mt-4' onClick={() => setTsxFiles([...tsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
-          </div>
-          <Divider className='my-4' />
-          <div>
-            <h3>JSX JSON</h3>
-            {/* <Input placeholder="Name" value={jsxJSON?.name} onChange={(e) => setJsxJSON({ ...jsxJSON, name: e.target.value })} />
-          <Input placeholder="Type" value={jsxJSON?.type} onChange={(e) => setJsxJSON({ ...jsxJSON, type: e.target.value })} />
-          <Input placeholder="Author" value={jsxJSON?.author} onChange={(e) => setJsxJSON({ ...jsxJSON, author: e.target.value })} />
-          <Input placeholder="Title" value={jsxJSON?.title} onChange={(e) => setJsxJSON({ ...jsxJSON, title: e.target.value })} /> */}
-            <Input
-              placeholder="Dependencies (comma-separated)"
-              value={jsxJSON?.dependencies.join(',')}
-              onChange={(e) => setJsxJSON({
-                ...jsxJSON,
-                dependencies: e.target.value.split(',').map(dep => dep.trim())
-              })}
-            />
-            <div className='mt-4 space-y-4'>
-              {jsxFiles.map((file, index) => (
-                <div key={index} className='border rounded-lg p-4'>
-                  <Input placeholder="Path" value={file.path} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
-                  <Textarea placeholder="Content" value={file.content} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} />
-                  <Input placeholder="Type" value={file.type} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
-                  <Input placeholder="Target" value={file.target} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
+          {/* <Divider /> */}
+          <div className='grid grid-cols-2 gap-4'>
+            <Card className='mt-4 border p-4 rounded-lg bg-transparent dark:bg-transparent'>
+              <CardHeader>
+                <CardTitle>TSX JSON</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Input
+                  placeholder="Dependencies (comma-separated)"
+                  value={tsxJSON?.dependencies.join(',')}
+                  onChange={(e) => setTsxJSON({
+                    ...tsxJSON,
+                    dependencies: e.target.value.split(',').map(dep => dep.trim())
+                  })}
+                />
+                <div className='space-y-4'>
+                  {tsxFiles.map((file, index) => (
+                    <div key={index} className='border rounded-lg p-4 mb-4'>
+                      <Input placeholder="Path" value={file.path} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
+                      <Input placeholder="Type" value={file.type} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
+                      <Input placeholder="Target" value={file.target} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
+                      {/* <Textarea placeholder="Content" value={file.content} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} /> */}
+                      <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+                        <Editor
+                          defaultLanguage="javascript"
+                          defaultValue=""
+                          theme="vs-dark"
+                          className='rounded-none'
+                          // onChange={(value) => {
+                          //   update(value);
+                          // }}
+                          onChange={(e) => setTsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e } : f))}
+                          options={{
+                            minimap: { enabled: false },
+                            fontSize: 14,
+                            lineNumbers: 'on',
+                            roundedSelection: false,
+                            scrollBeyondLastLine: false,
+                            automaticLayout: true,
+                            suggestOnTriggerCharacters: true,
+                            tabSize: 2,
+                            wordWrap: 'on',
+                            folding: true,
+                            lineDecorationsWidth: 0,
+                            lineNumbersMinChars: 3,
+                            renderValidationDecorations: 'on',
+                            renderWhitespace: 'none',
+                            scrollbar: {
+                              verticalScrollbarSize: 10,
+                              horizontalScrollbarSize: 10
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  <Button variant='outline' className='mt-4' onClick={() => setTsxFiles([...tsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
                 </div>
-              ))}
-              <Button variant='outline' className='mt-4' onClick={() => setJsxFiles([...jsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
-            </div>
+              </CardContent>
+            </Card>
+            {/* <Divider className='my-4' /> */}
+            <Card className='mt-4 border p-4 rounded-lg '>
+              <CardHeader>
+                <CardTitle>JSX JSON</CardTitle>
+              </CardHeader>
+              {/* <Input placeholder="Name" value={jsxJSON?.name} onChange={(e) => setJsxJSON({ ...jsxJSON, name: e.target.value })} />
+            <Input placeholder="Type" value={jsxJSON?.type} onChange={(e) => setJsxJSON({ ...jsxJSON, type: e.target.value })} />
+            <Input placeholder="Author" value={jsxJSON?.author} onChange={(e) => setJsxJSON({ ...jsxJSON, author: e.target.value })} />
+            <Input placeholder="Title" value={jsxJSON?.title} onChange={(e) => setJsxJSON({ ...jsxJSON, title: e.target.value })} /> */}
+              <Input
+                placeholder="Dependencies (comma-separated)"
+                value={jsxJSON?.dependencies.join(',')}
+                onChange={(e) => setJsxJSON({
+                  ...jsxJSON,
+                  dependencies: e.target.value.split(',').map(dep => dep.trim())
+                })}
+              />
+              <CardContent>
+                <div className='space-y-4'>
+                  {jsxFiles.map((file, index) => (
+                    <div key={index} className='border rounded-lg p-4'>
+                      <Input placeholder="Path" value={file.path} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
+                      <Input placeholder="Type" value={file.type} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
+                      <Input placeholder="Target" value={file.target} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
+                      {/* <Textarea placeholder="Content" value={file.content} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} /> */}
+                      <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+                        <Editor
+                          defaultLanguage="javascript"
+                          defaultValue=""
+                          theme="vs-dark"
+                          className='rounded-none'
+                          // onChange={(value) => {
+                          //   update(value);
+                          // }}
+                          onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e } : f))}
+                          options={{
+                            minimap: { enabled: false },
+                            fontSize: 14,
+                            lineNumbers: 'on',
+                            roundedSelection: false,
+                            scrollBeyondLastLine: false,
+                            automaticLayout: true,
+                            suggestOnTriggerCharacters: true,
+                            tabSize: 2,
+                            wordWrap: 'on',
+                            folding: true,
+                            lineDecorationsWidth: 0,
+                            lineNumbersMinChars: 3,
+                            renderValidationDecorations: 'on',
+                            renderWhitespace: 'none',
+                            scrollbar: {
+                              verticalScrollbarSize: 10,
+                              horizontalScrollbarSize: 10
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  <Button variant='outline' className='mt-4' onClick={() => setJsxFiles([...jsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </CardContent>
       </Card >

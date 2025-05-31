@@ -1,19 +1,59 @@
 import CodeSnippets from '@/components/CodeSnippets'
 import EditPage from '@/components/EditPage'
-import ComingSoon from '@/components/ComingSoon'
 import ComponentTable from '@/components/ComponentTable'
-import {defaultCarousel} from './Code/Code.tsx'
+import { defaultCarousel, customControlsCarousel, autoplayCarousel, carouselPropsData, carouselSlidesPropsData, carouselItemPropsData } from './Code/Code.tsx'
+import DescriptionWithCode from '@/components/DescriptionWithCode'
 
 ## Table of Contents
 
-
 ## Default Carousel
+
 ---
-<CodeSnippets styles="mt-4" content={defaultCarousel} lang="javascript" url="examples/components/carousel/default-carousel">
-</CodeSnippets>
 
-<ComingSoon/>
+<CodeSnippets
+  styles='mt-4'
+  content={defaultCarousel}
+  lang='javascript'
+  url='examples/components/carousel/default-carousel'
+></CodeSnippets>
+## Custom Controls Carousel 
 
+---
 
+<CodeSnippets
+  styles='mt-4'
+  content={customControlsCarousel}
+  lang='javascript'
+  url='examples/components/carousel/custom-carousel-control'
+></CodeSnippets>
 
+## Autoplay Carousel
 
+---
+
+<DescriptionWithCode description='The `autoplay` prop automatically plays carousel slides. You can install the required `embla-carousel-autoplay` package by running `npm install embla-carousel-autoplay` or `yarn add embla-carousel-autoplay`.' />
+
+<CodeSnippets
+  styles='mt-4'
+  content={autoplayCarousel}
+  lang='javascript'
+  url='examples/components/carousel/autoplay-carousel'
+></CodeSnippets>
+
+## Card Props
+
+---
+
+<ComponentTable data={carouselPropsData} />
+
+## CarouselSlides Props
+
+---
+
+<ComponentTable data={carouselSlidesPropsData} />
+
+## CarouselItem Props
+
+---
+
+<ComponentTable data={carouselItemPropsData} />

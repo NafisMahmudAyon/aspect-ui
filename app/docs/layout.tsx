@@ -8,8 +8,7 @@ import { ReactNode } from 'react'
 
 const DocsLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang='en'>
-      <body className={`bg-primary-50 dark:bg-primary-950 font-sans`} suppressHydrationWarning={true}>
+    
         <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Navbar />
           <section>
@@ -28,8 +27,6 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
           </section>
           <TopProgressBar />
         </AspectThemeProvider>
-      </body>
-    </html>
   )
 }
 

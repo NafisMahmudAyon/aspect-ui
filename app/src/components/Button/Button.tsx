@@ -41,7 +41,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const baseStyles =
-    `${variant== 'link' ? "" : "inline-flex gap-2 items-center justify-center"} font-medium rounded-md focus:outline-hidden transition ease-in-out duration-200`
+    `${variant== 'link' ? "" : "inline-flex gap-2 items-center justify-center"} font-medium rounded-md focus:outline-hidden transition ease-in-out duration-200 cursor-pointer`
 
   const sizeStyles = {
     small: `${variant == 'link' ? "" : "px-3 py-2"} text-sm`,

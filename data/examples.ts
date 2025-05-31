@@ -22,6 +22,11 @@ import SimpleCard from "@/app/examples/data/components/Card/SimpleCard";
 import WithHeaderFooterCard from "@/app/examples/data/components/Card/WithHeaderFooterCard";
 import InteractiveCard from "@/app/examples/data/components/Card/InteractiveCard";
 import DefaultCarousel from "@/app/examples/data/components/Carousel/DefaultCarousel";
+import CustomControlsCarousel from "@/app/examples/data/components/Carousel/customControlsCarousel";
+import AutoplayCarousel from "@/app/examples/data/components/Carousel/AutoPlayCarousel";
+import DefaultCheckbox from "@/app/examples/data/components/Checkbox/DefaultCheckbox";
+import CheckboxWithLabel from "@/app/examples/data/components/Checkbox/CheckboxWithLabel";
+import DisabledCheckbox from "@/app/examples/data/components/Checkbox/DisabledCheckbox";
 
 type ComponentCategory =
   | 'button'
@@ -32,6 +37,7 @@ type ComponentCategory =
   | 'accordion'
   | 'breadcrumb'
   | 'back-to-top'
+  | 'checkbox'
 type ExampleKey = string
 
 export type ExampleComponentMap = {
@@ -78,7 +84,14 @@ const exampleComponentMap: ExampleComponentMap = {
     'interactive-card': InteractiveCard
   },
   'carousel': {
-    'default-carousel': DefaultCarousel
+    'default-carousel': DefaultCarousel,
+    'custom-carousel-control': CustomControlsCarousel,
+    'autoplay-carousel': AutoplayCarousel
+  },
+  'checkbox': {
+    'default-checkbox': DefaultCheckbox,
+    'checkbox-with-label': CheckboxWithLabel,
+    'disabled-checkbox': DisabledCheckbox
   }
 }
 
