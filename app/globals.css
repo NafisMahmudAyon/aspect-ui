@@ -10,6 +10,24 @@
   color: var(--color-primary-500);
 }
 
+@theme {
+  --animate-float: float 2s ease-in-out infinite;
+  --animate-float-2: float 2s ease-in-out 1s infinite;
+  --animate-float-3: float 2s ease-in-out 2s infinite;
+  --animate-float-4: float 2s ease-in-out 3s infinite;
+  @keyframes float {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(0, 5px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+}
+
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -174,3 +192,25 @@ iframe body {
   }
 }
 
+
+/* scroll bar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 3px;
+  @media (prefers-color-scheme: dark) {
+    
+  }
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

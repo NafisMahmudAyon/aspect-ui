@@ -18,25 +18,25 @@ const Hero = () => {
       <section className="container mx-auto px-4 py-6 md:py-10 lg:py-16 lg:h-[calc(100vh-80px)] flex items-center justify-center">
         <div className="relative grid w-full h-full place-items-center">
           {/* Feature Icons */}
-          <div className="absolute left-0 top-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+          <div className="absolute left-0 top-0 rounded-lg border bg-primary-200 shadow-sm animate-float border-primary-800/20 dark:border-primary-200/20 dark:bg-primary-200/50 p-4 animate-float">
             <div className="grid h-16 w-16 place-items-center rounded-lg">
               <Layers className="h-8 w-8" />
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+          <div className="absolute bottom-0 left-0 rounded-lg border bg-primary-200 shadow-sm animate-float border-primary-800/20 dark:border-primary-200/20 dark:bg-primary-200/50 p-4 animate-float-2">
             <div className="grid h-16 w-16 place-items-center rounded-lg">
               <Code className="h-8 w-8" />
             </div>
           </div>
 
-          <div className="absolute right-0 top-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+          <div className="absolute right-0 top-0 rounded-lg border bg-primary-200 shadow-sm animate-float border-primary-800/20 dark:border-primary-200/20 dark:bg-primary-200/50 p-4 animate-float-3">
             <div className="grid h-16 w-16 place-items-center rounded-lg">
               <Palette className="h-8 w-8" />
             </div>
           </div>
 
-          <div className="absolute bottom-0 right-0 rounded-lg border border-gray-800 bg-[#111] p-4">
+          <div className="absolute bottom-0 right-0 rounded-lg border bg-primary-200 shadow-sm animate-float border-primary-800/20 dark:border-primary-200/20 dark:bg-primary-200/50 p-4 animate-float-4">
             <div className="grid h-16 w-16 place-items-center rounded-lg">
               <Box className="h-8 w-8" />
             </div>

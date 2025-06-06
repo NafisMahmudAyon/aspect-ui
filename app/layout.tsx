@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true} className={`bg-primary-50 dark:bg-primary-950 font-sans`}>{children}</body>
+      <body suppressHydrationWarning={true} className={`bg-primary-50 dark:bg-primary-950 font-sans scrollbar-thin`}>{children}</body>
     </html>
   )
 }

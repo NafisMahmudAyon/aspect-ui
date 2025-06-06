@@ -11,6 +11,7 @@ import React, { useEffect, useState, type JSX } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold, coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import { Check, Copy } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 interface CodeSnippetProps {
@@ -58,8 +59,8 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
   return (
     <Code styles={cn(styles, "my-4 rounded-t-lg rounded-b-lg relative bg-primary-50 dark:bg-primary-950 hover:shadow-md")}>
       <CodeHeader
-        styles={cn(headerStyles, "flex items-center justify-between w-full bg-primary-100 dark:bg-primary-900 py-1 px-2 text-white rounded-t-lg hover:bg-primary-100 dark:hover:bg-primary-900")}>
-        <div className="">
+        styles={cn(headerStyles, "flex items-center justify-between w-full bg-primary-100 dark:bg-primary-900 py-3 px-2 text-white rounded-t-lg hover:bg-primary-100 dark:hover:bg-primary-900")}>
+        <div className="flex justify-between">
           {(children || url) && showCode && (
             <Button
               onClick={() => { setPreview(true); setCodeType(999) }}
@@ -74,15 +75,15 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
 
           {!showCode && (
             <div className="flex items-center gap-2 ml-6">
-              <span className="w-3.5 h-3.5 bg-[#ff6053] rounded-full inline-block" />
-              <span className="w-3.5 h-3.5 bg-[#ffb43e] rounded-full inline-block" />
-              <span className="w-3.5 h-3.5 bg-[#25cf3a] rounded-full inline-block" />
+              <span className="w-3.5 h-3.5 bg-red-500 rounded-full inline-block" />
+              <span className="w-3.5 h-3.5 bg-yellow-500 rounded-full inline-block" />
+              <span className="w-3.5 h-3.5 bg-green-500 rounded-full inline-block" />
             </div>
           )}
 
           {showCode && Object.keys(content).map((key, index) => (
+            <React.Fragment key={index}>
             <Button
-              key={index}
               onClick={() => { setPreview(false); setCodeType(index) }}
               className={cn(
                 'hidden md:inline-flex px-4 py-2.5 text-body2 font-normal border-b-2 rounded-none',
@@ -91,7 +92,6 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
             >
               <span>{key}</span>
             </Button>
-          ))}
           <div className="inline-flex md:hidden">
             <Dropdown>
               <DropdownAction>
@@ -108,6 +108,8 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
               </DropdownContent>
             </Dropdown>
           </div>
+            </React.Fragment>
+          ))}
         </div>
         <div className="flex gap-2">
           <div className={cn('gap-2 items-center hidden', preview ? ' md:flex' : 'hidden')}>
@@ -255,12 +257,12 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
       {url && preview && (
         <>
           <div className="py-[20px] border border-t-0 border-primary-100 dark:border-primary-900 rounded-b-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
-            <iframe style={{ height: `${height}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out `}
+            <iframe style={{ height: `${height}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out`}
               // src="https://pp01.nafisbd.com/examples/hero"
               src={isExternal ? url : process.env.NEXT_PUBLIC_BASE_URL ?
                 `${process.env.NEXT_PUBLIC_BASE_URL}${url}` :
                 `/${url}`
-            }
+              }
             />
           </div>
         </>
@@ -293,3 +295,54 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
     </>
   );
 };
+
+interface CLICodeBlockProps {
+  id: number;
+  isPro?: boolean;
+  description?: string;
+}
+
+export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
+  id,
+  isPro=false
+}) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (id: number, isPro: boolean) => {
+    try {
+      await navigator.clipboard.writeText(`npx -p aspect-ui@latest add https://aspect-ui.vercel.app/api/get/${id}${isPro &&"?api-key=*****"}`);
+      setCopied(true);
+
+      // Reset copied state after 2 seconds
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+  return (
+    <div className="relative rounded-lg bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 shadow-lg border border-primary-800/20 dark:border-primary-200/20 mt-14">
+      <div className='absolute bottom-full left-4 dark:bg-primary-100 dark:text-primary-800 bg-primary-900 text-primary-200 px-3 py-1 rounded-t-md border-b border-primary-800/20 dark:border-primary-200/20'>CLI</div>
+      <div className="p-4 mr-12 flex items-center gap-2">
+        {<span className="text-green-400">$ </span>}
+        <pre className={`text-sm overflow-x-auto`}>
+          <code className="font-mono">
+            npx -p aspect-ui@latest add https://aspect-ui.vercel.app/api/get/{id}{isPro && "?api-key=*****"}
+          </code>
+        </pre>
+      </div>
+      <button
+        onClick={() => handleCopy(id, isPro)}
+        className="absolute top-1/2 -translate-y-1/2 right-4 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        aria-label="Copy to clipboard"
+      >
+        {copied ? (
+          <Check size={16} className="text-green-400" />
+        ) : (
+          <Copy size={16} className="text-gray-400" />
+        )}
+      </button>
+    </div>
+  )
+}

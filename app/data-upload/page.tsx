@@ -25,7 +25,7 @@ interface FileData {
 const page = () => {
   const { addToast, ToastContainer } = useToast()
   const [url, setUrl] = useState('/examples/components/accordion')
-  const [codeTsx, setcodeTsx] = useState('')
+  const [codeTsx, setcodeTsx] = useState<string | undefined>('')
   const [codeJsx, setcodeJsx] = useState<string | undefined>('')
   const [title, setTitle] = useState('')
   const [pro, setPro] = useState(false)

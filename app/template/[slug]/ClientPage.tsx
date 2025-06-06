@@ -1,6 +1,6 @@
 'use client'
 import { Divider, Pagination } from '@/app/src'
-import CodeSnippets from '@/components/CodeSnippets'
+import CodeSnippets, { CLICodeBlock } from '@/components/CodeSnippets'
 import ComingSoon from '@/components/ComingSoon'
 import { useTOC } from '@/context/TOCContext'
 import { useEffect, useState } from 'react'
@@ -12,11 +12,13 @@ const ClientPage = ({ slug }: { slug: string }) => {
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(true)
 
+
   useEffect(() => {
     setLoading(true)
     async function getData() {
       try {
-        const res = await fetch(`/api/get?cats=template&subcats=${slug}&page=${page}&limit=5`)
+        const link = slug == 'all' ? `/api/get?cats=template&page=${page}&limit=5` : `/api/get?cats=template&subcats=${slug}&page=${page}&limit=5`
+        const res = await fetch(link)
         const json = await res.json()
         setFetchedData(json.data)
         setTotalPages(json.totalPages)
@@ -61,15 +63,16 @@ const ClientPage = ({ slug }: { slug: string }) => {
                 </a>
               </h2>
               <Divider />
+              <CLICodeBlock id={item.id} isPro={item.pro} />
               <CodeSnippets styles="mt-4" content={generatedContent} lang="javascript" url={item.url} showCode={false} height={800}>
               </CodeSnippets>
             </div>
           )
         })}
-        {fetchedData.length == 0 && <div><ComingSoon heading="Coming Soon" subHeading="Coming Soon" description="We are currently working on this variations. Please check back later for updates." showLaunchDate={false}/></div>}
+        {fetchedData.length == 0 && <div><ComingSoon heading="Coming Soon" subHeading="Coming Soon" description="We are currently working on this variations. Please check back later for updates." showLaunchDate={false} /></div>}
       </>
       )}
-        {totalPages > 1 && <Pagination count={totalPages} defaultPage={page} showFirstLast={totalPages > 5 ? true : false} showNextPrev={totalPages > 1 ? true : false} onChange={(page) => setPage(page)} />}
+      {totalPages > 1 && <Pagination count={totalPages} defaultPage={page} showFirstLast={totalPages > 5 ? true : false} showNextPrev={totalPages > 1 ? true : false} onChange={(page) => setPage(page)} />}
     </div>
   )
 }

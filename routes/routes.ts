@@ -663,11 +663,27 @@ export const variationsRoutes: routerPath[] = [
 export const templatesRoutes: routerPath[] = [
   {
     id: generatedID(),
+    name: 'All',
+    href: '/template/all',
+    tag: false,
+    deprecate: false,
+    folderName: 'All'
+  },
+  {
+    id: generatedID(),
     name: 'Hero',
     href: '/template/hero',
     tag: false,
     deprecate: false,
     folderName: 'Hero'
+  },
+  {
+    id: generatedID(),
+    name: 'About',
+    href: '/template/about',
+    tag: false,
+    deprecate: false,
+    folderName: 'About'
   },
 ]
 
