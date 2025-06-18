@@ -5,10 +5,10 @@ import tableOfContents from 'remark-toc'
 const nextConfig = {
   pageExtensions: ['mdx', 'tsx', 'ts'],
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   reactStrictMode: true,
   async redirects() {
@@ -215,6 +215,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'via.placeholder.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com'
       }
     ]
   }

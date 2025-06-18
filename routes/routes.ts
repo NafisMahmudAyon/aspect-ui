@@ -781,7 +781,7 @@ export const navbarRoutes: routerPath[] = [
   },
   {
     id: generatedID(),
-    href: '/template/hero',
+    href: '/template/all',
     name: 'Template',
     redirect: false
   },

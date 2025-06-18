@@ -1,21 +1,22 @@
 import { NavbarList } from '@/app/src'
-import React from 'react'
-import ThemeSwitcher from './ThemeSwitcher'
-import Link from 'next/link'
-import Image from 'next/image'
-import AspectLogo from '../public/SVG/aspectLogo.svg'
-import AspectDarkLogo from '../public/SVG/aspectDarkLogo.svg'
 import { navbarRoutes } from '@/routes/routes'
+// import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs'
+import Image from 'next/image'
+import Link from 'next/link'
+import AspectDarkLogo from '../public/SVG/aspectDarkLogo.svg'
+import AspectLogo from '../public/SVG/aspectLogo.svg'
+import ThemeSwitcher from './ThemeSwitcher'
+// import UserButton from './UserButton'
 
 const DesktopMenu = () => {
   return (
     <>
       <Link href="/" className="flex">
-        <Image src={AspectLogo} width={150} alt="Aspect Logo"  className="block dark:hidden" />
+        <Image src={AspectLogo} width={150} alt="Aspect Logo" className="block dark:hidden" />
         <Image src={AspectDarkLogo} alt="Aspect Logo" width={150} className="hidden dark:block" />
       </Link>
       <NavbarList>
-        {navbarRoutes.map((nav)=>(
+        {navbarRoutes.map((nav) => (
           <Link key={nav.id} href={nav.href} target='_self' className='text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-50'>
             {nav.name}
           </Link>
@@ -27,6 +28,7 @@ const DesktopMenu = () => {
       </NavbarList>
       <NavbarList>
         <ThemeSwitcher />
+        {/* <UserButton /> */}
       </NavbarList>
     </>
   )

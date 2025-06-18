@@ -137,8 +137,8 @@ export const Popover = ({
       }
 
       // Adjust for viewport boundaries
-      if (left + popoverRect.width > viewportWidth) {
-        left = viewportWidth - popoverRect.width - spacing;
+      if (left + popoverRect.width / 2 > viewportWidth) {
+        left = viewportWidth - (popoverRect.width / 2) - offset;
       }
       if (left < spacing) {
         left = spacing;
@@ -196,7 +196,7 @@ export const Popover = ({
   }, [onHover]);
 
   const getPopoverStyles = (): string => {
-    const baseStyles = 'fixed bg-white rounded-lg shadow-lg border border-gray-200';
+    const baseStyles = 'fixed  rounded-lg shadow-lg border border-primary-200/30 dark:border-primary-800/30 ';
 
     const positionStyles = {
       top: '-translate-x-1/2',
@@ -226,8 +226,6 @@ export const Popover = ({
     }
   };
 
-  console.log(getPopoverStyles(), popoverStyles)
-
   return (
     <>
       <div
@@ -240,6 +238,7 @@ export const Popover = ({
         {children}
       </div>
       {isOpen &&
+        typeof window !== 'undefined' &&
         createPortal(
           <div
             ref={popoverRef}
@@ -262,7 +261,8 @@ export const Popover = ({
             {content}
           </div>,
           document.body
-        )}
+        )
+      }
     </>
   );
 };

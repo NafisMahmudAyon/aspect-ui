@@ -1,11 +1,12 @@
 import { Carousel, CarouselIndicators, CarouselItem, CarouselSlides } from '@/app/src'
 import { NextButton } from '@/app/src/components/Carousel/NextButton'
 import { PrevButton } from '@/app/src/components/Carousel/PrevButton'
+import autoPlay from 'embla-carousel-autoplay'
 
 const CarouselExample = () => {
   return (
     <div className='w-full'>
-      <Carousel className="w-full pb-0">
+      <Carousel className="w-full pb-0" options={{ loop: true }} plugins={[autoPlay()]}>
         <CarouselSlides className=''>
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index} className='flex-[0_0_100%]'>
