@@ -35,7 +35,7 @@ export const Divider: React.FC<DividerProps> = ({
     '2xl': 'border-l-[6px]'
   }
 
-  const baseStyles = `border-primary-500 ${orientation === 'horizontal' ? horizontalSizeStyles[size] : verticalSizeStyles[size]}`
+  const baseStyles = `border-border ${orientation === 'horizontal' ? horizontalSizeStyles[size] : verticalSizeStyles[size]}`
 
   const orientationStyles =
     orientation === 'horizontal' ? 'w-full' : 'h-full'

@@ -17,7 +17,7 @@ interface ToastOptions {
     action?: ToastAction;
 }
 export declare const useToast: () => {
-    addToast: (options: ToastOptions) => void;
+    toast: (options: ToastOptions) => void;
     ToastContainer: React.FC<{}>;
     promise: <T>(promise: Promise<T>, options: {
         loading: string;

@@ -226,6 +226,8 @@
     "@mdx-js/react": "^3.1.0",
     "@monaco-editor/react": "^4.7.0",
     "@next/mdx": "^15.0.3",
+    "@radix-ui/react-popover": "^1.1.14",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.1",
     "@types/chalk-animation": "^1.6.3",

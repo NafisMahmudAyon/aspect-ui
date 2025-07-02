@@ -33,11 +33,11 @@ export const Skeleton: React.FC<SkeletonProps> = ({
         return 'rounded-sm'
     }
   }
-  
+
 
   return (
     <div
-      className={cn('animate-pulse bg-primary-200 dark:bg-primary-800', getVariationStyle(), className)}
+      className={cn('animate-pulse bg-bg-light', getVariationStyle(), className)}
       style={{
         width: width || '100%',
         height: height || (variation === 'text' ? '1em' : '100%')

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '../../utils/cn'
 
 interface SliderProps {
@@ -9,6 +9,7 @@ interface SliderProps {
   defaultValue: number[]
   onChange?: (values: number[]) => void
   className?: string
+  disabled?: boolean
 }
 
 export const Slider: React.FC<SliderProps> = ({
@@ -18,6 +19,7 @@ export const Slider: React.FC<SliderProps> = ({
   defaultValue,
   onChange,
   className = "",
+  disabled = false,
   ...rest
 }) => {
   const [values, setValues] = useState<number[]>(defaultValue)
@@ -71,12 +73,12 @@ export const Slider: React.FC<SliderProps> = ({
 
   return (
     <div
-      className={cn('relative h-2 w-full rounded-full bg-primary-200 dark:bg-primary-800', className)}
+      className={cn('relative h-2 w-full rounded-full bg-bg-light', disabled && 'opacity-50 cursor-not-allowed pointer-events-none', className)}
       ref={sliderRef}
       {...rest}
     >
       <div
-        className='absolute h-full rounded-full bg-primary-800 dark:bg-primary-200'
+        className='absolute h-full rounded-full bg-primary'
         style={{
           left: `${values.length === 1 ? '0' : getLeftPosition(values[0])}%`,
           right: `${values.length === 1
@@ -87,7 +89,7 @@ export const Slider: React.FC<SliderProps> = ({
       {values.map((value, index) => (
         <div
           key={index}
-          className='absolute size-4 cursor-pointer rounded-full border-2 border-primary-800 dark:border-primary-200 bg-primary-200 dark:bg-primary-800'
+          className={cn('absolute size-4 cursor-pointer rounded-full border-2 border-primary  bg-primary-foreground')}
           style={{
             left: `calc(${getLeftPosition(value)}% - 0.5rem)`,
             top: '-0.25rem'

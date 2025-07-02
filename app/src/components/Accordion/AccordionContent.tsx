@@ -1,27 +1,23 @@
 'use client'
 
+import { AnimatePresence, motion } from 'framer-motion'
 import React, { ReactNode } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useAccordion } from './AccordionContext'
 import { cn } from '../../utils/cn'
+import { useAccordion } from './AccordionContext'
 
 interface AccordionContentProps {
   children: ReactNode
   isOpen?: boolean
   className?: string
-  reset?: boolean
 }
 
 export const AccordionContent: React.FC<AccordionContentProps> = ({
   children,
   isOpen,
   className = '',
-  reset = false,
   ...rest
 }) => {
-  const { contentClassName: accordionContentClassName, reset: accordionReset } = useAccordion()
-
-  const accordionContentReset = accordionReset ?? reset
+  const { contentClassName: accordionContentClassName } = useAccordion()
 
   return (
     <AnimatePresence initial={false}>
@@ -38,10 +34,7 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
         >
           <div
             className={cn(
-              'overflow-hidden border-t p-4',
-              isOpen
-                ? accordionContentReset ? "" : 'border-primary-950 dark:border-primary-100 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200'
-                : accordionContentReset ? "" :  'border-primary-950 dark:border-primary-100',
+              'overflow-hidden border-t border-border bg-bg p-4 text-sm',
               accordionContentClassName,
               className
             )} {...rest}

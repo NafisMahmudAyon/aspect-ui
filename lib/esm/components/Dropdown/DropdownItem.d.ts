@@ -5,6 +5,7 @@ interface DropdownItemProps {
     className?: string;
     activeClassName?: string;
     isSelected?: boolean;
+    isLink?: boolean;
 }
 export declare const DropdownItem: React.FC<DropdownItemProps>;
 export {};

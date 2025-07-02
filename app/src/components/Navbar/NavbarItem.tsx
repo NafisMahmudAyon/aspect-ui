@@ -6,9 +6,9 @@ import { cn } from '../../utils/cn'
 
 interface NavbarItemProps {
   children: ReactNode
-  className?: string 
+  className?: string
 }
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({ children, className = '', ...rest }) => {
-  return <div className={cn('px-2 py-1 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100', className)} {...rest}>{children}</div>
+  return <button className={cn('px-2 py-1 inline-flex text-text hover:bg-bg-light rounded-md transition-colors ease-in-out focus-visible:bg-bg-light', className)} {...rest}>{children}</button>
 }

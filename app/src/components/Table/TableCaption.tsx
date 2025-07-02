@@ -12,11 +12,11 @@ interface TableCaptionProps {
 export const TableCaption: React.FC<TableCaptionProps> = ({
   children,
   className = '',
-  position = "top",
+  position = "bottom",
   ...rest
 }) => {
   return (
-    <caption className={cn("mb-2 text-sm text-primary-800 dark:text-primary-200", position === "top" ? "caption-top" : "caption-bottom", className)} {...rest}>
+    <caption className={cn("mb-2 mt-4 text-sm text-text-muted", position === "top" ? "caption-top" : "caption-bottom", className)} {...rest}>
       {children}
     </caption>
   )

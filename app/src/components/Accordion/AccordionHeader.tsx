@@ -69,7 +69,6 @@ interface AccordionHeaderProps {
   activeLabelClassName?: string
   headerClassName?: string
   activeHeaderClassName?: string
-  reset?: boolean
   tagName?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'button'
 }
 
@@ -89,7 +88,6 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   headerClassName: headerHeaderClassName,
   activeHeaderClassName: headerActiveHeaderClassName,
   disabled = false,
-  reset = false,
   tagName = 'h2',
   ...rest
 }) => {
@@ -104,7 +102,6 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     activeLabelClassName: accordionActiveLabelClassName,
     headerClassName: accordionHeaderClassName,
     activeHeaderClassName: accordionActiveHeaderClassName,
-    reset: accordionReset
   } = useAccordion()
   const TagName = tagName
   const iconEnabled = headerIconEnabled ?? accordionIconEnabled
@@ -121,23 +118,17 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const labelClassName = headerLabelClassName ?? accordionLabelClassName
   const activeLabelClassName =
     headerActiveLabelClassName ?? accordionActiveLabelClassName
-    const headerClassName = cn(headerHeaderClassName, accordionHeaderClassName)
+  const headerClassName = headerHeaderClassName ?? accordionHeaderClassName
   const activeHeaderClassName =
     headerActiveHeaderClassName ?? accordionActiveHeaderClassName
 
   const labelClass = cn(labelClassName, isOpen ? activeLabelClassName : '')
   const headerClass = cn(headerClassName, isOpen ? activeHeaderClassName : '')
-  const accordionHeaderReset = accordionReset ?? reset
+
   return (
     <TagName
       className={cn(
-        'flex w-full items-center justify-between p-4 text-left transition-all duration-150 ease-in-out',
-        disabled
-          ? ''
-          : `cursor-pointer ${accordionHeaderReset ? '' : 'hover:bg-primary-200 dark:hover:bg-primary-900'}`,
-        isOpen
-          ? accordionHeaderReset ? '' : 'bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200'
-          : accordionHeaderReset ? '' : 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100',
+        'flex w-full items-center justify-between p-4 bg-bg text-left transition-all duration-150 ease-in-out cursor-pointer text-text',
         className,
         headerClass,
       )}
@@ -145,11 +136,11 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
       disabled={disabled} {...rest}
     >
       {iconEnabled && iconPosition === 'left' && (
-        <span className={`${iconClass}`}>{icon}</span>
+        <span className={cn("text-text-muted", iconClass)}>{icon}</span>
       )}
       <span className={`${labelClass} grow`}>{children}</span>
       {iconEnabled && iconPosition === 'right' && (
-        <span className={`${iconClass}`}>{icon}</span>
+        <span className={cn("text-text-muted", iconClass)}>{icon}</span>
       )}
     </TagName>
   )

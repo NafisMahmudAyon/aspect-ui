@@ -14,7 +14,7 @@ export const ModalAction: React.FC<ModalActionProps> = ({ children, className = 
 
   return (
     <button
-      className={cn('rounded-sm  px-4 py-2 transition-colors bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100', className)}
+      className={cn('inline-flex gap-2 items-center justify-center font-medium rounded-md focus:outline-hidden focus-visible:border-ring focus-visible:ring-border transition ease-in-out duration-200 focus-visible:ring-1 px-4 py-2 bg-bg-light text-text cursor-pointer', className)}
       onClick={handleOpen}
       {...rest}
     >

@@ -1,8 +1,8 @@
 // ./app/src/components/Navbar/NavbarCollapseBtn.tsx
 'use client'
 import React from 'react'
-import { useNavbar } from './NavbarContext'
 import { cn } from '../../utils/cn'
+import { useNavbar } from './NavbarContext'
 
 interface NavbarCollapseBtnProps {
   className?: string
@@ -14,7 +14,7 @@ export const NavbarCollapseBtn: React.FC<NavbarCollapseBtnProps> = ({ className 
 
   return (
     <button
-      className={cn('rounded-md p-2 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-200', `block ${collapseBreakpoint === 'sm' && 'sm:hidden'} ${collapseBreakpoint === 'md' && 'md:hidden'} ${collapseBreakpoint === 'lg' && 'lg:hidden'} ${collapseBreakpoint === 'xl' && 'xl:hidden'} ${collapseBreakpoint === '2xl' && '2xl:hidden'}`, className)}
+      className={cn('rounded-md p-2 text-text hover:bg-bg-light focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-border focus-visible:bg-bg-light', `block ${collapseBreakpoint === 'sm' && 'sm:hidden'} ${collapseBreakpoint === 'md' && 'md:hidden'} ${collapseBreakpoint === 'lg' && 'lg:hidden'} ${collapseBreakpoint === 'xl' && 'xl:hidden'} ${collapseBreakpoint === '2xl' && '2xl:hidden'}`, className)}
       onClick={toggleCollapse}
       {...rest}
     >

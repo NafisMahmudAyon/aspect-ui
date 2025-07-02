@@ -12,6 +12,7 @@ interface ToggleButtonGroupContextType {
   handleChange: (value: string) => void
   outline?: boolean
   disabled?: boolean
+  size?: 'small' | 'medium' | 'large'
 }
 
 const ToggleButtonGroupContext = createContext<
@@ -35,6 +36,7 @@ interface ToggleButtonGroupProviderProps {
   onChange?: (value: string | string[]) => void
   outline?: boolean
   disabled?: boolean
+  size?: 'small' | 'medium' | 'large'
 }
 
 
@@ -46,7 +48,8 @@ export const ToggleButtonGroupProvider: React.FC<
   defaultValue = type === 'single' ? '' : [],
   onChange,
   outline = false,
-  disabled = false
+  disabled = false,
+  size = 'medium'
 }) => {
   const [selectedValues, setSelectedValues] = useState<string | string[]>(
     defaultValue
@@ -73,7 +76,7 @@ export const ToggleButtonGroupProvider: React.FC<
 
   return (
     <ToggleButtonGroupContext.Provider
-      value={{ type, selectedValues, handleChange, outline, disabled }}
+      value={{ type, selectedValues, handleChange, outline, disabled, size }}
     >
       {children}
     </ToggleButtonGroupContext.Provider>

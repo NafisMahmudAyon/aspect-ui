@@ -1,8 +1,8 @@
 'use client'
 
 import React, { ReactNode, useEffect, useRef } from 'react';
-import { useDropdown } from './DropdownContext';
 import { cn } from '../../utils/cn';
+import { useDropdown } from './DropdownContext';
 
 interface DropdownContentProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -31,9 +31,9 @@ export const DropdownContent: React.FC<DropdownContentProps> = ({ children, clas
   if (!isOpen) return null
 
   return (
-    <div className={cn("absolute z-10", positionClass, className)} ref={contentRef} {...rest}>
+    <div className={cn("absolute z-10 bg-bg rounded-md", positionClass, className)} ref={contentRef} role='presentation' {...rest}>
       {/* <div className=" border border-primary-50 dark:border-primary-950 rounded-md shadow-lg"> */}
-        {children}
+      {children}
       {/* </div> */}
     </div>
   );

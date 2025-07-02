@@ -11,6 +11,7 @@ interface RatingProps {
     readOnly?: boolean;
     icon?: React.ReactNode;
     theme?: 'default' | 'dark';
+    className?: string;
 }
 export declare const Rating: React.FC<RatingProps>;
 export default Rating;

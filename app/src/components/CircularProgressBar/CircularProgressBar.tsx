@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '../../utils/cn'
 
 interface CircularProgressBarProps
@@ -27,8 +27,8 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   className = '',
   onVisible,
   duration = 2,
-  strokeColor = '#CCCCCC',
-  strokeFillColor = '#333333',
+  strokeColor = 'var(--color-bg-light)',
+  strokeFillColor = 'var(--color-primary)',
   strokeWidth = 2,
   contentClassName = '',
   hideValue = false,

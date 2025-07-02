@@ -38,7 +38,7 @@ const AvatarExample = () => {
     <div className='w-full flex justify-center'>
       <AvatarGroup>
         {avatarData.map((item, index) => (
-          <Avatar key={index} className='border border-primary-500'>
+          <Avatar key={index} className='border-2 border-border'>
             <AvatarImage
               src={item.avatar}
               altText={item.first_name}

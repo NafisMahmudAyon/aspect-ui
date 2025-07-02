@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
 
 interface ToastAction {
@@ -103,7 +103,7 @@ interface ToastOptions {
 export const useToast = () => {
   const [toasts, setToasts] = useState<ToastOptions[]>([])
 
-  const addToast = useCallback((options: ToastOptions) => {
+  const toast = useCallback((options: ToastOptions) => {
     setToasts(prevToasts => [...prevToasts, options])
   }, [])
 
@@ -124,7 +124,7 @@ export const useToast = () => {
       }
     ) => {
       const toastId = Date.now()
-      addToast({
+      toast({
         message: options.loading,
         description: options.loadingDescription,
         type: 'info',
@@ -134,7 +134,7 @@ export const useToast = () => {
       promise
         .then(result => {
           removeToast(toastId)
-          addToast({
+          toast({
             message: options.success,
             description: options.successDescription,
             type: 'success'
@@ -143,7 +143,7 @@ export const useToast = () => {
         })
         .catch(error => {
           removeToast(toastId)
-          addToast({
+          toast({
             message: options.error,
             description: options.errorDescription,
             type: 'error'
@@ -153,7 +153,7 @@ export const useToast = () => {
 
       return promise
     },
-    [addToast, removeToast]
+    [toast, removeToast]
   )
 
   const ToastContainer: React.FC = () => (
@@ -179,6 +179,5 @@ export const useToast = () => {
     </>
   )
 
-  return { addToast, ToastContainer, promise }
+  return { toast, ToastContainer, promise }
 }
-

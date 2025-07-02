@@ -15,7 +15,6 @@ interface AccordionProps {
     headerClassName?: string;
     activeHeaderClassName?: string;
     contentClassName?: string;
-    reset?: boolean;
 }
 export declare const Accordion: React.FC<AccordionProps>;
 export {};

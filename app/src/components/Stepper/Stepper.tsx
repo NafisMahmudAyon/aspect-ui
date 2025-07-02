@@ -43,9 +43,8 @@ const Stepper: React.FC<StepperProps> = ({ children, initialStep = 0 }) => {
           <React.Fragment key={index}>
             {index > 0 && (
               <div
-                className={`mx-2 h-0.5 grow ${
-                  index <= activeStep ? 'bg-blue-500' : 'bg-gray-300'
-                }`}
+                className={`mx-2 h-0.5 grow ${index <= activeStep ? 'bg-primary' : 'bg-bg'
+                  }`}
               />
             )}
             {React.cloneElement(child, {
@@ -75,9 +74,9 @@ const StepperItem: React.FC<StepperItemProps & { index?: number }> = ({
   const active = index === activeStep
 
   const getStateStyles = () => {
-    if (completed) return 'bg-blue-500 text-white'
-    if (active) return 'border-blue-500 text-blue-500'
-    return 'bg-white border-gray-300 text-gray-500'
+    if (completed) return 'bg-primary text-primary-foreground'
+    if (active) return 'border-primary text-text'
+    return 'bg-bg border-border text-text-muted'
   }
 
   const handleClick = () => {
@@ -94,7 +93,7 @@ const StepperItem: React.FC<StepperItemProps & { index?: number }> = ({
       >
         {completed ? '✓' : icon}
       </div>
-      <p className={`mt-2 text-sm ${active ? 'font-medium' : 'text-gray-500'}`}>
+      <p className={`mt-2 text-sm ${active ? 'font-medium text-text' : 'text-text-muted'}`}>
         {label}
       </p>
       {children && <div className='mt-2'>{children}</div>}
@@ -112,3 +111,4 @@ const useStepper = () => {
 }
 
 export { Stepper, StepperItem, useStepper }
+

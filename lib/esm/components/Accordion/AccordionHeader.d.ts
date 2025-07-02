@@ -15,7 +15,6 @@ interface AccordionHeaderProps {
     activeLabelClassName?: string;
     headerClassName?: string;
     activeHeaderClassName?: string;
-    reset?: boolean;
     tagName?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'button';
 }
 export declare const AccordionHeader: React.FC<AccordionHeaderProps>;

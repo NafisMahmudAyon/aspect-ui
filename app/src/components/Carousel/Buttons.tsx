@@ -8,9 +8,9 @@ export const CarouselButtons = forwardRef<
 >(({ children, className, ...rest }, ref: Ref<HTMLDivElement>) => {
   return (
     <div
-    className={cn("flex items-center gap-2", className)}
-    ref={ref}
-    {...rest}
+      className={cn("flex items-center gap-2", className)}
+      ref={ref}
+      {...rest}
     >
       {children}
     </div>

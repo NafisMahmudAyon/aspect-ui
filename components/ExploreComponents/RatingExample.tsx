@@ -4,15 +4,13 @@ import { Star } from 'lucide-react'
 
 const RatingExample = () => {
   return (
-    <div>
+    <div className=''>
       <Rating
         maxRating={5}
         initialRating={3.5}
-        starColor="#FFD700"
-        hoverColor="#FFA500"
-        unratedColor="#D3D3D3"
         ratingTexts={['Poor', 'Fair', 'Good', 'Very Good', 'Excellent']}
         icon={<Star />}
+        className='min-w-[225px]'
       />
     </div>
   )

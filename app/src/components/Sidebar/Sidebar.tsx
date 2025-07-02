@@ -10,11 +10,11 @@ interface SidebarProps {
   className?: string
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ children, className="", ...rest }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ children, className = "", ...rest }) => {
   return (
     <>
       {/* <SidebarProvider> */}
-      <aside className={cn('flex h-screen w-64 flex-col p-5 bg-primary-100 dark:bg-primary-900 transition-all duration-300 ease-in-out', className)} {...rest}>
+      <aside className={cn('flex h-screen w-64 flex-col p-5 bg-bg transition-all duration-300 ease-in-out', className)} {...rest}>
         {children}
       </aside>
       {/* </SidebarProvider> */}

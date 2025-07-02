@@ -5,7 +5,7 @@ import { cn } from '../../utils/cn'
 
 type ModalOverlayProps = HTMLAttributes<HTMLDivElement> & MotionProps
 
-export const ModalOverlay = forwardRef<HTMLDivElement, ModalOverlayProps>(
+export const ModalOverlayComponent = forwardRef<HTMLDivElement, ModalOverlayProps>(
   ({ children, className, ...props }, ref: Ref<HTMLDivElement>) => {
     return (
       <motion.div
@@ -22,6 +22,9 @@ export const ModalOverlay = forwardRef<HTMLDivElement, ModalOverlayProps>(
         {children}
       </motion.div>
     )
-  },
+  }
 )
 
+ModalOverlayComponent.displayName = 'ModalOverlay'
+
+export const ModalOverlay = ModalOverlayComponent

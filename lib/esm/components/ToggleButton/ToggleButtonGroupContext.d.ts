@@ -6,6 +6,7 @@ interface ToggleButtonGroupContextType {
     handleChange: (value: string) => void;
     outline?: boolean;
     disabled?: boolean;
+    size?: 'small' | 'medium' | 'large';
 }
 export declare const useToggleButtonGroup: () => ToggleButtonGroupContextType;
 interface ToggleButtonGroupProviderProps {
@@ -15,6 +16,7 @@ interface ToggleButtonGroupProviderProps {
     onChange?: (value: string | string[]) => void;
     outline?: boolean;
     disabled?: boolean;
+    size?: 'small' | 'medium' | 'large';
 }
 export declare const ToggleButtonGroupProvider: React.FC<ToggleButtonGroupProviderProps>;
 export {};

@@ -26,13 +26,13 @@ export const Modal: React.FC<ModalProps> = ({ children, isOpenExternal, onToggle
   useEffect(() => {
     const handleEscapeKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        isOpen && handleOpen()
+        handleOpen()
       }
     }
 
     const handleClickOutsideModal = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest('.aspect-ui-modal')) {
-        isOpen && handleOpen()
+        handleOpen()
       }
     }
 

@@ -4,7 +4,7 @@ import React from 'react'
 const TabsWxample = () => {
   return (
     <div className='w-full'>
-      <Tabs defaultActive='item-5' className='mx-auto max-w-xl test'>
+      <Tabs defaultActive='item-5' className='mx-auto max-w-xl'>
               <TabList>
                 <TabItem id='item-5'>Figma</TabItem>
                 <TabItem disabled={true} id='item-6'>Docs</TabItem>

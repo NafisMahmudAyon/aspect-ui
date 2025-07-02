@@ -22,14 +22,14 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
   return (
     <ul
-      className={cn("flex max-w-max items-center gap-3 px-3.5 py-2.5 text-primary-800 dark:text-primary-100", className)}
+      className={cn("text-muted flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5", className)}
       {...rest}
     >
       {childrenArray.map((child: React.ReactNode, index: number) => (
         <React.Fragment key={index}>
           {child}
           {index < childrenArray.length - 1 && (
-            <span className={cn('mx-2 text-primary-500', separatorClassName)}>{separator}</span>
+            <span className={cn('mx-2 text-muted', separatorClassName)}>{separator}</span>
           )}
         </React.Fragment>
       ))}

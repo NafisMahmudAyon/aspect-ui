@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Avatar as Icon } from '../Icon/Avatar'
 import { cn } from '../../utils/cn'
+import { Avatar as Icon } from '../Icon/Avatar'
 
 interface AvatarImageProps {
   className?: string
@@ -35,7 +35,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
         alt={altText || 'alt text'}
         {...(name && { title: name })}
         className={cn(
-          'aspect-square h-auto max-w-full overflow-hidden rounded-full object-cover',
+          'aspect-square h-auto max-w-full overflow-hidden object-cover',
           className
         )}
         {...rest}

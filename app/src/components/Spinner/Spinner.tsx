@@ -21,15 +21,12 @@ export const Spinner: React.FC<SpinnerProps> = ({
 
   return (
     <div
-      className={cn("inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-primary-800 dark:text-primary-200", sizeClasses[size], className)}
+      className={cn("inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-primary", sizeClasses[size], className)}
       style={{ borderWidth: `${thickness}px` }}
       aria-label='loading...'
       role='status'
       {...rest}
     >
-      {/* <span className='absolute! -m-px! h-px! w-px! overflow-hidden! whitespace-nowrap! border-0! p-0! [clip:rect(0,0,0,0)]!'>
-        Loading...
-      </span> */}
     </div>
   )
 }

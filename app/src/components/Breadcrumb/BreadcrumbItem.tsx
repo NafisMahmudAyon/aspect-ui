@@ -9,11 +9,11 @@ export interface BreadcrumbItemProps extends HTMLAttributes<HTMLLIElement> {
 
 export const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   children,
-  className="",
+  className = "",
   ...rest
 }) => {
   return (
-    <li className={cn("flex cursor-pointer items-center", className) } {...rest} >
+    <li className={cn("flex cursor-pointer items-center", className)} {...rest} >
       {children}
     </li>
   )

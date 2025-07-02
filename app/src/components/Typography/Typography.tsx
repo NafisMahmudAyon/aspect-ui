@@ -22,13 +22,13 @@ interface TypographyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Typography: React.FC<TypographyProps> = ({
-  variant="",
+  variant = "",
   tagName = "p",
   children,
   className = '',
   ...rest
 }) => {
-  const TagName=tagName
+  const TagName = tagName
   // const getComponent = (): React.ElementType => {
   //   switch (variant) {
   //     case 'h1':
@@ -81,7 +81,7 @@ export const Typography: React.FC<TypographyProps> = ({
 
   return (
     <TagName
-      className={cn("", styles, className)}
+      className={cn("text-primary-800 dark:text-primary-200", styles, className)}
       {...rest}
     >
       {children}

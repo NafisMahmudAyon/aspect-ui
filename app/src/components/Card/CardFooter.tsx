@@ -1,4 +1,4 @@
-import { cn } from "../../utils/cn"
+import { cn } from '../../utils/cn'
 
 interface CardFooterProps {
   children: React.ReactNode
@@ -10,5 +10,5 @@ export const CardFooter: React.FC<CardFooterProps> = ({
   className = '',
   ...rest
 }) => {
-  return <div className={cn(className)} {...rest}>{children}</div>
+  return <div className={cn('px-6 flex items-center', className)} {...rest}>{children}</div>
 }

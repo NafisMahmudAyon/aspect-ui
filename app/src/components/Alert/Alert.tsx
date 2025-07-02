@@ -23,9 +23,10 @@ export const Alert: React.FC<AlertProps> = ({
   const [isVisible, setIsVisible] = useState(true)
 
   const handleClose = () => {
+    setIsVisible(false)
     if (onClose) {
       onClose()
-    } setIsVisible(false)
+    }
   }
 
   if (!isVisible) return null
@@ -126,7 +127,7 @@ export const Alert: React.FC<AlertProps> = ({
     <div className={cn(getAlertStyles(), className)} role='alert' {...rest}>
       <div className='flex items-center'>
         <span className={`mr-2 ${getIconStyles()}`}>{getIcon()}</span>
-        <span className='flex-1'>{children}</span>
+        <span className='block sm:inline'>{children}</span>
       </div>
       {closeable && (
         <span

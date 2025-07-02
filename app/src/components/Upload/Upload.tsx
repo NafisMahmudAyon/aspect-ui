@@ -2,10 +2,11 @@
 
 'use client'
 
-import React, { useState, useRef, ChangeEvent } from 'react'
+import { Trash2 } from 'lucide-react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import { cn } from '../../utils/cn'
 
-interface UploadProps {
+interface FileUploadProps {
   onFileSelect: (files: File[]) => void
   accept?: string
   multiple?: boolean
@@ -19,7 +20,7 @@ interface UploadProps {
   deleteIconClassName?: string
 }
 
-export const Upload: React.FC<UploadProps> = ({
+export const FileUpload: React.FC<FileUploadProps> = ({
   onFileSelect,
   accept = '*',
   multiple = false,
@@ -117,7 +118,7 @@ export const Upload: React.FC<UploadProps> = ({
   return (
     <div className="w-full" {...rest}>
       <div
-        className={`flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed ${dragActive ? 'border-blue-500 bg-primary-50 dark:bg-primary-950' : 'border-primary-300 dark:border-primary-800'
+        className={`flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border hover:bg-bg-light/50 transition-all duration-200 ${dragActive ? 'bg-bg-light/50' : ''
           }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -135,7 +136,7 @@ export const Upload: React.FC<UploadProps> = ({
         />
         {!content && (<>{uploadIcon && <span className={cn("", uploadIconClassName)}>{uploadIcon}</span>}
           {!uploadIcon && (<svg
-            className={cn("mb-3 h-10 w-10 text-primary-800 dark:text-primary-200", uploadIconClassName)}
+            className={cn("mb-3 h-10 w-10 text-text", uploadIconClassName)}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -148,10 +149,10 @@ export const Upload: React.FC<UploadProps> = ({
               d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
             ></path>
           </svg>)}
-          <p className="mb-2 text-body1 text-primary-800 dark:text-primary-200">
+          <p className="mb-2 text-body1 text-text">
             <span className="font-semibold">Click to upload</span> or drag and drop
           </p>
-          <p className="text-xs text-primary-800 dark:text-primary-200">
+          <p className="text-xs text-text-muted">
             {multiple ? `Upload up to ${maxFiles} files` : 'Upload a file'}
             {maxFileSize && ` (Max size: ${maxFileSize}MB)`}
           </p></>)}
@@ -161,12 +162,12 @@ export const Upload: React.FC<UploadProps> = ({
       {/* Selected Files List */}
       {files.length > 0 && (
         <div className="mt-4">
-          <h4 className="mb-2 text-sm font-medium text-primary-800 dark:text-primary-200">Selected Files:</h4>
+          <h4 className="mb-2 text-sm font-medium text-text">Selected Files:</h4>
           <ul className="space-y-2">
             {files.map((file, index) => (
               <li
                 key={`${file.name}-${index}`}
-                className="flex items-center justify-between rounded-lg bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 p-2 px-4"
+                className="flex items-center justify-between rounded-lg bg-bg-light text-text p-2 px-4"
               >
                 <span className="text-sm">{file.name}</span>
                 <button
@@ -174,20 +175,11 @@ export const Upload: React.FC<UploadProps> = ({
                     e.stopPropagation()
                     removeFile(index)
                   }}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-error"
                 >
-                  <svg
-                    width={18}
-                    height={18}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="m7.81 1.76-.31.615H3.375C2.615 2.375 2 2.989 2 3.75c0 .76.614 1.375 1.375 1.375h16.5c.76 0 1.375-.614 1.375-1.375 0-.76-.614-1.375-1.375-1.375H15.75l-.31-.614A1.37 1.37 0 0 0 14.213 1H9.038c-.52 0-.997.292-1.229.76M19.874 6.5h-16.5l.91 14.566A2.064 2.064 0 0 0 6.346 23h10.56c1.088 0 1.99-.846 2.06-1.934z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  {deleteButton ? deleteButton :
+                    <Trash2 className={cn("h-4 w-4", deleteIconClassName)} />
+                  }
                 </button>
               </li>
             ))}

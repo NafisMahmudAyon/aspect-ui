@@ -1,7 +1,7 @@
 // ./app/src/components/Toggle/ToggleButtonGroup.tsx
 'use client'
 
-import { cn } from "../../utils/cn"
+import { cn } from '../../utils/cn'
 import { ToggleButtonGroupProvider } from "./ToggleButtonGroupContext"
 
 interface ToggleButtonGroupProps {
@@ -32,7 +32,7 @@ export const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
       outline={outline}
       disabled={disabled}
     >
-      <div className={cn("flex space-x-2", className)} {...rest}>{children}</div>
+      <div className={cn("flex items-center rounded-md", outline && 'shadow-xs', className)} {...rest}>{children}</div>
     </ToggleButtonGroupProvider>
   )
 }

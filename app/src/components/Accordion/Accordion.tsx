@@ -1,8 +1,8 @@
 'use client'
 
 import React, { ReactNode, useState } from 'react'
-import { AccordionProvider } from './AccordionContext'
 import { cn } from '../../utils/cn'
+import { AccordionProvider } from './AccordionContext'
 
 interface AccordionProps {
   children: ReactNode
@@ -20,7 +20,6 @@ interface AccordionProps {
   headerClassName?: string
   activeHeaderClassName?: string
   contentClassName?: string
-  reset?: boolean
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -39,7 +38,6 @@ export const Accordion: React.FC<AccordionProps> = ({
   headerClassName = '',
   activeHeaderClassName = '',
   contentClassName = '',
-  reset = false,
   ...rest
 }) => {
   const [openItems, setOpenItems] = useState<string[]>(activeItem ?? [])
@@ -70,7 +68,6 @@ export const Accordion: React.FC<AccordionProps> = ({
         headerClassName,
         activeHeaderClassName,
         contentClassName,
-        reset
       }}
     >
       <div className={cn('space-y-2', className)} {...rest}>{children}</div>

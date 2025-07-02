@@ -286,14 +286,13 @@ const ExploreComponents = () => {
       <h2 className="text-h2 font-bold leading-tight md:text-6xl t-shadow text-center mb-6">Explore Components</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full px-4 lg:px-6'>
         {examples.map((example, index) => (
-          <div key={index} className={cn('bg-gray-200/70 dark:bg-gray-800/50 p-4 rounded-lg grid place-items-center group relative dark:shadow-gray-200/10 shadow-sm hover:shadow-lg transition-all duration-300', example.class)} onMouseEnter={() => setIsHovered(true)}
+          <div key={index} className={cn('bg-gray-200/70 dark:bg-bg-dark p-4 rounded-lg grid place-items-center group relative dark:shadow-gray-200/10 shadow-sm hover:shadow-lg transition-all duration-300', example.class)} onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
             {example.code}
             <HoverEffect title={example.title} link={example.link} isHovered={isHovered} />
             <div className="lg:hidden">
               <Link href={"/docs/components/" + example.link} className='absolute top-4 right-4 text-primary-800 dark:text-primary-200 group/link z-10' >
                 <ArrowUpRight className="group-hover/link:opacity-0 group-hover/link:size-0 size-6 opacity-100  block transition-all duration-150 ease-in-out" />
-                {/* <SquareArrowOutUpRight className="group-hover/link:block size-0 opacity-0 group-hover/link:size-6 group-hover/link:opacity-100 hidden transition-all duration-500 delay-150 ease-in-out" /> */}
               </Link>
             </div>
           </div>

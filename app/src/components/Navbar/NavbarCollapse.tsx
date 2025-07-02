@@ -1,15 +1,15 @@
 // ./app/src/components/Navbar/NavbarCollapse.tsx
 'use client'
 
-import { forwardRef, HTMLAttributes } from 'react'
-import { useNavbar } from './NavbarContext'
-import { cn } from '../../utils/cn'
 import { AnimatePresence, motion, MotionProps } from 'framer-motion'
+import { forwardRef, HTMLAttributes } from 'react'
+import { cn } from '../../utils/cn'
+import { useNavbar } from './NavbarContext'
 
 
 type NavbarCollapseProps = HTMLAttributes<HTMLDivElement> & MotionProps
 
-export const NavbarCollapse = forwardRef<HTMLDivElement, NavbarCollapseProps>(({ children, className, ...rest }, ref) => {
+export const NavbarCollapseComponent = forwardRef<HTMLDivElement, NavbarCollapseProps>(({ children, className, ...rest }, ref) => {
   const { isCollapsed } = useNavbar()
 
   return (
@@ -23,7 +23,7 @@ export const NavbarCollapse = forwardRef<HTMLDivElement, NavbarCollapseProps>(({
           ref={ref}
           {...rest}
           className={cn(
-            `absolute left-0 right-0 top-full z-20 bg-primary-100 dark:bg-primary-900 p-4 rounded-md border border-primary-200 dark:border-primary-800 ${isCollapsed ? 'hidden' : 'flex flex-col'}`,
+            `absolute left-0 right-0 top-full z-[1000] bg-bg p-4 rounded-md rounded-t-none border border-border shadow-md ${isCollapsed ? 'hidden' : 'flex flex-col'}`,
             className
           )}
         >
@@ -34,3 +34,7 @@ export const NavbarCollapse = forwardRef<HTMLDivElement, NavbarCollapseProps>(({
     </AnimatePresence>
   )
 })
+
+NavbarCollapseComponent.displayName = 'NavbarCollapse'
+
+export const NavbarCollapse = NavbarCollapseComponent

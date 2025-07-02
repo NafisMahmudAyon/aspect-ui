@@ -1,220 +1,66 @@
-'use client'
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import ReactDOM from 'react-dom'
-import { cn } from '../../utils/cn'
+"use client"
 
-type TooltipDirection = 'top' | 'right' | 'bottom' | 'left'
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import * as React from "react";
 
-interface TooltipProps {
-  children: [
-    React.ReactElement<TooltipActionProps>,
-    React.ReactElement<TooltipContentProps>
-  ]
-  direction?: TooltipDirection
-  showOnClick?: boolean
-  className?: string
-  arrowColor?: string
-  arrowSize?: number
-  contentClassName?: string
-  actionClassName?: string
-  showOnLoad?: boolean
-  reset?: boolean
-  closeOnClickOutside?: boolean
+import { cn } from '../../utils/cn';
+
+interface TooltipActionProps extends React.ComponentProps<typeof TooltipPrimitive.Trigger> {
+  outline?: boolean;
 }
 
-interface TooltipActionProps {
-  children: ReactNode
-  className?: string
-  reset?: boolean
-}
-
-interface TooltipContentProps {
-  children: ReactNode
-  className?: string
-  reset?: boolean
-}
-
-const Tooltip: React.FC<TooltipProps> = ({
-  children,
-  direction = 'top',
-  showOnClick = false,
-  className = '',
-  arrowColor = '#65a3a9',
-  arrowSize = 10,
-  contentClassName = '',
-  actionClassName = '',
-  showOnLoad=false,
-  reset = false,
-  closeOnClickOutside=true,
-  ...rest
-}) => {
-  const [isVisible, setIsVisible] = useState(showOnLoad)
-  const [tooltipPosition, setTooltipPosition] = useState<{ top: number; left: number } | null>(null)
-  const tooltipRef = useRef<HTMLDivElement>(null)
-  const triggerRef = useRef<HTMLDivElement>(null)
-  const [actionElement, contentElement] = React.Children.toArray(children) as [
-    React.ReactElement<TooltipActionProps>,
-    React.ReactElement<TooltipContentProps>
-  ]
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  let showTimeout: NodeJS.Timeout | null = null
-  let hideTimeout: NodeJS.Timeout | null = null
-
-  const updateTooltipPosition = () => {
-    if (!tooltipRef.current || !triggerRef.current) return
-    const rect = triggerRef.current.getBoundingClientRect()
-    const tooltipRect = tooltipRef.current.getBoundingClientRect()
-    const offset = 10 // Spacing between the tooltip and the element
-
-    switch (direction) {
-      case 'top':
-        setTooltipPosition({
-          top: rect.top - tooltipRect.height - offset + window.scrollY,
-          left: rect.left + rect.width / 2 - tooltipRect.width / 2 + window.scrollX,
-        })
-        break
-      case 'right':
-        setTooltipPosition({
-          top: rect.top + rect.height / 2 - tooltipRect.height / 2 + window.scrollY,
-          left: rect.right + offset + window.scrollX,
-        })
-        break
-      case 'bottom':
-        setTooltipPosition({
-          top: rect.bottom + offset + window.scrollY,
-          left: rect.left + rect.width / 2 - tooltipRect.width / 2 + window.scrollX,
-        })
-        break
-      case 'left':
-        setTooltipPosition({
-          top: rect.top + rect.height / 2 - tooltipRect.height / 2 + window.scrollY,
-          left: rect.left - tooltipRect.width - offset + window.scrollX,
-        })
-        break
-    }
-  }
-
-  const showTooltip = () => {
-    if (hideTimeout) {
-      clearTimeout(hideTimeout)
-    }
-    showTimeout = setTimeout(() => {
-      setIsVisible(true)
-      setTooltipPosition(null) // Reset position to allow recalculation
-    }, 100) // Add a small delay
-  }
-
-  const hideTooltip = () => {
-    if (showTimeout) {
-      clearTimeout(showTimeout)
-    }
-    hideTimeout = setTimeout(() => {
-      setIsVisible(false)
-    }, 100) // Add a small delay
-  }
-
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (
-      closeOnClickOutside &&
-      tooltipRef.current &&
-      !tooltipRef.current.contains(event.target as Node) &&
-      triggerRef.current &&
-      !triggerRef.current.contains(event.target as Node)
-    ) {
-      setIsVisible(false)
-    }
-  }
-
-  useEffect(() => {
-    if (isVisible && !tooltipPosition) {
-      updateTooltipPosition()
-    }
-
-    if (isVisible) {
-      document.addEventListener('scroll', updateTooltipPosition, true) // Capture scroll events
-    }
-
-    if (showOnClick) {
-      document.addEventListener('click', handleOutsideClick)
-    }
-
-    return () => {
-      document.removeEventListener('scroll', updateTooltipPosition, true)
-      document.removeEventListener('click', handleOutsideClick)
-      if (showTimeout) clearTimeout(showTimeout)
-      if (hideTimeout) clearTimeout(hideTimeout)
-    }
-  }, [isVisible, tooltipPosition, showOnClick])
-
-  const getArrowStyle = (): React.CSSProperties => {
-    const baseStyle: React.CSSProperties = {
-      position: 'absolute',
-      width: '0',
-      height: '0',
-      border: `${arrowSize}px solid transparent`
-    }
-
-    switch (direction) {
-      case 'top':
-        return { ...baseStyle, bottom: `-${arrowSize * 2}px`, left: '50%', transform: 'translateX(-50%)', borderTopColor: arrowColor }
-      case 'right':
-        return { ...baseStyle, left: `-${arrowSize * 2}px`, top: '50%', transform: 'translateY(-50%)', borderRightColor: arrowColor }
-      case 'bottom':
-        return {
-          ...baseStyle, top: `-${arrowSize * 2}px`, left: '50%', transform: 'translateX(-50%)', borderBottomColor: arrowColor
-        }
-      case 'left':
-        return {
-          ...baseStyle, right: `-${arrowSize * 2}px`, top: '50%', transform: 'translateY(-50%)', borderLeftColor: arrowColor
-        }
-    }
-  }
-// console.log(getArrowStyle())
-
+function TooltipProvider({
+  delayDuration = 0,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return (
-    <div className={cn('relative inline-block', className)} {...rest}>
-      <div
-        ref={triggerRef}
-        className={cn('', actionClassName)}
-        onMouseEnter={showOnClick ? undefined : showTooltip}
-        onMouseLeave={showOnClick ? undefined : hideTooltip}
-        onClick={showOnClick ? showTooltip : undefined}
-      >
-        {actionElement}
-      </div>
-      {mounted && isVisible &&
-        ReactDOM.createPortal(
-          <div
-            ref={tooltipRef}
-            className={cn('absolute z-[9999]',
-              // 'absolute rounded-md text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
-              contentClassName
-            )}
-            style={{
-              top: tooltipPosition?.top ?? '-9999px',
-              left: tooltipPosition?.left ?? '-9999px',
-              position: 'absolute',
-              visibility: tooltipPosition ? 'visible' : 'hidden',
-            }}
-          >
-            {contentElement}
-            <div style={getArrowStyle()}></div>
-          </div>,
-          document.body
-        )}
-    </div>
+    <TooltipPrimitive.Provider
+      delayDuration={delayDuration}
+      {...props}
+    />
   )
 }
 
+function Tooltip({
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+  return (
+    <TooltipProvider>
+      <TooltipPrimitive.Root {...props} />
+    </TooltipProvider>
+  )
+}
 
-const TooltipAction: React.FC<TooltipActionProps> = ({ children, className = '', reset = false, ...rest }) => <div className={className} {...rest}>{children}</div>
-const TooltipContent: React.FC<TooltipContentProps> = ({ children, className = '', reset = false, ...rest }) => <div className={cn(
-  'rounded-md px-2 py-4 text-body2 w-max', reset ? "" : "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200",
-  className)} {...rest}>{children}</div>
+function TooltipAction({
+  className,
+  outline = false,
+  ...props
+}: TooltipActionProps) {
+  return <TooltipPrimitive.Trigger className={cn("inline-flex gap-2 items-center justify-center font-medium rounded-md focus:outline-hidden focus-visible:border-ring focus-visible:ring-border transition ease-in-out duration-200 focus-visible:ring-1 cursor-pointer px-4 py-2 hover:bg-bg-light/60", outline && "border border-border text-text bg-bg-light/30", className)} {...props} />
+}
 
-export { Tooltip, TooltipAction, TooltipContent }
+function TooltipContent({
+  className,
+  sideOffset = 0,
+  children,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+  return (
+    <TooltipPrimitive.Portal>
+      <TooltipPrimitive.Content
+        sideOffset={sideOffset}
+        className={cn(
+          "bg-primary text-primary-foreground z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <TooltipPrimitive.Arrow className="bg-primary fill-primary z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+      </TooltipPrimitive.Content>
+    </TooltipPrimitive.Portal>
+  )
+}
+
+export { Tooltip, TooltipAction, TooltipContent, TooltipProvider };
+

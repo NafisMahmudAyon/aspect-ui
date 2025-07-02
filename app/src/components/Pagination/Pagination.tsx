@@ -20,7 +20,7 @@ interface PaginationProps {
   className?: string
   buttonClassName?: string
   activeClassName?: string
-  ellipsisClassName?: string 
+  ellipsisClassName?: string
   numberType?: 'normal' | 'roman' | 'custom'
   numbers?: string[]
   onChange: (page: number) => void
@@ -31,8 +31,8 @@ export const Pagination: React.FC<PaginationProps> = ({
   defaultPage = 1,
   boundaryCount = 1,
   siblingCount = 1,
-  showFirstLast = true,
-  showNextPrev = true,
+  showFirstLast = false,
+  showNextPrev = false,
   firstButton = 'First',
   lastButton = 'Last',
   nextButton = 'Next',
@@ -67,17 +67,17 @@ export const Pagination: React.FC<PaginationProps> = ({
       { value: 4, symbol: 'IV' },
       { value: 1, symbol: 'I' }
     ]
-    
+
     let result = ''
     let remaining = num
-    
+
     for (let i = 0; i < romanNumerals.length; i++) {
       while (remaining >= romanNumerals[i].value) {
         result += romanNumerals[i].symbol
         remaining -= romanNumerals[i].value
       }
     }
-    
+
     return result.toLowerCase()
   }
 
@@ -162,7 +162,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       {paginationItems.map((item, index) => (
         <React.Fragment key={index}>
           {item === 'start-ellipsis' || item === 'end-ellipsis' ? (
-            <span className={cn('px-3 py-1 text-primary-800 dark:text-primary-100', ellipsisClassName)}>...</span>
+            <span className={cn('px-3 py-1 text-text', ellipsisClassName)}>...</span>
           ) : (
             <button
               onClick={() =>
@@ -173,18 +173,18 @@ export const Pagination: React.FC<PaginationProps> = ({
               disabled={
                 typeof item === 'string'
                   ? (item === 'previous' && currentPage === 1) ||
-                    (item === 'next' && currentPage === count)
+                  (item === 'next' && currentPage === count)
                   : false
               }
-                className={cn('rounded-md px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 disabled:opacity-50 hover:text-primary-900 dark:hover:text-primary-100', currentPage === item
-                  && 'bg-primary-500 dark:bg-primary-600 dark:text-primary-50 text-primary-200', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
+              className={cn('rounded-md px-3 py-1 text-text hover:bg-bg-light', currentPage === item
+                && 'bg-bg-light/50 hover:bg-bg-light border border-border', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
             >
               {item === 'first' && firstButton}
               {item === 'previous' && previousButton}
               {item === 'next' && nextButton}
               {item === 'last' && lastButton}
               {typeof item === 'number' && (
-                numberType === 'roman' 
+                numberType === 'roman'
                   ? convertToRoman(item)
                   : numberType === 'custom' && numbers.length >= count
                     ? numbers[item - 1]

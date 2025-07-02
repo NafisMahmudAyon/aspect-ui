@@ -1,4 +1,4 @@
-import { cn } from "../../utils/cn"
+import { cn } from '../../utils/cn'
 
 interface CardContentProps {
   children: React.ReactNode
@@ -10,5 +10,5 @@ export const CardContent: React.FC<CardContentProps> = ({
   className = '',
   ...rest
 }) => {
-  return <div className={cn('py-4',className)} {...rest}>{children}</div>
+  return <div className={cn('px-6', className)} {...rest}>{children}</div>
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { cn } from "../../utils/cn"
+import { cn } from '../../utils/cn'
 import { useDropdown } from "./DropdownContext"
 
 interface DropdownItemProps {
@@ -8,6 +8,7 @@ interface DropdownItemProps {
   className?: string
   activeClassName?: string
   isSelected?: boolean
+  isLink?: boolean
 }
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({
@@ -16,6 +17,7 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
   activeClassName = '',
   onClick,
   isSelected = false,
+  isLink = false,
   ...rest
 }) => {
   const { closeDropdown } = useDropdown()
@@ -26,17 +28,31 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
     }
     closeDropdown()
   }
-
+  if (isLink === true) {
+    return (
+      <a
+        href='#'
+        className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light",activeClassName) : '')}
+        role='option'
+        area-selected={isSelected}
+        onClick={handleClick}
+        data-selected={isSelected}
+        {...rest}
+      >
+        {children}
+      </a>
+    )
+  }
   return (
-    <a
-      href='#'
-      className={cn('block px-4 py-2 text-sm bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 text-nowrap', className, isSelected ? activeClassName : '')}
-      role='menuitem'
+    <div
+      className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light", activeClassName) : '')}
+      are-selected={isSelected}
+      role='option'
       onClick={handleClick}
       data-selected={isSelected}
       {...rest}
     >
       {children}
-    </a>
+    </div>
   )
 }

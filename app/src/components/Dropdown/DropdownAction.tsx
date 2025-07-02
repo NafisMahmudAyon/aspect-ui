@@ -1,14 +1,14 @@
 'use client'
 
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
-import { useDropdown } from './DropdownContext'
 import { cn } from '../../utils/cn'
 import { Down, Left, Right, Up } from '../Icon/Arrow'
+import { useDropdown } from './DropdownContext'
 
 interface DropdownActionProps {
   children: ReactNode
   className?: string
-  icon?: ReactElement<any>
+  icon?: ReactElement
   iconPosition?: 'start' | 'end'
 }
 
@@ -30,7 +30,7 @@ export const DropdownAction: React.FC<DropdownActionProps> = ({ children, classN
   return (
     <button
       type='button'
-      className={cn('inline-flex w-full justify-center rounded-md bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 px-4 py-2 font-medium shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-100', className)}
+      className={cn('flex w-fit justify-center items-center gap-2 border border-border rounded-md bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-border', className)}
       onClick={toggleDropdown}
       {...rest}
     >

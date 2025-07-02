@@ -16,7 +16,7 @@ const SwitchExample = () => {
         activeSwitchIcon={<Moon />}
         deactiveSwitchIcon={<Sun />}
         switchIconEnabled={true}
-        size='lg'
+        size='large'
       />
     </div>
   )

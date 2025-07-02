@@ -1,13 +1,12 @@
 'use client'
-import { cn } from '../../utils/cn'
 import {
   CarouselNextButton as NextBtn,
   usePrevNextButtons
 } from './CarouselArrowButtons'
 import { useCarouselContext } from './CarouselContext'
 
-export const NextButton = ({ className, ...rest }: { className?: string }) => {
+export const NextButton = () => {
   const { emblaApi } = useCarouselContext()
   const { nextBtnDisabled, onNextButtonClick } = usePrevNextButtons(emblaApi)
-  return <NextBtn onClick={onNextButtonClick} disabled={nextBtnDisabled} className={cn(className)} {...rest} />
+  return <NextBtn onClick={onNextButtonClick} disabled={nextBtnDisabled} />
 }

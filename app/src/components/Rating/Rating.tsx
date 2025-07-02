@@ -13,13 +13,13 @@ interface RatingProps {
   readOnly?: boolean;
   icon?: React.ReactNode;
   theme?: 'default' | 'dark';
+  className?: string;
 }
 
 interface StarProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string;
   size?: number;
   icon?: React.ReactNode;
-  color?: string;
   style: React.CSSProperties;
   fillPercentage?: number;
   unratedColor?: string;
@@ -30,7 +30,6 @@ const Star: React.FC<StarProps> = ({
   size = 24,
   icon,
   style,
-  color,
   fillPercentage = 100,
   unratedColor,
   onClick,
@@ -130,11 +129,12 @@ export const Rating: React.FC<RatingProps> = ({
   initialRating = 0,
   size = 24,
   onChange,
-  starColor = '#438e96',
-  hoverColor = '#65a3a9',
-  unratedColor = '#a9cdcf',
+  starColor = 'color-mix(in oklab, var(--color-primary) 50%, transparent)',
+  hoverColor = 'var(--color-primary)',
+  unratedColor = 'var(--color-bg)',
   ratingTexts = defaultRatingTexts,
   readOnly = false,
+  className = '',
   icon
 }) => {
   const [rating, setRating] = useState(initialRating);
@@ -196,7 +196,7 @@ export const Rating: React.FC<RatingProps> = ({
   };
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }} className={className}>
       <div style={{ display: 'flex', gap: '4px' }}>
         {[...Array(maxRating)].map((_, index) => {
           const value = index + 1;

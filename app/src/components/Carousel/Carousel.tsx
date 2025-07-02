@@ -2,9 +2,9 @@
 import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { HTMLAttributes, Ref, forwardRef } from 'react'
+import { cn } from '../../utils/cn'
 import { CarouselContext } from './CarouselContext'
 import { CarouselViewport } from './Viewport'
-import { cn } from '../../utils/cn'
 
 interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   options?: EmblaOptionsType

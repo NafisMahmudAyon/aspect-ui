@@ -31,7 +31,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   children,
   hover = false,
   hoverDelay = 0,
-  closeDelay = 300,
+  closeDelay = 100,
   direction = 'bottom'
 }) => {
   const [isOpen, setIsOpen] = useState(false)

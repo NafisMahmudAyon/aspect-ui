@@ -6,6 +6,7 @@ interface ToggleProps {
     defaultSelected?: boolean;
     outline?: boolean;
     disabled?: boolean;
+    size?: 'small' | 'medium' | 'large';
     onChange?: (value: string, selected: boolean) => void;
 }
 export declare const Toggle: React.FC<ToggleProps>;

@@ -6,11 +6,33 @@
 
 @config '../tailwind.config.ts';
 
-.test {
+/* .test {
   color: var(--color-primary-500);
+} */
+
+:root {
+	--bg-dark: hsl(0, 0%, 90%);
+	--bg: hsl(0, 0%, 95%);
+	--bg-light: hsl(0, 0%, 100%);
+	--text: hsl(0, 0%, 5%);
+	--text-muted: hsl(0, 0%, 30%);
+	--border: hsl(0, 0%, 80%);
+	--primary: hsl(185, 37%, 20%);
+	--primary-foreground: hsl(183, 28%, 74%);
 }
 
 @theme {
+	--color-bg-dark: var(--bg-dark);
+	--color-bg: var(--bg);
+	--color-bg-light: var(--bg-light);
+	--color-text: var(--text);
+	--color-text-muted: var(--text-muted);
+	--color-border: var(--border);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+  --color-bg-p: var(--bg-p);
+
+
   --animate-float: float 2s ease-in-out infinite;
   --animate-float-2: float 2s ease-in-out 1s infinite;
   --animate-float-3: float 2s ease-in-out 2s infinite;
@@ -26,6 +48,18 @@
       transform: translate(0, 0);
     }
   }
+}
+
+.dark {
+	--bg-dark: hsl(0, 0%, 0%);
+	--bg: hsl(0, 0%, 5%);
+	--bg-light: hsl(0, 0%, 10%);
+	--text: hsl(0, 0%, 95%);
+	--text-muted: hsl(0, 0%, 70%);
+	--border: hsl(0, 0%, 20%);
+	--primary: hsl(183, 28%, 74%);
+	--primary-foreground: hsl(185, 37%, 20%);
+	--bg-p: hsl(20 0% 50%);
 }
 
 /*

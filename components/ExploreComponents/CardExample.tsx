@@ -10,7 +10,7 @@ const CardExample = () => {
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>This card has a header with title and description, content area, and a footer with actions.</p>
+          <p className='text-text-muted'>This card has a header with title and description, content area, and a footer with actions.</p>
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button variant="outline">Cancel</Button>

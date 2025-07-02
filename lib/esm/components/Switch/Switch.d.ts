@@ -14,7 +14,7 @@ interface SwitchProps {
     switchIconEnabled?: boolean;
     activeSwitchIcon?: React.ReactNode;
     deactiveSwitchIcon?: React.ReactNode;
-    size?: "sm" | "md" | "lg";
+    size?: "small" | "medium" | "large";
 }
 export declare const Switch: React.FC<SwitchProps>;
 export {};

@@ -1,9 +1,9 @@
-import { Upload } from '@/app/src'
+import { FileUpload } from '@/app/src'
 
 const UploadExample = () => {
   return (
     <div className="w-full">
-      <Upload
+      <FileUpload
         onFileSelect={(files) => console.log('Selected files:', files)}
         accept=".pdf,.doc,.docx"
         multiple={true}

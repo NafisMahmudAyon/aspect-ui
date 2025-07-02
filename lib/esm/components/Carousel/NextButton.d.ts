@@ -1,3 +1,1 @@
-export declare const NextButton: ({ className, ...rest }: {
-    className?: string;
-}) => import("react/jsx-runtime").JSX.Element;
+export declare const NextButton: () => import("react/jsx-runtime").JSX.Element;

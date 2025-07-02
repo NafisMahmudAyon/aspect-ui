@@ -1,8 +1,8 @@
 'use client'
 
-import React, { ReactNode, isValidElement, cloneElement } from 'react'
-import { useAccordion } from './AccordionContext'
+import React, { ReactNode, cloneElement, isValidElement } from 'react'
 import { cn } from '../../utils/cn'
+import { useAccordion } from './AccordionContext'
 
 interface AccordionItemProps {
   children: ReactNode
@@ -24,10 +24,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-md border',
-        isOpen
-          ? 'border-primary-900 dark:border-primary-100'
-          : 'border-primary-800 dark:border-primary-100',
+        'overflow-hidden rounded-md border border-border',
         disabled ? 'opacity-50' : '',
         className
       )} {...rest}

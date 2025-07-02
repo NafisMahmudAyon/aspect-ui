@@ -1,0 +1,65 @@
+{
+  "name": "aspect-ui-accordion",
+  "version": "1.0.4",
+  "description": "Accordion Component",
+  "files": [
+    "./lib/"
+  ],
+  "main": "./lib/cjs/components/Accordion/index.js",
+  "module": "./lib/esm/components/Accordion/index.js",
+  "types": "./lib/esm/components/Accordion/index.d.ts",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "build:lib": "rimraf ./lib/ && yarn build:lib:dev",
+    "build:lib:dev": "yarn build:lib:esm && yarn build:lib:cjs",
+    "build:lib:cjs": "tsc -p tsconfig.lib.json",
+    "build:lib:esm": "tsc -p tsconfig.lib.json --module esnext --declaration --outDir ./lib/esm",
+    "watch:lib": "npx tailwindcss -c ./app/src/tailwind.config.ts -i ./app/src/input.css -o ./app/src/index.css",
+    "build:css": "css-minify -f ./app/index.css -o ./lib/cjs/theme",
+    "watch": "npx tailwindcss -i ./app/src/input.css -o ./app/src/index.css",
+    "lint": "eslint app --ext ts,tsx,js,jsx,cjs --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint app --ext js,jsx,ts,tsx,cjs --fix",
+    "prettier": "npx prettier --write .",
+    "format": "prettier --write 'app/**/*.{js,jsx,ts,tsx,css,html}'",
+    "watchX": "npx tailwindcss -i ./app/globals.css -o ./app/index.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NafisMahmudAyon/aspect-ui.git"
+  },
+  "keywords": [
+    "accordion",
+    "aspect-ui",
+    "ui",
+    "react",
+    "design-system",
+    "tailwindcss",
+    "tailwind-css"
+  ],
+  "author": "Nafis Mahmud Ayon <nafismahmudayon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NafisMahmudAyon/aspect-ui/issues"
+  },
+  "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc",
+    "react-dom": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "next": "^14.2.15",
+    "framer-motion": "^11.11.9",
+    "typescript": "^5.7.2"
+  }
+}

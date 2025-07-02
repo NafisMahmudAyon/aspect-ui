@@ -1,12 +1,13 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import { Dropdown, DropdownAction, DropdownContent, DropdownItem, DropdownList } from '../Dropdown'
+import React, { useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
+import { Dropdown, DropdownAction, DropdownContent, DropdownItem, DropdownList } from '../Dropdown'
 import { Left, Right } from '../Icon/Arrow'
+import { Popover, PopoverAction, PopoverContent } from '../Popover'
 
 interface DatePickerProps {
   onChange: (dates: Date[]) => void
-  initialDates?: Date[]
+  initialDates?: Date[] | string[]
   isRange?: boolean
   shape?: 'rounded-sm' | 'square' | 'circle'
   placeholder?: string
@@ -19,16 +20,22 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   initialDates = [],
   isRange = false,
-  shape="circle",
+  shape = "circle",
   placeholder = 'Select your date',
-  className="",
-  show = false,
+  className = "",
   calendarContainerClassName = "",
-  ...rest
+  
 }) => {
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [selectedDates, setSelectedDates] = useState<Date[]>(initialDates)
-  const [isOpen, setIsOpen] = useState(show)
+  const [currentDate, setCurrentDate] = useState(() => {
+    const initDate = Array.isArray(initialDates) && initialDates.length > 0
+      ? new Date(initialDates[0])
+      : new Date();
+    return initDate;
+  });
+  const [selectedDates, setSelectedDates] = useState<Date[]>(
+    initialDates.map((date) => new Date(date))
+  )
+  // const [isOpen, setIsOpen] = useState(show)
   const [years, setYears] = useState<number[]>([])
 
   const monthNames = [
@@ -114,7 +121,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }
 
   const formatDateRange = (dates: Date[]): string => {
-    if (dates.length === 0) return 'Select your date'
+    if (dates.length === 0) return placeholder
     if (dates.length === 1) return formatDate(dates[0])
     if (isRange && dates.length === 2) {
       return `${formatShortDate(dates[0])} - ${formatShortDate(dates[1])}`
@@ -128,129 +135,107 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }
   return (
     <div className='relative'>
-      <input
-        type='text'
-        className={cn('w-full rounded-md border text-primary-800 dark:text-primary-200 border-primary-500 px-4 py-2 bg-primary-200 dark:bg-primary-800 outline-hidden focus-visible:outlined', className)}
-        value={formatDateRange(selectedDates)}
-        onClick={() => setIsOpen(!isOpen)}
-        readOnly
-        placeholder={placeholder}
-        {...rest}
-      />
-      {isOpen && (
-        <div className={cn('absolute p-4 left-0 top-full mt-2 rounded-md border border-primary-500 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 shadow-lg z-9999', calendarContainerClassName)}>
-          <div className='flex items-center justify-between py-2'>
-            <button onClick={handlePrevMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
-              <Left />
-            </button>
-            <div className='flex flex-1 justify-center gap-3'>
-              {/* <select
-                value={currentDate.getMonth()}
-                onChange={(e) => setCurrentDate(new Date(currentDate.getFullYear(), parseInt(e.target.value), 1))}
-                className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer'
-              >
-                {monthNames.map((month, index) => (
-                  <option key={month} value={index}>
-                    {month}
-                  </option>
-                ))}
-              </select> */}
-              <Dropdown>
-                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
-                  {monthNames[currentDate.getMonth()]}
-                </DropdownAction>
-                <DropdownContent>
-                  <DropdownList>
-                    {monthNames.map((month, index) => (
-                      <DropdownItem className={`bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800 ${currentDate.getMonth() == index ? "bg-primary-200 dark:bg-primary-800" : ""}`} key={month} onClick={() => {
-                        const cDate = new Date()
-                        if (cDate.getMonth() === index) {
+      <Popover
+      >
+        <PopoverAction className={cn('w-full rounded-md border border-border px-4 py-2 bg-bg outline-hidden focus-visible:outlined', className)}>
+          {/* <span
+            // type='text'
+            className={cn('w-full rounded-md border border-border px-4 py-2 bg-bg outline-hidden focus-visible:outlined', className)}
+            // readOnly
+            // value={formatDateRange(selectedDates)}
+            // onClick={() => setIsOpen(!isOpen)}
+            // placeholder={placeholder}
+            {...rest}
+          > */}
+            {formatDateRange(selectedDates)}
+          {/* </span> */}
+          </PopoverAction>
+        <PopoverContent className='p-0 w-auto'>
+          <div className={cn('p-4 rounded-md bg-bg shadow-lg', calendarContainerClassName)}>
+            <div className='flex items-center justify-between py-2 gap-2'>
+              <button onClick={handlePrevMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
+                <Left />
+              </button>
+              <div className='flex flex-1 justify-center gap-3'>
+                <Dropdown>
+                  <DropdownAction className=''>
+                    {monthNames[currentDate.getMonth()]}
+                  </DropdownAction>
+                  <DropdownContent>
+                    <DropdownList>
+                      {monthNames.map((month, index) => (
+                        <DropdownItem className={`${currentDate.getMonth() == index ? "bg-bg-light" : ""}`} key={month} onClick={() => {
+                          const cDate = new Date()
+                          if (cDate.getMonth() === index) {
 
-                          setCurrentDate(new Date(currentDate.getFullYear(), index, cDate.getDate()))
-                        } else
-                          setCurrentDate(new Date(currentDate.getFullYear(), index, 1))
-                      }}>
-                        {month}
-                      </DropdownItem>
-                    ))}
-                  </DropdownList>
-                </DropdownContent>
-              </Dropdown>
-              <Dropdown>
-                <DropdownAction className='mr-2 bg-transparent appearance-none text-center border-b border-dotted border-primary-800 dark:border-primary-200 outline-hidden cursor-pointer hover:bg-transparent text-primary-800 dark:text-primary-200 rounded-none p-0 ring-0'>
-                  {currentDate.getFullYear()}
-                </DropdownAction>
-                <DropdownContent className='overflow-y-auto [&::-webkit-scrollbar]:w-2
-  [&::-webkit-scrollbar-track]:bg-gray-100
-  [&::-webkit-scrollbar-thumb]:bg-gray-300
-  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500' style={{ maxHeight: '300px' }}>
-                  <DropdownList>
-                    {years.map((year) => (
-                      <DropdownItem className={`bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 hover:bg-primary-200 dark:hover:bg-primary-800`}
-                        activeClassName="bg-primary-200 dark:bg-primary-800"
-                        key={year}
-                        onClick={() => {
-
-                          if (year == new Date().getFullYear() && currentDate.getMonth() == new Date().getMonth()) {
-                            const cDate = new Date()
-                            setCurrentDate(new Date(year, cDate.getMonth(), cDate.getDate()))
+                            setCurrentDate(new Date(currentDate.getFullYear(), index, cDate.getDate()))
                           } else
-                            setCurrentDate(new Date(year, currentDate.getMonth(), 1))
-                        }}
-                        isSelected={year === currentDate.getFullYear()}
-                      >
-                        {year}
-                      </DropdownItem>
-                    ))}
-                  </DropdownList>
-                </DropdownContent>
-              </Dropdown>
-              {/* <select
-                value={currentDate.getFullYear()}
-                onChange={(e) => setCurrentDate(new Date(parseInt(e.target.value), currentDate.getMonth(), 1))}
-                className='bg-transparent appearance-none border-b border-dotted border-primary-800 dark:border-primary-200'
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select> */}
+                            setCurrentDate(new Date(currentDate.getFullYear(), index, 1))
+                        }}>
+                          {month}
+                        </DropdownItem>
+                      ))}
+                    </DropdownList>
+                  </DropdownContent>
+                </Dropdown>
+                <Dropdown>
+                  <DropdownAction className=''>
+                    {currentDate.getFullYear()}
+                  </DropdownAction>
+                  <DropdownContent className='overflow-y-auto ' style={{ maxHeight: '300px' }}>
+                    <DropdownList>
+                      {years.map((year) => (
+                        <DropdownItem className={``}
+                          activeClassName="bg-bg-light"
+                          key={year}
+                          onClick={() => {
+                            if (year == new Date().getFullYear() && currentDate.getMonth() == new Date().getMonth()) {
+                              const cDate = new Date()
+                              setCurrentDate(new Date(year, cDate.getMonth(), cDate.getDate()))
+                            } else
+                              setCurrentDate(new Date(year, currentDate.getMonth(), 1))
+                          }}
+                          isSelected={year === currentDate.getFullYear()}
+                        >
+                          {year}
+                        </DropdownItem>
+                      ))}
+                    </DropdownList>
+                  </DropdownContent>
+                </Dropdown>
+              </div>
+              <button onClick={handleNextMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
+                <Right />
+              </button>
             </div>
-            <button onClick={handleNextMonth} className={cn('p-1 border border-primary-500/30 hover:bg-primary-200 dark:hover:bg-primary-800', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
-              <Right />
-            </button>
-          </div>
-          <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1'>
-            <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] col-start-1 col-end-8 gap-1 border-t border-b border-primary-500/30'>
-              {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                <div key={day} className='size-8 flex items-center justify-center text-center text-sm font-bold'>
-                  {day}
-                </div>
+            <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1'>
+              <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] col-start-1 col-end-8 gap-1 border-t border-b border-border'>
+                {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+                  <div key={day} className='size-8 flex items-center justify-center text-center text-sm font-bold'>
+                    {day}
+                  </div>
+                ))}
+              </div>
+              {generateCalendar().map((date, index) => (
+                <button
+                  key={index}
+                  onClick={() => date && handleDateClick(date)}
+                  className={cn(
+                    'h-8 w-8 text-center',
+                    shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '',
+                    !date && 'invisible',
+                    date && 'hover:bg-bg-light',
+                    date && date.getDate() === currentDate.getDate() &&
+                    ((isRange && selectedDates.length < 2) || (!isRange && selectedDates.length === 0)) && 'bg-bg-light',
+                    date && selectedDates.some(d => d.toDateString() === date.toDateString()) && 'bg-primary text-primary-foreground',
+                    date && isRange && selectedDates.length === 2 && date > selectedDates[0] && date < selectedDates[1] && 'bg-primary text-primary-foreground')}>
+                  {date ? date.getDate() : ''}
+                </button>
               ))}
             </div>
-            {generateCalendar().map((date, index) => (
-              <button
-                key={index}
-                onClick={() => date && handleDateClick(date)}
-                className={cn(
-                  'h-8 w-8 text-center',
-                  shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '',
-                  !date && 'invisible',
-                  date && 'hover:bg-primary-200 dark:hover:bg-primary-800',
-                  date && date.getDate() === currentDate.getDate() &&
-                  ((isRange && selectedDates.length < 2) || (!isRange && selectedDates.length === 0)) && 'bg-primary-200 dark:bg-primary-800',
-                  date && selectedDates.some(d => d.toDateString() === date.toDateString()) && 'bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100',
-                  date && isRange && selectedDates.length === 2 && date > selectedDates[0] && date < selectedDates[1] && 'bg-primary-50 dark:bg-primary-500 text-primary-300 dark:text-primary-800')}
-
-              >
-                {date ? date.getDate() : ''}
-              </button>
-            ))}
           </div>
-        </div>
-      )}
+        </PopoverContent>
+      </Popover>
     </div>
   )
 }

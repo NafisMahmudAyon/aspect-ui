@@ -13,7 +13,7 @@ export const TableBody: React.FC<TableBodyProps> = ({
   className = ''
 }) => {
   return (
-    <tbody className={cn("divide-y  divide-primary-50 border-b border-b-primary-50", className)}>
+    <tbody className={cn("[&_tr:last-child]:border-0", className)}>
       {children}
     </tbody>
   )

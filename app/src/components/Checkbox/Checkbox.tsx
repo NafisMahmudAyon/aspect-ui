@@ -1,125 +1,96 @@
-// ./app/src/components/Checkbox/Checkbox.tsx
-
-'use client'
-
 import React, { ChangeEvent } from 'react'
-import { cn } from '../../utils/cn';
+import { Check } from 'lucide-react'
+import { cn } from '../../utils/cn'
 
 interface CheckboxProps {
-  /**
-   * Label for the checkbox
-   * @default ""
-   * @example
-   * ```tsx
-   * <Checkbox label="Label"/>
-   * ```
-   */
-  label?: string
-  /**
-   * Whether the checkbox is checked or not
-   * @default false
-   * @example
-   * ```tsx
-   * <Checkbox checked={true} />
-   * ```
-   */
-  checked: boolean;
-  /**
-   * Additional CSS classes to apply to the checkbox
-   * @default ""
-   * @example
-   * ```tsx
-   * <Checkbox checkboxClassName="w-5 h-5" />
-   * ```
-   */
-  checkboxClassName?: string;
-  // variant?: 'rounded-sm' | 'circle' | 'default'
-  /**
-   * Callback function to be called when the checkbox state changes
-   * @default undefined
-   * @example
-   * ```tsx
-   * <Checkbox onChange={(checked) => console.log(checked)} />
-   * ```
-   */
-  onChange?: (checked: boolean) => void
-  /**
-   * Whether the checkbox is disabled or not
-   * @default false
-   * @example
-   * ```tsx
-   * <Checkbox disabled={true} />
-   * ```
-   */
+  label: string
+  checked: boolean
+  onChange: (checked: boolean) => void
   disabled?: boolean
-  /**
-   * Additional CSS classes to apply to the checkbox container
-   * @default ""
-   * @example
-   * ```tsx
-   * <Checkbox className="w-5 h-5" />
-   * ```
-   */
   className?: string
-  /**
-   * Additional CSS classes to apply to the label
-   * @default ""
-   * @example
-   * ```tsx
-   * <Checkbox labelClassName="text-lg" />
-   * ```
-   */
+  size?: 'sm' | 'md' | 'lg'
+  variant?: 'default' | 'rounded'
+  checkedIcon?: React.ReactNode
+  checkboxClassName?: string
   labelClassName?: string
 }
 
-/**
- * Checkbox component
- * @param {CheckboxProps} props - The props for the checkbox component
- * @returns {JSX.Element} The checkbox component
- * @link https://aspect-ui.vercel.app/docs/components/checkbox
- * @example
- * ```tsx
- * import { Checkbox } from '@/components/aspect-ui/Checkbox'
- * <Checkbox label="Label" checked={true} onChange={(checked) => console.log(checked)} />
- * ```
- */
 export const Checkbox: React.FC<CheckboxProps> = ({
-  label="",
+  label,
   checked,
-  checkboxClassName ="",
   onChange,
   disabled = false,
-  // variant = 'default',
-  labelClassName = "",
   className = '',
-  ...rest
+  size = 'md',
+  variant = 'default',
+  checkedIcon,
+  checkboxClassName = "",
+  labelClassName = ""
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.checked)
+    if (!disabled) {
+      onChange(event.target.checked)
+    }
+  }
+
+  const sizeClasses = {
+    sm: 'w-4 h-4',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6'
+  }
+
+  const iconSizes = {
+    sm: 12,
+    md: 16,
+    lg: 20
+  }
+
+  const variantClasses = {
+    default: 'rounded-sm',
+    rounded: 'rounded-full'
   }
 
   return (
     <label
-      className={cn("flex gap-2 cursor-pointer items-center", disabled ? 'cursor-not-allowed opacity-50' : '', className)}
+      className={`
+        flex items-center gap-3 cursor-pointer select-none transition-all duration-200 text-text
+        ${disabled
+        && 'pointer-events-none opacity-50'
+        } 
+        ${className}
+      `}
     >
-      <input
-        type='checkbox'
-        checked={checked}
-        onChange={handleChange}
-        disabled={disabled}
-        className={cn("accent-primary-200 dark:accent-primary-800", checkboxClassName)}
-        {...rest}
-      />
-      <span className={cn("", labelClassName)}>{label}</span>
+      <div className="relative">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+          disabled={disabled}
+          className="sr-only"
+        />
+        <div
+          className={cn(
+            sizeClasses[size],
+            variantClasses[variant],
+            "transition-all duration-200 ease-in-out flex items-center justify-center border",
+            checked
+              ? 'bg-bg-light shadow-md  border-bg-light' : "bg-transparent border-border",
+            checkboxClassName
+          )}
+        >
+          {checked && (checkedIcon ? checkedIcon : <Check
+            size={iconSizes[size]}
+            className={`
+                transition-all duration-200 ease-in-out
+              `}
+          />)}
+        </div>
+      </div>
+      <span
+        className={cn("transition-colors duration-200",labelClassName)}
+      >
+        {label}
+      </span>
     </label>
   )
 }
-
-
-/**
- * Component Checkbox
- * version: 1.0.0
- * author: Nafis Mahmud Ayon
- * license: MIT
- * repository: https://github.com/NafisMahmudAyon/aspect-ui
- */

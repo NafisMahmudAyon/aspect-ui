@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Avatar } from './Avatar'
 import { cn } from '../../utils/cn'
+import { Avatar } from './Avatar'
 
 interface AvatarGroupProps {
   className?: string

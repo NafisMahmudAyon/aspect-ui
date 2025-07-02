@@ -7,22 +7,22 @@ const AccordionExample = () => {
       <Accordion activeItem={['1'] }>
         <AccordionItem id="1">
           <AccordionHeader>
-            <Skeleton variation='text' width='80%' className='bg-gray-400 dark:bg-gray-500' />
+            <Skeleton variation='text' width='80%' className='' />
           </AccordionHeader>
           <AccordionContent>
-            <Skeleton variation='text' width='90%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
-            <Skeleton variation='text' width='80%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
-            <Skeleton variation='text' width='60%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
+            <Skeleton variation='text' width='90%' className='mb-2.5' />
+            <Skeleton variation='text' width='80%' className='mb-2.5' />
+            <Skeleton variation='text' width='60%' className='mb-2.5' />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem id="2">
           <AccordionHeader>
-            <Skeleton variation='text' width='85%' className='bg-gray-400 dark:bg-gray-500' />
+            <Skeleton variation='text' width='85%' className='' />
           </AccordionHeader>
           <AccordionContent>
-            <Skeleton variation='text' width='90%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
-            <Skeleton variation='text' width='80%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
-            <Skeleton variation='text' width='60%' className='mb-2.5 bg-gray-400 dark:bg-gray-500' />
+            <Skeleton variation='text' width='90%' className='mb-2.5' />
+            <Skeleton variation='text' width='80%' className='mb-2.5' />
+            <Skeleton variation='text' width='60%' className='mb-2.5' />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

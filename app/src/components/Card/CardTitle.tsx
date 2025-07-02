@@ -1,4 +1,4 @@
-import { cn } from "../../utils/cn"
+import { cn } from '../../utils/cn'
 
 interface CardTitleProps {
   children: React.ReactNode
@@ -12,7 +12,7 @@ export const CardTitle: React.FC<CardTitleProps> = ({
 }) => {
   return (
     <h3 className={cn(
-      "text-lg font-semibold text-primary-800 dark:text-primary-200",
+      "leading-none font-semibold",
       className
     )} {...rest}>
       {children}
