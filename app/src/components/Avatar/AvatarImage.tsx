@@ -1,8 +1,8 @@
 'use client'
 
+import { User } from 'lucide-react'
 import React from 'react'
 import { cn } from '../../utils/cn'
-import { Avatar as Icon } from '../Icon/Avatar'
 
 interface AvatarImageProps {
   className?: string
@@ -51,7 +51,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
   }
   return (
     <>
-      <Icon />
+      <User />
     </>
   )
 }

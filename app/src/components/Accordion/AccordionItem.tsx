@@ -4,7 +4,7 @@ import React, { ReactNode, cloneElement, isValidElement } from 'react'
 import { cn } from '../../utils/cn'
 import { useAccordion } from './AccordionContext'
 
-interface AccordionItemProps {
+export interface AccordionItemProps {
   children: ReactNode
   id: string
   disabled?: boolean

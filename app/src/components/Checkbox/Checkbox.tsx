@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from 'react'
 import { Check } from 'lucide-react'
+import React, { ChangeEvent } from 'react'
 import { cn } from '../../utils/cn'
 
 interface CheckboxProps {
@@ -87,7 +87,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         </div>
       </div>
       <span
-        className={cn("transition-colors duration-200",labelClassName)}
+        className={cn("transition-colors duration-200", labelClassName)}
       >
         {label}
       </span>

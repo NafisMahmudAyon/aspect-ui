@@ -5,7 +5,7 @@ import React, { ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 import { useAccordion } from './AccordionContext'
 
-interface AccordionContentProps {
+export interface AccordionContentProps {
   children: ReactNode
   isOpen?: boolean
   className?: string

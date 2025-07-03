@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, ReactNode } from 'react'
 
-interface AccordionContextType {
+export interface AccordionContextType {
   openItems: string[]
   toggleItem: (itemId: string) => void
   iconEnabled: boolean

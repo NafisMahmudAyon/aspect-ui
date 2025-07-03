@@ -1,8 +1,8 @@
 'use client'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
 import { Dropdown, DropdownAction, DropdownContent, DropdownItem, DropdownList } from '../Dropdown'
-import { Left, Right } from '../Icon/Arrow'
 import { Popover, PopoverAction, PopoverContent } from '../Popover'
 
 interface DatePickerProps {
@@ -24,7 +24,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   placeholder = 'Select your date',
   className = "",
   calendarContainerClassName = "",
-  
+
 }) => {
   const [currentDate, setCurrentDate] = useState(() => {
     const initDate = Array.isArray(initialDates) && initialDates.length > 0
@@ -147,14 +147,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             // placeholder={placeholder}
             {...rest}
           > */}
-            {formatDateRange(selectedDates)}
+          {formatDateRange(selectedDates)}
           {/* </span> */}
-          </PopoverAction>
+        </PopoverAction>
         <PopoverContent className='p-0 w-auto'>
           <div className={cn('p-4 rounded-md bg-bg shadow-lg', calendarContainerClassName)}>
             <div className='flex items-center justify-between py-2 gap-2'>
               <button onClick={handlePrevMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
-                <Left />
+                <ChevronLeft />
               </button>
               <div className='flex flex-1 justify-center gap-3'>
                 <Dropdown>
@@ -205,7 +205,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 </Dropdown>
               </div>
               <button onClick={handleNextMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
-                <Right />
+                <ChevronRight />
               </button>
             </div>
             <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1'>

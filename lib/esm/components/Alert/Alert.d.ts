@@ -6,6 +6,7 @@ interface AlertProps {
     closeable?: boolean;
     onClose?: () => void;
     className?: string;
+    icon?: React.ReactNode;
 }
 export declare const Alert: React.FC<AlertProps>;
 export {};

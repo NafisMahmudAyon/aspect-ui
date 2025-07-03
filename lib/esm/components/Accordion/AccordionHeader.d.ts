@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-interface AccordionHeaderProps {
+export interface AccordionHeaderProps {
     children: ReactNode;
     isOpen?: boolean;
     onToggle?: () => void;
@@ -18,4 +18,3 @@ interface AccordionHeaderProps {
     tagName?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'div' | 'button';
 }
 export declare const AccordionHeader: React.FC<AccordionHeaderProps>;
-export {};

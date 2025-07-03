@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-interface AccordionProps {
+export interface AccordionProps {
     children: ReactNode;
     iconEnabled?: boolean;
     iconPosition?: 'left' | 'right';
@@ -17,4 +17,3 @@ interface AccordionProps {
     contentClassName?: string;
 }
 export declare const Accordion: React.FC<AccordionProps>;
-export {};

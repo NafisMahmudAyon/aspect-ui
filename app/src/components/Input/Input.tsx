@@ -2,9 +2,9 @@
 
 'use client'
 
+import { Eye, EyeOff, Mail } from 'lucide-react'
 import { ChangeEvent, forwardRef, InputHTMLAttributes, ReactNode, useState } from 'react'
 import { cn } from '../../utils/cn'
-import { Hide, Mail, Show } from '../Icon/Form'
 import { Tooltip, TooltipAction, TooltipContent } from '../Tooltip'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -60,7 +60,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             <Tooltip>
               <TooltipAction className={cn("absolute inset-y-0 end-0 flex items-center me-4 cursor-pointer text-text", passwordIconClassName ? passwordIconClassName : iconClassName)}>
                 <div onClick={handleClick}>
-                  {isShown ? <Show /> : <Hide />}
+                  {isShown ? <Eye /> : <EyeOff />}
                 </div>
               </TooltipAction>
               <TooltipContent className='text-sm text-nowrap'>

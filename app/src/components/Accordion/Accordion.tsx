@@ -4,7 +4,7 @@ import React, { ReactNode, useState } from 'react'
 import { cn } from '../../utils/cn'
 import { AccordionProvider } from './AccordionContext'
 
-interface AccordionProps {
+export interface AccordionProps {
   children: ReactNode
   iconEnabled?: boolean
   iconPosition?: 'left' | 'right'

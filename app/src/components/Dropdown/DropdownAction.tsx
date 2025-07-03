@@ -1,8 +1,8 @@
 'use client'
 
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from 'lucide-react'
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
-import { Down, Left, Right, Up } from '../Icon/Arrow'
 import { useDropdown } from './DropdownContext'
 
 interface DropdownActionProps {
@@ -14,16 +14,16 @@ interface DropdownActionProps {
 
 export const DropdownAction: React.FC<DropdownActionProps> = ({ children, className = "", icon, iconPosition = "end", ...rest }) => {
   const { toggleDropdown, direction } = useDropdown()
-  const [iconDefault, setIconDefault] = useState(<Down />)
+  const [iconDefault, setIconDefault] = useState(<ChevronDown />)
   useEffect(() => {
     if (direction == 'top') {
-      setIconDefault(<Up />)
+      setIconDefault(<ChevronUp />)
     }
     if (direction == 'left') {
-      setIconDefault(<Left />)
+      setIconDefault(<ChevronLeft />)
     }
     if (direction == 'right') {
-      setIconDefault(<Right />)
+      setIconDefault(<ChevronRight />)
     }
   }, [direction]);
 

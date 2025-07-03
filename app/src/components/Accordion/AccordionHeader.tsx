@@ -53,7 +53,7 @@ const Down = ({ className = '', size = 24, ...rest }: IconProps) => {
   )
 }
 
-interface AccordionHeaderProps {
+export interface AccordionHeaderProps {
   children: ReactNode
   isOpen?: boolean
   onToggle?: () => void

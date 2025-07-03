@@ -18,6 +18,8 @@ export * from './Modal';
 export * from './Navbar';
 export * from './NumberCounter';
 export * from './Pagination';
+export * from './ProgressBar';
+export * from './Popover';
 export * from './Radio';
 export * from './Rating';
 export * from './Sidebar';

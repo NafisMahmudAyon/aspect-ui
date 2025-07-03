@@ -10,14 +10,16 @@ interface AlertProps {
   closeable?: boolean
   onClose?: () => void
   className?: string
+  icon?: React.ReactNode
 }
 
 export const Alert: React.FC<AlertProps> = ({
-  type,
+  type = 'info',
   children,
   closeable = true,
   onClose,
   className = '',
+  icon,
   ...rest
 }) => {
   const [isVisible, setIsVisible] = useState(true)
@@ -35,13 +37,13 @@ export const Alert: React.FC<AlertProps> = ({
     const baseStyles = `px-4 py-3 rounded-sm relative`
     switch (type) {
       case 'success':
-        return `${baseStyles} bg-success-100 dark:bg-success-950 border border-success-400 text-success-700 dark:text-success-300`
+        return `${baseStyles} bg-success border border-border text-text`
       case 'warning':
-        return `${baseStyles} bg-warning-100 dark:bg-warning-950 border border-warning-400 text-warning-700 dark:text-warning-300`
+        return `${baseStyles} bg-warning border border-border text-text`
       case 'error':
-        return `${baseStyles} bg-error-100 dark:bg-error-950 border border-error-400 text-error-700 dark:text-error-300`
+        return `${baseStyles} bg-error border border-border text-text`
       case 'info':
-        return `${baseStyles} bg-info-100 dark:bg-info-950 border border-info-400 text-info-700 dark:text-info-300`
+        return `${baseStyles} bg-info border border-border text-text`
       default:
         return baseStyles
     }
@@ -50,13 +52,13 @@ export const Alert: React.FC<AlertProps> = ({
   const getIconStyles = (): string => {
     switch (type) {
       case 'success':
-        return 'text-success-500 dark:text-success-300'
+        return 'text-success-foreground'
       case 'warning':
-        return 'text-warning-500 dark:text-warning-300'
+        return 'text-warning-foreground'
       case 'error':
-        return 'text-error-500 dark:text-error-300'
+        return 'text-error-foreground'
       case 'info':
-        return 'text-info-500 dark:text-info-300'
+        return 'text-info-foreground'
       default:
         return ''
     }
@@ -64,13 +66,13 @@ export const Alert: React.FC<AlertProps> = ({
   const getCloseStyles = (): string => {
     switch (type) {
       case 'success':
-        return 'text-green-500'
+        return 'text-success-foreground'
       case 'warning':
-        return 'text-yellow-500'
+        return 'text-warning-foreground'
       case 'error':
-        return 'text-error-500 dark:text-error-300'
+        return 'text-error-foreground'
       case 'info':
-        return 'text-info-500 dark:text-info-300'
+        return 'text-info-foreground'
       default:
         return ''
     }
@@ -126,8 +128,8 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <div className={cn(getAlertStyles(), className)} role='alert' {...rest}>
       <div className='flex items-center'>
-        <span className={`mr-2 ${getIconStyles()}`}>{getIcon()}</span>
-        <span className='block sm:inline'>{children}</span>
+        <span className={`mr-2 ${getIconStyles()}`}>{icon || getIcon()}</span>
+        <span className='block flex-1'>{children}</span>
       </div>
       {closeable && (
         <span

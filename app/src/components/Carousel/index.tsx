@@ -1,4 +1,3 @@
-export { CarouselButtons } from './Buttons'
 export { Carousel } from './Carousel'
 export { CarouselNextButton, CarouselPrevButton } from './CarouselArrowButtons'
 export { CarouselControl } from './Control'

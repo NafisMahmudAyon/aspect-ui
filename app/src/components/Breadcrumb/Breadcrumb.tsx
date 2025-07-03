@@ -1,7 +1,7 @@
 'use client'
+import { ChevronRight } from 'lucide-react'
 import React, { Children, HTMLAttributes } from 'react'
 import { cn } from '../../utils/cn'
-import { Right } from '../Icon/Arrow'
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLUListElement> {
   className?: string
@@ -13,7 +13,7 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLUListElement> {
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   children,
   className = "",
-  separator = <Right />,
+  separator = <ChevronRight />,
   separatorClassName = '',
   ...rest
 }) => {

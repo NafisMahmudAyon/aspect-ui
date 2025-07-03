@@ -10,17 +10,15 @@ const path_1 = __importDefault(require("path"));
 // Your internal dependencies from package.json
 const requiredDeps = [
     'clsx',
-    'deepmerge',
     'embla-carousel',
     'embla-carousel-react',
     'framer-motion',
     'react-focus-lock',
     'react-remove-scroll',
-    'react-syntax-highlighter',
-    'rehype-slug',
-    'remark-toc',
     'tailwind-merge',
-    'uuid'
+    '@radix-ui/react-popover',
+    '@radix-ui/react-tooltip',
+    'lucide-react'
 ];
 const projectRoot = process.cwd();
 function getPackageManager() {

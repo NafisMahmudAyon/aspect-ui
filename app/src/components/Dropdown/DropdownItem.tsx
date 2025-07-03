@@ -32,7 +32,7 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
     return (
       <a
         href='#'
-        className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light",activeClassName) : '')}
+        className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light", activeClassName) : '')}
         role='option'
         area-selected={isSelected}
         onClick={handleClick}

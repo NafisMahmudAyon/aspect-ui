@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-interface AccordionContextType {
+export interface AccordionContextType {
     openItems: string[];
     toggleItem: (itemId: string) => void;
     iconEnabled: boolean;
@@ -19,4 +19,3 @@ export declare const AccordionProvider: React.FC<{
     value: AccordionContextType;
 }>;
 export declare const useAccordion: () => AccordionContextType;
-export {};
