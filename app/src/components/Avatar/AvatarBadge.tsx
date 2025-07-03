@@ -15,7 +15,7 @@ interface AvatarBadgeProps {
   | 'invisible'
   counter?: number
   position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
-  icon?: React.ReactElement<any>
+  icon?: React.ReactElement
   iconEnabled?: boolean
   iconSize?: number
 }
@@ -47,23 +47,23 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'success':
-        return 'bg-success-500'
+        return 'bg-success-foreground text-success'
       case 'warning':
-        return 'bg-warning-500'
+        return 'bg-warning-foreground text-warning'
       case 'error':
-        return 'bg-error-500'
+        return 'bg-error-foreground text-error'
       case 'info':
-        return 'bg-info-500'
+        return 'bg-info-foreground text-info'
       case 'active':
-        return 'bg-success-500'
+        return 'bg-success-foreground text-primary'
       case 'away':
-        return 'bg-warning-500'
+        return 'bg-warning-foreground text-warning'
       case 'notDisturb':
-        return 'bg-error-300'
+        return 'bg-error-foreground text-error'
       case 'invisible':
-        return 'bg-gray-200'
+        return 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200'
       default:
-        return 'bg-success-500'
+        return 'bg-success-foreground text-success'
     }
   }
 
@@ -71,7 +71,7 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
     return (
       <div
         className={cn(
-          'absolute flex size-3 items-center justify-center rounded-full text-primary-50',
+          'absolute flex size-3 items-center justify-center rounded-full',
           getStatusColor(status),
           getPosition(position),
           className
@@ -96,7 +96,7 @@ export const AvatarBadge: React.FC<AvatarBadgeProps> = ({
     return (
       <div
         className={cn(
-          'absolute flex size-4 items-center justify-center rounded-full bg-primary-500 text-[12px] text-primary-800 dark:text-primary-200',
+          'absolute flex size-4 items-center justify-center rounded-full text-[12px]', getStatusColor(status),
           getPosition(position),
           className
         )} {...rest}

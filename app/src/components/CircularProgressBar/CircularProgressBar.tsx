@@ -126,7 +126,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           />
         </svg>
         <span
-          className={`${contentClassName} absolute inset-0 flex h-full w-full rotate-90 items-center justify-center text-gray-500 text-inherit`}
+          className={`${contentClassName} absolute inset-0 flex h-full w-full rotate-90 items-center justify-center text-text`}
         >
           {!children && !hideValue && <>{percentage}%</>}
           {children && <>{children}</>}

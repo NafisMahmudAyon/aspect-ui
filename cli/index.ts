@@ -2,37 +2,55 @@
 
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
+import { execSync } from 'child_process'
 import { syncDependencies } from './syncDependencies'
 
-// Detect project root
+// Project root
 const projectRoot = process.cwd()
 
-// 1. Check if project uses TypeScript
+// Check TypeScript
 const isTS = fs.existsSync(path.join(projectRoot, 'tsconfig.json'))
 
-// 2. Detect framework
-// const isNextAppRouter = fs.existsSync(path.join(projectRoot, 'app'))
+// Detect Vite
 const isVite =
   fs.existsSync(path.join(projectRoot, 'vite.config.js')) ||
   fs.existsSync(path.join(projectRoot, 'vite.config.ts'))
 
-// 3. Decide target directories based on framework
+// Target folders
 let targetComponentDir = path.join(projectRoot, 'components/aspect-ui')
 let targetUtilsDir = path.join(projectRoot, 'components/utils')
-let targetCSSDir = path.join(projectRoot, 'components/aspect-ui')
+// let targetCSSDir = path.join(projectRoot, 'components/aspect-ui')
 
 if (isVite) {
   targetComponentDir = path.join(projectRoot, 'src/components/aspect-ui')
   targetUtilsDir = path.join(projectRoot, 'src/components/utils')
-  targetCSSDir = path.join(projectRoot, 'src/components/aspect-ui')
+  // targetCSSDir = path.join(projectRoot, 'src/components/aspect-ui')
 }
 
-// 4. Component and utils source
-const componentsSrc = path.join(__dirname, '../../app/src/components')
-const utilsSrc = path.join(__dirname, '../../app/src/utils')
-const CSSSrc = path.join(__dirname, '../../app/src/css')
+// GitHub repo and branch
+const repoUrl =
+  'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git'
+const branchName = isTS ? 'typescript' : 'javascript'
 
-// 5. Copy files recursively and adapt TSX to JSX if needed
+// Temporary directory
+const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aspect-ui-'))
+
+// Clone the repo
+console.log(`📥 Cloning ${branchName} branch from Aspect UI repo...`)
+execSync(
+  `git clone --branch ${branchName} --single-branch ${repoUrl} ${tempDir}`,
+  {
+    stdio: 'inherit'
+  }
+)
+
+// Source directories from temp
+const componentsSrc = path.join(tempDir, 'src/components')
+const utilsSrc = path.join(tempDir, 'src/utils')
+// const CSSSrc = path.join(tempDir, 'src/css')
+
+// Copy logic
 function copyRecursiveSync(src: string, dest: string): void {
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true })
@@ -45,29 +63,22 @@ function copyRecursiveSync(src: string, dest: string): void {
     if (fs.lstatSync(srcPath).isDirectory()) {
       copyRecursiveSync(srcPath, destPath)
     } else {
-      if (!isTS && destPath.endsWith('.tsx')) {
-        // Convert .tsx → .jsx for JS projects
-        destPath = destPath.replace(/\.tsx$/, '.jsx')
-        let content = fs.readFileSync(srcPath, 'utf-8')
-        content = content
-          .replace(/: [a-zA-Z<>\[\]\|]+/g, '') // crude way to remove TS annotations
-          .replace(/interface\s+\w+\s+{[^}]+}/g, '') // crude way to remove interfaces
-          .replace(/import\s+type\s+/g, 'import ')
-        fs.writeFileSync(destPath, content, 'utf-8')
-      } else {
-        fs.copyFileSync(srcPath, destPath)
-      }
+      fs.copyFileSync(srcPath, destPath)
     }
   })
 }
 
-// 🚀 Run the script
-console.log('⚙️  Initializing Aspect UI components...')
+// 🚀 Run
+console.log('⚙️  Copying Aspect UI files...')
 copyRecursiveSync(componentsSrc, targetComponentDir)
 copyRecursiveSync(utilsSrc, targetUtilsDir)
-copyRecursiveSync(CSSSrc, targetCSSDir)
+// copyRecursiveSync(CSSSrc, targetCSSDir)
+
+// Clean up temp dir (optional)
+fs.rmSync(tempDir, { recursive: true, force: true })
+
 console.log(
-  `✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}\n - CSS: ${targetCSSDir}`
+  `✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}`
 )
 
 syncDependencies()

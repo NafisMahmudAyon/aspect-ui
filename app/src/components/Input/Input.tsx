@@ -1,11 +1,9 @@
-// ./app/src/components/Input/Input.tsx
-
 'use client'
 
-import { Eye, EyeOff, Mail } from 'lucide-react'
 import { ChangeEvent, forwardRef, InputHTMLAttributes, ReactNode, useState } from 'react'
 import { cn } from '../../utils/cn'
 import { Tooltip, TooltipAction, TooltipContent } from '../Tooltip'
+import { Eye, EyeOff, Mail } from 'lucide-react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
@@ -28,7 +26,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleClick = () => setIsShown(!isShown)
 
-    // Determine the input type based on the isShown state
     const inputType = type === "password" && isShown ? "text" : type
 
     return (
@@ -42,15 +39,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className='relative'>
           {icon && (
             <div
-              className={cn("pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 text-text", disabled ? 'opacity-50 pointer-events-none' : "", error ? "text-error-500 dark:text-error-500" : "", iconClassName)}
+              className={cn("pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 text-text", disabled ? 'opacity-50 pointer-events-none' : "", error ? "text-error-foreground" : "", iconClassName)}
             >
               {icon}
             </div>
           )}
           <input
             ref={ref}
-            type={inputType} // Use the determined input type
-            className={cn("w-full rounded-md border placeholder:text-text-muted px-3 py-2 shadow-xs selection:bg-primary selection:text-primary-foreground focus-visible:border-border focus:outline-hidden focus:ring-2 focus:ring-border ps-11", type === 'password' && 'pe-11', error ? 'border-error-500' : 'border-border', 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive', disabled ? 'opacity-50 pointer-events-none' : "", className)}
+            type={inputType}
+            className={cn("w-full rounded-md border placeholder:text-text-muted px-3 py-2 shadow-xs selection:bg-primary selection:text-primary-foreground focus-visible:border-border focus:outline-hidden focus:ring-2 focus:ring-border ps-11", type === 'password' && 'pe-11', error ? 'border-error-foreground' : 'border-border', 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive', disabled ? 'opacity-50 pointer-events-none' : "", className)}
             onChange={(event) => {
               onChange?.(event)
             }}
@@ -69,7 +66,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </Tooltip>
           }
         </div>
-        {error && <p className={cn('mt-1 text-sm text-error-600', errorClassName)}>{error}</p>}
+        {error && <p className={cn('mt-1 text-sm text-error-foreground', errorClassName)}>{error}</p>}
       </fieldset>
     )
   }

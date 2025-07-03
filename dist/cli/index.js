@@ -6,29 +6,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const os_1 = __importDefault(require("os"));
+const child_process_1 = require("child_process");
 const syncDependencies_1 = require("./syncDependencies");
-// Detect project root
+// Project root
 const projectRoot = process.cwd();
-// 1. Check if project uses TypeScript
+// Check TypeScript
 const isTS = fs_1.default.existsSync(path_1.default.join(projectRoot, 'tsconfig.json'));
-// 2. Detect framework
-// const isNextAppRouter = fs.existsSync(path.join(projectRoot, 'app'))
+// Detect Vite
 const isVite = fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.js')) ||
     fs_1.default.existsSync(path_1.default.join(projectRoot, 'vite.config.ts'));
-// 3. Decide target directories based on framework
+// Target folders
 let targetComponentDir = path_1.default.join(projectRoot, 'components/aspect-ui');
 let targetUtilsDir = path_1.default.join(projectRoot, 'components/utils');
-let targetCSSDir = path_1.default.join(projectRoot, 'components/aspect-ui');
+// let targetCSSDir = path.join(projectRoot, 'components/aspect-ui')
 if (isVite) {
     targetComponentDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
     targetUtilsDir = path_1.default.join(projectRoot, 'src/components/utils');
-    targetCSSDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
+    // targetCSSDir = path.join(projectRoot, 'src/components/aspect-ui')
 }
-// 4. Component and utils source
-const componentsSrc = path_1.default.join(__dirname, '../../app/src/components');
-const utilsSrc = path_1.default.join(__dirname, '../../app/src/utils');
-const CSSSrc = path_1.default.join(__dirname, '../../app/src/css');
-// 5. Copy files recursively and adapt TSX to JSX if needed
+// GitHub repo and branch
+const repoUrl = 'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git';
+const branchName = isTS ? 'typescript' : 'javascript';
+// Temporary directory
+const tempDir = fs_1.default.mkdtempSync(path_1.default.join(os_1.default.tmpdir(), 'aspect-ui-'));
+// Clone the repo
+console.log(`📥 Cloning ${branchName} branch from Aspect UI repo...`);
+(0, child_process_1.execSync)(`git clone --branch ${branchName} --single-branch ${repoUrl} ${tempDir}`, {
+    stdio: 'inherit'
+});
+// Source directories from temp
+const componentsSrc = path_1.default.join(tempDir, 'src/components');
+const utilsSrc = path_1.default.join(tempDir, 'src/utils');
+// const CSSSrc = path.join(tempDir, 'src/css')
+// Copy logic
 function copyRecursiveSync(src, dest) {
     if (!fs_1.default.existsSync(dest)) {
         fs_1.default.mkdirSync(dest, { recursive: true });
@@ -40,26 +51,16 @@ function copyRecursiveSync(src, dest) {
             copyRecursiveSync(srcPath, destPath);
         }
         else {
-            if (!isTS && destPath.endsWith('.tsx')) {
-                // Convert .tsx → .jsx for JS projects
-                destPath = destPath.replace(/\.tsx$/, '.jsx');
-                let content = fs_1.default.readFileSync(srcPath, 'utf-8');
-                content = content
-                    .replace(/: [a-zA-Z<>\[\]\|]+/g, '') // crude way to remove TS annotations
-                    .replace(/interface\s+\w+\s+{[^}]+}/g, '') // crude way to remove interfaces
-                    .replace(/import\s+type\s+/g, 'import ');
-                fs_1.default.writeFileSync(destPath, content, 'utf-8');
-            }
-            else {
-                fs_1.default.copyFileSync(srcPath, destPath);
-            }
+            fs_1.default.copyFileSync(srcPath, destPath);
         }
     });
 }
-// 🚀 Run the script
-console.log('⚙️  Initializing Aspect UI components...');
+// 🚀 Run
+console.log('⚙️  Copying Aspect UI files...');
 copyRecursiveSync(componentsSrc, targetComponentDir);
 copyRecursiveSync(utilsSrc, targetUtilsDir);
-copyRecursiveSync(CSSSrc, targetCSSDir);
-console.log(`✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}\n - CSS: ${targetCSSDir}`);
+// copyRecursiveSync(CSSSrc, targetCSSDir)
+// Clean up temp dir (optional)
+fs_1.default.rmSync(tempDir, { recursive: true, force: true });
+console.log(`✅ Components added to:\n - Components: ${targetComponentDir}\n - Utils: ${targetUtilsDir}`);
 (0, syncDependencies_1.syncDependencies)();
