@@ -46,9 +46,8 @@ execSync(
 )
 
 // Source directories from temp
-const componentsSrc = path.join(tempDir, 'src/components')
-const utilsSrc = path.join(tempDir, 'src/utils')
-// const CSSSrc = path.join(tempDir, 'src/css')
+const componentsSrc = path.join(tempDir, 'components/aspect-ui')
+const utilsSrc = path.join(tempDir, 'components/utils')
 
 // Copy logic
 function copyRecursiveSync(src: string, dest: string): void {

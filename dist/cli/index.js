@@ -36,9 +36,8 @@ console.log(`📥 Cloning ${branchName} branch from Aspect UI repo...`);
     stdio: 'inherit'
 });
 // Source directories from temp
-const componentsSrc = path_1.default.join(tempDir, 'src/components');
-const utilsSrc = path_1.default.join(tempDir, 'src/utils');
-// const CSSSrc = path.join(tempDir, 'src/css')
+const componentsSrc = path_1.default.join(tempDir, 'components/aspect-ui');
+const utilsSrc = path_1.default.join(tempDir, 'components/utils');
 // Copy logic
 function copyRecursiveSync(src, dest) {
     if (!fs_1.default.existsSync(dest)) {
