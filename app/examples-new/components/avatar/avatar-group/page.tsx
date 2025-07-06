@@ -33,7 +33,7 @@ const page = () => {
     }
     data()
   }, [])
-  console.log(avatarData)
+  // console.log(avatarData)
   return (
     <AvatarGroup>
       {avatarData.map((item, index) => (

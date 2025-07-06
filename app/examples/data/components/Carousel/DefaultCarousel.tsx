@@ -10,7 +10,7 @@ interface ImageItem {
 const CarouselComponent = () => {
   const images: ImageItem[] = use(fetchImages())
   return (
-    <Carousel className="w-full max-w-3xl">
+    <Carousel className="max-w-3xl mx-auto">
       <CarouselSlides>
         {images.map((item, i) => (
           <CarouselItem key={i}>

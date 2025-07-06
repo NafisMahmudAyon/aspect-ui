@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
 
     <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <div className={`bg-bg/30 text-text font-sans`}>
+      <div className={`font-sans`}>
         <Navbar />
         {children}
         </div>

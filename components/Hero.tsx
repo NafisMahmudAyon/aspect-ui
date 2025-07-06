@@ -43,7 +43,7 @@ const Hero = () => {
           </div>
 
           {/* Main Content */}
-          <div className="mx-auto max-w-3xl text-center text-primary-800 dark:text-primary-200">
+          <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 rounded-full border border-primary-800/30 bg-primary-200/50 px-3 md:px-5 lg:px-6 py-2 text-sm text-primary-800 inline-flex items-center gap-2 dark:border-primary-200/30 dark:bg-primary-800/50 dark:text-primary-200 backdrop-blur-xs">
               React <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> TypeScript <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> Tailwind CSS 
               {/* <span className="size-2 rounded-full bg-primary-500 animate-pulse" /> Accessibility */}

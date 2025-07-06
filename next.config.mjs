@@ -14,6 +14,21 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/docs',
+        destination: '/docs/getting-started/introduction',
+        permanent: true
+      },
+      {
+        source: '/variations',
+        destination: '/variations/components/accordion',
+        permanent: true
+      },
+      {
+        source: '/template',
+        destination: '/template/all',
+        permanent: true
+      },
+      {
         source: '/introduction',
         destination: '/docs/getting-started/introduction',
         permanent: true
@@ -171,7 +186,7 @@ const nextConfig = {
       },
       {
         source: '/textInput',
-        destination: '/docs/components/textInput',
+        destination: '/docs/components/input',
         permanent: true
       },
       {

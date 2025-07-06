@@ -3,6 +3,7 @@
 
 import React, { ReactNode } from 'react'
 import { cn } from '../../utils/cn'
+import { useNavbar } from './NavbarContext'
 
 interface NavbarItemProps {
   children: ReactNode
@@ -10,5 +11,6 @@ interface NavbarItemProps {
 }
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({ children, className = '', ...rest }) => {
-  return <button className={cn('px-2 py-1 inline-flex text-text hover:bg-bg-light rounded-md transition-colors ease-in-out focus-visible:bg-bg-light', className)} {...rest}>{children}</button>
+  const { setIsCollapsed } = useNavbar()
+  return <button className={cn('px-2 py-1 inline-flex text-text hover:bg-bg-light rounded-md transition-colors ease-in-out focus-visible:bg-bg-light', className)} onClick={() => {console.log(":");setIsCollapsed(false)}} {...rest}>{children}</button>
 }

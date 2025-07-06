@@ -20,14 +20,14 @@ const CodeBox: FC<CodeBoxProps> = ({ color, id, code }) => {
         <span
           className={cn(
             'opacity-0 transition-all duration-300 group-hover:opacity-100',
-            id > 300 ? 'text-metal-100' : 'text-metal-900',
+            id > 300 ? '' : '',
           )}>
           {copy ? <Check size={18} /> : <Copy size={18} />}
         </span>
       </button>
       <div className="mt-1 text-left">
-        <p className="text-[10px] font-medium text-metal-600 dark:text-metal-300">{id}</p>
-        <p className="text-[10px] font-medium text-metal-600 dark:text-metal-300">{code}</p>
+        <p className="text-[10px] font-medium">{id}</p>
+        <p className="text-[10px] font-medium">{code}</p>
       </div>
     </div>
   )

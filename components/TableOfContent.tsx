@@ -70,7 +70,7 @@ const TableOfContent = () => {
 
   return (
     <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
-      <aside id="linkPage" className="sticky top-28 h-[80vh] 2xl:top-60">
+      <aside id="linkPage" className="sticky top-24 h-[80vh] 2xl:top-32">
         <div className="2xl:pl-5">
           <div className="flex flex-col justify-between overflow-y-auto">
             <h4 className="mb-2 text-body-4 font-semibold uppercase text-primary-900 dark:text-primary-200">On this page</h4>
@@ -79,7 +79,7 @@ const TableOfContent = () => {
                 dangerouslySetInnerHTML={{
                   __html: innerHtml ?? '',
                 }}
-                className="border-l border-l-primary-200 dark:border-l-primary-800"
+                className="border-l-2 border-l-border"
               />
             </nav>
           </div>

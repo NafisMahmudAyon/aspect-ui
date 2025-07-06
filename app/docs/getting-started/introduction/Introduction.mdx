@@ -1,27 +1,47 @@
 import CodeSnippet from '@/components/CodeSnippet'
+import CodeSnippets from '@/components/CodeSnippets'
 import EditPage from '@/components/EditPage'
 import { importInNext, importInReact } from './Code/Code.tsx'
 import IntroductionStepsForReact from './IntroductionStepsForReact'
 import IntroductionStepsForNext from './IntroductionStepsForNext'
+import { bashInstall, bashCLIImport, bashNextInstall, bashViteInstall, usageAspectUI } from './Code/Code.tsx'
 
+## Table of Contents
 
+## Installation
 
-## Vite React Application
+You can quickly install Aspect UI using npm:
 
-Setting Up Aspect UI in Vite React Application
+<CodeSnippet styles="mt-4" content={bashInstall} lang="bash" />
 
-<IntroductionStepsForReact />
+Or use our CLI tool to scaffold components and setup files instantly:
 
-Congratulations! You've now successfully set up Aspect UI in your Vite React application. You can begin using components from <span className="code">`aspect-ui`</span> in your project.
+<CodeSnippet styles="mt-4" content={bashCLIImport} lang="bash" />
 
-<CodeSnippet styles="mt-4" content={importInReact} lang="javascript" />
+## Quick Start with Templates
 
-## Next JS Application
+Want to jump right into building? You can create a fully set-up project using our ready-made templates for Next.js or Vite.
 
-You can easily integrate <span className="code">`aspect-ui`</span> library into your Next.js application.
+### Next.js Template
 
-<IntroductionStepsForNext />
+<CodeSnippet styles="mt-4" content={bashNextInstall} lang="bash" />
 
-Now you can import any component from <span className="code">`aspect-ui`</span> and start using it in your NextJS project.
+This will generate a new Next.js app preconfigured with Aspect UI.
 
-<CodeSnippet styles="mt-4" content={importInNext} lang="javascript" />
+### Vite Template
+
+<CodeSnippet styles="mt-4" content={bashViteInstall} lang="bash" />
+
+This will create a new Vite React project with Aspect UI fully integrated.
+
+## Usage
+
+After installation, you can start using components right away. Example:
+
+<CodeSnippet styles="mt-4" content={usageAspectUI} lang="javascript" />
+
+### Get Started Today
+
+Aspect UI is designed to help you move fast and create beautiful, consistent UIs with minimal effort. Whether you're building a personal project, a startup MVP, or a large-scale production app, Aspect UI gives you the tools to succeed.
+
+👉 Start building with Aspect UI today and make your ideas come to life!

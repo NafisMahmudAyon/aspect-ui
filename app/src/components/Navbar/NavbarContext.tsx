@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 interface NavbarContextType {
   isCollapsed: boolean
+  setIsCollapsed: (value: boolean) => void
   toggleCollapse: () => void
   collapseBreakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'all'
 }
@@ -15,11 +16,11 @@ export const NavbarProvider: React.FC<{ children: React.ReactNode, collapseBreak
   collapseBreakpoint = 'md' // default value
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(true)
-
+  
   const toggleCollapse = () => setIsCollapsed(prev => !prev)
 
   return (
-    <NavbarContext.Provider value={{ isCollapsed, toggleCollapse, collapseBreakpoint }}>
+    <NavbarContext.Provider value={{ isCollapsed, setIsCollapsed, toggleCollapse, collapseBreakpoint }}>
       {children}
     </NavbarContext.Provider>
   )

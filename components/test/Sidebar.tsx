@@ -3,28 +3,33 @@ import {
   SidebarContainer,
   SidebarFooter,
   SidebarHeader,
-  SidebarItem
+  SidebarItem,
+  SidebarToggleButton
 } from '@/app/src/components/Sidebar'
-import React from 'react'
 import Dark from '../Dark'
+import { SidebarProvider } from '@/app/src/components/Sidebar'
 
 const SidebarDemo = () => {
   return (
     <div>
-      <Sidebar>
-        <SidebarHeader>
-          <Dark />
-          <h2 className='text-xl font-bold'>My App</h2>
-        </SidebarHeader>
-        <SidebarContainer>
-          <SidebarItem>Dashboard</SidebarItem>
-          <SidebarItem>Profile</SidebarItem>
-          <SidebarItem>Settings</SidebarItem>
-        </SidebarContainer>
-        <SidebarFooter>
-          <p>© 2024 My App</p>
-        </SidebarFooter>
-      </Sidebar>
+      <SidebarProvider>
+
+        <Sidebar>
+          <SidebarHeader>
+            <Dark />
+            <h2 className='text-xl font-bold'>My App</h2>
+          </SidebarHeader>
+          <SidebarContainer>
+            <SidebarItem>Dashboard</SidebarItem>
+            <SidebarItem>Profile</SidebarItem>
+            <SidebarItem>Settings</SidebarItem>
+          </SidebarContainer>
+          <SidebarFooter>
+            <p>© 2024 My App</p>
+          </SidebarFooter>
+        </Sidebar>
+        <SidebarToggleButton />
+      </SidebarProvider>
     </div>
   )
 }

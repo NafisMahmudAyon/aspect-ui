@@ -53,20 +53,20 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
       setCopySuccess(null);
     }, 2000);
   };
-  const [codeType, setCodeType] = useState(children ? 99 : 0)
+  const [codeType, setCodeType] = useState(999)
   const [preview, setPreview] = useState((children || url) ? true : false)
 
   return (
-    <Code styles={cn(styles, "my-4 rounded-t-lg rounded-b-lg relative bg-primary-50 dark:bg-primary-950 hover:shadow-md")}>
+    <Code styles={cn(styles, "my-4 rounded-t-lg rounded-b-lg relative hover:shadow-md")}>
       <CodeHeader
-        styles={cn(headerStyles, "flex items-center justify-between w-full bg-primary-100 dark:bg-primary-900 py-3 px-2 text-white rounded-t-lg hover:bg-primary-100 dark:hover:bg-primary-900")}>
-        <div className="flex justify-between">
+        styles={cn(headerStyles, "flex items-center justify-between w-full gap-2 py-3 px-2 rounded-t-lg overflow-hidden", !showCode && "border border-border rounded-lg mb-4")}>
+        <div className="flex justify-between gap-1.5 overflow-x-auto no-scrollbar">
           {(children || url) && showCode && (
-            <Button
+            <Button variant="outline" size="small"
               onClick={() => { setPreview(true); setCodeType(999) }}
               className={cn(
-                'px-4 py-2.5 text-body2 font-normal border-b-2 rounded-none',
-                preview === true ? 'border-b-primary-900 dark:border-b-primary-100 ' : 'border-b-transparent dark:border-b-transparent',
+                'text-body-2 font-normal',
+                preview === true ? 'bg-bg-light' : '',
               )}
             >
               <span>Preview</span>
@@ -83,24 +83,26 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
 
           {showCode && Object.keys(content).map((key, index) => (
             <React.Fragment key={index}>
-            <Button
-              onClick={() => { setPreview(false); setCodeType(index) }}
-              className={cn(
-                'hidden md:inline-flex px-4 py-2.5 text-body2 font-normal border-b-2 rounded-none',
-                (!preview && codeType === index) ? 'border-b-primary-900 dark:border-b-primary-100 ' : 'border-b-transparent dark:border-b-transparent',
-              )}
-            >
-              <span>{key}</span>
-            </Button>
+              <Button variant="outline" size="small"
+                onClick={() => { setPreview(false); setCodeType(index) }}
+                className={cn(
+                  'hidden md:inline-flex text-body-2 font-normal ',
+                  (!preview && codeType === index) ? 'bg-bg-light' : '',
+                )}
+              >
+                <span>{key}</span>
+              </Button>
+            </React.Fragment>
+          ))}
           <div className="inline-flex md:hidden">
             <Dropdown>
               <DropdownAction>
-                Code
+                {codeType === 999 ? "Code" : Object.keys(content)[codeType]}
               </DropdownAction>
               <DropdownContent>
                 <DropdownList>
                   {Object.keys(content).map((key, index) => (
-                    <DropdownItem key={index} onClick={() => { setPreview(false); setCodeType(index) }}>
+                    <DropdownItem key={index} isSelected={codeType === index} onClick={() => { setPreview(false); setCodeType(index) }}>
                       {key}
                     </DropdownItem>
                   ))}
@@ -108,16 +110,14 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
               </DropdownContent>
             </Dropdown>
           </div>
-            </React.Fragment>
-          ))}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-1 justify-end">
           <div className={cn('gap-2 items-center hidden', preview ? ' md:flex' : 'hidden')}>
-            <button className={`py-0.5 px-1 cursor-pointer border rounded-md border-gray-300/30 ${width == "mobile" ? "bg-gray-700 dark:bg-gray-200 text-inherit dark:text-primary-800" : "bg-gray-500/50 dark:bg-gray-200/30"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('mobile')}><Smartphone className="size-5" /></button>
-            <button className={`py-0.5 px-1 cursor-pointer border rounded-md border-gray-300/30 bg-gray-200/30 ${width == "tablet" ? "bg-gray-700 dark:bg-gray-200 text-inherit dark:text-primary-800" : "bg-gray-500/50 dark:bg-gray-200/30"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('tablet')}><Tablet className="size-5" /></button>
-            <button className={`py-0.5 px-1 cursor-pointer border rounded-md border-gray-300/30 bg-gray-200/30 ${width == "desktop" ? "bg-gray-700 dark:bg-gray-200 text-inherit dark:text-primary-800" : "bg-gray-500/50 dark:bg-gray-200/30"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('desktop')}><Monitor className="size-5" /></button>
+            <Button variant="outline" size="small" className={`cursor-pointer px-2 ${width == "mobile" && "bg-bg-light"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('mobile')}><Smartphone className="size-5" /></Button>
+            <Button variant="outline" size="small" className={`cursor-pointer px-2 ${width == "tablet" && "bg-bg-light"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('tablet')}><Tablet className="size-5" /></Button>
+            <Button variant="outline" size="small" className={`cursor-pointer px-2 ${width == "desktop" && "bg-bg-light"} transition-colors duration-300 ease-in-out `} onClick={() => setWidth('desktop')}><Monitor className="size-5" /></Button>
           </div>
-          {showCode && <Button
+          {showCode && <Button variant="outline" size="small"
             onClick={() => {
               if (!preview)
                 handleCopyClick(Object.values(content)[codeType])
@@ -126,8 +126,8 @@ const CodeSnippets: React.FC<CodeSnippetProps> = ({
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
             </svg>
             }
-            iconClassName="text-body2"
-            className="p-2 text-body2 rounded-none border-l-0 pr-4 cursor-pointer"
+            iconClassName="text-body-2"
+            className="text-body-2 cursor-pointer text-nowrap"
           >
             {
               copySuccess === null
@@ -201,7 +201,6 @@ interface CodeBodyProps {
 const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = "", children, preview, url, width, height = 400, showCode = true }) => {
   // const iframeRef = useRef(null);
   // const [iframeHeight, setIframeHeight] = useState(500); // default height
-
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isExternal, setIsExternal] = useState(false)
@@ -217,46 +216,12 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
       setIsExternal(url[0] == '/' ? false : true)
   }, [url])
 
-
-  // useEffect(() => {
-  //   const handleMessage = (event: MessageEvent) => {
-  //     if (event.data.type === 'resize-iframe' && event.data.height) {
-  //       setIframeHeight(event.data.height);
-  //     }
-  //   };
-
-  //   window.addEventListener('message', handleMessage);
-  //   return () => window.removeEventListener('message', handleMessage);
-  // }, []);
-  // const iframe = document.querySelector('iframe');
-
-  // if (iframe) iframe.onload = () => {
-  //   const iframeDoc = iframe?.contentDocument || iframe?.contentWindow?.document;
-  //   if (iframeDoc) iframeDoc.body.style.backgroundColor = 'transparent';
-  // };
-  // useEffect(() => {
-  //   const iframe = document.querySelector("iframe");
-
-  //   if (iframe) {
-  //     iframe.onload = () => {
-  //       try {
-  //         // Access the iframe's document to adjust height dynamically
-  //         const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-  //         if (iframeDoc && iframeDoc.body) {
-  //           iframe.style.height = iframeDoc.body.scrollHeight + "px";
-  //         }
-  //       } catch (error) {
-  //         console.warn("Can't access iframe content due to cross-origin restrictions", error);
-  //       }
-  //     };
-  //   }
-  // }, []);
   return (
     <>
-      {children && preview && <div className="w-full h-full bg-[#121c29] px-[40px] py-[20px] rounded-b-lg">{children}</div>}
+      {children && preview && <div className="w-full h-full px-[40px] py-[20px] rounded-b-lg">{children}</div>}
       {url && preview && (
         <>
-          <div className="py-[20px] border border-t-0 border-primary-100 dark:border-primary-900 rounded-b-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
+          <div className="py-[20px] border border-border rounded-lg px-[20px] lg:px-[30px] xl:px-[40px] overflow-auto">
             <iframe style={{ height: `${height}px` }} className={` ${width === 'mobile' ? "w-full sm:w-[460px]" : width === 'tablet' ? "w-full md:w-[600px] lg:w-[680px] xl:w-[704px]" : "w-full"} mx-auto transition-all duration-300 ease-in-out`}
               // src="https://pp01.nafisbd.com/examples/hero"
               src={isExternal ? url : process.env.NEXT_PUBLIC_BASE_URL ?
@@ -268,7 +233,7 @@ const CodeBody: React.FC<CodeBodyProps> = ({ styles = "", language, content = ""
         </>
       )}
       {!preview && showCode &&
-        <div className="rounded-b-lg overflow-hidden bg-primary-50 dark:bg-[#121c29] ">
+        <div className="rounded-lg overflow-hidden border border-border bg-bg">
           <SyntaxHighlighter
             className={cn(
               styles
@@ -304,13 +269,13 @@ interface CLICodeBlockProps {
 
 export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
   id,
-  isPro=false
+  isPro = false
 }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (id: number, isPro: boolean) => {
     try {
-      await navigator.clipboard.writeText(`npx -p aspect-ui@latest add https://aspect-ui.vercel.app/api/get/${id}${isPro &&"?api-key=*****"}`);
+      await navigator.clipboard.writeText(`npx -p aspect-ui@latest add https://aspect-ui.vercel.app/api/get/${id}${isPro && "?api-key=*****"}`);
       setCopied(true);
 
       // Reset copied state after 2 seconds
@@ -322,8 +287,8 @@ export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
     }
   };
   return (
-    <div className="relative rounded-lg bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 shadow-lg border border-primary-800/20 dark:border-primary-200/20 mt-14">
-      <div className='absolute bottom-full left-4 dark:bg-primary-100 dark:text-primary-800 bg-primary-900 text-primary-200 px-3 py-1 rounded-t-md border-b border-primary-800/20 dark:border-primary-200/20'>CLI</div>
+    <div className="relative rounded-lg shadow-lg border border-border mt-14">
+      <div className='absolute bottom-full left-4 px-3 py-1 rounded-t-md border  border-border'>CLI</div>
       <div className="p-4 mr-12 flex items-center gap-2">
         {<span className="text-green-400">$ </span>}
         <pre className={`text-sm overflow-x-auto`}>
@@ -332,9 +297,9 @@ export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
           </code>
         </pre>
       </div>
-      <button
+      <Button variant="outline"
         onClick={() => handleCopy(id, isPro)}
-        className="absolute top-1/2 -translate-y-1/2 right-4 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="absolute top-1/2 -translate-y-1/2 right-4 p-2 rounded-md "
         aria-label="Copy to clipboard"
       >
         {copied ? (
@@ -342,7 +307,7 @@ export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
         ) : (
           <Copy size={16} className="text-gray-400" />
         )}
-      </button>
+      </Button>
     </div>
   )
 }

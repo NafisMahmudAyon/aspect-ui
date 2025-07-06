@@ -50,7 +50,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
                 }),
               })
               const data = await response.json()
-              console.log(data)
+              // console.log(data)
               return data
             }
             createProfile()
@@ -63,7 +63,7 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     fetchData();
     setIsLoaded(true)
   }, [user, isLoaded])
-  console.log(user)
+  // console.log(user)
   // console.log(logIn)
   const userValue: UserContextType = {
     user,

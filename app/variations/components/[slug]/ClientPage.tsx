@@ -17,6 +17,10 @@ const ClientPage = ({ slug }: { slug: string }) => {
     async function getData() {
       try {
         const res = await fetch(`/api/get?cats=variations&subcats=${slug}&page=${page}&limit=5`)
+        if (!res.ok) {
+          setFetchedData([])
+          return
+        }
         const json = await res.json()
         setFetchedData(json.data)
         setTotalPages(json.totalPages)
@@ -51,11 +55,11 @@ const ClientPage = ({ slug }: { slug: string }) => {
           }
           return (
             <div key={item._id}>
-              <h2 className="section-title group relative font-semibold text-h5" id={generatedID}>{item.title}
+              <h2 className="section-title group relative font-semibold text-h5 text-text" id={generatedID}>{item.title}
                 <a
                   aria-label={`Link to this section: ${item.title}`}
                   href={`#${generatedID}`}
-                  className="ml-2 text-metal-500 opacity-0 transition-opacity group-hover:opacity-100">
+                  className="ml-2 opacity-0 transition-opacity group-hover:opacity-100">
                   #
                 </a>
               </h2>

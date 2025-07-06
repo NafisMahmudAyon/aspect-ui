@@ -4,7 +4,7 @@ import React from 'react'
 
 const DatePickerExample = () => {
   const handleDateChange = (dates: Date[]) => {
-    console.log('Selected date:', dates)
+    // console.log('Selected date:', dates)
   }
   return (
     <div>

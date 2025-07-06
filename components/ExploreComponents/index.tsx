@@ -286,7 +286,7 @@ const ExploreComponents = () => {
       <h2 className="text-h2 font-bold leading-tight md:text-6xl t-shadow text-center mb-6">Explore Components</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full px-4 lg:px-6'>
         {examples.map((example, index) => (
-          <div key={index} className={cn('bg-gray-200/70 dark:bg-bg-dark p-4 rounded-lg grid place-items-center group relative dark:shadow-gray-200/10 shadow-sm hover:shadow-lg transition-all duration-300', example.class)} onMouseEnter={() => setIsHovered(true)}
+          <div key={index} className={cn('bg-gray-200/70 dark:bg-bg-dark/20 p-4 rounded-lg grid place-items-center group relative dark:shadow-gray-200/10 shadow-sm hover:shadow-lg transition-all duration-300', example.class)} onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
             {example.code}
             <HoverEffect title={example.title} link={example.link} isHovered={isHovered} />
@@ -304,7 +304,7 @@ const ExploreComponents = () => {
 
 const HoverEffect = ({ title, link = "", isHovered }: { title: string, link: string, isHovered: boolean }) => {
   return (
-    <div className='group-hover:opacity-100 group-hover:z-10 transition-all opacity-0 hidden duration-300 absolute inset-0 backdrop-blur-sm bg-primary-800/5 dark:bg-primary-200/5 -z-10 h-full w-full animate-effect rounded-lg group-hover:flex items-center justify-center group'>
+    <div className='group-hover:opacity-100 group-hover:z-[100] transition-all opacity-0 hidden duration-300 absolute inset-0 backdrop-blur-sm bg-primary-800/5 dark:bg-primary-200/5 -z-10 h-full w-full animate-effect rounded-lg group-hover:flex items-center justify-center group'>
       {/* <h1 className='text-center text-white text-h1 relative translate-y-full -translate-x-full group-hover:translate-y-0 group-hover:-translate-x-0 transition-all duration-1000 ease-in-out opacity-0 group-hover:opacity-100'>{title}</h1> */}
       <AnimatedTitle title={title} isHovered={isHovered} />
       <Link href={"/docs/components/" + link} className='absolute top-4 right-4 text-primary-800 dark:text-primary-200 group/link' >

@@ -111,6 +111,31 @@ export default AspectUITheme(config);
   `,
 }
 
+/////////////////////////////////////////////////
+const bashInstall = {
+  'npm': `npm i aspect-ui`,
+  'yarn': `yarn add aspect-ui`,
+  'pnpm': `pnpm add aspect-ui`,
+}
+const bashCLIImport = {
+  'npm': `npx aspect-ui@latest init`,
+  'yarn': `yarn aspect-ui@latest init`,
+  'pnpm': `pnpm dlsx aspect-ui@latest init`,
+}
+const bashNextInstall = {
+  'npm': `npx -p aspect-ui@latest next-app`,
+}
+const bashViteInstall = {
+  'npm': `npx -p aspect-ui@latest vite-app`,
+}
+const usageAspectUI = {
+  'javascript': `import { Button } from '@components/aspect-ui';
+
+export default function HomePage() {
+  return <Button>Get Started</Button>;
+}`
+}
+
 export {
   importInNext,
   importInReact,
@@ -122,4 +147,10 @@ export {
   twCssForReact,
   twNpmInstall,
   viteReact,
+  //////////////////
+  bashInstall,
+  bashCLIImport,
+  bashNextInstall,
+  bashViteInstall,
+  usageAspectUI
 }

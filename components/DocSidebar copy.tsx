@@ -5,12 +5,11 @@ import { usePathname } from 'next/navigation'
 // import { Accordion
 //   // AccordionContainer, AccordionContent, AccordionPanel, AccordionTitle 
 // } from ''
-import { Accordion, AccordionContent, AccordionHeader, AccordionItem, Sidebar, useSidebar } from '@/app/src'
+import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from '@/app/src'
 import { cn } from '@/app/src/utils/cn'
 
 const DocSidebar = () => {
   const pathname = usePathname()
-  const { isOpen } = useSidebar()
 
   const IsActive = (str: string) => {
     const lastPart = pathname.toLowerCase().split('/').pop()
@@ -28,7 +27,7 @@ const DocSidebar = () => {
     activeItem = ['item-5']
   }
   return (
-    <Sidebar className={cn("h-[calc(100vh-140px)] lg:h-[calc(100vh-100px)] overflow-auto lg:sticky lg:top-[80px] absolute lg:col-span-3 lg:block xl:col-span-2 border-r p-2 no-scrollbar lg:w-auto lg:bg-transparent lg:opacity-100", isOpen ? 'shadow-md rounded-lg lg:shadow-none lg:rounded-none' : 'opacity-0')}>
+    <div className={cn("h-[calc(100vh-100px)] overflow-auto sticky top-[80px]  hidden lg:col-span-3 lg:block xl:col-span-2 border-r p-2 no-scrollbar")}>
       <aside
         id="componentListSidebar"
         className=" space-y-5 2xl:py-6 2xl:pl-5">
@@ -128,7 +127,7 @@ const DocSidebar = () => {
           </AccordionItem>
         </Accordion>
       </aside>
-    </Sidebar>
+    </div>
   )
 }
 

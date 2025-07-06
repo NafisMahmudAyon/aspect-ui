@@ -8,13 +8,13 @@ const TableExample = () => {
         <TableHeader>
           <TableRow>
             <TableHeadCell>
-              <Skeleton variation='text' width="100px" className='dark:bg-primary-200' /></TableHeadCell>
+              <Skeleton variation='text' width="100px" className='' /></TableHeadCell>
             <TableHeadCell>
-              <Skeleton variation='text' width="100px" className='dark:bg-primary-200' /></TableHeadCell>
+              <Skeleton variation='text' width="100px" className='' /></TableHeadCell>
             <TableHeadCell>
-              <Skeleton variation='text' width="100px" className='dark:bg-primary-200' /></TableHeadCell>
+              <Skeleton variation='text' width="100px" className='' /></TableHeadCell>
             <TableHeadCell>
-              <Skeleton variation='text' width="100px" className='dark:bg-primary-200' /></TableHeadCell>
+              <Skeleton variation='text' width="100px" className='' /></TableHeadCell>
           </TableRow>
         </TableHeader>
         <TableBody>

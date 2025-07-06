@@ -52,7 +52,7 @@ export default function AutoplayCarousel() {
 
   return (
     <Carousel
-      className="w-full max-w-3xl"
+      className="max-w-3xl mx-auto"
       plugins={[autoPlay()]}
       options={{ loop: true, }}
     >

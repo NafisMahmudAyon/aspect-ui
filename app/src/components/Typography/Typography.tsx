@@ -8,10 +8,10 @@ type TypographyVariant =
   | 'h4'
   | 'h5'
   | 'h6'
-  | 'display1'
-  | 'display2'
-  | 'body1'
-  | 'body2'
+  | 'display-1'
+  | 'display-2'
+  | 'body-1'
+  | 'body-2'
   | 'caption'
 
 interface TypographyProps extends HTMLAttributes<HTMLDivElement> {
@@ -29,23 +29,6 @@ export const Typography: React.FC<TypographyProps> = ({
   ...rest
 }) => {
   const TagName = tagName
-  // const getComponent = (): React.ElementType => {
-  //   switch (variant) {
-  //     case 'h1':
-  //     case 'h2':
-  //     case 'h3':
-  //     case 'h4':
-  //     case 'h5':
-  //     case 'h6':
-  //       return variant
-  //     case 'display1':
-  //       return 'h1'
-  //     case 'display2':
-  //       return 'h1'
-  //     default:
-  //       return 'p'
-  //   }
-  // }
 
   const getStyles = (): string => {
     switch (variant) {
@@ -61,16 +44,16 @@ export const Typography: React.FC<TypographyProps> = ({
         return 'text-h5'
       case 'h6':
         return 'text-h6'
-      case 'body1':
-        return 'text-body1'
-      case 'body2':
-        return 'text-body2'
+      case 'body-1':
+        return 'text-body-1'
+      case 'body-2':
+        return 'text-body-2'
       case 'caption':
         return 'text-caption'
-      case 'display1':
-        return 'text-display1'
-      case 'display2':
-        return 'text-display2'
+      case 'display-1':
+        return 'text-display-1'
+      case 'display-2':
+        return 'text-display-2'
       default:
         return ''
     }
@@ -81,7 +64,7 @@ export const Typography: React.FC<TypographyProps> = ({
 
   return (
     <TagName
-      className={cn("text-primary-800 dark:text-primary-200", styles, className)}
+      className={cn("text-text-muted", styles, className)}
       {...rest}
     >
       {children}

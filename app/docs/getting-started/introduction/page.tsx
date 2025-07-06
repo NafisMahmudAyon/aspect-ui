@@ -5,7 +5,7 @@ import EditPage from '@/components/EditPage'
 
 export const metadata: Metadata = {
   description:
-    'Aspect UI is an open-source component library built on top of React and Tailwind CSS. It offers a collection of pre-designed UI components and styles that you can easily integrate into your web applications. Install Aspect UI in your React application or NextJs Application following step bellow.',
+    'Aspect UI is an open-source component library built on top of React and Tailwind CSS. It offers a collection of pre-designed UI components and styles that you can easily integrate into your web applications. With Aspect UI, you get a powerful set of pre-built components, ready-to-use templates, and CLI tools to supercharge your workflow.',
   title: 'Introduction - Aspect UI',
 }
 

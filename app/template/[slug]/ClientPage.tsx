@@ -42,7 +42,7 @@ const ClientPage = ({ slug }: { slug: string }) => {
     }))
     setTOC(newTOC)
   }, [fetchedData])
-  console.log(fetchedData)
+  // console.log(fetchedData)
   return (
     <div>
       {loading ? <div>Loading...</div> : (<>
@@ -54,11 +54,11 @@ const ClientPage = ({ slug }: { slug: string }) => {
           }
           return (
             <div key={item._id}>
-              <h2 className="section-title group relative font-semibold text-h5" id={generatedID}>{item.title}
+              <h2 className="section-title group relative font-semibold text-h5 text-text" id={generatedID}>{item.title}
                 <a
                   aria-label={`Link to this section: ${item.title}`}
                   href={`#${generatedID}`}
-                  className="ml-2 text-metal-500 opacity-0 transition-opacity group-hover:opacity-100">
+                  className="ml-2 opacity-0 transition-opacity group-hover:opacity-100">
                   #
                 </a>
               </h2>

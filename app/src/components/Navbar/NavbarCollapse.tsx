@@ -12,6 +12,7 @@ type NavbarCollapseProps = HTMLAttributes<HTMLDivElement> & MotionProps
 export const NavbarCollapseComponent = forwardRef<HTMLDivElement, NavbarCollapseProps>(({ children, className, ...rest }, ref) => {
   const { isCollapsed } = useNavbar()
 
+
   return (
     <AnimatePresence>
       {!isCollapsed && (

@@ -33,7 +33,7 @@ const page = () => {
     }
     data()
   }, [])
-  console.log(avatarData)
+  // console.log(avatarData)
   return (
     <Avatar className='border'>
       <AvatarImage

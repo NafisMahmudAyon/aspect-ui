@@ -59,7 +59,7 @@ const ClientPage = ({ id }: { id: string }) => {
   }])
   const [categories, setCategories] = useState<string[]>([])
   const [subCategory, setSubCategory] = useState<string>('')
-  console.log(subCategory)
+  // console.log(subCategory)
   const handleMultipleChange = (value: string | string[]) => {
     setCategories(Array.isArray(value) ? value : [value])
   }
@@ -78,12 +78,12 @@ const ClientPage = ({ id }: { id: string }) => {
         setUrl(json.data.url)
         setPro(json.data.pro)
         setCategories(json.data.categories)
-        console.log(json.data.subCategories.join(", "))
-        setSubCategory(json.data.subCategories.join(", "))
+        // console.log(json.data.subCategories.join(", "))
+        // setSubCategory(json.data.subCategories.join(", "))
         const jsonTsx = JSON.parse(json.data.jsonTsx)
         const jsonJsx = JSON.parse(json.data.jsonJsx)
-        console.log(jsonTsx)
-        console.log(jsonJsx)
+        // console.log(jsonTsx)
+        // console.log(jsonJsx)
         setJsonData(
           {
             name: jsonTsx.name,
@@ -132,7 +132,7 @@ const ClientPage = ({ id }: { id: string }) => {
     // const tsxFilesContent = tsxFiles.map((file) => file.content).join(",")
     const finalTsxJSON = JSON.stringify({ ...jsonData, ...tsxJSON, files: tsxFiles })
     const finalJsxJSON = JSON.stringify({ ...jsonData, ...jsxJSON, files: jsxFiles })
-    console.log(typeof subCategory)
+    // console.log(typeof subCategory)
     const subCategories = subCategory.split(", ").map((item) => item.trim())
 
     const res = await fetch(`/api/get/${id}`, {

@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Nova+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&family=Fira+Code&display=swap');
 @import './index.css';
 @import 'tailwindcss';
 
-@import './src/css/aspect-ui.css';
+@import './src/components/aspect-ui.css';
 
 @config '../tailwind.config.ts';
 
@@ -10,7 +10,7 @@
   color: var(--color-primary-500);
 } */
 
-:root {
+/* :root {
 	--bg-dark: hsl(0, 0%, 90%);
 	--bg: hsl(0, 0%, 95%);
 	--bg-light: hsl(0, 0%, 100%);
@@ -19,20 +19,9 @@
 	--border: hsl(0, 0%, 80%);
 	--primary: hsl(185, 37%, 20%);
 	--primary-foreground: hsl(183, 28%, 74%);
-}
+} */
 
 @theme {
-	--color-bg-dark: var(--bg-dark);
-	--color-bg: var(--bg);
-	--color-bg-light: var(--bg-light);
-	--color-text: var(--text);
-	--color-text-muted: var(--text-muted);
-	--color-border: var(--border);
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
-  --color-bg-p: var(--bg-p);
-
-
   --animate-float: float 2s ease-in-out infinite;
   --animate-float-2: float 2s ease-in-out 1s infinite;
   --animate-float-3: float 2s ease-in-out 2s infinite;
@@ -50,7 +39,16 @@
   }
 }
 
-.dark {
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* .dark {
 	--bg-dark: hsl(0, 0%, 0%);
 	--bg: hsl(0, 0%, 5%);
 	--bg-light: hsl(0, 0%, 10%);
@@ -60,7 +58,7 @@
 	--primary: hsl(183, 28%, 74%);
 	--primary-foreground: hsl(185, 37%, 20%);
 	--bg-p: hsl(20 0% 50%);
-}
+} */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -90,7 +88,7 @@
   } */
 
 .font-mono {
-  font-family: 'Nova Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -113,7 +111,7 @@
 }
 
 #visible-table-of-contents li:has(.active-link) {
-  @apply border-l-primary-800 dark:border-l-primary-50 text-primary-800 dark:text-primary-50;
+  @apply border-l-primary-foreground text-primary-foreground;
   transition-property: color, background-color, border-color,
     text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -123,22 +121,19 @@
 #visible-table-of-contents li {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  margin-left: -1px;
-  border-left-width: 1px;
+  margin-left: -2px;
+  border-left-width: 2px;
   border-left-color: transparent;
   padding-left: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.375rem;
-  letter-spacing: -0.2px;
   --tw-text-opacity: 1;
-  @apply text-primary-700 dark:text-primary-300;
+  @apply text-text-muted text-caption;
   /* color: rgb(94 113 141 / var(--tw-text-opacity, 1)); */
 }
 
 .code {
   font-family: 'Code';
   font-weight: 100;
-  @apply bg-primary-200 dark:bg-primary-800 text-primary-800 dark:text-primary-200;
+  @apply bg-primary text-primary-foreground;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   border-radius: 0.375rem;
@@ -247,4 +242,8 @@ iframe body {
 }
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+body {
+  @apply bg-bg-dark;
 }

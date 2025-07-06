@@ -4,16 +4,29 @@ export const useMDXComponents: (components: MDXComponents) => MDXComponents = (c
   return {
     h2: (props) => (
       <h2
-        className="section-title group relative font-semibold text-h5"
+        className="section-title group relative font-semibold text-h5 text-text"
         {...props}>
         {props.children}
         <a
           aria-label={`Link to this section: ${props.children}`}
           href={`#${props.id}`}
-          className="ml-2 text-metal-500 opacity-0 transition-opacity group-hover:opacity-100">
+          className="ml-2 opacity-0 transition-opacity group-hover:opacity-100">
           #
         </a>
       </h2>
+    ),
+    h3: (props) => (
+      <h3
+        className="section-title group relative font-semibold text-h6 text-text"
+        {...props}>
+        {props.children}
+        <a
+          aria-label={`Link to this section: ${props.children}`}
+          href={`#${props.id}`}
+          className="ml-2 opacity-0 transition-opacity group-hover:opacity-100">
+          #
+        </a>
+      </h3>
     ),
     table: (props) => (
       <table className="w-full text-sm text-left border border-border mt-4" {...props} />

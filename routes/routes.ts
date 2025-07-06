@@ -698,11 +698,11 @@ export const gettingStartedRoutes: routerPath[] = [
     name: 'Typography',
     href: '/docs/getting-started/typography',
   },
-  {
-    id: generatedID(),
-    name: 'Colors',
-    href: '/docs/getting-started/colors',
-  },
+  // {
+  //   id: generatedID(),
+  //   name: 'Colors',
+  //   href: '/docs/getting-started/colors',
+  // },
   // {
   //   id: generatedID(),
   //   name: 'Dark Mode',
