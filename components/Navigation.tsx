@@ -12,7 +12,7 @@ const Navbar = () => {
   }
   return (
     <header
-      className={`fixed top-0 z-50 w-full border-b border-primary text-primary-foreground backdrop-blur-md `}>
+      className={`fixed top-0 z-[1000] w-full border-b border-primary text-primary-foreground backdrop-blur-md `}>
       <div className="relative mx-auto max-w-7xl px-1 lg:px-6 2xl:px-0">
         <Nav className="flex items-center justify-between shadow-none bg-transparent" collapseBreakpoint='lg'>
           <NavbarContainer>

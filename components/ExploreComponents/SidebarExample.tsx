@@ -5,7 +5,7 @@ const SidebarExample = () => {
   return (
     <div>
       <SidebarProvider>
-      <Sidebar className='h-[500px]'>
+      <Sidebar className='h-[500px]' breakPoint='none'>
         <SidebarHeader>
           <h2 className='text-xl font-bold'>My App</h2>
         </SidebarHeader>
