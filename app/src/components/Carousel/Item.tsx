@@ -14,7 +14,6 @@ export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
 
 export const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(
   ({ children, asChild, className, ...props }, ref: Ref<HTMLDivElement>) => {
-
     if (asChild && isValidElement(children)) {
       return cloneElement(children, {
         itemRef: ref,
@@ -23,7 +22,14 @@ export const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(
     }
 
     return (
-      <div {...props} className={cn("flex-[0_0_100%] h-auto min-w-0 overflow-hidden pl-4", className)} ref={ref}>
+      <div
+        {...props}
+        className={cn(
+          'h-auto min-w-0 flex-[0_0_100%] overflow-hidden pl-4',
+          className
+        )}
+        ref={ref}
+      >
         {children}
       </div>
     )

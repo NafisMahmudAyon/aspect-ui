@@ -10,10 +10,10 @@ interface CircularProgressBarProps
   onVisible?: boolean
   /**
    * Duration of the progress bar in seconds
-   * 
+   *
    * Default value is 2 seconds
    */
-  duration?: number;
+  duration?: number
   strokeColor?: string
   strokeFillColor?: string
   strokeWidth?: number
@@ -83,14 +83,14 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
 
   return (
     <div
-      className={cn("relative size-24", className)}
+      className={cn('relative size-24', className)}
       onClick={onClick}
       role='progressbar'
       {...rest}
     >
-      <div className='absolute left-0 top-0 h-full w-full origin-center -rotate-90 transform'>
+      <div className='absolute top-0 left-0 h-full w-full origin-center -rotate-90 transform'>
         <svg
-          className='absolute left-1/2 top-1/2 z-0 h-full w-full -translate-x-1/2 -translate-y-1/2'
+          className='absolute top-1/2 left-1/2 z-0 h-full w-full -translate-x-1/2 -translate-y-1/2'
           viewBox='0 0 24 24'
           ref={svgRef}
         >
@@ -106,7 +106,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           />
         </svg>
         <svg
-          className='absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 stroke-slate-600'
+          className='absolute top-1/2 left-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 stroke-slate-600'
           viewBox='0 0 24 24'
           ref={svgRef}
         >
@@ -126,7 +126,7 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           />
         </svg>
         <span
-          className={`${contentClassName} absolute inset-0 flex h-full w-full rotate-90 items-center justify-center text-text`}
+          className={`${contentClassName} text-text absolute inset-0 flex h-full w-full rotate-90 items-center justify-center`}
         >
           {!children && !hideValue && <>{percentage}%</>}
           {children && <>{children}</>}

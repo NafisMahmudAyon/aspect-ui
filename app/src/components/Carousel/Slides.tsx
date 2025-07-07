@@ -7,11 +7,7 @@ export const CarouselSlides = forwardRef<
   HTMLAttributes<HTMLDivElement>
 >(({ children, className, ...props }, ref: Ref<HTMLDivElement>) => {
   return (
-    <div
-      {...props}
-      className={cn("flex -ml-4", className)}
-      ref={ref}
-    >
+    <div {...props} className={cn('-ml-4 flex', className)} ref={ref}>
       {children}
     </div>
   )

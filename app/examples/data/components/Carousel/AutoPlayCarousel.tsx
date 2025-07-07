@@ -1,11 +1,16 @@
 'use client'
-import { Carousel, CarouselIndicators, CarouselItem, CarouselSlides } from "@/app/src";
-import autoPlay from 'embla-carousel-autoplay';
-import { useEffect, useState } from "react";
+import {
+  Carousel,
+  CarouselIndicators,
+  CarouselItem,
+  CarouselSlides
+} from '@/app/src'
+import autoPlay from 'embla-carousel-autoplay'
+import { useEffect, useState } from 'react'
 interface ImageItem {
-  id: string;
-  url: string;
-  alt: string;
+  id: string
+  url: string
+  alt: string
 }
 
 export default function AutoplayCarousel() {
@@ -27,34 +32,36 @@ export default function AutoplayCarousel() {
   //     }
   //   ];
 
-  const [images, setImages] = useState<ImageItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [images, setImages] = useState<ImageItem[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch('https://api.nafisbd.com/api/images?category=nature&size=landscape&limit=6');
-        const data = await res.json();
-        setImages(data.images);
+        const res = await fetch(
+          'https://api.nafisbd.com/api/images?category=nature&size=landscape&limit=6'
+        )
+        const data = await res.json()
+        setImages(data.images)
       } catch (error) {
-        console.error('Error fetching images:', error);
+        console.error('Error fetching images:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchImages();
-  }, []);
+    fetchImages()
+  }, [])
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
     <Carousel
-      className="max-w-3xl mx-auto"
+      className='mx-auto max-w-3xl'
       plugins={[autoPlay()]}
-      options={{ loop: true, }}
+      options={{ loop: true }}
     >
       <CarouselSlides>
         {images.map((item, i) => (
@@ -62,12 +69,12 @@ export default function AutoplayCarousel() {
             <img
               src={item.url}
               alt={item.alt}
-              className="w-full h-64 object-cover rounded-lg"
+              className='h-64 w-full rounded-lg object-cover'
             />
           </CarouselItem>
         ))}
       </CarouselSlides>
-      <CarouselIndicators className="mt-4" />
+      <CarouselIndicators className='mt-4' />
     </Carousel>
-  );
+  )
 }

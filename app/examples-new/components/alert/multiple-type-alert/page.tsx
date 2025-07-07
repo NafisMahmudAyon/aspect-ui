@@ -1,19 +1,18 @@
 import { Alert } from '@/app/src'
 
 const Page = () => {
-
   return (
     <div className='space-y-3'>
-      <Alert type="success" closeable={false}>
+      <Alert type='success' closeable={false}>
         Operation completed successfully!
       </Alert>
-      <Alert type="info" closeable={false}>
+      <Alert type='info' closeable={false}>
         This is an informational message for your reference.
       </Alert>
-      <Alert type="warning" closeable={false}>
+      <Alert type='warning' closeable={false}>
         Warning: This action requires your attention!
       </Alert>
-      <Alert type="error" closeable={false}>
+      <Alert type='error' closeable={false}>
         Error: Operation failed! Please try again.
       </Alert>
     </div>

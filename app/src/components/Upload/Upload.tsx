@@ -30,8 +30,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   content,
   uploadIcon,
   deleteButton,
-  uploadIconClassName = "",
-  deleteIconClassName = "",
+  uploadIconClassName = '',
+  deleteIconClassName = '',
   ...rest
 }) => {
   const [dragActive, setDragActive] = useState(false)
@@ -40,7 +40,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const validateFile = (file: File): boolean => {
-    if (maxFileSize && file.size > maxFileSize * 1024 * 1024) { // Convert MB to bytes
+    if (maxFileSize && file.size > maxFileSize * 1024 * 1024) {
+      // Convert MB to bytes
       setError(`File size exceeds ${maxFileSize}MB limit`)
       return false
     }
@@ -48,7 +49,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     if (accept !== '*') {
       const acceptedTypes = accept.split(',').map(type => type.trim())
       const fileType = file.type || `/*.${file.name.split('.').pop()}`
-      if (!acceptedTypes.some(type => fileType.match(new RegExp(type.replace('*', '.*'))))) {
+      if (
+        !acceptedTypes.some(type =>
+          fileType.match(new RegExp(type.replace('*', '.*')))
+        )
+      ) {
         setError(`File type not accepted. Accepted types: ${accept}`)
         return false
       }
@@ -116,10 +121,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   }
 
   return (
-    <div className="w-full" {...rest}>
+    <div className='w-full' {...rest}>
       <div
-        className={`flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border hover:bg-bg-light/50 transition-all duration-200 ${dragActive ? 'bg-bg-light/50' : ''
-          }`}
+        className={`border-border hover:bg-bg-light/50 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed transition-all duration-200 ${
+          dragActive ? 'bg-bg-light/50' : ''
+        }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
@@ -128,58 +134,71 @@ export const FileUpload: React.FC<FileUploadProps> = ({
       >
         <input
           ref={inputRef}
-          type="file"
-          className="hidden"
+          type='file'
+          className='hidden'
           multiple={multiple}
           accept={accept}
           onChange={handleChange}
         />
-        {!content && (<>{uploadIcon && <span className={cn("", uploadIconClassName)}>{uploadIcon}</span>}
-          {!uploadIcon && (<svg
-            className={cn("mb-3 h-10 w-10 text-text", uploadIconClassName)}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-            ></path>
-          </svg>)}
-          <p className="mb-2 text-body1 text-text">
-            <span className="font-semibold">Click to upload</span> or drag and drop
-          </p>
-          <p className="text-xs text-text-muted">
-            {multiple ? `Upload up to ${maxFiles} files` : 'Upload a file'}
-            {maxFileSize && ` (Max size: ${maxFileSize}MB)`}
-          </p></>)}
-        {error && <p className="mt-2 text-xs text-error-500">{error}</p>}
+        {!content && (
+          <>
+            {uploadIcon && (
+              <span className={cn('', uploadIconClassName)}>{uploadIcon}</span>
+            )}
+            {!uploadIcon && (
+              <svg
+                className={cn('text-text mb-3 h-10 w-10', uploadIconClassName)}
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+                ></path>
+              </svg>
+            )}
+            <p className='text-body1 text-text mb-2'>
+              <span className='font-semibold'>Click to upload</span> or drag and
+              drop
+            </p>
+            <p className='text-text-muted text-xs'>
+              {multiple ? `Upload up to ${maxFiles} files` : 'Upload a file'}
+              {maxFileSize && ` (Max size: ${maxFileSize}MB)`}
+            </p>
+          </>
+        )}
+        {error && <p className='text-error-500 mt-2 text-xs'>{error}</p>}
       </div>
 
       {/* Selected Files List */}
       {files.length > 0 && (
-        <div className="mt-4">
-          <h4 className="mb-2 text-sm font-medium text-text">Selected Files:</h4>
-          <ul className="space-y-2">
+        <div className='mt-4'>
+          <h4 className='text-text mb-2 text-sm font-medium'>
+            Selected Files:
+          </h4>
+          <ul className='space-y-2'>
             {files.map((file, index) => (
               <li
                 key={`${file.name}-${index}`}
-                className="flex items-center justify-between rounded-lg bg-bg-light text-text p-2 px-4"
+                className='bg-bg-light text-text flex items-center justify-between rounded-lg p-2 px-4'
               >
-                <span className="text-sm">{file.name}</span>
+                <span className='text-sm'>{file.name}</span>
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation()
                     removeFile(index)
                   }}
-                  className="text-error"
+                  className='text-error'
                 >
-                  {deleteButton ? deleteButton :
-                    <Trash2 className={cn("h-4 w-4", deleteIconClassName)} />
-                  }
+                  {deleteButton ? (
+                    deleteButton
+                  ) : (
+                    <Trash2 className={cn('h-4 w-4', deleteIconClassName)} />
+                  )}
                 </button>
               </li>
             ))}

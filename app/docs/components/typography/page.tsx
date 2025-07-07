@@ -6,19 +6,20 @@ import EditPage from '@/components/EditPage'
 export const metadata: Metadata = {
   title: 'Typography - Aspect UI',
   description:
-    'The `Typography` component provides predefined styles for headings, body text, quotes, and more. It ensures consistent text rendering and semantic hierarchy.',
-};
-
-
+    'The `Typography` component provides predefined styles for headings, body text, quotes, and more. It ensures consistent text rendering and semantic hierarchy.'
+}
 
 const page: NextPage = () => {
   return (
-    <DocsContentLayout description={`${metadata.description}`} title={`${metadata.title}`}>
+    <DocsContentLayout
+      description={`${metadata.description}`}
+      title={`${metadata.title}`}
+    >
       <Introduction />
       <EditPage
-        pageLink="/docs/components/accordion"
-        nextPageLink="/docs/components/accordion"
-        nextPageName="Typography"
+        pageLink='/docs/components/accordion'
+        nextPageLink='/docs/components/accordion'
+        nextPageName='Typography'
       />
     </DocsContentLayout>
   )

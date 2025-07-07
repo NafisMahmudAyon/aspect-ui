@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-montserrat',
+  variable: '--font-montserrat'
 })
 
 export default function RootLayout({
@@ -23,11 +23,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-
-    <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <div className={`bg-primary text-primary-foreground ${montserrat.className}`}>
+    <AspectThemeProvider
+      attribute='class'
+      defaultTheme='light'
+      enableSystem
+      disableTransitionOnChange
+    >
+      <div
+        className={`bg-primary text-primary-foreground ${montserrat.className}`}
+      >
         {children}
-        </div>
+      </div>
     </AspectThemeProvider>
   )
 }

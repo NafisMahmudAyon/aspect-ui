@@ -14,7 +14,7 @@ export const Masonry: React.FC<MasonryProps> = ({
   children,
   columnCount = { sm: 1, md: 2, lg: 3, xl: 4 },
   gap = 4,
-  className = "",
+  className = '',
   ...rest
 }) => {
   const [columns, setColumns] = useState(columnCount.sm)

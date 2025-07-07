@@ -9,7 +9,10 @@ export const CarouselControl = forwardRef<
   return (
     <div
       {...props}
-      className={cn("flex items-center justify-between mt-[1.8rem] absolute top-0 left-0 w-full z-50", className)}
+      className={cn(
+        'absolute top-0 left-0 z-50 mt-[1.8rem] flex w-full items-center justify-between',
+        className
+      )}
       ref={ref}
     >
       {children}

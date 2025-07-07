@@ -38,7 +38,10 @@ export const DefaultAvatar = () => {
     <Avatar className='border'>
       <AvatarImage
         src={avatarData.avatar}
-        altText={avatarData.first_name ?? "https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?cs=srgb&dl=pexels-manei-3211476.jpg&fm=jpg&w=640&h=640"}
+        altText={
+          avatarData.first_name ??
+          'https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?cs=srgb&dl=pexels-manei-3211476.jpg&fm=jpg&w=640&h=640'
+        }
       />
       <AvatarBadge status='success' iconEnabled />
     </Avatar>

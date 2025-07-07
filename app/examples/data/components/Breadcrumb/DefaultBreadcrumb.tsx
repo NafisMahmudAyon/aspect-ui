@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem } from "@/app/src/components/Breadcrumb";
+import { Breadcrumb, BreadcrumbItem } from '@/app/src/components/Breadcrumb'
 
 export const DefaultBreadcrumb = () => {
   return (
@@ -9,6 +9,5 @@ export const DefaultBreadcrumb = () => {
         <BreadcrumbItem>Product</BreadcrumbItem>
       </Breadcrumb>
     </div>
-  );
-};
-
+  )
+}

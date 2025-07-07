@@ -22,7 +22,7 @@ const Page = () => {
   return (
     <>
       {visible && (
-        <Alert type="success" onClose={handleClose}>
+        <Alert type='success' onClose={handleClose}>
           Operation completed successfully!
         </Alert>
       )}

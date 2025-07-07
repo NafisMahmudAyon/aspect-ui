@@ -15,7 +15,13 @@ export const NavbarContainer: React.FC<NavbarContainerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn('container mx-auto flex items-center justify-between py-4 px-4', className)} {...rest}>
+    <div
+      className={cn(
+        'container mx-auto flex items-center justify-between px-4 py-4',
+        className
+      )}
+      {...rest}
+    >
       {children}
     </div>
   )

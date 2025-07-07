@@ -6,14 +6,18 @@ type CardProps = {
   className?: string
 }
 
-export const Card: React.FC<CardProps> = ({ children, className = "",
-  ...rest }) => {
+export const Card: React.FC<CardProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
   return (
     <div
       className={cn(
-        "bg-bg text-text flex flex-col gap-6 rounded-lg border border-border py-6 shadow-sm",
+        'bg-bg text-text border-border flex flex-col gap-6 rounded-lg border py-6 shadow-sm',
         className
-      )} {...rest}
+      )}
+      {...rest}
     >
       {children}
     </div>

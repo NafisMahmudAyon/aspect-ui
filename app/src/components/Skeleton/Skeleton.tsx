@@ -34,10 +34,13 @@ export const Skeleton: React.FC<SkeletonProps> = ({
     }
   }
 
-
   return (
     <div
-      className={cn('animate-pulse bg-bg-light', getVariationStyle(), className)}
+      className={cn(
+        'bg-bg-light animate-pulse',
+        getVariationStyle(),
+        className
+      )}
       style={{
         width: width || '100%',
         height: height || (variation === 'text' ? '1em' : '100%')

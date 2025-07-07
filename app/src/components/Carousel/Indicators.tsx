@@ -19,15 +19,21 @@ export const CarouselIndicators = forwardRef<
   return (
     <div
       {...props}
-      className={cn('flex flex-wrap items-center gap-2 absolute bottom-0 left-1/2 -translate-x-1/2 w-full', className)}
+      className={cn(
+        'absolute bottom-0 left-1/2 flex w-full -translate-x-1/2 flex-wrap items-center gap-2',
+        className
+      )}
       ref={ref}
     >
       {scrollSnaps.map((number, index) => (
         <DotButton
           key={number}
           onClick={() => onDotButtonClick(index)}
-          className={cn("inline-flex size-3 rounded-full border-2 border-border", `${index === selectedIndex && 'border-primary'
-            }`, dotButtonStyle)}
+          className={cn(
+            'border-border inline-flex size-3 rounded-full border-2',
+            `${index === selectedIndex && 'border-primary'}`,
+            dotButtonStyle
+          )}
         />
       ))}
     </div>

@@ -10,6 +10,9 @@ export const CardDescription: React.FC<CardDescriptionProps> = ({
   className = '',
   ...rest
 }) => {
-  return <p className={cn("text-sm text-text-muted", className,)
-  } {...rest}>{children}</p>
+  return (
+    <p className={cn('text-text-muted text-sm', className)} {...rest}>
+      {children}
+    </p>
+  )
 }

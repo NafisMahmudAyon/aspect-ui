@@ -93,20 +93,26 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div
-      className={cn("my-2 flex w-full items-center gap-4", className)}
+      className={cn('my-2 flex w-full items-center gap-4', className)}
       {...rest}
     >
       {contentPosition === 'left' && (
-        <span className={cn("min-w-10 text-text", contentClassName)}>
+        <span className={cn('text-text min-w-10', contentClassName)}>
           {!children && <>{`${percentage}%`}</>}
           {children && children}
         </span>
       )}
       <div
-        className={cn("flex-1 overflow-hidden rounded-full border border-border p-1 bg-bg-light", containerClassName)}
+        className={cn(
+          'border-border bg-bg-light flex-1 overflow-hidden rounded-full border p-1',
+          containerClassName
+        )}
       >
         <div
-          className={cn("relative flex h-4 rounded-full bg-primary", fillClassName)}
+          className={cn(
+            'bg-primary relative flex h-4 rounded-full',
+            fillClassName
+          )}
           role='progressbar'
           aria-valuenow={clampedValue}
           aria-valuemin={min}
@@ -116,7 +122,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         ></div>
       </div>
       {contentPosition === 'right' && (
-        <span className={cn("min-w-10 text-text", contentClassName)}>
+        <span className={cn('text-text min-w-10', contentClassName)}>
           {!children && <>{`${percentage}%`}</>}
           {children && children}
         </span>

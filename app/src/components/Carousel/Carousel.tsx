@@ -27,7 +27,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
 
     return (
-      <div className={cn("w-full relative pb-[2.4rem]", className)} ref={ref} {...rest}>
+      <div
+        className={cn('relative w-full pb-[2.4rem]', className)}
+        ref={ref}
+        {...rest}
+      >
         <CarouselContext.Provider value={{ emblaApi, emblaRef }}>
           <CarouselViewport className={carouselViewportClasses}>
             {children}

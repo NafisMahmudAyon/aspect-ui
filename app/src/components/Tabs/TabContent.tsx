@@ -10,10 +10,19 @@ interface TabContentProps {
   className?: string
 }
 
-export const TabContent: React.FC<TabContentProps> = ({ children, id, className = "", ...rest }) => {
+export const TabContent: React.FC<TabContentProps> = ({
+  children,
+  id,
+  className = '',
+  ...rest
+}) => {
   const { activeTab } = useTabs()
 
   if (activeTab !== id) return null
 
-  return <div className={cn(className)} {...rest}>{children}</div>
+  return (
+    <div className={cn(className)} {...rest}>
+      {children}
+    </div>
+  )
 }

@@ -9,6 +9,20 @@ interface SidebarHeaderProps {
   className?: string
 }
 
-export const SidebarHeader: React.FC<SidebarHeaderProps> = ({ children, className = "", ...rest }) => {
-  return <div className={cn('border-b-2 border-border text-text transition-all duration-200 ease-in-out px-2.5 py-3', className)} {...rest}>{children}</div>
+export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
+  return (
+    <div
+      className={cn(
+        'border-border text-text border-b-2 px-2.5 py-3 transition-all duration-200 ease-in-out',
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
 }

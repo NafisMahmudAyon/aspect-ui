@@ -221,7 +221,6 @@ iframe body {
   }
 }
 
-
 /* scroll bar */
 .scrollbar-thin {
   scrollbar-width: thin;
@@ -237,7 +236,6 @@ iframe body {
   background: red;
   border-radius: 3px;
   @media (prefers-color-scheme: dark) {
-    
   }
 }
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {

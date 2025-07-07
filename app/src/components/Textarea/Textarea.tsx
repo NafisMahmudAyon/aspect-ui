@@ -16,20 +16,40 @@ interface TextareaProps
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label, error, className = "", labelClassName = "", wrapperClassName = "", errorClassName = "", ...rest }, ref) => {
+  (
+    {
+      label,
+      error,
+      className = '',
+      labelClassName = '',
+      wrapperClassName = '',
+      errorClassName = '',
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <fieldset className={cn('mb-4', wrapperClassName)}>
         {label && (
-          <label className={cn('mb-1 block text-sm font-medium text-text', labelClassName)}>
+          <label
+            className={cn(
+              'text-text mb-1 block text-sm font-medium',
+              labelClassName
+            )}
+          >
             {label}
           </label>
         )}
         <textarea
           ref={ref}
-          className={`w-full rounded-md border placeholder:text-text-muted shadow-xs selection:bg-primary selection:text-primary-foreground focus-visible:border-border focus:outline-hidden focus:ring-2 focus:ring-border px-3 py-2 ${error ? 'border-error-500' : 'border-border'} ${className})`}
+          className={`placeholder:text-text-muted selection:bg-primary selection:text-primary-foreground focus-visible:border-border focus:ring-border w-full rounded-md border px-3 py-2 shadow-xs focus:ring-2 focus:outline-hidden ${error ? 'border-error-500' : 'border-border'} ${className})`}
           {...rest}
         />
-        {error && <p className={cn('mt-1 text-xs text-error-600', errorClassName)}>{error}</p>}
+        {error && (
+          <p className={cn('text-error-600 mt-1 text-xs', errorClassName)}>
+            {error}
+          </p>
+        )}
       </fieldset>
     )
   }

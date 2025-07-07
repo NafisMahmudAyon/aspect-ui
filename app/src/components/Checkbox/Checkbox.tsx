@@ -24,8 +24,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   size = 'md',
   variant = 'default',
   checkedIcon,
-  checkboxClassName = "",
-  labelClassName = ""
+  checkboxClassName = '',
+  labelClassName = ''
 }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!disabled) {
@@ -52,43 +52,41 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <label
-      className={`
-        flex items-center gap-3 cursor-pointer select-none transition-all duration-200 text-text
-        ${disabled
-        && 'pointer-events-none opacity-50'
-        } 
-        ${className}
-      `}
+      className={`text-text flex cursor-pointer items-center gap-3 transition-all duration-200 select-none ${
+        disabled && 'pointer-events-none opacity-50'
+      } ${className} `}
     >
-      <div className="relative">
+      <div className='relative'>
         <input
-          type="checkbox"
+          type='checkbox'
           checked={checked}
           onChange={handleChange}
           disabled={disabled}
-          className="sr-only"
+          className='sr-only'
         />
         <div
           className={cn(
             sizeClasses[size],
             variantClasses[variant],
-            "transition-all duration-200 ease-in-out flex items-center justify-center border",
+            'flex items-center justify-center border transition-all duration-200 ease-in-out',
             checked
-              ? 'bg-bg-light shadow-md  border-bg-light' : "bg-transparent border-border",
+              ? 'bg-bg-light border-bg-light shadow-md'
+              : 'border-border bg-transparent',
             checkboxClassName
           )}
         >
-          {checked && (checkedIcon ? checkedIcon : <Check
-            size={iconSizes[size]}
-            className={`
-                transition-all duration-200 ease-in-out
-              `}
-          />)}
+          {checked &&
+            (checkedIcon ? (
+              checkedIcon
+            ) : (
+              <Check
+                size={iconSizes[size]}
+                className={`transition-all duration-200 ease-in-out`}
+              />
+            ))}
         </div>
       </div>
-      <span
-        className={cn("transition-colors duration-200", labelClassName)}
-      >
+      <span className={cn('transition-colors duration-200', labelClassName)}>
         {label}
       </span>
     </label>

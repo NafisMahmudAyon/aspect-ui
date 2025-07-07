@@ -7,7 +7,7 @@ import { SidebarProvider } from './src'
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-montserrat',
+  variable: '--font-montserrat'
 })
 
 export default function RootLayout({
@@ -17,12 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true} className={`text-text-muted font-sans scrollbar-thin ${montserrat.className}`}>
+      <body
+        suppressHydrationWarning={true}
+        className={`text-text-muted scrollbar-thin font-sans ${montserrat.className}`}
+      >
         <ClerkProvider>
           <UserContextProvider>
-            <SidebarProvider> 
-            {children}
-            </SidebarProvider>
+            <SidebarProvider>{children}</SidebarProvider>
           </UserContextProvider>
         </ClerkProvider>
       </body>

@@ -67,10 +67,12 @@ export const Accordion: React.FC<AccordionProps> = ({
         activeLabelClassName,
         headerClassName,
         activeHeaderClassName,
-        contentClassName,
+        contentClassName
       }}
     >
-      <div className={cn('space-y-2', className)} {...rest}>{children}</div>
+      <div className={cn('space-y-2', className)} {...rest}>
+        {children}
+      </div>
     </AccordionProvider>
   )
 }

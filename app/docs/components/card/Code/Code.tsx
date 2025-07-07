@@ -114,7 +114,7 @@ export default function CardWithHeaderFooter() {
       </CardFooter>
     </Card>
   );
-}`,
+}`
 }
 
 export const interactiveCard = {
@@ -211,7 +211,7 @@ export default function InteractiveCard() {
       </CardFooter>
     </Card>
   );
-}`,
+}`
 }
 
 export const cardPropsData = [
@@ -219,87 +219,87 @@ export const cardPropsData = [
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card',
+    description: 'Additional CSS classes to apply to the card'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card',
-  },
-];
+    description: 'The content of the card'
+  }
+]
 
 export const cardHeaderPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card header',
+    description: 'Additional CSS classes to apply to the card header'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card header',
-  },
-];
+    description: 'The content of the card header'
+  }
+]
 
 export const cardTitlePropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card title',
+    description: 'Additional CSS classes to apply to the card title'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card title',
-  },
-];
+    description: 'The content of the card title'
+  }
+]
 
 export const cardDescriptionPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card description',
+    description: 'Additional CSS classes to apply to the card description'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card description',
-  },
-];
+    description: 'The content of the card description'
+  }
+]
 
 export const cardContentPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card content',
+    description: 'Additional CSS classes to apply to the card content'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card content area',
-  },
-];
+    description: 'The content of the card content area'
+  }
+]
 
 export const cardFooterPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the card footer',
+    description: 'Additional CSS classes to apply to the card footer'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the card footer',
-  },
-];
+    description: 'The content of the card footer'
+  }
+]

@@ -1,9 +1,5 @@
-
-
-
-import { ChevronRight } from "lucide-react";
-import { Breadcrumb, BreadcrumbItem } from "@/app/src/components/Breadcrumb";
-
+import { ChevronRight } from 'lucide-react'
+import { Breadcrumb, BreadcrumbItem } from '@/app/src/components/Breadcrumb'
 
 export const customIconBreadcrumb = {
   'BreadcrumbComponent.tsx': `import { Breadcrumb, BreadcrumbItem } from '@/components/aspect-ui/Breadcrumb'
@@ -32,17 +28,17 @@ export const CustomIconBreadcrumb = () => {
   )
 }
 `
-};
+}
 
 export const CustomIconBreadcrumb = () => {
   return (
-    <Breadcrumb separator={<ChevronRight className="h-4 w-4" />}>
+    <Breadcrumb separator={<ChevronRight className='h-4 w-4' />}>
       <BreadcrumbItem>Home</BreadcrumbItem>
       <BreadcrumbItem>Category</BreadcrumbItem>
       <BreadcrumbItem>Product</BreadcrumbItem>
     </Breadcrumb>
   )
-};
+}
 
 export const defaultBreadcrumb = {
   'BreadcrumbComponent.tsx': `import { Breadcrumb, BreadcrumbItem } from '@/components/aspect-ui/Breadcrumb'
@@ -69,7 +65,7 @@ export const DefaultBreadcrumb = () => {
   )
 }
 `
-};
+}
 
 export const DefaultBreadcrumb = () => {
   return (
@@ -78,8 +74,8 @@ export const DefaultBreadcrumb = () => {
       <BreadcrumbItem>Category</BreadcrumbItem>
       <BreadcrumbItem>Product</BreadcrumbItem>
     </Breadcrumb>
-  );
-};
+  )
+}
 
 export const BreadcrumbPropsData = [
   {
@@ -100,7 +96,7 @@ export const BreadcrumbPropsData = [
     default: "''",
     description: 'Additional CSS classes for the breadcrumb container.'
   }
-];
+]
 
 export const BreadcrumbItemPropsData = [
   {
@@ -127,4 +123,4 @@ export const BreadcrumbItemPropsData = [
     default: "''",
     description: 'Additional CSS classes for the breadcrumb item.'
   }
-];
+]

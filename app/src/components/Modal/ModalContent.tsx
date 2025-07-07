@@ -21,11 +21,23 @@ const ModalContentComponent = forwardRef<HTMLDivElement, ModalContentProps>(
     return (
       <AnimatePresence>
         <ModalPortal>
-          <motion.div className={cn('aspect-ui-modal bg-bg border border-border p-4 rounded-lg max-w-[calc(100%-2rem)] shadow-lg', className)} {...rest} ref={ref}
+          <motion.div
+            className={cn(
+              'aspect-ui-modal bg-bg border-border max-w-[calc(100%-2rem)] rounded-lg border p-4 shadow-lg',
+              className
+            )}
+            {...rest}
+            ref={ref}
             initial={{ scale: 0.5, opacity: 0, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.3, type: 'spring', damping: 25, stiffness: 500 }}
-            exit={{ opacity: 0.5, scale: 0.5, y: 40 }}>
+            transition={{
+              duration: 0.3,
+              type: 'spring',
+              damping: 25,
+              stiffness: 500
+            }}
+            exit={{ opacity: 0.5, scale: 0.5, y: 40 }}
+          >
             {children}
           </motion.div>
         </ModalPortal>

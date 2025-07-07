@@ -16,14 +16,14 @@ type TypographyVariant =
 
 interface TypographyProps extends HTMLAttributes<HTMLDivElement> {
   variant?: TypographyVariant
-  tagName?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "caption" | "span"
+  tagName?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'caption' | 'span'
   children?: React.ReactNode
   className?: string
 }
 
 export const Typography: React.FC<TypographyProps> = ({
-  variant = "",
-  tagName = "p",
+  variant = '',
+  tagName = 'p',
   children,
   className = '',
   ...rest
@@ -63,10 +63,7 @@ export const Typography: React.FC<TypographyProps> = ({
   const styles = getStyles()
 
   return (
-    <TagName
-      className={cn("text-text-muted", styles, className)}
-      {...rest}
-    >
+    <TagName className={cn('text-text-muted', styles, className)} {...rest}>
       {children}
     </TagName>
   )

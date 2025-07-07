@@ -1,7 +1,7 @@
 'use client'
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 import { cn } from '../../utils/cn'
-import { useDropdown } from "./DropdownContext"
+import { useDropdown } from './DropdownContext'
 
 interface DropdownItemProps {
   children: ReactNode
@@ -33,7 +33,11 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
     return (
       <a
         href='#'
-        className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light", activeClassName) : '')}
+        className={cn(
+          'hover:bg-bg-light/80 block px-4 py-2 text-sm text-nowrap',
+          className,
+          isSelected ? cn('bg-bg-light', activeClassName) : ''
+        )}
         role='option'
         area-selected={isSelected}
         onClick={handleClick}
@@ -46,7 +50,11 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
   }
   return (
     <div
-      className={cn('block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80', className, isSelected ? cn("bg-bg-light", activeClassName) : '')}
+      className={cn(
+        'hover:bg-bg-light/80 block px-4 py-2 text-sm text-nowrap',
+        className,
+        isSelected ? cn('bg-bg-light', activeClassName) : ''
+      )}
       are-selected={isSelected}
       role='option'
       onClick={handleClick}

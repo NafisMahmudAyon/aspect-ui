@@ -15,10 +15,13 @@ export const TableFooter: React.FC<TableFooterProps> = ({
   ...rest
 }) => {
   return (
-    <tfoot className={cn(
-      "bg-bg-light/50 border-t border-t-border font-medium [&>tr]:last:border-b-0",
-      className
-    )} {...rest}>
+    <tfoot
+      className={cn(
+        'bg-bg-light/50 border-t-border border-t font-medium [&>tr]:last:border-b-0',
+        className
+      )}
+      {...rest}
+    >
       {children}
     </tfoot>
   )

@@ -8,6 +8,20 @@ interface TabListProps {
   className?: string
 }
 
-export const TabList: React.FC<TabListProps> = ({ children, className = "", ...rest }) => {
-  return <div className={cn('mb-4 space-x-2 bg-bg text-text rounded-md p-[3px] inline-flex items-center', className)} {...rest}>{children}</div>
+export const TabList: React.FC<TabListProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
+  return (
+    <div
+      className={cn(
+        'bg-bg text-text mb-4 inline-flex items-center space-x-2 rounded-md p-[3px]',
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
 }

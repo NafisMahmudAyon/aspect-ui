@@ -40,9 +40,7 @@ export const Toggle: React.FC<ToggleProps> = ({
         : 'border border-border bg-transparent shadow-xs hover:bg-bg-light hover:text-text-muted'
     }
 
-    return isSelected
-      ? 'bg-bg-light text-text'
-      : 'bg-transparent'
+    return isSelected ? 'bg-bg-light text-text' : 'bg-transparent'
   }
 
   const getSizeStyles = () => {
@@ -56,10 +54,14 @@ export const Toggle: React.FC<ToggleProps> = ({
     }
   }
 
-
   return (
     <button
-      className={cn("inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium hover:bg-bg-light hover:text-text-muted disabled:pointer-events-none disabled:opacity-50 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-[color,box-shadow] whitespace-nowrap", getButtonStyles(), getSizeStyles(), className)}
+      className={cn(
+        'hover:bg-bg-light hover:text-text-muted focus-visible:border-ring focus-visible:ring-ring/50 inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
+        getButtonStyles(),
+        getSizeStyles(),
+        className
+      )}
       onClick={handleClick}
       disabled={disabled}
       {...rest}

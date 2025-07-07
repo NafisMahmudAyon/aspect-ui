@@ -9,10 +9,15 @@ interface NavbarProps {
   collapseBreakpoint?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'all'
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ children, className = '', collapseBreakpoint = 'md', ...rest }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  children,
+  className = '',
+  collapseBreakpoint = 'md',
+  ...rest
+}) => {
   return (
     <NavbarProvider collapseBreakpoint={collapseBreakpoint}>
-      <nav className={cn('relative bg-bg shadow-md', className)} {...rest}>
+      <nav className={cn('bg-bg relative shadow-md', className)} {...rest}>
         {children}
       </nav>
     </NavbarProvider>

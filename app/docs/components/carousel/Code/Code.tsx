@@ -1,6 +1,3 @@
-
-
-
 export const defaultCarousel = {
   'CarouselComponent.tsx': `import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselSlides } from "@/components/aspect-ui/carousel";
 
@@ -268,67 +265,65 @@ export default function DefaultCarousel() {
 }`
 }
 
-
-
 export const carouselPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the carousel',
+    description: 'Additional CSS classes to apply to the carousel'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the carousel (CarouselItems, Controls, etc.)',
+    description: 'The content of the carousel (CarouselItems, Controls, etc.)'
   },
   {
     prop: 'options',
     type: 'EmblaOptionsType',
     default: '{}',
-    description: 'Embla carousel options.',
+    description: 'Embla carousel options.'
   },
   {
     prop: 'plugins',
     type: 'EmblaPluginType[]',
     default: '[]',
-    description: 'Embla carousel plugins for adding more variants.',
+    description: 'Embla carousel plugins for adding more variants.'
   },
   {
     prop: 'carouselViewportClasses',
     type: 'string',
     default: '',
-    description: 'Customize the viewport of the carousel container',
-  },
-];
+    description: 'Customize the viewport of the carousel container'
+  }
+]
 
 export const carouselSlidesPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the carousel slides',
+    description: 'Additional CSS classes to apply to the carousel slides'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the carousel slides',
-  },
-];
+    description: 'The content of the carousel slides'
+  }
+]
 
 export const carouselItemPropsData = [
   {
     prop: 'className',
     type: 'string',
     default: '',
-    description: 'Additional CSS classes to apply to the carousel item',
+    description: 'Additional CSS classes to apply to the carousel item'
   },
   {
     prop: 'children',
     type: 'React.ReactNode',
     default: '',
-    description: 'The content of the carousel item',
-  },
-];
+    description: 'The content of the carousel item'
+  }
+]

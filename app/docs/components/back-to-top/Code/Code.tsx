@@ -1,7 +1,3 @@
-
-
-
-
 export const defaultBackToTop = {
   'BackToTopExample.tsx': `import { BackToTop } from '@/components/aspect-ui/BackToTop'
 
@@ -92,7 +88,6 @@ export default DefaultAvatar
   `
 }
 
-
 export const avatarGroup = {
   'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
 
@@ -157,7 +152,7 @@ const DefaultAvatar = () => {
 }
 
 export default DefaultAvatar
-  `,
+  `
 }
 
 export const alertPropsData = [
@@ -165,30 +160,31 @@ export const alertPropsData = [
     prop: 'type',
     type: `'success' | 'warning' | 'error' | 'info'`,
     default: '-',
-    description: 'Specifies the type of alert to display, which determines the style and icon.',
+    description:
+      'Specifies the type of alert to display, which determines the style and icon.'
   },
   {
     prop: 'children',
     type: 'ReactNode',
     default: '-',
-    description: 'The content displayed inside the alert.',
+    description: 'The content displayed inside the alert.'
   },
   {
     prop: 'closeable',
     type: 'boolean',
     default: 'true',
-    description: 'Determines whether the alert can be dismissed.',
+    description: 'Determines whether the alert can be dismissed.'
   },
   {
     prop: 'onClose',
     type: '() => void',
     default: '-',
-    description: 'Callback function invoked when the alert is closed.',
+    description: 'Callback function invoked when the alert is closed.'
   },
   {
     prop: 'className',
     type: 'string',
     default: `''`,
-    description: 'Additional CSS classes for the alert container.',
-  },
-];
+    description: 'Additional CSS classes for the alert container.'
+  }
+]

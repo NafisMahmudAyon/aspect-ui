@@ -7,7 +7,7 @@ interface DividerProps {
   color?: string
   variant?: 'start' | 'center' | 'end' | 'full'
   className?: string
-  borderStyle?: "solid" | "dashed" | "dotted" | "double"
+  borderStyle?: 'solid' | 'dashed' | 'dotted' | 'double'
   children?: ReactNode
 }
 
@@ -15,7 +15,7 @@ export const Divider: React.FC<DividerProps> = ({
   orientation = 'horizontal',
   size = 'md',
   variant = 'full',
-  borderStyle = "solid",
+  borderStyle = 'solid',
   className = '',
   children,
   ...rest
@@ -37,8 +37,7 @@ export const Divider: React.FC<DividerProps> = ({
 
   const baseStyles = `border-border ${orientation === 'horizontal' ? horizontalSizeStyles[size] : verticalSizeStyles[size]}`
 
-  const orientationStyles =
-    orientation === 'horizontal' ? 'w-full' : 'h-full'
+  const orientationStyles = orientation === 'horizontal' ? 'w-full' : 'h-full'
 
   const variantStyles = {
     start: 'justify-start',
@@ -50,17 +49,42 @@ export const Divider: React.FC<DividerProps> = ({
   const borderStyleClass = `border-${borderStyle}`
 
   if (!children || variant === 'full') {
-    return <div className={cn(baseStyles, orientationStyles, borderStyleClass, className)}></div>
+    return (
+      <div
+        className={cn(
+          baseStyles,
+          orientationStyles,
+          borderStyleClass,
+          className
+        )}
+      ></div>
+    )
   }
 
   return (
     <div className={`flex items-center ${variantStyles[variant]}`} {...rest}>
       {variant !== 'start' && (
-        <span className={cn("flex-1 mr-4", baseStyles, borderStyleClass, orientationStyles, className)}></span>
+        <span
+          className={cn(
+            'mr-4 flex-1',
+            baseStyles,
+            borderStyleClass,
+            orientationStyles,
+            className
+          )}
+        ></span>
       )}
-      <span className="">{children}</span>
+      <span className=''>{children}</span>
       {variant !== 'end' && (
-        <span className={cn("flex-1 ml-4", baseStyles, borderStyleClass, orientationStyles, className)}></span>
+        <span
+          className={cn(
+            'ml-4 flex-1',
+            baseStyles,
+            borderStyleClass,
+            orientationStyles,
+            className
+          )}
+        ></span>
       )}
     </div>
   )

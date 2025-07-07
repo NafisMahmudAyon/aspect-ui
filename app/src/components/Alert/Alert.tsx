@@ -1,7 +1,7 @@
 'use client'
-import { CircleAlert, CircleCheckBig, CircleX, Info, X } from 'lucide-react';
-import React, { useState, type JSX } from 'react';
-import { cn } from '../../utils/cn';
+import { CircleAlert, CircleCheckBig, CircleX, Info, X } from 'lucide-react'
+import React, { useState, type JSX } from 'react'
+import { cn } from '../../utils/cn'
 
 type AlertType = 'success' | 'warning' | 'error' | 'info'
 
@@ -82,21 +82,13 @@ export const Alert: React.FC<AlertProps> = ({
   const getIcon = (): JSX.Element => {
     switch (type) {
       case 'success':
-        return (
-          <CircleCheckBig />
-        )
+        return <CircleCheckBig />
       case 'warning':
-        return (
-          <CircleAlert />
-        )
+        return <CircleAlert />
       case 'error':
-        return (
-          <CircleX />
-        )
+        return <CircleX />
       case 'info':
-        return (
-          <Info />
-        )
+        return <Info />
       default:
         return <></>
     }
@@ -110,8 +102,11 @@ export const Alert: React.FC<AlertProps> = ({
       </div>
       {closeable && (
         <span
-          className='absolute bottom-0 right-0 top-0 px-4 py-3'
-          onClick={handleClose} title='close' role='button' aria-label='close'
+          className='absolute top-0 right-0 bottom-0 px-4 py-3'
+          onClick={handleClose}
+          title='close'
+          role='button'
+          aria-label='close'
         >
           <X className={cn(getCloseStyles())} />
         </span>

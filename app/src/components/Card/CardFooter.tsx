@@ -10,5 +10,9 @@ export const CardFooter: React.FC<CardFooterProps> = ({
   className = '',
   ...rest
 }) => {
-  return <div className={cn('px-6 flex items-center', className)} {...rest}>{children}</div>
+  return (
+    <div className={cn('flex items-center px-6', className)} {...rest}>
+      {children}
+    </div>
+  )
 }

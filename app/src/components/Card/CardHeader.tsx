@@ -10,5 +10,9 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   className = '',
   ...rest
 }) => {
-  return <div className={cn("px-6", className)} {...rest}>{children}</div>
+  return (
+    <div className={cn('px-6', className)} {...rest}>
+      {children}
+    </div>
+  )
 }

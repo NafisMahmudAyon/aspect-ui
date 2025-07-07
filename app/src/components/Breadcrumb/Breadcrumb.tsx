@@ -12,7 +12,7 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLUListElement> {
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   children,
-  className = "",
+  className = '',
   separator = <ChevronRight />,
   separatorClassName = '',
   ...rest
@@ -22,14 +22,19 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
   return (
     <ul
-      className={cn("text-muted flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5", className)}
+      className={cn(
+        'text-muted flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5',
+        className
+      )}
       {...rest}
     >
       {childrenArray.map((child: React.ReactNode, index: number) => (
         <React.Fragment key={index}>
           {child}
           {index < childrenArray.length - 1 && (
-            <span className={cn('mx-2 text-muted', separatorClassName)}>{separator}</span>
+            <span className={cn('text-muted mx-2', separatorClassName)}>
+              {separator}
+            </span>
           )}
         </React.Fragment>
       ))}

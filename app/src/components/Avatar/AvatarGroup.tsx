@@ -14,7 +14,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   children,
   ...rest
 }) => {
-
   return (
     <div className={cn('flex items-center -space-x-2', className)} {...rest}>
       {!children ? (

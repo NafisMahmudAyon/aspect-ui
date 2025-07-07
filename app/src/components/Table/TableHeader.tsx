@@ -13,5 +13,12 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
   className = '',
   ...rest
 }) => {
-  return <thead className={cn('[&_tr]:border-b [&_tr]:border-b-border', className)} {...rest}>{children}</thead>
+  return (
+    <thead
+      className={cn('[&_tr]:border-b-border [&_tr]:border-b', className)}
+      {...rest}
+    >
+      {children}
+    </thead>
+  )
 }

@@ -21,11 +21,11 @@ const Up = ({ className = '', size = 24, ...rest }: IconProps) => {
       {...rest}
     >
       <path
-        d="m5.996 14.996 6-6L18 15"
-        stroke="currentColor"
+        d='m5.996 14.996 6-6L18 15'
+        stroke='currentColor'
         strokeWidth={1.6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )
@@ -43,11 +43,11 @@ const Down = ({ className = '', size = 24, ...rest }: IconProps) => {
       {...rest}
     >
       <path
-        d="m18 9-6 6-6.004-6.004"
-        stroke="currentColor"
+        d='m18 9-6 6-6.004-6.004'
+        stroke='currentColor'
         strokeWidth={1.6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )
@@ -101,7 +101,7 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     labelClassName: accordionLabelClassName,
     activeLabelClassName: accordionActiveLabelClassName,
     headerClassName: accordionHeaderClassName,
-    activeHeaderClassName: accordionActiveHeaderClassName,
+    activeHeaderClassName: accordionActiveHeaderClassName
   } = useAccordion()
   const TagName = tagName
   const iconEnabled = headerIconEnabled ?? accordionIconEnabled
@@ -113,7 +113,11 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   const inactiveIcon = headerInactiveIcon ?? accordionInactiveIcon ?? <Down />
 
   const icon = isOpen ? activeIcon : inactiveIcon
-  const iconClass = cn(iconClassName, isOpen ? activeIconClassName : '', 'transition-transform duration-300')
+  const iconClass = cn(
+    iconClassName,
+    isOpen ? activeIconClassName : '',
+    'transition-transform duration-300'
+  )
 
   const labelClassName = headerLabelClassName ?? accordionLabelClassName
   const activeLabelClassName =
@@ -128,19 +132,20 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
   return (
     <TagName
       className={cn(
-        'flex w-full items-center justify-between p-4 bg-bg text-left transition-all duration-150 ease-in-out cursor-pointer text-text',
+        'bg-bg text-text flex w-full cursor-pointer items-center justify-between p-4 text-left transition-all duration-150 ease-in-out',
         className,
-        headerClass,
+        headerClass
       )}
       onClick={onToggle}
-      disabled={disabled} {...rest}
+      disabled={disabled}
+      {...rest}
     >
       {iconEnabled && iconPosition === 'left' && (
-        <span className={cn("text-text-muted", iconClass)}>{icon}</span>
+        <span className={cn('text-text-muted', iconClass)}>{icon}</span>
       )}
       <span className={`${labelClass} grow`}>{children}</span>
       {iconEnabled && iconPosition === 'right' && (
-        <span className={cn("text-text-muted", iconClass)}>{icon}</span>
+        <span className={cn('text-text-muted', iconClass)}>{icon}</span>
       )}
     </TagName>
   )

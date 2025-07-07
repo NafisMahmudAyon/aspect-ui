@@ -158,11 +158,18 @@ export const Pagination: React.FC<PaginationProps> = ({
   const paginationItems = generatePaginationItems()
 
   return (
-    <nav className={cn('flex items-center justify-center space-x-2 flex-wrap', className)}>
+    <nav
+      className={cn(
+        'flex flex-wrap items-center justify-center space-x-2',
+        className
+      )}
+    >
       {paginationItems.map((item, index) => (
         <React.Fragment key={index}>
           {item === 'start-ellipsis' || item === 'end-ellipsis' ? (
-            <span className={cn('px-3 py-1 text-text', ellipsisClassName)}>...</span>
+            <span className={cn('text-text px-3 py-1', ellipsisClassName)}>
+              ...
+            </span>
           ) : (
             <button
               onClick={() =>
@@ -173,23 +180,31 @@ export const Pagination: React.FC<PaginationProps> = ({
               disabled={
                 typeof item === 'string'
                   ? (item === 'previous' && currentPage === 1) ||
-                  (item === 'next' && currentPage === count)
+                    (item === 'next' && currentPage === count)
                   : false
               }
-              className={cn('rounded-md px-3 py-1 text-text hover:bg-bg-light', currentPage === item
-                && 'bg-bg-light/50 hover:bg-bg-light border border-border', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
+              className={cn(
+                'text-text hover:bg-bg-light rounded-md px-3 py-1',
+                currentPage === item &&
+                  'bg-bg-light/50 hover:bg-bg-light border-border border',
+                item === 'first' && firstButtonClassName,
+                item === 'last' && lastButtonClassName,
+                item === 'next' && nextButtonClassName,
+                item === 'previous' && previousButtonClassName,
+                currentPage === item && activeClassName,
+                buttonClassName
+              )}
             >
               {item === 'first' && firstButton}
               {item === 'previous' && previousButton}
               {item === 'next' && nextButton}
               {item === 'last' && lastButton}
-              {typeof item === 'number' && (
-                numberType === 'roman'
+              {typeof item === 'number' &&
+                (numberType === 'roman'
                   ? convertToRoman(item)
                   : numberType === 'custom' && numbers.length >= count
                     ? numbers[item - 1]
-                    : item
-              )}
+                    : item)}
             </button>
           )}
         </React.Fragment>

@@ -4,7 +4,7 @@ const twCssForReact = {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  `,
+  `
 }
 const twCssForNext = {
   'app/globals.css': `
@@ -12,7 +12,7 @@ const twCssForNext = {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  `,
+  `
 }
 
 const importInReact = {
@@ -26,7 +26,7 @@ const App = () => {
 }
 
 export default App;
-  `,
+  `
 }
 const importInNext = {
   'app/page.tsx': `
@@ -39,24 +39,25 @@ const page = () => {
 }
     
 export default page;
-  `,
+  `
 }
 const twNpmInstall = {
-  'Install-Tailwind-CSS': 'npm i autoprefixer postcss tailwindcss\nnpx tailwindcss init -p',
+  'Install-Tailwind-CSS':
+    'npm i autoprefixer postcss tailwindcss\nnpx tailwindcss init -p'
 }
 const aspectInstall = {
   npm: 'npm i aspect-ui',
   yarn: 'yarn add aspect-ui',
-  pnpm: 'pnpm add aspect-ui',
+  pnpm: 'pnpm add aspect-ui'
 }
 const viteReact = {
   'Vite-React': `
 npm create vite@latest my-project -- --template react
 cd my-project
-`,
+`
 }
 const nextJsInstall = {
-  'Create-NextJS-Project': `npx create-next-app@latest`,
+  'Create-NextJS-Project': `npx create-next-app@latest`
 }
 const twConfigForReact = {
   'tailwind.config.js': `
@@ -79,7 +80,7 @@ const config : Config = {
 }
 
 export default AspectUITheme(config);
-  `,
+  `
 }
 const twConfigForNextJS = {
   'tailwind.config.js': `
@@ -108,28 +109,28 @@ const config : Config = {
 };
 
 export default AspectUITheme(config);
-  `,
+  `
 }
 
 /////////////////////////////////////////////////
 const bashInstall = {
-  'npm': `npm i aspect-ui`,
-  'yarn': `yarn add aspect-ui`,
-  'pnpm': `pnpm add aspect-ui`,
+  npm: `npm i aspect-ui`,
+  yarn: `yarn add aspect-ui`,
+  pnpm: `pnpm add aspect-ui`
 }
 const bashCLIImport = {
-  'npm': `npx aspect-ui@latest init`,
-  'yarn': `yarn aspect-ui@latest init`,
-  'pnpm': `pnpm dlsx aspect-ui@latest init`,
+  npm: `npx aspect-ui@latest init`,
+  yarn: `yarn aspect-ui@latest init`,
+  pnpm: `pnpm dlsx aspect-ui@latest init`
 }
 const bashNextInstall = {
-  'npm': `npx -p aspect-ui@latest next-app`,
+  npm: `npx -p aspect-ui@latest next-app`
 }
 const bashViteInstall = {
-  'npm': `npx -p aspect-ui@latest vite-app`,
+  npm: `npx -p aspect-ui@latest vite-app`
 }
 const usageAspectUI = {
-  'javascript': `import { Button } from '@components/aspect-ui';
+  javascript: `import { Button } from '@components/aspect-ui';
 
 export default function HomePage() {
   return <Button>Get Started</Button>;

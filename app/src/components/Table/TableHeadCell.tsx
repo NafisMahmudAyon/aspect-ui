@@ -15,7 +15,7 @@ export const TableHeadCell: React.FC<TableHeadCellProps> = ({
   return (
     <th
       className={cn(
-        "text-text h-10 px-2 text-left align-middle font-medium whitespace-nowrap",
+        'text-text h-10 px-2 text-left align-middle font-medium whitespace-nowrap',
         className
       )}
     >

@@ -2,7 +2,13 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
-import { Dropdown, DropdownAction, DropdownContent, DropdownItem, DropdownList } from '../Dropdown'
+import {
+  Dropdown,
+  DropdownAction,
+  DropdownContent,
+  DropdownItem,
+  DropdownList
+} from '../Dropdown'
 import { Popover, PopoverAction, PopoverContent } from '../Popover'
 
 interface DatePickerProps {
@@ -20,27 +26,37 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   initialDates = [],
   isRange = false,
-  shape = "circle",
+  shape = 'circle',
   placeholder = 'Select your date',
-  className = "",
-  calendarContainerClassName = "",
-
+  className = '',
+  calendarContainerClassName = ''
 }) => {
   const [currentDate, setCurrentDate] = useState(() => {
-    const initDate = Array.isArray(initialDates) && initialDates.length > 0
-      ? new Date(initialDates[0])
-      : new Date();
-    return initDate;
-  });
+    const initDate =
+      Array.isArray(initialDates) && initialDates.length > 0
+        ? new Date(initialDates[0])
+        : new Date()
+    return initDate
+  })
   const [selectedDates, setSelectedDates] = useState<Date[]>(
-    initialDates.map((date) => new Date(date))
+    initialDates.map(date => new Date(date))
   )
   // const [isOpen, setIsOpen] = useState(show)
   const [years, setYears] = useState<number[]>([])
 
   const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ]
 
   useEffect(() => {
@@ -78,9 +94,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       if (selectedDates.length === 0) {
         newDates = [date]
       } else if (selectedDates.length === 1) {
-        newDates = [selectedDates[0], date].sort((a, b) => a.getTime() - b.getTime())
+        newDates = [selectedDates[0], date].sort(
+          (a, b) => a.getTime() - b.getTime()
+        )
       } else if (selectedDates.length === 2) {
-        if (date.getTime() === selectedDates[0].getTime() || date.getTime() === selectedDates[1].getTime()) {
+        if (
+          date.getTime() === selectedDates[0].getTime() ||
+          date.getTime() === selectedDates[1].getTime()
+        ) {
           newDates = []
         } else if (date > selectedDates[0] && date < selectedDates[1]) {
           newDates = [selectedDates[0], date]
@@ -130,14 +151,31 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }
 
   const formatShortDate = (date: Date): string => {
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const monthNames = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
     return `${monthNames[date.getMonth()]} ${date.getDate().toString().padStart(2, '0')}, ${date.getFullYear()}`
   }
   return (
     <div className='relative'>
-      <Popover
-      >
-        <PopoverAction className={cn('w-full rounded-md border border-border px-4 py-2 bg-bg outline-hidden focus-visible:outlined', className)}>
+      <Popover>
+        <PopoverAction
+          className={cn(
+            'border-border bg-bg focus-visible:outlined w-full rounded-md border px-4 py-2 outline-hidden',
+            className
+          )}
+        >
           {/* <span
             // type='text'
             className={cn('w-full rounded-md border border-border px-4 py-2 bg-bg outline-hidden focus-visible:outlined', className)}
@@ -150,10 +188,25 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           {formatDateRange(selectedDates)}
           {/* </span> */}
         </PopoverAction>
-        <PopoverContent className='p-0 w-auto'>
-          <div className={cn('p-4 rounded-md bg-bg shadow-lg', calendarContainerClassName)}>
-            <div className='flex items-center justify-between py-2 gap-2'>
-              <button onClick={handlePrevMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
+        <PopoverContent className='w-auto p-0'>
+          <div
+            className={cn(
+              'bg-bg rounded-md p-4 shadow-lg',
+              calendarContainerClassName
+            )}
+          >
+            <div className='flex items-center justify-between gap-2 py-2'>
+              <button
+                onClick={handlePrevMonth}
+                className={cn(
+                  'border-border border p-1',
+                  shape === 'circle'
+                    ? 'rounded-full'
+                    : shape === 'rounded-sm'
+                      ? 'rounded-md'
+                      : ''
+                )}
+              >
                 <ChevronLeft />
               </button>
               <div className='flex flex-1 justify-center gap-3'>
@@ -164,14 +217,25 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   <DropdownContent>
                     <DropdownList>
                       {monthNames.map((month, index) => (
-                        <DropdownItem className={`${currentDate.getMonth() == index ? "bg-bg-light" : ""}`} key={month} onClick={() => {
-                          const cDate = new Date()
-                          if (cDate.getMonth() === index) {
-
-                            setCurrentDate(new Date(currentDate.getFullYear(), index, cDate.getDate()))
-                          } else
-                            setCurrentDate(new Date(currentDate.getFullYear(), index, 1))
-                        }}>
+                        <DropdownItem
+                          className={`${currentDate.getMonth() == index ? 'bg-bg-light' : ''}`}
+                          key={month}
+                          onClick={() => {
+                            const cDate = new Date()
+                            if (cDate.getMonth() === index) {
+                              setCurrentDate(
+                                new Date(
+                                  currentDate.getFullYear(),
+                                  index,
+                                  cDate.getDate()
+                                )
+                              )
+                            } else
+                              setCurrentDate(
+                                new Date(currentDate.getFullYear(), index, 1)
+                              )
+                          }}
+                        >
                           {month}
                         </DropdownItem>
                       ))}
@@ -182,18 +246,33 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   <DropdownAction className=''>
                     {currentDate.getFullYear()}
                   </DropdownAction>
-                  <DropdownContent className='overflow-y-auto ' style={{ maxHeight: '300px' }}>
+                  <DropdownContent
+                    className='overflow-y-auto'
+                    style={{ maxHeight: '300px' }}
+                  >
                     <DropdownList>
-                      {years.map((year) => (
-                        <DropdownItem className={``}
-                          activeClassName="bg-bg-light"
+                      {years.map(year => (
+                        <DropdownItem
+                          className={``}
+                          activeClassName='bg-bg-light'
                           key={year}
                           onClick={() => {
-                            if (year == new Date().getFullYear() && currentDate.getMonth() == new Date().getMonth()) {
+                            if (
+                              year == new Date().getFullYear() &&
+                              currentDate.getMonth() == new Date().getMonth()
+                            ) {
                               const cDate = new Date()
-                              setCurrentDate(new Date(year, cDate.getMonth(), cDate.getDate()))
+                              setCurrentDate(
+                                new Date(
+                                  year,
+                                  cDate.getMonth(),
+                                  cDate.getDate()
+                                )
+                              )
                             } else
-                              setCurrentDate(new Date(year, currentDate.getMonth(), 1))
+                              setCurrentDate(
+                                new Date(year, currentDate.getMonth(), 1)
+                              )
                           }}
                           isSelected={year === currentDate.getFullYear()}
                         >
@@ -204,14 +283,27 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   </DropdownContent>
                 </Dropdown>
               </div>
-              <button onClick={handleNextMonth} className={cn('p-1 border border-border', shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '')}>
+              <button
+                onClick={handleNextMonth}
+                className={cn(
+                  'border-border border p-1',
+                  shape === 'circle'
+                    ? 'rounded-full'
+                    : shape === 'rounded-sm'
+                      ? 'rounded-md'
+                      : ''
+                )}
+              >
                 <ChevronRight />
               </button>
             </div>
             <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1'>
-              <div className='grid grid-cols-[repeat(7,minmax(2rem,1fr))] col-start-1 col-end-8 gap-1 border-t border-b border-border'>
+              <div className='border-border col-start-1 col-end-8 grid grid-cols-[repeat(7,minmax(2rem,1fr))] gap-1 border-t border-b'>
                 {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                  <div key={day} className='size-8 flex items-center justify-center text-center text-sm font-bold'>
+                  <div
+                    key={day}
+                    className='flex size-8 items-center justify-center text-center text-sm font-bold'
+                  >
                     {day}
                   </div>
                 ))}
@@ -222,13 +314,31 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   onClick={() => date && handleDateClick(date)}
                   className={cn(
                     'h-8 w-8 text-center',
-                    shape === 'circle' ? 'rounded-full' : shape === 'rounded-sm' ? 'rounded-md' : '',
+                    shape === 'circle'
+                      ? 'rounded-full'
+                      : shape === 'rounded-sm'
+                        ? 'rounded-md'
+                        : '',
                     !date && 'invisible',
                     date && 'hover:bg-bg-light',
-                    date && date.getDate() === currentDate.getDate() &&
-                    ((isRange && selectedDates.length < 2) || (!isRange && selectedDates.length === 0)) && 'bg-bg-light',
-                    date && selectedDates.some(d => d.toDateString() === date.toDateString()) && 'bg-primary text-primary-foreground',
-                    date && isRange && selectedDates.length === 2 && date > selectedDates[0] && date < selectedDates[1] && 'bg-primary text-primary-foreground')}>
+                    date &&
+                      date.getDate() === currentDate.getDate() &&
+                      ((isRange && selectedDates.length < 2) ||
+                        (!isRange && selectedDates.length === 0)) &&
+                      'bg-bg-light',
+                    date &&
+                      selectedDates.some(
+                        d => d.toDateString() === date.toDateString()
+                      ) &&
+                      'bg-primary text-primary-foreground',
+                    date &&
+                      isRange &&
+                      selectedDates.length === 2 &&
+                      date > selectedDates[0] &&
+                      date < selectedDates[1] &&
+                      'bg-primary text-primary-foreground'
+                  )}
+                >
                   {date ? date.getDate() : ''}
                 </button>
               ))}

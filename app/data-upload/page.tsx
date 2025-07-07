@@ -1,25 +1,36 @@
 'use client'
-import Editor from '@monaco-editor/react';
-import { useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, Switch, ToggleButton, ToggleButtonGroup, useToast } from '../src';
+import Editor from '@monaco-editor/react'
+import { useState } from 'react'
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Input,
+  Switch,
+  ToggleButton,
+  ToggleButtonGroup,
+  useToast
+} from '../src'
 
 interface ComponentData {
-  dependencies: string[];
-  files: FileData[];
+  dependencies: string[]
+  files: FileData[]
 }
 
 interface JsonData {
-  name: string;
-  type: string;
-  author: string;
-  title: string;
+  name: string
+  type: string
+  author: string
+  title: string
 }
 
 interface FileData {
-  path: string;
-  content: string | undefined;
-  type: string;
-  target: string;
+  path: string
+  content: string | undefined
+  type: string
+  target: string
 }
 
 const page = () => {
@@ -33,28 +44,32 @@ const page = () => {
     dependencies: [],
     files: []
   })
-  const [tsxFiles, setTsxFiles] = useState<FileData[]>([{
-    path: 'components/aspect-ui/',
-    content: '',
-    type: '',
-    target: ''
-  }])
+  const [tsxFiles, setTsxFiles] = useState<FileData[]>([
+    {
+      path: 'components/aspect-ui/',
+      content: '',
+      type: '',
+      target: ''
+    }
+  ])
   const [jsonData, setJsonData] = useState<JsonData>({
     name: '',
     type: '',
     author: 'Nafis Mahmud Ayon <nafismahmudayon@gmail.com>',
-    title: '',
+    title: ''
   })
   const [jsxJSON, setJsxJSON] = useState<ComponentData>({
     dependencies: [],
     files: []
   })
-  const [jsxFiles, setJsxFiles] = useState<FileData[]>([{
-    path: 'components/aspect-ui/',
-    content: '',
-    type: '',
-    target: ''
-  }])
+  const [jsxFiles, setJsxFiles] = useState<FileData[]>([
+    {
+      path: 'components/aspect-ui/',
+      content: '',
+      type: '',
+      target: ''
+    }
+  ])
   const [categories, setCategories] = useState<string[]>([])
   const [subCategory, setSubCategory] = useState<string>('')
   const handleMultipleChange = (value: string | string[]) => {
@@ -65,51 +80,79 @@ const page = () => {
     // jsxFiles all content stringify then join with ","
     // const jsxFilesContent = jsxFiles.map((file) => file.content).join(",")
     // const tsxFilesContent = tsxFiles.map((file) => file.content).join(",")
-    const finalTsxJSON = JSON.stringify({ ...jsonData, ...tsxJSON, files: tsxFiles })
-    const finalJsxJSON = JSON.stringify({ ...jsonData, ...jsxJSON, files: jsxFiles })
+    const finalTsxJSON = JSON.stringify({
+      ...jsonData,
+      ...tsxJSON,
+      files: tsxFiles
+    })
+    const finalJsxJSON = JSON.stringify({
+      ...jsonData,
+      ...jsxJSON,
+      files: jsxFiles
+    })
 
-    const subCategories = subCategory.split(", ").map((item) => item.trim())
+    const subCategories = subCategory.split(', ').map(item => item.trim())
 
-    const res = await fetch("/api/insert-example", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, url, codeTsx, codeJsx, pro, jsonTsx: finalTsxJSON, jsonJsx: finalJsxJSON, categories, subCategories }),
-    });
-    const data = await res.json();
-    showToaster(data.success ? 'success' : 'error', data.success ? 'Upload successful' : 'Upload failed')
-  };
+    const res = await fetch('/api/insert-example', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title,
+        url,
+        codeTsx,
+        codeJsx,
+        pro,
+        jsonTsx: finalTsxJSON,
+        jsonJsx: finalJsxJSON,
+        categories,
+        subCategories
+      })
+    })
+    const data = await res.json()
+    showToaster(
+      data.success ? 'success' : 'error',
+      data.success ? 'Upload successful' : 'Upload failed'
+    )
+  }
 
   const showToaster = (type: 'success' | 'error', message: string) => {
     addToast({
-      className: "",
+      className: '',
       message: message,
-      messageClassName: "",
+      messageClassName: '',
       type: type
     })
   }
 
-
-
   return (
-    <div className='min-h-screen pt-10 container mx-auto space-y-4'>
+    <div className='container mx-auto min-h-screen space-y-4 pt-10'>
       <h1 className='text-h1 text-center'>Data Upload</h1>
       {/* <Input placeholder="Example-id" type="number" value={id} onChange={(e) => setId(Number(e.target.value))} /> */}
-      <div className='space-y-4 border rounded-lg p-4'>
-
-        <Input placeholder="Title" label='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
-        <Input placeholder="Example-url" label='Example-url' value={url} onChange={(e) => setUrl(e.target.value)} />
+      <div className='space-y-4 rounded-lg border p-4'>
+        <Input
+          placeholder='Title'
+          label='Title'
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <Input
+          placeholder='Example-url'
+          label='Example-url'
+          value={url}
+          onChange={e => setUrl(e.target.value)}
+        />
         {/* <Textarea placeholder="Code TSX" label='Code TSX' value={codeTsx} onChange={(e) => setcodeTsx(e.target.value)} /> */}
         <div className='grid grid-cols-2 gap-4'>
-          <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+          <div className='h-[400px] w-full overflow-hidden rounded-lg border'>
             <Editor
-              defaultLanguage="javascript"
-              defaultValue=""
-              theme="vs-dark"
+              defaultLanguage='javascript'
+              defaultValue=''
+              theme='vs-dark'
               className='rounded-none'
               // onChange={(value) => {
               //   update(value);
               // }}
-              onChange={(e) => setcodeTsx(e)}
+              onChange={e => setcodeTsx(e)}
               options={{
                 minimap: { enabled: false },
                 fontSize: 14,
@@ -133,16 +176,16 @@ const page = () => {
             />
           </div>
           {/* <Textarea placeholder="Code JSX" label='Code JSX' value={codeJsx} onChange={(e) => setcodeJsx(e.target.value)} /> */}
-          <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+          <div className='h-[400px] w-full overflow-hidden rounded-lg border'>
             <Editor
-              defaultLanguage="javascript"
-              defaultValue=""
-              theme="vs-dark"
+              defaultLanguage='javascript'
+              defaultValue=''
+              theme='vs-dark'
               className='rounded-none'
               // onChange={(value) => {
               //   update(value);
               // }}
-              onChange={(e) => setcodeJsx(e)}
+              onChange={e => setcodeJsx(e)}
               options={{
                 minimap: { enabled: false },
                 fontSize: 14,
@@ -166,7 +209,7 @@ const page = () => {
             />
           </div>
         </div>
-        <Card className='bg-transparent dark:bg-transparent border'>
+        <Card className='border bg-transparent dark:bg-transparent'>
           <CardHeader>
             <CardTitle>Pro/Free</CardTitle>
           </CardHeader>
@@ -180,7 +223,12 @@ const page = () => {
             <CardTitle>Categories</CardTitle>
           </CardHeader>
           <CardContent className='mb-4'>
-            <ToggleButtonGroup type='multiple' defaultValue={categories} outline={true} onChange={handleMultipleChange}>
+            <ToggleButtonGroup
+              type='multiple'
+              defaultValue={categories}
+              outline={true}
+              onChange={handleMultipleChange}
+            >
               <ToggleButton value='docs'>Docs</ToggleButton>
               <ToggleButton value='variations'>Variations</ToggleButton>
               <ToggleButton value='template'>Template</ToggleButton>
@@ -191,51 +239,111 @@ const page = () => {
             <CardTitle>Sub Categories</CardTitle>
           </CardHeader>
           <CardContent>
-            <Input placeholder="Sub Category" value={subCategory} onChange={(e) => setSubCategory(e.target.value)} />
+            <Input
+              placeholder='Sub Category'
+              value={subCategory}
+              onChange={e => setSubCategory(e.target.value)}
+            />
           </CardContent>
         </Card>
       </div>
-      <Card className='border rounded-lg p-4 bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent'>
+      <Card className='rounded-lg border bg-transparent p-4 hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent'>
         <CardHeader>
           <CardTitle>JSON Data</CardTitle>
         </CardHeader>
         <CardContent>
-          <Input placeholder="Name" value={jsonData?.name} onChange={(e) => setJsonData({ ...jsonData, name: e.target.value })} />
-          <Input placeholder="Type" value={jsonData?.type} onChange={(e) => setJsonData({ ...jsonData, type: e.target.value })} />
-          <Input placeholder="Author" value={jsonData?.author} onChange={(e) => setJsonData({ ...jsonData, author: e.target.value })} />
-          <Input placeholder="Title" value={jsonData?.title} onChange={(e) => setJsonData({ ...jsonData, title: e.target.value })} />
+          <Input
+            placeholder='Name'
+            value={jsonData?.name}
+            onChange={e => setJsonData({ ...jsonData, name: e.target.value })}
+          />
+          <Input
+            placeholder='Type'
+            value={jsonData?.type}
+            onChange={e => setJsonData({ ...jsonData, type: e.target.value })}
+          />
+          <Input
+            placeholder='Author'
+            value={jsonData?.author}
+            onChange={e => setJsonData({ ...jsonData, author: e.target.value })}
+          />
+          <Input
+            placeholder='Title'
+            value={jsonData?.title}
+            onChange={e => setJsonData({ ...jsonData, title: e.target.value })}
+          />
           {/* <Divider /> */}
           <div className='grid grid-cols-2 gap-4'>
-            <Card className='mt-4 border p-4 rounded-lg bg-transparent dark:bg-transparent'>
+            <Card className='mt-4 rounded-lg border bg-transparent p-4 dark:bg-transparent'>
               <CardHeader>
                 <CardTitle>TSX JSON</CardTitle>
               </CardHeader>
               <CardContent>
                 <Input
-                  placeholder="Dependencies (comma-separated)"
+                  placeholder='Dependencies (comma-separated)'
                   value={tsxJSON?.dependencies.join(',')}
-                  onChange={(e) => setTsxJSON({
-                    ...tsxJSON,
-                    dependencies: e.target.value.split(',').map(dep => dep.trim())
-                  })}
+                  onChange={e =>
+                    setTsxJSON({
+                      ...tsxJSON,
+                      dependencies: e.target.value
+                        .split(',')
+                        .map(dep => dep.trim())
+                    })
+                  }
                 />
                 <div className='space-y-4'>
                   {tsxFiles.map((file, index) => (
-                    <div key={index} className='border rounded-lg p-4 mb-4'>
-                      <Input placeholder="Path" value={file.path} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
-                      <Input placeholder="Type" value={file.type} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
-                      <Input placeholder="Target" value={file.target} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
+                    <div key={index} className='mb-4 rounded-lg border p-4'>
+                      <Input
+                        placeholder='Path'
+                        value={file.path}
+                        onChange={e =>
+                          setTsxFiles(
+                            tsxFiles.map((f, i) =>
+                              i === index ? { ...f, path: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
+                      <Input
+                        placeholder='Type'
+                        value={file.type}
+                        onChange={e =>
+                          setTsxFiles(
+                            tsxFiles.map((f, i) =>
+                              i === index ? { ...f, type: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
+                      <Input
+                        placeholder='Target'
+                        value={file.target}
+                        onChange={e =>
+                          setTsxFiles(
+                            tsxFiles.map((f, i) =>
+                              i === index ? { ...f, target: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
                       {/* <Textarea placeholder="Content" value={file.content} onChange={(e) => setTsxFiles(tsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} /> */}
-                      <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+                      <div className='h-[400px] w-full overflow-hidden rounded-lg border'>
                         <Editor
-                          defaultLanguage="javascript"
-                          defaultValue=""
-                          theme="vs-dark"
+                          defaultLanguage='javascript'
+                          defaultValue=''
+                          theme='vs-dark'
                           className='rounded-none'
                           // onChange={(value) => {
                           //   update(value);
                           // }}
-                          onChange={(e) => setTsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e } : f))}
+                          onChange={e =>
+                            setTsxFiles(
+                              jsxFiles.map((f, i) =>
+                                i === index ? { ...f, content: e } : f
+                              )
+                            )
+                          }
                           options={{
                             minimap: { enabled: false },
                             fontSize: 14,
@@ -260,12 +368,23 @@ const page = () => {
                       </div>
                     </div>
                   ))}
-                  <Button variant='outline' className='mt-4' onClick={() => setTsxFiles([...tsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
+                  <Button
+                    variant='outline'
+                    className='mt-4'
+                    onClick={() =>
+                      setTsxFiles([
+                        ...tsxFiles,
+                        { path: '', content: '', type: '', target: '' }
+                      ])
+                    }
+                  >
+                    Add File
+                  </Button>
                 </div>
               </CardContent>
             </Card>
             {/* <Divider className='my-4' /> */}
-            <Card className='mt-4 border p-4 rounded-lg '>
+            <Card className='mt-4 rounded-lg border p-4'>
               <CardHeader>
                 <CardTitle>JSX JSON</CardTitle>
               </CardHeader>
@@ -274,31 +393,71 @@ const page = () => {
             <Input placeholder="Author" value={jsxJSON?.author} onChange={(e) => setJsxJSON({ ...jsxJSON, author: e.target.value })} />
             <Input placeholder="Title" value={jsxJSON?.title} onChange={(e) => setJsxJSON({ ...jsxJSON, title: e.target.value })} /> */}
               <Input
-                placeholder="Dependencies (comma-separated)"
+                placeholder='Dependencies (comma-separated)'
                 value={jsxJSON?.dependencies.join(',')}
-                onChange={(e) => setJsxJSON({
-                  ...jsxJSON,
-                  dependencies: e.target.value.split(',').map(dep => dep.trim())
-                })}
+                onChange={e =>
+                  setJsxJSON({
+                    ...jsxJSON,
+                    dependencies: e.target.value
+                      .split(',')
+                      .map(dep => dep.trim())
+                  })
+                }
               />
               <CardContent>
                 <div className='space-y-4'>
                   {jsxFiles.map((file, index) => (
-                    <div key={index} className='border rounded-lg p-4'>
-                      <Input placeholder="Path" value={file.path} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, path: e.target.value } : f))} />
-                      <Input placeholder="Type" value={file.type} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, type: e.target.value } : f))} />
-                      <Input placeholder="Target" value={file.target} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, target: e.target.value } : f))} />
+                    <div key={index} className='rounded-lg border p-4'>
+                      <Input
+                        placeholder='Path'
+                        value={file.path}
+                        onChange={e =>
+                          setJsxFiles(
+                            jsxFiles.map((f, i) =>
+                              i === index ? { ...f, path: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
+                      <Input
+                        placeholder='Type'
+                        value={file.type}
+                        onChange={e =>
+                          setJsxFiles(
+                            jsxFiles.map((f, i) =>
+                              i === index ? { ...f, type: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
+                      <Input
+                        placeholder='Target'
+                        value={file.target}
+                        onChange={e =>
+                          setJsxFiles(
+                            jsxFiles.map((f, i) =>
+                              i === index ? { ...f, target: e.target.value } : f
+                            )
+                          )
+                        }
+                      />
                       {/* <Textarea placeholder="Content" value={file.content} onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e.target.value } : f))} /> */}
-                      <div className='w-full h-[400px] border rounded-lg overflow-hidden'>
+                      <div className='h-[400px] w-full overflow-hidden rounded-lg border'>
                         <Editor
-                          defaultLanguage="javascript"
-                          defaultValue=""
-                          theme="vs-dark"
+                          defaultLanguage='javascript'
+                          defaultValue=''
+                          theme='vs-dark'
                           className='rounded-none'
                           // onChange={(value) => {
                           //   update(value);
                           // }}
-                          onChange={(e) => setJsxFiles(jsxFiles.map((f, i) => i === index ? { ...f, content: e } : f))}
+                          onChange={e =>
+                            setJsxFiles(
+                              jsxFiles.map((f, i) =>
+                                i === index ? { ...f, content: e } : f
+                              )
+                            )
+                          }
                           options={{
                             minimap: { enabled: false },
                             fontSize: 14,
@@ -323,18 +482,29 @@ const page = () => {
                       </div>
                     </div>
                   ))}
-                  <Button variant='outline' className='mt-4' onClick={() => setJsxFiles([...jsxFiles, { path: '', content: '', type: '', target: '' }])}>Add File</Button>
+                  <Button
+                    variant='outline'
+                    className='mt-4'
+                    onClick={() =>
+                      setJsxFiles([
+                        ...jsxFiles,
+                        { path: '', content: '', type: '', target: '' }
+                      ])
+                    }
+                  >
+                    Add File
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
         </CardContent>
-      </Card >
+      </Card>
 
       <ToastContainer />
 
       <Button onClick={handleUpload}>Upload</Button>
-    </div >
+    </div>
   )
 }
 

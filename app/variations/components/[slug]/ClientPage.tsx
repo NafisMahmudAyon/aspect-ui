@@ -16,7 +16,9 @@ const ClientPage = ({ slug }: { slug: string }) => {
     setLoading(true)
     async function getData() {
       try {
-        const res = await fetch(`/api/get?cats=variations&subcats=${slug}&page=${page}&limit=5`)
+        const res = await fetch(
+          `/api/get?cats=variations&subcats=${slug}&page=${page}&limit=5`
+        )
         if (!res.ok) {
           setFetchedData([])
           return
@@ -27,8 +29,7 @@ const ClientPage = ({ slug }: { slug: string }) => {
         setLoading(false)
       } catch (error) {
         console.error('Fetch failed:', error)
-      }
-      finally {
+      } finally {
         setLoading(false)
       }
     }
@@ -40,39 +41,69 @@ const ClientPage = ({ slug }: { slug: string }) => {
 
     const newTOC = fetchedData.map((item: any) => ({
       id: item.title.replace(/\s+/g, '-').toLowerCase(),
-      title: item.title,
+      title: item.title
     }))
     setTOC(newTOC)
   }, [fetchedData])
   return (
     <div>
-      {loading ? <div>Loading...</div> : (<>
-        {fetchedData && fetchedData.map((item: any) => {
-          const generatedID = item.title.replace(/\s+/g, '-').toLowerCase()
-          const generatedContent = {
-            "tsx": JSON.parse(JSON.stringify(item.codeTsx)),
-            "jsx": JSON.parse(JSON.stringify(item.codeJsx))
-          }
-          return (
-            <div key={item._id}>
-              <h2 className="section-title group relative font-semibold text-h5 text-text" id={generatedID}>{item.title}
-                <a
-                  aria-label={`Link to this section: ${item.title}`}
-                  href={`#${generatedID}`}
-                  className="ml-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  #
-                </a>
-              </h2>
-              <Divider />
-              <CodeSnippets styles="mt-4" content={generatedContent} lang="javascript" url={item.url} >
-              </CodeSnippets>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          {fetchedData &&
+            fetchedData.map((item: any) => {
+              const generatedID = item.title.replace(/\s+/g, '-').toLowerCase()
+              const generatedContent = {
+                tsx: JSON.parse(JSON.stringify(item.codeTsx)),
+                jsx: JSON.parse(JSON.stringify(item.codeJsx))
+              }
+              return (
+                <div key={item._id}>
+                  <h2
+                    className='section-title group text-h5 text-text relative font-semibold'
+                    id={generatedID}
+                  >
+                    {item.title}
+                    <a
+                      aria-label={`Link to this section: ${item.title}`}
+                      href={`#${generatedID}`}
+                      className='ml-2 opacity-0 transition-opacity group-hover:opacity-100'
+                    >
+                      #
+                    </a>
+                  </h2>
+                  <Divider />
+                  <CodeSnippets
+                    styles='mt-4'
+                    content={generatedContent}
+                    lang='javascript'
+                    url={item.url}
+                  ></CodeSnippets>
+                </div>
+              )
+            })}
+          {fetchedData.length == 0 && (
+            <div>
+              <ComingSoon
+                heading='Coming Soon'
+                subHeading='Coming Soon'
+                description='We are currently working on this variations. Please check back later for updates.'
+                showLaunchDate={false}
+              />
             </div>
-          )
-        })}
-        {fetchedData.length == 0 && <div><ComingSoon heading="Coming Soon" subHeading="Coming Soon" description="We are currently working on this variations. Please check back later for updates." showLaunchDate={false}/></div>}
-      </>
+          )}
+        </>
       )}
-        {totalPages > 1 && <Pagination count={totalPages} defaultPage={page} showFirstLast={totalPages > 5 ? true : false} showNextPrev={totalPages > 1 ? true : false} onChange={(page) => setPage(page)} />}
+      {totalPages > 1 && (
+        <Pagination
+          count={totalPages}
+          defaultPage={page}
+          showFirstLast={totalPages > 5 ? true : false}
+          showNextPrev={totalPages > 1 ? true : false}
+          onChange={page => setPage(page)}
+        />
+      )}
     </div>
   )
 }

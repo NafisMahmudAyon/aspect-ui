@@ -9,11 +9,15 @@ interface TableProps {
   className?: string
 }
 
-export const Table: React.FC<TableProps> = ({ children, className = '', ...rest }) => {
+export const Table: React.FC<TableProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
   return (
     <TableProvider>
       <div className='relative w-full overflow-auto'>
-        <table className={cn("relative w-full", className)} {...rest}>
+        <table className={cn('relative w-full', className)} {...rest}>
           {children}
         </table>
       </div>

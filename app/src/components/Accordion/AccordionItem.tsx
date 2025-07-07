@@ -24,10 +24,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-md border border-border',
+        'border-border overflow-hidden rounded-md border',
         disabled ? 'opacity-50' : '',
         className
-      )} {...rest}
+      )}
+      {...rest}
     >
       {React.Children.map(children, child => {
         if (isValidElement(child)) {

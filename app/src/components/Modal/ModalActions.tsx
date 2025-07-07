@@ -9,12 +9,19 @@ interface ModalActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
 }
 
-export const ModalAction: React.FC<ModalActionProps> = ({ children, className = '', ...rest }) => {
+export const ModalAction: React.FC<ModalActionProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
   const { handleOpen } = useModal()
 
   return (
     <button
-      className={cn('inline-flex gap-2 items-center justify-center font-medium rounded-md focus:outline-hidden focus-visible:border-ring focus-visible:ring-border transition ease-in-out duration-200 focus-visible:ring-1 px-4 py-2 bg-bg-light text-text cursor-pointer', className)}
+      className={cn(
+        'focus-visible:border-ring focus-visible:ring-border bg-bg-light text-text inline-flex cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-2 font-medium transition duration-200 ease-in-out focus:outline-hidden focus-visible:ring-1',
+        className
+      )}
       onClick={handleOpen}
       {...rest}
     >

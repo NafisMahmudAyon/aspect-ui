@@ -10,7 +10,7 @@ export const colors = {
     { id: 600, className: 'bg-primary-600', code: '#0f3cd9' },
     { id: 700, className: 'bg-primary-700', code: '#042bb2' },
     { id: 800, className: 'bg-primary-800', code: '#042185' },
-    { id: 900, className: 'bg-primary-900', code: '#00114a' },
+    { id: 900, className: 'bg-primary-900', code: '#00114a' }
   ],
   success: [
     { id: 25, className: 'bg-success-25 ', code: '#eafef5' },
@@ -23,7 +23,7 @@ export const colors = {
     { id: 600, className: 'bg-success-600 ', code: '#0a9952' },
     { id: 700, className: 'bg-success-700 ', code: '#048746' },
     { id: 800, className: 'bg-success-800 ', code: '#046a37' },
-    { id: 900, className: 'bg-success-900 ', code: '#02542b' },
+    { id: 900, className: 'bg-success-900 ', code: '#02542b' }
   ],
   warning: [
     { id: 25, className: 'bg-warning-25 ', code: '#fff9df' },
@@ -36,7 +36,7 @@ export const colors = {
     { id: 600, className: 'bg-warning-600 ', code: '#d8a800' },
     { id: 700, className: 'bg-warning-700 ', code: '#b18a00' },
     { id: 800, className: 'bg-warning-800 ', code: '#896b00' },
-    { id: 900, className: 'bg-warning-900 ', code: '#624d00' },
+    { id: 900, className: 'bg-warning-900 ', code: '#624d00' }
   ],
   error: [
     { id: 25, className: 'bg-error-25 ', code: '#fff5f4' },
@@ -49,7 +49,7 @@ export const colors = {
     { id: 600, className: 'bg-error-600 ', code: '#e92215' },
     { id: 700, className: 'bg-error-700 ', code: '#d21a0e' },
     { id: 800, className: 'bg-error-800 ', code: '#be170c' },
-    { id: 900, className: 'bg-error-900 ', code: '#ab0a00' },
+    { id: 900, className: 'bg-error-900 ', code: '#ab0a00' }
   ]
 }
 
@@ -123,7 +123,7 @@ const config : Config = {
 }
 
 export default keepTheme(config, colorsPalette);
-  `,
+  `
 }
 
 export const forbiddenRoles = {
@@ -154,7 +154,7 @@ const colorsPalette = {
   },
 }
 
-  `,
+  `
 }
 
 export const customizeSingleColor = {
@@ -201,5 +201,5 @@ const config : Config = {
 }
 
 export default keepTheme(config, colorsPalette);
-  `,
+  `
 }

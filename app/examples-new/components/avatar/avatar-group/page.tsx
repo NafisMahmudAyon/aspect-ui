@@ -38,10 +38,7 @@ const page = () => {
     <AvatarGroup>
       {avatarData.map((item, index) => (
         <Avatar key={index} className='border'>
-          <AvatarImage
-            src={item.avatar}
-            altText={item.first_name}
-          />
+          <AvatarImage src={item.avatar} altText={item.first_name} />
           <AvatarBadge status='success' iconEnabled />
         </Avatar>
       ))}

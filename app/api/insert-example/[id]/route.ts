@@ -14,7 +14,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const {id} = await params
+    const { id } = await params
     const body = await req.json()
 
     if (!id || !body) {

@@ -18,7 +18,10 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 }) => {
   return (
     <div
-      className={cn('cursor-pointer p-2.5 flex items-center gap-3 rounded-md text-body1 font-normal transition-all duration-150 ease-in-out hover:bg-bg-light text-text', className)}
+      className={cn(
+        'text-body1 hover:bg-bg-light text-text flex cursor-pointer items-center gap-3 rounded-md p-2.5 font-normal transition-all duration-150 ease-in-out',
+        className
+      )}
       onClick={onClick}
       {...rest}
     >

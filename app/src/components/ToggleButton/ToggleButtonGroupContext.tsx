@@ -39,7 +39,6 @@ interface ToggleButtonGroupProviderProps {
   size?: 'small' | 'medium' | 'large'
 }
 
-
 export const ToggleButtonGroupProvider: React.FC<
   ToggleButtonGroupProviderProps
 > = ({

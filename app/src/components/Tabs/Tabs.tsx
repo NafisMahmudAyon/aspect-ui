@@ -19,7 +19,9 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <TabsProvider value={{ activeTab, setActiveTab }}>
-      <div className={className} {...rest}>{children}</div>
+      <div className={className} {...rest}>
+        {children}
+      </div>
     </TabsProvider>
   )
 }

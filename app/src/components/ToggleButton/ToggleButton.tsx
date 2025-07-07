@@ -18,7 +18,8 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
   className = '',
   ...rest
 }) => {
-  const { selectedValues, handleChange, outline, disabled, size } = useToggleButtonGroup()
+  const { selectedValues, handleChange, outline, disabled, size } =
+    useToggleButtonGroup()
 
   const isSelected = Array.isArray(selectedValues)
     ? selectedValues.includes(value)
@@ -31,9 +32,7 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
         : 'border border-border bg-transparent shadow-xs hover:bg-bg-light hover:text-text-muted'
     }
 
-    return isSelected
-      ? 'bg-bg-light text-text'
-      : 'bg-transparent'
+    return isSelected ? 'bg-bg-light text-text' : 'bg-transparent'
   }
 
   const getSizeStyles = () => {
@@ -49,7 +48,13 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
 
   return (
     <button
-      className={cn("min-w-0 flex-1 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md", getButtonStyles(), getSizeStyles(), outline && "border-l-0 first:border-l", className)}
+      className={cn(
+        'min-w-0 flex-1 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md',
+        getButtonStyles(),
+        getSizeStyles(),
+        outline && 'border-l-0 first:border-l',
+        className
+      )}
       onClick={() => handleChange(value)}
       disabled={disabled}
       {...rest}
@@ -58,4 +63,3 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
     </button>
   )
 }
-

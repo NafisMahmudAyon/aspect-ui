@@ -58,7 +58,6 @@ export async function GET(
   }
 }
 
-
 // PATCH method: Update one item by ID
 export async function PATCH(
   req: NextRequest,
@@ -69,10 +68,13 @@ export async function PATCH(
     const updateData = await req.json()
 
     if (!id || typeof updateData !== 'object') {
-      return new Response(JSON.stringify({ success: false, error: 'Missing id or update data' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ success: false, error: 'Missing id or update data' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     await client.connect()
@@ -82,22 +84,28 @@ export async function PATCH(
     const result = await collection.updateOne({ id }, { $set: updateData })
 
     if (result.matchedCount === 0) {
-      return new Response(JSON.stringify({ success: false, error: 'Document not found' }), {
-        status: 404,
-        headers: { 'Content-Type': 'application/json' },
-      })
+      return new Response(
+        JSON.stringify({ success: false, error: 'Document not found' }),
+        {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     })
   } catch (error) {
     console.error('Update failed:', error)
-    return new Response(JSON.stringify({ success: false, error: 'Update failed' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return new Response(
+      JSON.stringify({ success: false, error: 'Update failed' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    )
   } finally {
     await client.close()
   }

@@ -12,7 +12,7 @@ const page = () => {
       <Hero />
       {/* <ComponentList /> */}
       <ExploreComponents />
-      <div className="h-[300px]" />
+      <div className='h-[300px]' />
       {/* <UserButton />/ */}
       <SidebarDemo />
       <Footer />

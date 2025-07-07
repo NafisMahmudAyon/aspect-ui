@@ -4,8 +4,14 @@ import './example.css'
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-
-    <AspectThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>{children}</AspectThemeProvider>
+    <AspectThemeProvider
+      attribute='class'
+      defaultTheme='light'
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </AspectThemeProvider>
   )
 }
 

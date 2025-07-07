@@ -13,7 +13,7 @@ export const TableBody: React.FC<TableBodyProps> = ({
   className = ''
 }) => {
   return (
-    <tbody className={cn("[&_tr:last-child]:border-0", className)}>
+    <tbody className={cn('[&_tr:last-child]:border-0', className)}>
       {children}
     </tbody>
   )

@@ -48,10 +48,28 @@ export const BackToTop: React.FC<BackToTopProps> = ({
   return (
     <button
       onClick={scrollToTop}
-      className={cn('fixed bottom-5 right-5 rounded-full bg-bg p-3 font-bold text-text shadow-lg transition-all duration-300 ease-in-out focus:outline-hidden border border-border', className)} {...rest}
+      className={cn(
+        'bg-bg text-text border-border fixed right-5 bottom-5 rounded-full border p-3 font-bold shadow-lg transition-all duration-300 ease-in-out focus:outline-hidden',
+        className
+      )}
+      {...rest}
     >
       {children || (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5.996 14.996 6-6L18 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        <svg
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='m5.996 14.996 6-6L18 15'
+            stroke='currentColor'
+            strokeWidth='1.6'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
       )}
     </button>
   )

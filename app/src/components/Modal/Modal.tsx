@@ -9,7 +9,11 @@ interface ModalProps {
   onToggle?: (isOpen: boolean) => void
 }
 
-export const Modal: React.FC<ModalProps> = ({ children, isOpenExternal, onToggle }) => {
+export const Modal: React.FC<ModalProps> = ({
+  children,
+  isOpenExternal,
+  onToggle
+}) => {
   const [isOpenInternal, setIsOpenInternal] = useState(false)
 
   const isOpen = isOpenExternal ?? isOpenInternal

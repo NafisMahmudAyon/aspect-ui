@@ -34,10 +34,11 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
         >
           <div
             className={cn(
-              'overflow-hidden border-t border-border bg-bg p-4 text-sm',
+              'border-border bg-bg overflow-hidden border-t p-4 text-sm',
               accordionContentClassName,
               className
-            )} {...rest}
+            )}
+            {...rest}
           >
             {children}
           </div>

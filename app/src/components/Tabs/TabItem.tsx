@@ -14,16 +14,33 @@ interface TabItemProps {
   onClick?: () => void
 }
 
-export const TabItem: React.FC<TabItemProps> = ({ children, id, disabled, className = "", activeClassName = "", disabledClassName = "", onClick, ...rest }) => {
+export const TabItem: React.FC<TabItemProps> = ({
+  children,
+  id,
+  disabled,
+  className = '',
+  activeClassName = '',
+  disabledClassName = '',
+  onClick,
+  ...rest
+}) => {
   const { activeTab, setActiveTab } = useTabs()
 
   return (
     <button
-      className={cn('rounded-md px-3 py-1.5 border border-transparent text-sm font-medium whitespace-nowrap', activeTab === id
-        ? cn('bg-bg-light border-border', activeClassName)
-        : disabled && cn("opacity-50 pointer-events-none", disabledClassName), className
+      className={cn(
+        'rounded-md border border-transparent px-3 py-1.5 text-sm font-medium whitespace-nowrap',
+        activeTab === id
+          ? cn('bg-bg-light border-border', activeClassName)
+          : disabled && cn('pointer-events-none opacity-50', disabledClassName),
+        className
       )}
-      onClick={() => { if (!disabled) { setActiveTab(id); onClick?.() } }}
+      onClick={() => {
+        if (!disabled) {
+          setActiveTab(id)
+          onClick?.()
+        }
+      }}
       {...rest}
     >
       {children}

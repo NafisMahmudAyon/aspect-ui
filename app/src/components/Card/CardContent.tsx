@@ -10,5 +10,9 @@ export const CardContent: React.FC<CardContentProps> = ({
   className = '',
   ...rest
 }) => {
-  return <div className={cn('px-6', className)} {...rest}>{children}</div>
+  return (
+    <div className={cn('px-6', className)} {...rest}>
+      {children}
+    </div>
+  )
 }
