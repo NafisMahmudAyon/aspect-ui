@@ -70,7 +70,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             variantClasses[variant],
             'flex items-center justify-center border transition-all duration-200 ease-in-out',
             checked
-              ? 'bg-bg-light border-bg-light shadow-md'
+              ? 'bg-primary text-bg-light border-primary shadow-md'
               : 'border-border bg-transparent',
             checkboxClassName
           )}

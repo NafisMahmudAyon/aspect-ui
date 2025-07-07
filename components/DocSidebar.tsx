@@ -29,7 +29,7 @@ const DocSidebar = () => {
   }
   return (
     <Sidebar className={cn("h-[calc(100vh-140px)] lg:h-[calc(100vh-100px)] overflow-auto lg:sticky lg:top-[80px] absolute lg:col-span-3 lg:block xl:col-span-2 border-r p-2 no-scrollbar lg:w-auto lg:bg-transparent lg:opacity-100", isOpen ? 'shadow-md rounded-lg lg:shadow-none lg:rounded-none' : 'opacity-0')}>
-      <aside
+      <div
         id="componentListSidebar"
         className=" space-y-5 2xl:py-6 2xl:pl-5">
         <Accordion multiple={true} activeItem={activeItem ?? ['item-1']}>
@@ -127,7 +127,7 @@ const DocSidebar = () => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </aside>
+      </div>
     </Sidebar>
   )
 }

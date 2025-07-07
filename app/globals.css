@@ -245,3 +245,72 @@ iframe body {
 body {
   @apply bg-bg-dark;
 }
+
+/* :root {
+  --bg-dark: hsl(300, 8%, 89%);
+  --bg: hsl(300, 8%, 97%);
+  --bg-light: hsl(300, 8%, 100%);
+  --text: hsl(340, 9%, 19%);
+  --text-muted: hsl(340, 0%, 59%);
+  --border: hsl(300, 13%, 82%);
+  --primary: hsl(340, 83%, 65%);
+  --primary-foreground: hsl(340, 30%, 15%);
+  --secondary: hsl(61, 59%, 54%);
+  --secondary-foreground: hsl(61, 39%, 90%);
+  --accent: hsl(210, 91%, 58%);
+  --accent-foreground: hsl(210, 71%, 90%);
+  --success: hsl(142, 76%, 85%);
+  --success-foreground: hsl(142, 76%, 25%);
+  --warning: hsl(38, 92%, 85%);
+  --warning-foreground: hsl(38, 92%, 35%);
+  --error: hsl(0, 84%, 88%);
+  --error-foreground: hsl(0, 84%, 45%);
+  --info: hsl(217, 91%, 93%);
+  --info-foreground: hsl(217, 91%, 45%);
+}
+
+.dark {
+  --bg-dark: hsl(340, 8%, 0%);
+  --bg: hsl(340, 8%, 6%);
+  --bg-light: hsl(340, 8%, 12%);
+  --text: hsl(340, 5%, 95%);
+  --text-muted: hsl(340, 5%, 65%);
+  --border: hsl(340, 10%, 20%);
+  --primary: hsl(340, 93%, 55%);
+  --primary-foreground: hsl(340, 73%, 90%);
+  --secondary: hsl(61, 69%, 44%);
+  --secondary-foreground: hsl(61, 49%, 90%);
+  --accent: hsl(210, 100%, 48%);
+  --accent-foreground: hsl(210, 80%, 90%);
+  --success: hsl(142, 76%, 15%);
+  --success-foreground: hsl(142, 76%, 70%);
+  --warning: hsl(38, 92%, 15%);
+  --warning-foreground: hsl(38, 92%, 75%);
+  --error: hsl(0, 84%, 15%);
+  --error-foreground: hsl(0, 84%, 75%);
+  --info: hsl(217, 91%, 20%);
+  --info-foreground: hsl(217, 91%, 80%);
+}
+
+@theme {
+  --color-bg-dark: var(--bg-dark);
+  --color-bg: var(--bg);
+  --color-bg-light: var(--bg-light);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+} */

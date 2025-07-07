@@ -28,7 +28,7 @@ const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
   // Terminal style (original)
   if (variant === 'terminal') {
     return (
-      <Code className="w-full max-w-4xl mx-auto">
+      <div className="w-full max-w-4xl mx-auto">
         {description && (
           <p className="text-gray-300 mb-4 text-center text-lg">{description}</p>
         )}
@@ -74,7 +74,7 @@ const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
           </div>
           <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl transform scale-105"></div>
         </div>
-      </Code>
+      </div>
     );
   }
 

@@ -36,7 +36,7 @@ export const Radio: React.FC<RadioProps> = ({
         value={value}
         checked={checked}
         onChange={onChange}
-        className={cn('form-radio accent-text h-5 w-5', className)}
+        className={cn('form-radio accent-primary h-5 w-5', className)}
       />
       <label htmlFor={id} className={cn('text-text ml-2', labelClassName)}>
         {label}

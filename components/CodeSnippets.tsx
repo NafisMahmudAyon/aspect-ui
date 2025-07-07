@@ -291,7 +291,7 @@ export const CLICodeBlock: React.FC<CLICodeBlockProps> = ({
       <div className='absolute bottom-full left-4 px-3 py-1 rounded-t-md border  border-border'>CLI</div>
       <div className="p-4 mr-12 flex items-center gap-2">
         {<span className="text-green-400">$ </span>}
-        <pre className={`text-sm overflow-x-auto`}>
+        <pre className={`text-sm overflow-x-auto no-scrollbar`}>
           <code className="font-mono">
             npx -p aspect-ui@latest add https://aspect-ui.vercel.app/api/get/{id}{isPro && "?api-key=*****"}
           </code>
