@@ -121,7 +121,7 @@ const bashInstall = {
 const bashCLIImport = {
   npm: `npx aspect-ui@latest init`,
   yarn: `yarn aspect-ui@latest init`,
-  pnpm: `pnpm dlsx aspect-ui@latest init`
+  pnpm: `pnpm dlx aspect-ui@latest init`
 }
 const bashNextInstall = {
   npm: `npx -p aspect-ui@latest next-app`
