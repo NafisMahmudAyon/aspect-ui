@@ -1,7 +1,6 @@
 import Breadcrumb from '@/components/Breadcrumb'
 import DocSidebar from '@/components/DocSidebar'
 import Navbar from '@/components/Navigation'
-import DynamicTableOfContent from '@/components/DynamicTableOfContent'
 // import RightSideBar from '@/components/RightSideBar'
 import TableOfContent from '@/components/TableOfContent'
 import { AspectThemeProvider } from '@/components/ThemeProvider'
@@ -25,9 +24,9 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
           <div className='container mx-auto mt-[90px] w-full px-3 lg:hidden'>
             <Breadcrumb />
           </div>
-          <div className='md:px-auto relative z-20 container mx-auto grid grid-cols-12 gap-5 px-3 lg:mt-[70px] lg:grid-cols-14'>
+          <div className='md:px-auto relative z-20 container mx-auto grid grid-cols-12 gap-5 px-3 lg:mt-[70px] lg:grid-cols-14 xl:grid-cols-12'>
             <DocSidebar />
-            <div className='col-span-12 py-6 pt-6 lg:col-span-8 xl:col-span-10 2xl:py-4 2xl:pt-10'>
+            <div className='col-span-12 py-6 pt-6 lg:col-span-8 2xl:py-4 2xl:pt-10'>
               <div id='linkPage' className='overflow-y-auto'>
                 {children}
               </div>

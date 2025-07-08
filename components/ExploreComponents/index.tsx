@@ -289,7 +289,7 @@ const ExploreComponents = () => {
           <div key={index} className={cn('bg-gray-200/70 dark:bg-bg-dark/20 p-4 rounded-lg grid place-items-center group relative dark:shadow-gray-200/10 shadow-sm hover:shadow-lg transition-all duration-300', example.class)} onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
             {example.code}
-            {/* <HoverEffect title={example.title} link={example.link} isHovered={isHovered} /> */}
+            <HoverEffect title={example.title} link={example.link} isHovered={isHovered} />
             <div className="lg:hidden">
               <Link href={"/docs/components/" + example.link} className='absolute top-4 right-4 text-primary-800 dark:text-primary-200 group/link z-10' >
                 <ArrowUpRight className="group-hover/link:opacity-0 group-hover/link:size-0 size-6 opacity-100  block transition-all duration-150 ease-in-out" />
@@ -297,7 +297,7 @@ const ExploreComponents = () => {
             </div>
           </div>
         ))}
-      </div>
+        </div>
     </div>
   )
 }

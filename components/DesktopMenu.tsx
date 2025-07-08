@@ -6,6 +6,7 @@ import Link from 'next/link'
 import AspectDarkLogo from '../public/SVG/aspectDarkLogo.svg'
 import AspectLogo from '../public/SVG/aspectLogo.svg'
 import ThemeSwitcher from './ThemeSwitcher'
+import SearchAction from './SearchAction'
 // import UserButton from './UserButton'
 
 const DesktopMenu = () => {
@@ -27,6 +28,7 @@ const DesktopMenu = () => {
         <li className='hover:text-primary-900 dark:hover:text-primary-50'>Full Page</li> */}
       </NavbarList>
       <NavbarList>
+        <SearchAction />
         <ThemeSwitcher />
         {/* <UserButton /> */}
       </NavbarList>

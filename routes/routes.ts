@@ -119,14 +119,14 @@ export const routes: routerPath[] = [
     deprecate: false,
     folderName: 'Dropdown'
   },
-  {
-    id: generatedID(),
-    name: 'Image',
-    href: '/docs/components/image',
-    tag: false,
-    deprecate: false,
-    folderName: 'Image'
-  },
+  // {
+  //   id: generatedID(),
+  //   name: 'Image',
+  //   href: '/docs/components/image',
+  //   tag: false,
+  //   deprecate: false,
+  //   folderName: 'Image'
+  // },
   {
     id: generatedID(),
     name: 'Input',

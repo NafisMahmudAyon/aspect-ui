@@ -41,7 +41,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const [selectedDates, setSelectedDates] = useState<Date[]>(
     initialDates.map(date => new Date(date))
   )
-  // const [isOpen, setIsOpen] = useState(show)
+
   const [years, setYears] = useState<number[]>([])
 
   const monthNames = [
@@ -176,17 +176,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             className
           )}
         >
-          {/* <span
-            // type='text'
-            className={cn('w-full rounded-md border border-border px-4 py-2 bg-bg outline-hidden focus-visible:outlined', className)}
-            // readOnly
-            // value={formatDateRange(selectedDates)}
-            // onClick={() => setIsOpen(!isOpen)}
-            // placeholder={placeholder}
-            {...rest}
-          > */}
           {formatDateRange(selectedDates)}
-          {/* </span> */}
         </PopoverAction>
         <PopoverContent className='w-auto p-0'>
           <div

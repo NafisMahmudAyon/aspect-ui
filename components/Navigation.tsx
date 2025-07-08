@@ -4,6 +4,7 @@ import DesktopMenu from './DesktopMenu'
 import { Navbar as Nav, NavbarCollapseBtn, NavbarContainer } from '@/app/src'
 import MobileMenu from './MobileMenu'
 import ThemeSwitcher from './ThemeSwitcher'
+import SearchAction from './SearchAction'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -19,6 +20,7 @@ const Navbar = () => {
             <DesktopMenu />
             <div className='flex items-center gap-2'>
               <div className='lg:hidden'>
+                <SearchAction />
                 <ThemeSwitcher />
               </div>
             <NavbarCollapseBtn />

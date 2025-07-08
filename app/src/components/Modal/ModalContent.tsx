@@ -6,21 +6,18 @@ import { cn } from '../../utils/cn'
 import { useModal } from './ModalContext'
 import { ModalPortal } from './ModalPortal'
 
-// interface ModalContentProps {
-//   children: ReactNode
-//   className?: string
-// }
-
-type ModalContentProps = HTMLAttributes<HTMLDivElement> & MotionProps
+type ModalContentProps = HTMLAttributes<HTMLDivElement> & MotionProps & {
+  overlayClassName?: string
+}
 
 const ModalContentComponent = forwardRef<HTMLDivElement, ModalContentProps>(
-  ({ children, className = '', ...rest }, ref: Ref<HTMLDivElement>) => {
+  ({ children, className = '', overlayClassName = '', ...rest }, ref: Ref<HTMLDivElement>) => {
     const { isOpen } = useModal()
     if (!isOpen) return null
 
     return (
       <AnimatePresence>
-        <ModalPortal>
+        <ModalPortal overlayClassName={overlayClassName}>
           <motion.div
             className={cn(
               'aspect-ui-modal bg-bg border-border max-w-[calc(100%-2rem)] rounded-lg border p-4 shadow-lg',

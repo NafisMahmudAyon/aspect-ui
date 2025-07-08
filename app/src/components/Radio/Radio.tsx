@@ -1,4 +1,3 @@
-// ./app/src/components/Radio/Radio.tsx
 'use client'
 
 import React from 'react'
