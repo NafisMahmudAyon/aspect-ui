@@ -1,7 +1,8 @@
 'use client'
 
-import { Badge, Card, CardContent, Input, Modal, ModalAction, ModalContent } from '@/app/src'
+import { Badge, Button, Card, CardContent, Input, Modal, ModalAction, ModalContent } from '@/app/src'
 import { cn } from '@/app/src/utils/cn'
+import { Portal } from '@/app/src/utils/Portal'
 import {
   gettingStartedRoutes,
   layoutRoutes,
@@ -11,10 +12,13 @@ import {
   templatesRoutes,
   variationsRoutes,
 } from '@/routes/routes'
+import { AnimatePresence, motion } from 'framer-motion'
 import Fuse from 'fuse.js'
 import { ArrowUpRight, Search, Slash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import ReactFocusLock from 'react-focus-lock'
+import { RemoveScroll } from 'react-remove-scroll'
 
 interface routerPath {
   id: string
@@ -47,21 +51,24 @@ export default function SearchAction() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [filteredGroups, setFilteredGroups] = useState<{ group: string; items: routerPath[] }[]>([])
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
+  const modalRef = useRef<HTMLDivElement>(null)
 
+  // Handle click outside
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey && e.key === 'k') || e.key === '/') {
-        e.preventDefault()
-        setOpen(true)
-      }
-      if (e.key === 'Escape') {
-        setOpen(false)
-        setQuery('')
+    const handleClickOutside = (e: MouseEvent) => {
+      if (open && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        closeModal()
       }
     }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [])
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [open])
 
   useEffect(() => {
     let orderedGroups = groupedRoutes
@@ -115,6 +122,11 @@ export default function SearchAction() {
     group.items.map((item) => ({ group: group.group, item }))
   )
 
+  const closeModal = () => {
+    setOpen(false)
+    setQuery('')
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -128,15 +140,19 @@ export default function SearchAction() {
       e.preventDefault()
       handleSelect(flatResults[activeIndex].item.href)
     }
+    if (e.key === 'Escape') {
+      e.preventDefault()
+      closeModal()
+    }
   }
 
   const handleSelect = (href: string) => {
-    setOpen(false)
-    setQuery('')
+    closeModal()
     router.push(href)
   }
 
   const highlightMatch = (text: string, query: string) => {
+    if (!query) return text
     const regex = new RegExp(`(${query})`, 'gi')
     return text.split(regex).map((part, i) =>
       part.toLowerCase() === query.toLowerCase() ? (
@@ -149,10 +165,38 @@ export default function SearchAction() {
     )
   }
 
+  // Global keyboard shortcuts
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
+        if (
+          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
+          e.target instanceof HTMLInputElement ||
+          e.target instanceof HTMLTextAreaElement ||
+          e.target instanceof HTMLSelectElement
+        ) {
+          return
+        }
+
+        e.preventDefault()
+        setOpen(true)
+      }
+    }
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
+  })
   return (
-    <>
-      <Modal isOpenExternal={open} onToggle={(isOpen) => setOpen(isOpen)}>
-        <ModalAction className='flex gap-3 px-2 py-1 rounded-full border border-primary bg-primary text-primary-foreground'><Search /> <span className='p-1 bg-gray-800/80 dark:bg-gray-600/80 rounded-md text-white'><Slash className='size-4' /></span> </ModalAction>
+    <div className=''>
+      <Modal isOpenExternal={open} onToggle={setOpen}>
+        <ModalAction
+          className='flex gap-3 px-2 py-1 rounded-full border border-primary bg-primary text-primary-foreground'
+          onClick={() => setOpen(true)}
+        >
+          <Search />
+          <span className='p-1 bg-gray-800/80 dark:bg-gray-600/80 rounded-md text-white'>
+            <Slash className='size-4' />
+          </span>
+        </ModalAction>
         <ModalContent className="p-0 text-sm" overlayClassName="z-[1001]" onKeyDown={handleKeyDown}>
           <Card className="p-0">
             <CardContent className="p-2 min-h-[18rem] min-w-[20rem]">
@@ -199,10 +243,10 @@ export default function SearchAction() {
                                   <Badge variant="outline" className="text-xs">Tag</Badge>
                                 )}
                                 {item.deprecate && (
-                                  <Badge variant="destructive" className="text-xs">Deprecated</Badge>
+                                  <Badge variant="default" className="text-xs bg-red-500 dark:bg-red-600 text-text-muted">Deprecated</Badge>
                                 )}
                                 {item.redirect && (
-                                  <Badge variant="secondary" className="text-xs">Redirect</Badge>
+                                  <Badge variant="default" className="text-xs">Redirect</Badge>
                                 )}
                               </div>
                             </div>
@@ -218,6 +262,6 @@ export default function SearchAction() {
           </Card>
         </ModalContent>
       </Modal>
-    </>
+    </div>
   )
 }

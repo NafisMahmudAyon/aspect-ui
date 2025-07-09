@@ -1,10 +1,10 @@
 'use client'
+import { Navbar as Nav, NavbarCollapseBtn, NavbarContainer, NavbarList } from '@/app/src'
 import { usePathname } from 'next/navigation'
 import DesktopMenu from './DesktopMenu'
-import { Navbar as Nav, NavbarCollapseBtn, NavbarContainer } from '@/app/src'
 import MobileMenu from './MobileMenu'
-import ThemeSwitcher from './ThemeSwitcher'
 import SearchAction from './SearchAction'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -19,11 +19,9 @@ const Navbar = () => {
           <NavbarContainer>
             <DesktopMenu />
             <div className='flex items-center gap-2'>
-              <div className='lg:hidden'>
-                <SearchAction />
-                <ThemeSwitcher />
-              </div>
-            <NavbarCollapseBtn />
+              <SearchAction />
+              <ThemeSwitcher />
+              <NavbarCollapseBtn />
             </div>
             <MobileMenu />
           </NavbarContainer>

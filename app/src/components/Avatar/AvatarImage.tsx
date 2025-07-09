@@ -35,7 +35,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({
         alt={altText || 'alt text'}
         {...(name && { title: name })}
         className={cn(
-          'aspect-square h-auto max-w-full overflow-hidden object-cover',
+          'aspect-square h-auto max-w-full overflow-hidden rounded-full object-cover',
           className
         )}
         {...rest}

@@ -17,7 +17,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   return (
     <div
       className={cn(
-        'bg-bg text-text relative flex size-12 items-center justify-center overflow-hidden rounded-full',
+        'bg-bg text-text relative flex size-12 items-center justify-center rounded-full',
         className
       )}
       onClick={onClick}

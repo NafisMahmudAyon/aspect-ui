@@ -5,14 +5,14 @@ interface AvatarBadgeProps {
   className?: string
   type?: 'counter' | 'status'
   status?:
-    | 'success'
-    | 'warning'
-    | 'error'
-    | 'info'
-    | 'active'
-    | 'away'
-    | 'notDisturb'
-    | 'invisible'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info'
+  | 'active'
+  | 'away'
+  | 'notDisturb'
+  | 'invisible'
   counter?: number
   position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
   icon?: React.ReactElement

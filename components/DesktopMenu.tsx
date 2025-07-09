@@ -27,11 +27,11 @@ const DesktopMenu = () => {
         <li className='hover:text-primary-900 dark:hover:text-primary-50'>Template</li>
         <li className='hover:text-primary-900 dark:hover:text-primary-50'>Full Page</li> */}
       </NavbarList>
-      <NavbarList>
-        <SearchAction />
-        <ThemeSwitcher />
+      {/* <NavbarList> */}
+        {/* <SearchAction />
+        <ThemeSwitcher /> */}
         {/* <UserButton /> */}
-      </NavbarList>
+      {/* </NavbarList> */}
     </>
   )
 }
