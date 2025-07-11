@@ -18,7 +18,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { isOpen } = useSidebar()
 
-  const breakpointStyle = (breakPoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'none') => {
+  const breakpointStyle = (
+    breakPoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'none'
+  ) => {
     switch (breakPoint) {
       case 'sm':
         return 'md:flex md:translate-x-0 md:relative'

@@ -6,12 +6,16 @@ import { cn } from '../../utils/cn'
 import { useModal } from './ModalContext'
 import { ModalPortal } from './ModalPortal'
 
-type ModalContentProps = HTMLAttributes<HTMLDivElement> & MotionProps & {
-  overlayClassName?: string
-}
+type ModalContentProps = HTMLAttributes<HTMLDivElement> &
+  MotionProps & {
+    overlayClassName?: string
+  }
 
 const ModalContentComponent = forwardRef<HTMLDivElement, ModalContentProps>(
-  ({ children, className = '', overlayClassName = '', ...rest }, ref: Ref<HTMLDivElement>) => {
+  (
+    { children, className = '', overlayClassName = '', ...rest },
+    ref: Ref<HTMLDivElement>
+  ) => {
     const { isOpen } = useModal()
     if (!isOpen) return null
 

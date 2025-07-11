@@ -6,7 +6,13 @@ import { ModalOverlay } from './ModalOverlay'
 import { Portal } from '../../utils/Portal'
 import { RemoveScroll } from 'react-remove-scroll'
 
-export const ModalPortal = ({ children, overlayClassName }: { children: ReactNode, overlayClassName?: string }) => {
+export const ModalPortal = ({
+  children,
+  overlayClassName
+}: {
+  children: ReactNode
+  overlayClassName?: string
+}) => {
   const { isOpen } = useModal()
   return (
     <Portal>

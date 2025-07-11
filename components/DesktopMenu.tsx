@@ -13,8 +13,8 @@ const DesktopMenu = () => {
   return (
     <>
       <Link href="/" className="flex">
-        <Image src={AspectLogo} width={150} alt="Aspect Logo" className="block dark:hidden" />
-        <Image src={AspectDarkLogo} alt="Aspect Logo" width={150} className="hidden dark:block" />
+        <Image src={AspectLogo} width={140} alt="Aspect Logo" className="block dark:hidden" />
+        <Image src={AspectDarkLogo} alt="Aspect Logo" width={140} className="hidden dark:block" />
       </Link>
       <NavbarList>
         {navbarRoutes.map((nav) => (

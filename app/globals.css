@@ -215,7 +215,7 @@ iframe body {
   text-shadow:
     0px 1px 2px var(--tw-text-shadow-color),
     0px 3px 2px var(--tw-text-shadow-color),
-    0px 4px 8px var(--tw-text-shadow-color);
+    /*  */ 0px 4px 8px var(--tw-text-shadow-color);
   &:where(.dark, .dark *) {
     --tw-text-shadow-color: #20434680;
   }
@@ -244,4 +244,23 @@ iframe body {
 
 body {
   @apply bg-bg-dark;
+}
+
+.new-hero {
+  color: var(--color-primary);
+}
+
+:root {
+  --line-color: hsl(0, 0%, 20%);
+  --line-highlight-color: hsl(0, 0%, 0%);
+  --dot-color: hsl(185, 37%, 20%);
+  --star-white-color: hsl(0, 0%, 30%);
+  --star-primary-color: hsl(185, 37%, 20%);
+}
+.dark {
+  --line-color: hsl(0, 0%, 75%);
+  --line-highlight-color: hsl(0, 0%, 95%);
+  --dot-color: hsl(183, 28%, 74%);
+  --star-white-color: hsl(0, 0%, 100%);
+  --star-primary-color: hsl(186, 32%, 33%);
 }

@@ -189,7 +189,7 @@ export default function SearchAction() {
     <div className=''>
       <Modal isOpenExternal={open} onToggle={setOpen}>
         <ModalAction
-          className='flex gap-3 px-2 py-1 rounded-full border border-primary bg-primary text-primary-foreground'
+          className='flex gap-2 md:gap-3 px-2 py-1 rounded-full border border-primary bg-primary text-primary-foreground'
           onClick={() => setOpen(true)}
         >
           <Search />
