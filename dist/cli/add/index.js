@@ -9,26 +9,12 @@ const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
 const process_1 = __importDefault(require("process"));
 const readline_1 = __importDefault(require("readline"));
+const os_1 = __importDefault(require("os"));
 const undici_1 = require("undici");
+const simple_git_1 = __importDefault(require("simple-git"));
+const repoUrl = 'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git'; // ← replace this
 function isTypeScriptProject() {
-    const tsconfigExists = fs_1.default.existsSync(path_1.default.resolve('tsconfig.json'));
-    const hasTsFiles = fs_1.default
-        .readdirSync(path_1.default.resolve('.'), { withFileTypes: true })
-        .some(file => file.isFile() &&
-        (file.name.endsWith('.ts') || file.name.endsWith('.tsx')));
-    return tsconfigExists || hasTsFiles;
-}
-function isNextJSProject() {
-    const packageJsonPath = path_1.default.resolve('package.json');
-    if (!fs_1.default.existsSync(packageJsonPath))
-        return false;
-    try {
-        const packageJson = JSON.parse(fs_1.default.readFileSync(packageJsonPath, 'utf8'));
-        return packageJson.dependencies?.next || packageJson.devDependencies?.next;
-    }
-    catch {
-        return false;
-    }
+    return fs_1.default.existsSync(path_1.default.resolve('tsconfig.json'));
 }
 function promptUser(question) {
     const rl = readline_1.default.createInterface({
@@ -52,292 +38,128 @@ function generateUniqueFileName(filePath) {
     }
     return uniquePath;
 }
-function detectMainCssFile() {
-    const nextPath = path_1.default.resolve('app/globals.css');
-    const vitePath = path_1.default.resolve('src/index.css');
-    if (fs_1.default.existsSync(nextPath))
-        return nextPath;
-    if (fs_1.default.existsSync(vitePath))
-        return vitePath;
-    return null;
-}
-function ensureMainCssFile() {
-    let mainCss = detectMainCssFile();
-    if (mainCss)
-        return mainCss;
-    const nextAppDir = path_1.default.resolve('app');
-    const viteSrcDir = path_1.default.resolve('src');
-    if (fs_1.default.existsSync(nextAppDir)) {
-        const newPath = path_1.default.join(nextAppDir, 'globals.css');
-        fs_1.default.writeFileSync(newPath, '/* Main CSS file created */\n');
-        return newPath;
-    }
-    else if (fs_1.default.existsSync(viteSrcDir)) {
-        const newPath = path_1.default.join(viteSrcDir, 'index.css');
-        fs_1.default.writeFileSync(newPath, '/* Main CSS file created */\n');
-        return newPath;
-    }
-    const fallbackPath = path_1.default.resolve('src/index.css');
-    fs_1.default.mkdirSync(path_1.default.dirname(fallbackPath), { recursive: true });
-    fs_1.default.writeFileSync(fallbackPath, '/* Main CSS file created */\n');
-    return fallbackPath;
-}
-function getComponentsPath() {
-    const isNext = isNextJSProject();
-    return isNext
-        ? path_1.default.resolve('components/aspect-ui')
-        : path_1.default.resolve('src/components/aspect-ui');
-}
-function getUtilsPath() {
-    const isNext = isNextJSProject();
-    return isNext
-        ? path_1.default.resolve('components/utils')
-        : path_1.default.resolve('src/components/utils');
-}
-function isValidURL(string) {
+function isUrl(str) {
     try {
-        new URL(string);
+        new URL(str);
         return true;
     }
     catch {
         return false;
     }
 }
-async function fetchFromGitHub(filePath, branch) {
-    const baseUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${branch}`;
-    const url = `${baseUrl}/${filePath}`;
-    const response = await (0, undici_1.fetch)(url);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch ${filePath}: ${response.statusText}`);
-    }
-    return await response.text();
+function parseComponentsArg(arg) {
+    return arg
+        .split(/\s+/)
+        .map(name => name.trim())
+        .filter(Boolean);
 }
-async function fetchDirectoryContents(dirPath, branch) {
-    const apiUrl = `https://api.github.com/repos/NafisMahmudAyon/aspect-ui-components-folders/contents/${dirPath}?ref=${branch}`;
-    const response = await (0, undici_1.fetch)(apiUrl);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch directory contents: ${response.statusText}`);
-    }
-    const contents = await response.json();
-    return contents.map((item) => item.name);
-}
-async function getComponentsConfig() {
-    const isTS = isTypeScriptProject();
-    const branch = isTS ? 'typescript' : 'javascript';
-    try {
-        const configContent = await fetchFromGitHub('components-config.json', branch);
-        return JSON.parse(configContent);
-    }
-    catch (error) {
-        console.error('❌ Failed to fetch components configuration');
-        throw error;
-    }
-}
-function loadAspectUIConfig() {
-    const configPath = path_1.default.resolve('aspect-ui.json');
-    if (fs_1.default.existsSync(configPath)) {
-        return JSON.parse(fs_1.default.readFileSync(configPath, 'utf8'));
-    }
-    return { components: [], css: 'aspect-ui' };
-}
-function saveAspectUIConfig(config) {
-    const configPath = path_1.default.resolve('aspect-ui.json');
-    fs_1.default.writeFileSync(configPath, JSON.stringify(config, null, 2));
-}
-function updateIndexFile(componentNames) {
-    const isTS = isTypeScriptProject();
-    const componentsPath = getComponentsPath();
-    const indexPath = path_1.default.join(componentsPath, isTS ? 'index.ts' : 'index.js');
-    fs_1.default.mkdirSync(componentsPath, { recursive: true });
-    const exports = componentNames
-        .map(name => `export * from './${name}';`)
-        .join('\n');
-    fs_1.default.writeFileSync(indexPath, exports + '\n');
-}
-function addCSSImport() {
-    const mainCssFile = ensureMainCssFile();
-    const cssContent = fs_1.default.readFileSync(mainCssFile, 'utf8');
-    const importStatement = "@import './components/aspect-ui/aspect-ui.css';";
-    if (!cssContent.includes(importStatement)) {
-        fs_1.default.writeFileSync(mainCssFile, importStatement + '\n' + cssContent);
-        console.log(`🎨 Added CSS import to: ${path_1.default.relative(process_1.default.cwd(), mainCssFile)}`);
-    }
-}
-async function installComponentByName(componentNames) {
-    const config = await getComponentsConfig();
-    const isTS = isTypeScriptProject();
-    const branch = isTS ? 'typescript' : 'javascript';
-    const componentsPath = getComponentsPath();
-    const utilsPath = getUtilsPath();
-    const aspectUIConfig = loadAspectUIConfig();
-    const allDependencies = new Set();
-    const requiredUtils = new Set();
-    const newComponents = [];
-    // Validate all components exist
-    for (const componentName of componentNames) {
-        const lowerName = componentName.toLowerCase();
-        if (!config.components[lowerName]) {
-            console.error(`❌ Component '${componentName}' not found in registry`);
-            process_1.default.exit(1);
-        }
-    }
-    // Install aspect-ui.css first
-    try {
-        const cssContent = await fetchFromGitHub('components/aspect-ui/aspect-ui.css', branch);
-        const cssPath = path_1.default.join(componentsPath, 'aspect-ui.css');
-        fs_1.default.mkdirSync(path_1.default.dirname(cssPath), { recursive: true });
-        fs_1.default.writeFileSync(cssPath, cssContent);
-        console.log(`🎨 Created: ${path_1.default.relative(process_1.default.cwd(), cssPath)}`);
-        addCSSImport();
-    }
-    catch (error) {
-        console.error('❌ Failed to install aspect-ui.css');
-        throw error;
-    }
-    // Collect all dependencies and utils
-    for (const componentName of componentNames) {
-        const lowerName = componentName.toLowerCase();
-        const componentConfig = config.components[lowerName];
-        componentConfig.dependencies.forEach(dep => allDependencies.add(dep));
-        componentConfig.utils.forEach(util => requiredUtils.add(util));
-        if (!aspectUIConfig.components.includes(lowerName)) {
-            newComponents.push(lowerName);
-        }
-    }
-    // Install dependencies
-    if (allDependencies.size > 0) {
-        const deps = Array.from(allDependencies);
-        console.log(`📦 Installing dependencies: ${deps.join(', ')}`);
-        (0, child_process_1.execSync)(`npm install ${deps.join(' ')}`, { stdio: 'inherit' });
-    }
-    // Install required utils
-    for (const utilName of requiredUtils) {
-        const utilConfig = config.utils.find(u => u.name === utilName);
-        if (!utilConfig) {
-            console.error(`❌ Utility '${utilName}' not found`);
+async function copyComponentFromRepo(components, branchName, config) {
+    const tmpDir = fs_1.default.mkdtempSync(path_1.default.join(os_1.default.tmpdir(), 'aspect-ui-'));
+    const git = (0, simple_git_1.default)();
+    console.log(`⬇️ Cloning ${branchName} branch from repo...`);
+    await git.clone(repoUrl, tmpDir, ['--depth', '1', '--branch', branchName]);
+    let allDependencies = [];
+    for (const name of components) {
+        const compConfig = config.components[name];
+        if (!compConfig) {
+            console.error(`❌ Component not found in config: ${name}`);
             continue;
         }
-        const utilPath = path_1.default.join(utilsPath, path_1.default.basename(utilConfig.path));
-        if (!fs_1.default.existsSync(utilPath)) {
-            try {
-                const utilContent = await fetchFromGitHub(utilConfig.path, branch);
-                fs_1.default.mkdirSync(path_1.default.dirname(utilPath), { recursive: true });
-                fs_1.default.writeFileSync(utilPath, utilContent);
-                console.log(`🔧 Created util: ${path_1.default.relative(process_1.default.cwd(), utilPath)}`);
-                // Install util dependencies
-                if (utilConfig.dependencies.length > 0) {
-                    console.log(`📦 Installing util dependencies: ${utilConfig.dependencies.join(', ')}`);
-                    (0, child_process_1.execSync)(`npm install ${utilConfig.dependencies.join(' ')}`, {
-                        stdio: 'inherit'
-                    });
-                }
-            }
-            catch (error) {
-                console.error(`❌ Failed to install utility '${utilName}'`);
-            }
-        }
-    }
-    // Install components
-    for (const componentName of componentNames) {
-        const lowerName = componentName.toLowerCase();
-        const componentConfig = config.components[lowerName];
-        const capitalizedName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
-        try {
-            const componentDir = path_1.default.join(componentsPath, capitalizedName);
-            fs_1.default.mkdirSync(componentDir, { recursive: true });
-            // Get component files from GitHub
-            const componentPath = `components/aspect-ui/${capitalizedName}`;
-            const files = await fetchDirectoryContents(componentPath, branch);
-            for (const file of files) {
-                const filePath = `${componentPath}/${file}`;
-                const fileContent = await fetchFromGitHub(filePath, branch);
-                const targetPath = path_1.default.join(componentDir, file);
-                fs_1.default.writeFileSync(targetPath, fileContent);
-                console.log(`✅ Created: ${path_1.default.relative(process_1.default.cwd(), targetPath)}`);
-            }
-        }
-        catch (error) {
-            console.error(`❌ Failed to install component '${componentName}'`);
-            throw error;
-        }
-    }
-    // Update index file
-    const allComponents = [...aspectUIConfig.components, ...newComponents];
-    updateIndexFile(allComponents.map(name => name.charAt(0).toUpperCase() + name.slice(1)));
-    // Update aspect-ui.json
-    aspectUIConfig.components = allComponents;
-    saveAspectUIConfig(aspectUIConfig);
-    console.log(`🎉 Successfully installed components: ${componentNames.join(', ')}`);
-}
-async function installComponentByURL(url) {
-    const res = await (0, undici_1.fetch)(url);
-    if (!res.ok)
-        throw new Error(`Failed to fetch: ${res.statusText}`);
-    const json = (await res.json());
-    if (!json.success) {
-        console.error(`❌ Invalid response: ${json.error}`);
-        process_1.default.exit(1);
-    }
-    const isTS = isTypeScriptProject();
-    const projectType = isTS ? 'TypeScript' : 'JavaScript';
-    console.log(`📁 Detected project type: ${projectType}`);
-    const componentRaw = isTS ? json.data.jsonTsx : json.data.jsonJsx;
-    const component = JSON.parse(componentRaw);
-    if (component.dependencies.length) {
-        console.log(`📦 Installing dependencies: ${component.dependencies.join(', ')}`);
-        (0, child_process_1.execSync)(`npm install ${component.dependencies.join(' ')}`, {
-            stdio: 'inherit'
-        });
-    }
-    for (const file of component.files) {
-        let fullPath = path_1.default.resolve(file.target);
-        const dir = path_1.default.dirname(fullPath);
-        const isCssFile = fullPath.endsWith('.css');
-        if (isCssFile) {
-            const mainCssFile = ensureMainCssFile();
-            const relativeName = path_1.default.relative(process_1.default.cwd(), file.target);
-            const comment = `\n\n/* From: ${relativeName} */\n`;
-            fs_1.default.appendFileSync(mainCssFile, comment + file.content.trim());
-            console.log(`🎨 Appended CSS to: ${path_1.default.relative(process_1.default.cwd(), mainCssFile)}`);
+        const srcComponentPath = path_1.default.join(tmpDir, compConfig.path);
+        if (!fs_1.default.existsSync(srcComponentPath)) {
+            console.error(`❌ Component folder not found in repo: ${compConfig.path}`);
             continue;
         }
-        if (!fs_1.default.existsSync(dir)) {
-            fs_1.default.mkdirSync(dir, { recursive: true });
-        }
-        if (fs_1.default.existsSync(fullPath)) {
-            const answer = await promptUser(`⚠️ File ${file.target} already exists. Override? (y/n): `);
+        const destComponentPath = path_1.default.resolve('components', 'aspect-ui', path_1.default.basename(srcComponentPath));
+        if (fs_1.default.existsSync(destComponentPath)) {
+            const answer = await promptUser(`⚠️ Component ${name} already exists. Override? (y/n): `);
             if (answer !== 'y') {
-                const newPath = generateUniqueFileName(fullPath);
-                fullPath = newPath;
-                console.log(`🔄 Creating new file: ${path_1.default.relative(process_1.default.cwd(), newPath)}`);
-            }
-            else {
-                console.log(`♻️ Overwriting: ${file.target}`);
+                console.log(`⏭️ Skipped: ${name}`);
+                continue;
             }
         }
-        fs_1.default.writeFileSync(fullPath, file.content.trim());
-        console.log(`✅ Created: ${path_1.default.relative(process_1.default.cwd(), fullPath)}`);
+        fs_1.default.mkdirSync(path_1.default.dirname(destComponentPath), { recursive: true });
+        fs_1.default.cpSync(srcComponentPath, destComponentPath, { recursive: true });
+        console.log(`✅ Added: components/aspect-ui/${path_1.default.basename(srcComponentPath)}`);
+        if (compConfig.dependencies && compConfig.dependencies.length) {
+            allDependencies.push(...compConfig.dependencies);
+        }
     }
-    console.log(`🎉 Added: ${component.title}`);
-    console.log(`👤 Author: ${component.author}`);
+    fs_1.default.rmSync(tmpDir, { recursive: true, force: true });
+    console.log('🧹 Cleaned up temporary files.');
+    if (allDependencies.length) {
+        const uniqueDeps = Array.from(new Set(allDependencies));
+        console.log(`📦 Installing dependencies: ${uniqueDeps.join(', ')}`);
+        (0, child_process_1.execSync)(`npm install ${uniqueDeps.join(' ')}`, { stdio: 'inherit' });
+    }
 }
-// Main execution
+const inputArg = process_1.default.argv[2];
+if (!inputArg) {
+    console.error('❌ Please provide a URL or component names.\nExample: npx -p aspect-ui add <url|components>');
+    process_1.default.exit(1);
+}
 ;
 (async () => {
     try {
-        const args = process_1.default.argv.slice(2);
-        if (args.length === 0) {
-            console.error('❌ Please provide a URL or component names.\nExample: npx -p aspect-ui@latest add <url>\nExample: npx -p aspect-ui@latest add accordion button');
-            process_1.default.exit(1);
-        }
-        const firstArg = args[0];
-        if (isValidURL(firstArg)) {
-            // URL-based installation
-            await installComponentByURL(firstArg);
+        if (isUrl(inputArg)) {
+            // 🔥 URL logic
+            const res = await (0, undici_1.fetch)(inputArg);
+            if (!res.ok)
+                throw new Error(`Failed to fetch: ${res.statusText}`);
+            const json = (await res.json());
+            if (!json.success) {
+                console.error(`❌ Invalid response: ${json.error}`);
+                process_1.default.exit(1);
+            }
+            const isTS = isTypeScriptProject();
+            const componentRaw = isTS ? json.data.jsonTsx : json.data.jsonJsx;
+            const component = JSON.parse(componentRaw);
+            if (component.dependencies.length) {
+                console.log(`📦 Installing dependencies: ${component.dependencies.join(', ')}`);
+                (0, child_process_1.execSync)(`npm install ${component.dependencies.join(' ')}`, {
+                    stdio: 'inherit'
+                });
+            }
+            for (const file of component.files) {
+                let fullPath = path_1.default.resolve(file.target);
+                const dir = path_1.default.dirname(fullPath);
+                if (!fs_1.default.existsSync(dir)) {
+                    fs_1.default.mkdirSync(dir, { recursive: true });
+                }
+                if (fs_1.default.existsSync(fullPath)) {
+                    const answer = await promptUser(`⚠️ File ${file.target} already exists. Override? (y/n): `);
+                    if (answer !== 'y') {
+                        const newPath = generateUniqueFileName(fullPath);
+                        fullPath = newPath;
+                        console.log(`🔄 Creating new file: ${path_1.default.relative(process_1.default.cwd(), newPath)}`);
+                    }
+                    else {
+                        console.log(`♻️ Overwriting: ${file.target}`);
+                    }
+                }
+                fs_1.default.writeFileSync(fullPath, file.content.trim());
+                console.log(`✅ Created: ${path_1.default.relative(process_1.default.cwd(), fullPath)}`);
+            }
+            console.log(`🎉 Added: ${component.title}`);
+            console.log(`👤 Author: ${component.author}`);
         }
         else {
-            // Component name-based installation
-            await installComponentByName(args);
+            // 💥 Component names logic
+            const components = parseComponentsArg(inputArg);
+            if (!components.length) {
+                console.error('❌ No valid component names provided.');
+                process_1.default.exit(1);
+            }
+            const isTS = isTypeScriptProject();
+            const branchName = isTS ? 'typescript' : 'javascript';
+            // Load config
+            const configFile = path_1.default.resolve('aspect-ui.config.json');
+            if (!fs_1.default.existsSync(configFile)) {
+                console.error(`❌ Missing config file: aspect-ui.config.json`);
+                process_1.default.exit(1);
+            }
+            const config = JSON.parse(fs_1.default.readFileSync(configFile, 'utf-8'));
+            await copyComponentFromRepo(components, branchName, config);
         }
     }
     catch (err) {
