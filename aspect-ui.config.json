@@ -1,0 +1,384 @@
+{
+  "components": {
+    "accordion": {
+      "name": "Accordion",
+      "path": "./components/aspect-ui/Accordion",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "alert": {
+      "name": "Alert",
+      "path": "./components/aspect-ui/Alert",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "avatar": {
+      "name": "Avatar",
+      "path": "./components/aspect-ui/Avatar",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "back-to-top": {
+      "name": "BackToTop",
+      "path": "./components/aspect-ui/BackToTop",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "badge": {
+      "name": "Badge",
+      "path": "./components/aspect-ui/Badge",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "breadcrumb": {
+      "name": "Breadcrumb",
+      "path": "./components/aspect-ui/Breadcrumb",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "button": {
+      "name": "Button",
+      "path": "./components/aspect-ui/Button",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "card": {
+      "name": "Card",
+      "path": "./components/aspect-ui/Card",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "carousel": {
+      "name": "Carousel",
+      "path": "./components/aspect-ui/Carousel",
+      "dependencies": [
+        "embla-carousel-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "checkbox": {
+      "name": "Checkbox",
+      "path": "./components/aspect-ui/Checkbox",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "circular-progress-bar": {
+      "name": "CircularProgressBar",
+      "path": "./components/aspect-ui/CircularProgressBar",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "date-picker": {
+      "name": "DatePicker",
+      "path": "./components/aspect-ui/DatePicker",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "components": [
+        "dropdown",
+        "popover"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "divider": {
+      "name": "Divider",
+      "path": "./components/aspect-ui/Divider",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "dropdown": {
+      "name": "Dropdown",
+      "path": "./components/aspect-ui/Dropdown",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "input": {
+      "name": "Input",
+      "path": "./components/aspect-ui/Input",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "components": [
+        "tooltip"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "masonry": {
+      "name": "Masonry",
+      "path": "./components/aspect-ui/Masonry",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "modal": {
+      "name": "Modal",
+      "path": "./components/aspect-ui/Modal",
+      "dependencies": [
+        "framer-motion",
+        "react-focus-lock",
+        "react-remove-scroll"
+      ],
+      "utils": [
+        "cn",
+        "portal"
+      ]
+    },
+    "navbar": {
+      "name": "Navbar",
+      "path": "./components/aspect-ui/Navbar",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "number-counter": {
+      "name": "NumberCounter",
+      "path": "./components/aspect-ui/NumberCounter",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "pagination": {
+      "name": "Pagination",
+      "path": "./components/aspect-ui/Pagination",
+      "dependencies": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "popover": {
+      "name": "Popover",
+      "path": "./components/aspect-ui/Popover",
+      "dependencies": [
+        "@radix-ui/react-popover"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "progress-bar": {
+      "name": "ProgressBar",
+      "path": "./components/aspect-ui/ProgressBar",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "radio": {
+      "name": "Radio",
+      "path": "./components/aspect-ui/Radio",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "rating": {
+      "name": "Rating",
+      "path": "./components/aspect-ui/Rating",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "sidebar": {
+      "name": "Sidebar",
+      "path": "./components/aspect-ui/Sidebar",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "components": [
+        "button"
+      ],
+      "utils": [
+        "cn"
+      ]
+    },
+    "skeleton": {
+      "name": "Skeleton",
+      "path": "./components/aspect-ui/Skeleton",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "slider": {
+      "name": "Slider",
+      "path": "./components/aspect-ui/Slider",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "spinner": {
+      "name": "Spinner",
+      "path": "./components/aspect-ui/Spinner",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "stepper": {
+      "name": "Stepper",
+      "path": "./components/aspect-ui/Stepper",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "switch": {
+      "name": "Switch",
+      "path": "./components/aspect-ui/Switch",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "table": {
+      "name": "Table",
+      "path": "./components/aspect-ui/Table",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "tabs": {
+      "name": "Tabs",
+      "path": "./components/aspect-ui/Tabs",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "textarea": {
+      "name": "Textarea",
+      "path": "./components/aspect-ui/Textarea",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "timeline": {
+      "name": "Timeline",
+      "path": "./components/aspect-ui/Timeline",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "toast": {
+      "name": "Toast",
+      "path": "./components/aspect-ui/Toast",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "toggle-button": {
+      "name": "ToggleButton",
+      "path": "./components/aspect-ui/ToggleButton",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "tooltip": {
+      "name": "Tooltip",
+      "path": "./components/aspect-ui/Tooltip",
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "typography": {
+      "name": "Typography",
+      "path": "./components/aspect-ui/Typography",
+      "dependencies": [],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    },
+    "upload": {
+      "name": "Upload",
+      "path": "./components/aspect-ui/Upload",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "components": [],
+      "utils": [
+        "cn"
+      ]
+    }
+  }
+}
