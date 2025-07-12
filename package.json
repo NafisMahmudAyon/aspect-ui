@@ -196,7 +196,7 @@
     "watch": "npx tailwindcss -i ./app/src/input.css -o ./app/src/index.css",
     "watch:lib": "npx tailwindcss -c ./app/src/tailwind.config.ts -i ./app/src/input.css -o ./app/src/index.css",
     "build:lib:cjs": "tsc -p tsconfig.lib.json",
-    "build:cli": "tsc --project tsconfig.cli.json",
+    "build:cli": "tsc --project tsconfig.cli.json && npx cpx \"cli/add/aspect-ui.config.json\" dist/cli/add/",
     "build:lib:esm": "tsc -p tsconfig.lib.json --module esnext --declaration --outDir ./lib/esm",
     "lint": "eslint app --ext ts,tsx,js,jsx,cjs --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint app --ext js,jsx,ts,tsx,cjs --fix",
