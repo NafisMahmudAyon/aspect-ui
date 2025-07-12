@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-import path from 'path'
 import { execSync } from 'child_process'
+import fs from 'fs'
+import os from 'os'
+import path from 'path'
 import process from 'process'
 import readline from 'readline'
-import os from 'os'
-import { fetch } from 'undici'
 import simpleGit from 'simple-git'
+import { fetch } from 'undici'
 
 const repoUrl =
   'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git' // ← replace this
@@ -237,12 +237,7 @@ if (!inputArg) {
       const branchName = isTS ? 'typescript' : 'javascript'
 
       // Load config
-      const configFile = path.resolve('aspect-ui.config.json')
-      if (!fs.existsSync(configFile)) {
-        console.error(`❌ Missing config file: aspect-ui.config.json`)
-        process.exit(1)
-      }
-
+      const configFile = path.join(__dirname, '../config/aspect-ui.config.json')
       const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'))
 
       await copyComponentFromRepo(components, branchName, config)

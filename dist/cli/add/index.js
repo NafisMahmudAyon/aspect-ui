@@ -4,14 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
+const fs_1 = __importDefault(require("fs"));
+const os_1 = __importDefault(require("os"));
+const path_1 = __importDefault(require("path"));
 const process_1 = __importDefault(require("process"));
 const readline_1 = __importDefault(require("readline"));
-const os_1 = __importDefault(require("os"));
-const undici_1 = require("undici");
 const simple_git_1 = __importDefault(require("simple-git"));
+const undici_1 = require("undici");
 const repoUrl = 'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git'; // ← replace this
 function isTypeScriptProject() {
     return fs_1.default.existsSync(path_1.default.resolve('tsconfig.json'));
@@ -153,11 +153,7 @@ if (!inputArg) {
             const isTS = isTypeScriptProject();
             const branchName = isTS ? 'typescript' : 'javascript';
             // Load config
-            const configFile = path_1.default.resolve('aspect-ui.config.json');
-            if (!fs_1.default.existsSync(configFile)) {
-                console.error(`❌ Missing config file: aspect-ui.config.json`);
-                process_1.default.exit(1);
-            }
+            const configFile = path_1.default.join(__dirname, '../config/aspect-ui.config.json');
             const config = JSON.parse(fs_1.default.readFileSync(configFile, 'utf-8'));
             await copyComponentFromRepo(components, branchName, config);
         }

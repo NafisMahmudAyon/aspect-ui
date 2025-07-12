@@ -9,7 +9,7 @@
     "./app/src/css",
     "./dist/",
     ".cli/",
-    "aspect-ui.config.json"
+    "./config"
   ],
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
