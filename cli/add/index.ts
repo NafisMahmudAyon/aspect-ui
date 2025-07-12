@@ -10,7 +10,7 @@ import simpleGit from 'simple-git'
 import { fetch } from 'undici'
 
 const repoUrl =
-  'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git' // ← replace this
+  'https://github.com/NafisMahmudAyon/aspect-ui-components-folders.git'
 
 type ComponentFile = {
   path: string
@@ -95,9 +95,40 @@ function isUrl(str: string): boolean {
 
 function parseComponentsArg(arg: string): string[] {
   return arg
-    .split(/\s+/)
+    .split(/[\s,]+/)
     .map(name => name.trim())
     .filter(Boolean)
+}
+
+function detectMainCssFile(): string | null {
+  const nextPath = path.resolve('app/globals.css')
+  const vitePath = path.resolve('src/index.css')
+  if (fs.existsSync(nextPath)) return nextPath
+  if (fs.existsSync(vitePath)) return vitePath
+  return null
+}
+
+function ensureMainCssFile(): string {
+  let mainCss = detectMainCssFile()
+  if (mainCss) return mainCss
+
+  const nextAppDir = path.resolve('app')
+  const viteSrcDir = path.resolve('src')
+
+  if (fs.existsSync(nextAppDir)) {
+    const newPath = path.join(nextAppDir, 'globals.css')
+    fs.writeFileSync(newPath, '/* Main CSS file created */\n')
+    return newPath
+  } else if (fs.existsSync(viteSrcDir)) {
+    const newPath = path.join(viteSrcDir, 'index.css')
+    fs.writeFileSync(newPath, '/* Main CSS file created */\n')
+    return newPath
+  }
+
+  const fallbackPath = path.resolve('src/index.css')
+  fs.mkdirSync(path.dirname(fallbackPath), { recursive: true })
+  fs.writeFileSync(fallbackPath, '/* Main CSS file created */\n')
+  return fallbackPath
 }
 
 async function copyComponentFromRepo(
@@ -131,6 +162,7 @@ async function copyComponentFromRepo(
       'aspect-ui',
       path.basename(srcComponentPath)
     )
+
     if (fs.existsSync(destComponentPath)) {
       const answer = await promptUser(
         `⚠️ Component ${name} already exists. Override? (y/n): `
@@ -147,6 +179,23 @@ async function copyComponentFromRepo(
       `✅ Added: components/aspect-ui/${path.basename(srcComponentPath)}`
     )
 
+    // If there is a CSS file inside component folder, append to main CSS
+    const files = fs.readdirSync(destComponentPath)
+    for (const file of files) {
+      if (file.endsWith('.css')) {
+        const cssContent = fs.readFileSync(
+          path.join(destComponentPath, file),
+          'utf-8'
+        )
+        const mainCssFile = ensureMainCssFile()
+        const comment = `\n\n/* From: ${path.join('components/aspect-ui', path.basename(srcComponentPath), file)} */\n`
+        fs.appendFileSync(mainCssFile, comment + cssContent.trim())
+        console.log(
+          `🎨 Appended CSS to: ${path.relative(process.cwd(), mainCssFile)}`
+        )
+      }
+    }
+
     if (compConfig.dependencies && compConfig.dependencies.length) {
       allDependencies.push(...compConfig.dependencies)
     }
@@ -162,7 +211,7 @@ async function copyComponentFromRepo(
   }
 }
 
-const inputArg = process.argv[2]
+const inputArg = process.argv.slice(2).join(' ')
 if (!inputArg) {
   console.error(
     '❌ Please provide a URL or component names.\nExample: npx -p aspect-ui add <url|components>'
@@ -173,7 +222,6 @@ if (!inputArg) {
 ;(async () => {
   try {
     if (isUrl(inputArg)) {
-      // 🔥 URL logic
       const res = await fetch(inputArg)
       if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`)
       const json = (await res.json()) as ApiResponse
@@ -199,6 +247,18 @@ if (!inputArg) {
       for (const file of component.files) {
         let fullPath = path.resolve(file.target)
         const dir = path.dirname(fullPath)
+
+        const isCssFile = fullPath.endsWith('.css')
+
+        if (isCssFile) {
+          const mainCssFile = ensureMainCssFile()
+          const comment = `\n\n/* From: ${file.target} */\n`
+          fs.appendFileSync(mainCssFile, comment + file.content.trim())
+          console.log(
+            `🎨 Appended CSS to: ${path.relative(process.cwd(), mainCssFile)}`
+          )
+          continue
+        }
 
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir, { recursive: true })
@@ -226,7 +286,6 @@ if (!inputArg) {
       console.log(`🎉 Added: ${component.title}`)
       console.log(`👤 Author: ${component.author}`)
     } else {
-      // 💥 Component names logic
       const components = parseComponentsArg(inputArg)
       if (!components.length) {
         console.error('❌ No valid component names provided.')
@@ -236,7 +295,6 @@ if (!inputArg) {
       const isTS = isTypeScriptProject()
       const branchName = isTS ? 'typescript' : 'javascript'
 
-      // Load config
       const configFile = path.join(__dirname, 'aspect-ui.config.json')
       const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'))
 
