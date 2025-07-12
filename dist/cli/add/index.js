@@ -153,7 +153,7 @@ if (!inputArg) {
             const isTS = isTypeScriptProject();
             const branchName = isTS ? 'typescript' : 'javascript';
             // Load config
-            const configFile = path_1.default.join(__dirname, '../config/aspect-ui.config.json');
+            const configFile = path_1.default.join(__dirname, 'aspect-ui.config.json');
             const config = JSON.parse(fs_1.default.readFileSync(configFile, 'utf-8'));
             await copyComponentFromRepo(components, branchName, config);
         }

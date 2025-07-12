@@ -237,7 +237,7 @@ if (!inputArg) {
       const branchName = isTS ? 'typescript' : 'javascript'
 
       // Load config
-      const configFile = path.join(__dirname, '../config/aspect-ui.config.json')
+      const configFile = path.join(__dirname, 'aspect-ui.config.json')
       const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'))
 
       await copyComponentFromRepo(components, branchName, config)
