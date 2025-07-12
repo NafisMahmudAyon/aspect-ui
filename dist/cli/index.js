@@ -21,8 +21,8 @@ let targetComponentDir = path_1.default.join(projectRoot, 'components/aspect-ui'
 let targetUtilsDir = path_1.default.join(projectRoot, 'components/utils');
 // let targetCSSDir = path.join(projectRoot, 'components/aspect-ui')
 if (isVite) {
-    targetComponentDir = path_1.default.join(projectRoot, 'src/components/aspect-ui');
-    targetUtilsDir = path_1.default.join(projectRoot, 'src/components/utils');
+    targetComponentDir = path_1.default.join(projectRoot, 'components/aspect-ui');
+    targetUtilsDir = path_1.default.join(projectRoot, 'components/utils');
     // targetCSSDir = path.join(projectRoot, 'src/components/aspect-ui')
 }
 // GitHub repo and branch
