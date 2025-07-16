@@ -66,36 +66,75 @@ export default DefaultCheckbox
   `
 }
 
-export const alertPropsData = [
+export const checkboxPropsData = [
   {
-    prop: 'type',
-    type: `'success' | 'warning' | 'error' | 'info'`,
+    prop: 'label',
+    type: 'string',
     default: '-',
     description:
-      'Specifies the type of alert to display, which determines the style and icon.'
+      'The label of the checkbox.'
   },
   {
-    prop: 'children',
-    type: 'ReactNode',
-    default: '-',
-    description: 'The content displayed inside the alert.'
-  },
-  {
-    prop: 'closeable',
+    prop: 'checked',
     type: 'boolean',
-    default: 'true',
-    description: 'Determines whether the alert can be dismissed.'
+    default: '-',
+    description:
+      'The checked state of the checkbox.'
   },
   {
-    prop: 'onClose',
+    prop: 'onChange',
     type: '() => void',
     default: '-',
-    description: 'Callback function invoked when the alert is closed.'
+    description:
+      'The onChange event of the checkbox.'
+  },
+  {
+    prop: 'disabled',
+    type: 'boolean',
+    default: '-',
+    description:
+      'The disabled state of the checkbox.'
   },
   {
     prop: 'className',
     type: 'string',
-    default: `''`,
-    description: 'Additional CSS classes for the alert container.'
+    default: '-',
+    description:
+      'The className of the checkbox.'
+  },
+  {
+    prop: 'size',
+    type: `'sm' | 'md' | 'lg'`,
+    default: 'md',
+    description:
+      'The size of the checkbox.'
+  },
+  {
+    prop: 'variant',
+    type: `'default' | 'rounded'`,
+    default: 'default',
+    description:
+      'The variant of the checkbox.'
+  },
+  {
+    prop: 'checkedIcon',
+    type: 'React.ReactNode',
+    default: '-',
+    description:
+      'The checked icon of the checkbox.'
+  },
+  {
+    prop: 'checkboxClassName',
+    type: 'string',
+    default: '-',
+    description:
+      'The className of the checkbox.'
+  },
+  {
+    prop: 'labelClassName',
+    type: 'string',
+    default: '-',
+    description:
+      'The className of the label.'
   }
 ]

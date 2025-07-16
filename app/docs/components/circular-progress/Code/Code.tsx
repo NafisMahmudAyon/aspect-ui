@@ -1,135 +1,108 @@
-export const defaultAvatar = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
+export const defaultCircularProgressBar = {
+  'CircularProgressBarComponent.tsx': `import { CircularProgressBar } from '@/components/aspect-ui/CircularProgressBar'
 
-const DefaultAvatar = () => {
+const DefaultCircularProgressBar = () => {
   return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
+    <CircularProgressBar value={78} />
   )
 }
 
-export default DefaultAvatar
+export default DefaultCircularProgressBar
   `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
+  'CircularProgressBarComponent.jsx': `import { CircularProgressBar } from '@/components/aspect-ui/CircularProgressBar'
 
-const DefaultAvatar = () => {
+const DefaultCircularProgressBar = () => {
   return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
+    <CircularProgressBar value={78} />
   )
 }
 
-export default DefaultAvatar
+export default DefaultCircularProgressBar
   `
 }
 
-export const avatarGroup = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
+export const OnVisibleCircularProgressBar = {
+  'CircularProgressBarComponent.tsx': `import { CircularProgressBar } from '@/components/aspect-ui/CircularProgressBar'
 
-const DefaultAvatar = () => {
+const OnVisibleCircularProgressBar = () => {
   return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
+    <CircularProgressBar value={78} onVisible />
   )
 }
 
-export default DefaultAvatar
+export default OnVisibleCircularProgressBar
   `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
+  'CircularProgressBarComponent.jsx': `import { CircularProgressBar } from '@/components/aspect-ui/CircularProgressBar'
 
-const DefaultAvatar = () => {
+const OnVisibleCircularProgressBar = () => {
   return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
+    <CircularProgressBar value={78} onVisible />
   )
 }
 
-export default DefaultAvatar
+export default OnVisibleCircularProgressBar
   `
 }
 
-export const alertPropsData = [
+export const circularProgressBarPropsData = [
   {
-    prop: 'type',
-    type: `'success' | 'warning' | 'error' | 'info'`,
-    default: '-',
-    description:
-      'Specifies the type of alert to display, which determines the style and icon.'
-  },
-  {
-    prop: 'children',
-    type: 'ReactNode',
-    default: '-',
-    description: 'The content displayed inside the alert.'
-  },
-  {
-    prop: 'closeable',
-    type: 'boolean',
-    default: 'true',
-    description: 'Determines whether the alert can be dismissed.'
-  },
-  {
-    prop: 'onClose',
-    type: '() => void',
-    default: '-',
-    description: 'Callback function invoked when the alert is closed.'
+    prop: 'value',
+    type: 'number',
+    default: '75',
+    description: 'The value of the progress bar.'
   },
   {
     prop: 'className',
     type: 'string',
-    default: `''`,
-    description: 'Additional CSS classes for the alert container.'
+    default: '-',
+    description: 'Additional CSS classes for the component.'
+  },
+  {
+    prop: 'onVisible',
+    type: 'boolean',
+    default: 'false',
+    description: 'Determines whether the progress bar is visible.'
+  },
+  {
+    prop: 'duration',
+    type: 'number',
+    default: '2',
+    description: 'Duration of the progress animation in seconds.'
+  },
+  {
+    prop: 'strokeColor',
+    type: 'string',
+    default: '#CCCCCC',
+    description: 'Color of the background circle.'
+  },
+  {
+    prop: 'strokeFillColor',
+    type: 'string',
+    default: '#333333',
+    description: 'Color of the progress arc.'
+  },
+  {
+    prop: 'strokeWidth',
+    type: 'number',
+    default: '2',
+    description: 'Width of the circle stroke.'
+  },
+  {
+    prop: 'contentClassName',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS classes for the content container.'
+  },
+  {
+    prop: 'hideValue',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether to hide the percentage value.'
+  },
+  {
+    prop: 'children',
+    type: 'React.ReactNode',
+    default: '',
+    description: 'Custom content to display inside the circle.'
   }
 ]

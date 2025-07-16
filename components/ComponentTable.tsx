@@ -13,7 +13,7 @@ const ComponentTable = ({ data }: {
       // if (i === 0) return line
       if (line.includes('\'')) {
         return (
-          <span key={i} className="code group-hover:dark:!bg-primary-100 group-hover:!bg-primary-800 group-hover:dark:!text-primary-800 group-hover:!text-primary-100 transition-colors duration-50">{line}</span>
+          <span key={i} className="code group-hover:dark:!bg-primary-100 group-hover:!bg-primary-800 group-hover:dark:!text-primary-800 group-hover:!text-primary-100 transition-colors duration-50">{line.replaceAll('\'', '')}</span>
         )
       }
       return line
@@ -21,23 +21,23 @@ const ComponentTable = ({ data }: {
     return code
   }
   return (
-    <div className='my-4'>
-      <Table className="w-full text-sm text-left border border-border rounded-lg">
-        <TableHeader className="bg-muted">
-          <TableRow className="border-b border-border">
-            <TableHeadCell className="px-4 py-2 font-semibold">Prop</TableHeadCell>
-            <TableHeadCell className="px-4 py-2 font-semibold">Type</TableHeadCell>
-            <TableHeadCell className="px-4 py-2 font-semibold">Default</TableHeadCell>
-            <TableHeadCell className="px-4 py-2 font-semibold">Description</TableHeadCell>
+    <div className='my-4 overflow-auto'>
+      <Table className="">
+        <TableHeader className="">
+          <TableRow className="">
+            <TableHeadCell className="font-semibold">Prop</TableHeadCell>
+            <TableHeadCell className="font-semibold">Type</TableHeadCell>
+            <TableHeadCell className="font-semibold">Default</TableHeadCell>
+            <TableHeadCell className="font-semibold">Description</TableHeadCell>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data && data.map((item, i) => (
-            <TableRow key={i} className="border-b border-border group transition-colors duration-50 ">
-              <TableCell className="px-4 py-2 whitespace-nowrap">{item.prop}</TableCell>
-              <TableCell className="px-4 py-2 max-w-[240px] flex gap-1 flex-wrap">{codeText(item.type)}</TableCell>
-              <TableCell className="px-4 py-2 whitespace-nowrap">{item.default}</TableCell>
-              <TableCell className="px-4 py-2">{item.description}</TableCell>
+            <TableRow key={i} className="">
+              <TableCell className="whitespace-nowrap">{item.prop}</TableCell>
+              <TableCell className="max-w-[240px] flex gap-1 flex-wrap">{codeText(item.type)}</TableCell>
+              <TableCell className="whitespace-nowrap">{item.default}</TableCell>
+              <TableCell className="">{item.description}</TableCell>
             </TableRow>
           ))}
         </TableBody>

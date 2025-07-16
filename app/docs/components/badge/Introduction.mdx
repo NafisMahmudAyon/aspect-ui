@@ -1,0 +1,47 @@
+import CodeSnippets from '@/components/CodeSnippets'
+import ComponentTable from '@/components/ComponentTable'
+import { defaultBadge, outlineBadge, ghostBadge, badgePropsData } from './Code/Code.tsx'
+
+## Table of Contents
+
+## Default Badge
+
+---
+
+<CodeSnippets
+  styles='mt-4'
+  content={defaultBadge}
+  lang='javascript'
+  height={200}
+  url='/examples/components/badge/default-badge'
+/>
+
+## Outline Badge
+
+---
+
+<CodeSnippets
+  styles='mt-4'
+  content={outlineBadge}
+  lang='javascript'
+  height={200}
+  url='/examples/components/badge/outline-badge'
+/>
+
+## Ghost Badge
+
+---
+
+<CodeSnippets
+  styles='mt-4'
+  content={ghostBadge}
+  lang='javascript'
+  height={200}
+  url='/examples/components/badge/ghost-badge'
+/>
+
+## Badge Props
+
+---
+
+<ComponentTable data={badgePropsData} />

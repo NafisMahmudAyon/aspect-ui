@@ -2,7 +2,7 @@ import CodeSnippets from '@/components/CodeSnippets'
 import EditPage from '@/components/EditPage'
 import ComingSoon from '@/components/ComingSoon'
 import ComponentTable from '@/components/ComponentTable'
-import {defaultCheckbox, checkboxWithLabel, disabledCheckbox} from './Code/Code.tsx'
+import {defaultCheckbox, checkboxWithLabel, disabledCheckbox, checkboxPropsData} from './Code/Code.tsx'
 
 ## Table of Contents
 
@@ -27,7 +27,12 @@ import {defaultCheckbox, checkboxWithLabel, disabledCheckbox} from './Code/Code.
 <CodeSnippets styles="mt-4" content={disabledCheckbox} lang="javascript" url="/examples/components/checkbox/disabled-checkbox" height="200px">
 </CodeSnippets>
 
-<ComingSoon/>
+## Checkbox Props
+
+---
+
+<ComponentTable data={checkboxPropsData} />
+
 
 
 

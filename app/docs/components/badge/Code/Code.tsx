@@ -1,3 +1,90 @@
+export const defaultBadge = {
+  'BadgeExample.tsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const BadgeExample = () => {
+  return (
+    <Badge>Badge</Badge>
+  )
+}
+
+export default BadgeExample
+  `,
+  'BadgeExample.jsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const BadgeExample = () => {
+  return (
+    <Badge>Badge</Badge>
+  )
+}
+
+export default BadgeExample
+  `
+}
+export const outlineBadge = {
+  'OutlineBadgeExample.tsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const OutlineBadgeExample = () => {
+  return (
+    <Badge variant='outline'>Badge</Badge>
+  )
+}
+
+export default OutlineBadgeExample
+  `,
+  'OutlineBadgeExample.jsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const OutlineBadgeExample = () => {
+  return (
+    <Badge variant='outline'>Outline</Badge>
+  )
+}
+
+export default OutlineBadgeExample
+  `
+}
+export const ghostBadge = {
+  'GhostBadgeExample.tsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const GhostBadgeExample = () => {
+  return (
+    <Badge variant='ghost'>Badge</Badge>
+  )
+}
+
+export default GhostBadgeExample
+  `,
+  'GhostBadgeExample.jsx': `import { Badge } from '@/components/aspect-ui/Badge'
+
+const GhostBadgeExample = () => {
+  return (
+    <Badge variant='ghost'>Badge</Badge>
+  )
+}
+
+export default GhostBadgeExample
+  `
+}
+
+export const badgePropsData = [
+  {
+    prop: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Custom content for the button.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes for the button.'
+  },
+  {
+    prop: 'variant',
+    type: `'default' | 'outline' | 'ghost'`,
+    default: 'default',
+    description: 'The variant of the badge.'
+  }
+]
 export const defaultAvatar = {
   'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
 
@@ -100,45 +187,36 @@ export default DefaultAvatar
   `
 }
 
-export const dividerPropsData = [
+export const alertPropsData = [
   {
-    prop: 'orientation',
-    type: `'horizontal' | 'vertical'`,
-    default: 'horizontal',
+    prop: 'type',
+    type: `'success' | 'warning' | 'error' | 'info'`,
+    default: '-',
     description:
-      'The orientation of the divider.'
-  },
-  {
-    prop: 'size',
-    type: `'sm' | 'md' | 'lg' | 'xl' | '2xl'`,
-    default: 'md',
-    description:
-      'The size of the divider.'
-  },
-  {
-    prop: 'variant',
-    type: `'start' | 'center' | 'end' | 'full'`,
-    default: 'full',
-    description:
-      'The variant of the divider.'
-  },
-  {
-    prop: 'borderStyle',
-    type: `'solid' | 'dashed' | 'dotted' | 'double'`,
-    default: 'solid',
-    description:
-      'The border style of the divider.'
-  },
-  {
-    prop: 'className',
-    type: 'string',
-    default: `-`,
-    description: 'Additional CSS classes for the component.'
+      'Specifies the type of alert to display, which determines the style and icon.'
   },
   {
     prop: 'children',
     type: 'ReactNode',
-    default: `-`,
-    description: 'The content of the divider.'
+    default: '-',
+    description: 'The content displayed inside the alert.'
+  },
+  {
+    prop: 'closeable',
+    type: 'boolean',
+    default: 'true',
+    description: 'Determines whether the alert can be dismissed.'
+  },
+  {
+    prop: 'onClose',
+    type: '() => void',
+    default: '-',
+    description: 'Callback function invoked when the alert is closed.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the alert container.'
   }
 ]

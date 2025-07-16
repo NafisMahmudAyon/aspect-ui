@@ -67,7 +67,7 @@ const Hero = () => {
                 Get Started
               </Link>
 
-              <div className="rounded-lg font-medium text-base border border-primary bg-bg-light text-text px-6 py-3 inline-flex items-center gap-2 backdrop-blur-xs t-shadow" onClick={() => {
+              <div className="rounded-lg font-medium text-base border border-primary bg-bg-light text-text px-6 py-3 inline-flex items-center gap-2 backdrop-blur-xs t-shadow select-all" onClick={() => {
                 navigator.clipboard.writeText('npx aspect-ui@latest init');
                 handleClick('success', 'Copied to clipboard')
               }}>

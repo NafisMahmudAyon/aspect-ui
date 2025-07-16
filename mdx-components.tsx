@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
+import { Divider } from './app/src'
 
 export const useMDXComponents: (components: MDXComponents) => MDXComponents = (components) => {
   return {
@@ -27,6 +28,9 @@ export const useMDXComponents: (components: MDXComponents) => MDXComponents = (c
           #
         </a>
       </h3>
+    ),
+    h4: () => (
+      <hr className='border-border border-t-[2px] w-full border-solid' />
     ),
     table: (props) => (
       <table className="w-full text-sm text-left border border-border mt-4" {...props} />

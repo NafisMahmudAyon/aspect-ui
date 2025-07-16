@@ -34,6 +34,12 @@ export const Divider: React.FC<DividerProps> = ({
     xl: 'border-l-[4px]',
     '2xl': 'border-l-[6px]'
   }
+  const borderStyleClassName = {
+    solid: 'border-solid',
+    dashed: 'border-dashed',
+    dotted: 'border-dotted',
+    double: 'border-double'
+  }
 
   const baseStyles = `border-border ${orientation === 'horizontal' ? horizontalSizeStyles[size] : verticalSizeStyles[size]}`
 
@@ -46,15 +52,13 @@ export const Divider: React.FC<DividerProps> = ({
     full: ''
   }
 
-  const borderStyleClass = `border-${borderStyle}`
-
   if (!children || variant === 'full') {
     return (
       <div
         className={cn(
           baseStyles,
           orientationStyles,
-          borderStyleClass,
+          borderStyleClassName[borderStyle],
           className
         )}
       ></div>
@@ -68,7 +72,7 @@ export const Divider: React.FC<DividerProps> = ({
           className={cn(
             'mr-4 flex-1',
             baseStyles,
-            borderStyleClass,
+            borderStyleClassName[borderStyle],
             orientationStyles,
             className
           )}
@@ -80,7 +84,7 @@ export const Divider: React.FC<DividerProps> = ({
           className={cn(
             'ml-4 flex-1',
             baseStyles,
-            borderStyleClass,
+            borderStyleClassName[borderStyle],
             orientationStyles,
             className
           )}

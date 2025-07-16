@@ -49,6 +49,14 @@ export const routes: routerPath[] = [
   },
   {
     id: generatedID(),
+    name: 'Badge',
+    href: '/docs/components/badge',
+    tag: false,
+    deprecate: false,
+    folderName: 'Badge'
+  },
+  {
+    id: generatedID(),
     name: 'Breadcrumb',
     href: '/docs/components/breadcrumb',
     tag: false,

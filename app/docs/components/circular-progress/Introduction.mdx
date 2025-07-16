@@ -2,13 +2,40 @@ import CodeSnippets from '@/components/CodeSnippets'
 import EditPage from '@/components/EditPage'
 import ComingSoon from '@/components/ComingSoon'
 import ComponentTable from '@/components/ComponentTable'
-import {defaultAvatar,avatarGroup, alertPropsData} from './Code/Code.tsx'
+import {
+  defaultCircularProgressBar,
+  OnVisibleCircularProgressBar,
+  circularProgressBarPropsData
+} from './Code/Code.tsx'
 
 ## Table of Contents
 
+## Default Circular Progress
 
-<ComingSoon/>
+---
 
+<CodeSnippets
+  styles='mt-4'
+  content={defaultCircularProgressBar}
+  lang='javascript'
+  height={200}
+  url='/examples/components/circular-progress/default-circular-progress'
+></CodeSnippets>
 
+## Animated on Visibility
 
+---
 
+<CodeSnippets
+  styles='mt-4'
+  content={OnVisibleCircularProgressBar}
+  lang='javascript'
+  height={200}
+  url='/examples/components/circular-progress/on-visible-circular-progress'
+></CodeSnippets>
+
+## Circular Progress Props
+
+---
+
+<ComponentTable data={circularProgressBarPropsData} />

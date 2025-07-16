@@ -1,135 +1,75 @@
-export const defaultAvatar = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
-  return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
-  )
-}
-
-export default DefaultAvatar
+export const defaultDatePicker = {
+  'DatePickerComponent.tsx': `'use client'
+  import { DatePicker } from '@/components/aspect-ui/DatePicker'
+  
+  const DefaultDatePicker = () => {
+    return (
+      <DatePicker onChange={(dates: Date[]) => console.log(dates)} />
+    )
+  }
+  
+  export default DefaultDatePicker
   `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
-  return (
-    <Avatar className='border'>
-      <AvatarImage
-        src={avatarData.avatar}
-        altText={"..."}
-      />
-      <AvatarBadge status='success' iconEnabled />
-    </Avatar>
-  )
-}
-
-export default DefaultAvatar
+  'DatePickerComponent.jsx': `'use client'
+  import { DatePicker } from '@/components/aspect-ui/DatePicker'
+  
+  const DefaultDatePicker = () => {
+    return (
+      <DatePicker onChange={(dates) => console.log(dates)} />
+    )
+  }
+  
+  export default DefaultDatePicker
   `
 }
 
-export const avatarGroup = {
-  'AvatarComponent.tsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
-  return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
-  )
-}
-
-export default DefaultAvatar
-  `,
-  'AvatarComponent.jsx': `import { Avatar, AvatarBadge, AvatarGroup, AvatarImage } from '@/components/aspect-ui/Avatar'
-
-const DefaultAvatar = () => {
-  return (
-    <AvatarGroup>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-      <Avatar className='border'>
-        <AvatarImage
-          src="..."
-          altText="..."
-        />
-        <AvatarBadge status='success' iconEnabled />
-      </Avatar>
-    </AvatarGroup>
-  )
-}
-
-export default DefaultAvatar
-  `
-}
-
-export const alertPropsData = [
+export const datePickerPropsData = [
   {
-    prop: 'type',
-    type: `'success' | 'warning' | 'error' | 'info'`,
-    default: '-',
-    description:
-      'Specifies the type of alert to display, which determines the style and icon.'
+    prop: 'onChange',
+    type: '(dates: Date[]) => void',
+    default: '',
+    description: 'Function called when date selection changes',
   },
   {
-    prop: 'children',
-    type: 'ReactNode',
-    default: '-',
-    description: 'The content displayed inside the alert.'
+    prop: 'initialDates',
+    type: 'Date[]',
+    default: '[]',
+    description: 'Array of pre-selected dates',
   },
   {
-    prop: 'closeable',
+    prop: 'isRange',
     type: 'boolean',
-    default: 'true',
-    description: 'Determines whether the alert can be dismissed.'
+    default: 'false',
+    description: 'Enable date range selection mode',
   },
   {
-    prop: 'onClose',
-    type: '() => void',
-    default: '-',
-    description: 'Callback function invoked when the alert is closed.'
+    prop: 'shape',
+    type: "'rounded-sm' | 'square' | 'circle'",
+    default: "'circle'",
+    description: 'Shape of date cells in the calendar',
+  },
+  {
+    prop: 'placeholder',
+    type: 'string',
+    default: "'Select your date'",
+    description: 'Placeholder text when no date is selected',
   },
   {
     prop: 'className',
     type: 'string',
-    default: `''`,
-    description: 'Additional CSS classes for the alert container.'
-  }
+    default: "-",
+    description: 'Additional CSS classes for the component',
+  },
+  {
+    prop: 'show',
+    type: 'boolean',
+    default: 'false',
+    description: 'Show the date picker',
+  },
+  {
+    prop: 'calendarContainerClassName',
+    type: 'string',
+    default: "-",
+    description: 'Additional CSS classes for the calendar container',
+  },
 ]

@@ -109,6 +109,12 @@
 #mainContent > #table-of-contents + ul {
   display: none;
 }
+#mainContent > hr {
+  border-top-color: var(--color-border);
+  border-top-width: 2px;
+  border-top-style: solid;
+  margin-top: 0.5rem;
+}
 
 #visible-table-of-contents li:has(.active-link) {
   @apply border-l-primary-foreground text-primary-foreground;
@@ -140,6 +146,7 @@
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   display: inline-block;
+  user-select: all;
 }
 .button {
   font-size: 3rem;

@@ -27,7 +27,13 @@ import AutoplayCarousel from "@/app/examples/data/components/Carousel/AutoPlayCa
 import DefaultCheckbox from "@/app/examples/data/components/Checkbox/DefaultCheckbox";
 import CheckboxWithLabel from "@/app/examples/data/components/Checkbox/CheckboxWithLabel";
 import DisabledCheckbox from "@/app/examples/data/components/Checkbox/DisabledCheckbox";
-
+import DefaultBadge from "@/app/examples/data/components/Badge/DefaultBadge";
+import OutlineBadge from "@/app/examples/data/components/Badge/OutlineBadge";
+import GhostBadge from "@/app/examples/data/components/Badge/GhostBadge";
+import DefaultCircularProgressBar from "@/app/examples/data/components/CircularProgressBar/DefaultCircularProgressBar";
+import OnVisibleCircularProgressBar from "@/app/examples/data/components/CircularProgressBar/OnVissibleCircularProgress";
+import DefaultDatePicker from "@/app/examples/data/components/DatePicker/DefaultDatePicker";
+import DefaultDivider from "@/app/examples/data/components/Divider/DefaultDivider";
 type ComponentCategory =
   | 'button'
   | 'card'
@@ -36,8 +42,12 @@ type ComponentCategory =
   | 'alert'
   | 'accordion'
   | 'breadcrumb'
+  | 'badge'
   | 'back-to-top'
   | 'checkbox'
+  | 'circular-progress'
+  | 'date-picker'
+  | 'divider'
 type ExampleKey = string
 
 export type ExampleComponentMap = {
@@ -64,6 +74,11 @@ const exampleComponentMap: ExampleComponentMap = {
   },
   'back-to-top': {
     'default-back-to-top': DefaultBackToTopExample
+  },
+  'badge': {
+    'default-badge': DefaultBadge,
+    'outline-badge': OutlineBadge,
+    'ghost-badge': GhostBadge
   },
   'breadcrumb': {
     'default-breadcrumb': DefaultBreadcrumb,
@@ -92,6 +107,16 @@ const exampleComponentMap: ExampleComponentMap = {
     'default-checkbox': DefaultCheckbox,
     'checkbox-with-label': CheckboxWithLabel,
     'disabled-checkbox': DisabledCheckbox
+  },
+  'circular-progress': {
+    'default-circular-progress': DefaultCircularProgressBar,
+    'on-visible-circular-progress': OnVisibleCircularProgressBar
+  },
+  'date-picker': {
+    'default-date-picker': DefaultDatePicker
+  },
+  'divider': {
+    'default-divider': DefaultDivider
   }
 }
 
