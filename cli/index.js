@@ -151,7 +151,6 @@ class AspectUI {
           libDir: this.libDir,
           projectLanguage: language
         })
-        spinner.stop()
       }
 
       const { resolvedComponents, resolvedUtils } =
@@ -335,12 +334,15 @@ class AspectUI {
       await Promise.all(utilPromises)
 
       if (depsSet.size > 0) {
+        spinner.text = 'Installing dependencies...'
         await this.installComponentDependencies(Array.from(depsSet))
-        spinner.succeed('Dependencies installed.')
+        spinner.succeed('Utils and dependencies installed successfully.')
+      } else {
+        spinner.succeed('Utils added successfully.')
       }
     } catch (error) {
       spinner.fail('Failed to add utils.')
-      this.handleError(error)
+      throw error // Re-throw to be handled by parent
     }
   }
 
@@ -503,6 +505,8 @@ class AspectUI {
   async installComponentDependencies(deps) {
     if (!deps.length) return
 
+    console.log(chalk.blue(`📦 Installing dependencies: ${deps.join(', ')}`))
+
     const packageManager = await this.detectPackageManager()
 
     const commands = {
@@ -520,20 +524,40 @@ class AspectUI {
     const [primaryCmd, fallbackCmd] = commands[packageManager]
 
     try {
-      execSync(primaryCmd, { stdio: 'inherit' })
+      execSync(primaryCmd, { stdio: 'pipe' })
+      console.log(chalk.green(`✅ Dependencies installed successfully`))
     } catch (err) {
       console.log(
         chalk.yellow(
-          `⚠️  Dependency conflict detected. Retrying with ${packageManager} compatibility flags...`
+          `⚠️  Primary installation failed. Trying with compatibility flags...`
         )
       )
       try {
-        execSync(fallbackCmd, { stdio: 'inherit' })
+        execSync(fallbackCmd, { stdio: 'pipe' })
+        console.log(
+          chalk.green(`✅ Dependencies installed with compatibility flags`)
+        )
       } catch (secondErr) {
+        console.log(
+          chalk.red(`❌ Failed to install dependencies with both methods`)
+        )
+        console.log(chalk.yellow(`\n💡 Manual fix suggestions:`))
+        console.log(
+          chalk.white(
+            `   1. Update React to latest: npm install react@^18.3.1 react-dom@^18.3.1`
+          )
+        )
+        console.log(
+          chalk.white(`   2. Or use legacy peer deps: ${fallbackCmd}`)
+        )
+        console.log(
+          chalk.white(
+            `   3. Or clean install: rm -rf node_modules package-lock.json && npm install`
+          )
+        )
+
         throw new AspectUICliError(
-          `Failed to install dependencies. Please try:\n` +
-            `1. Update React: npm install react@^18.3.1 react-dom@^18.3.1\n` +
-            `2. Or run: ${fallbackCmd}`
+          `Failed to install dependencies: ${deps.join(', ')}`
         )
       }
     }
@@ -581,7 +605,13 @@ class AspectUI {
   }
 
   handleError(error) {
-    console.error(chalk.red(`❌ ${error.message || error}`))
+    if (error instanceof AspectUICliError) {
+      console.error(chalk.red(`❌ ${error.message}`))
+    } else {
+      console.error(
+        chalk.red(`❌ An unexpected error occurred: ${error.message || error}`)
+      )
+    }
     process.exit(1)
   }
 }
@@ -734,7 +764,7 @@ export const utils = {
   portal: {
     name: 'Portal',
     path: 'utils',
-    dependencies: ['react-dom'],
+    dependencies: [],
     files: {
       javascript: ['Portal.jsx'],
       typescript: ['Portal.tsx']
