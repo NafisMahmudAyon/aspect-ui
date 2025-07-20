@@ -31,7 +31,6 @@ class AspectUI {
       .command('init')
       .description('Initialize Aspect UI')
       .option('-u, --url <url>', 'Set custom registry URL', this.baseUrl)
-      .option('-l, --language <language>', 'Project language')
       .action(async options => {
         await this.initProject(options)
       })
