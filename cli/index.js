@@ -86,6 +86,7 @@ class AspectUI {
 
       spinner.text = 'Initializing Aspect UI....'
       const language = await this.determineLanguage(options.language)
+      console.log(language)
 
       await Promise.all([
         this.saveConfig({
