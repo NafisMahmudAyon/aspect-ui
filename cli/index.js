@@ -189,7 +189,7 @@ class AspectUI {
     // Try to detect project language, fallback to typescript
     try {
       const isTS = await this.isTypescriptProject()
-      return isTS ? 'typescript' : 'typescript' // fallback to typescript even if not detected
+      return isTS ? 'typescript' : 'javascript' // fallback to typescript even if not detected
     } catch {
       return 'typescript' // fallback to typescript on any error
     }
