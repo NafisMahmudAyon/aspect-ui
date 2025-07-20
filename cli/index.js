@@ -66,20 +66,6 @@ class AspectUI {
     await run.parseAsync(process.argv)
   }
 
-  async detectPackageManager() {
-    try {
-      await fs.access('pnpm-lock.yaml')
-      return 'pnpm'
-    } catch {}
-
-    try {
-      await fs.access('yarn.lock')
-      return 'yarn'
-    } catch {}
-
-    return 'npm'
-  }
-
   async initProject(options) {
     const spinner = ora('Initializing Aspect UI...').start()
 
@@ -141,6 +127,7 @@ class AspectUI {
     try {
       const language = await this.determineLanguage(options.language)
       const isTS = language === 'typescript'
+      console.log(isTS)
 
       const configExists = await this.fileExists(this.configFile)
       if (!configExists) {
@@ -151,6 +138,7 @@ class AspectUI {
           libDir: this.libDir,
           projectLanguage: language
         })
+        spinner.stop()
       }
 
       const { resolvedComponents, resolvedUtils } =
@@ -260,6 +248,7 @@ class AspectUI {
       async compName => {
         const comp = componentList[compName]
         const files = isTS ? comp.files.typescript : comp.files.javascript
+        console.log(files)
         const compDir = path.join('components/aspect-ui', comp.path)
 
         await this.ensureDirectory(compDir)
@@ -334,15 +323,12 @@ class AspectUI {
       await Promise.all(utilPromises)
 
       if (depsSet.size > 0) {
-        spinner.text = 'Installing dependencies...'
         await this.installComponentDependencies(Array.from(depsSet))
-        spinner.succeed('Utils and dependencies installed successfully.')
-      } else {
-        spinner.succeed('Utils added successfully.')
+        spinner.succeed('Dependencies installed.')
       }
     } catch (error) {
       spinner.fail('Failed to add utils.')
-      throw error // Re-throw to be handled by parent
+      this.handleError(error)
     }
   }
 
@@ -441,16 +427,7 @@ class AspectUI {
         'Run inside a Node.js project (missing package.json).'
       )
     }
-
-    const packageManager = await this.detectPackageManager()
-    const command =
-      packageManager === 'yarn'
-        ? 'yarn add clsx tailwind-merge'
-        : packageManager === 'pnpm'
-          ? 'pnpm add clsx tailwind-merge'
-          : 'npm install clsx tailwind-merge'
-
-    execSync(command, { stdio: 'pipe' })
+    execSync('npm install clsx tailwind-merge', { stdio: 'pipe' })
   }
 
   async getRegistryUrl(url) {
@@ -504,62 +481,10 @@ class AspectUI {
 
   async installComponentDependencies(deps) {
     if (!deps.length) return
-
-    console.log(chalk.blue(`📦 Installing dependencies: ${deps.join(', ')}`))
-
-    const packageManager = await this.detectPackageManager()
-
-    const commands = {
-      npm: [
-        `npm install ${deps.join(' ')}`,
-        `npm install ${deps.join(' ')} --legacy-peer-deps`
-      ],
-      yarn: [
-        `yarn add ${deps.join(' ')}`,
-        `yarn add ${deps.join(' ')} --ignore-engines`
-      ],
-      pnpm: [`pnpm add ${deps.join(' ')}`, `pnpm add ${deps.join(' ')} --force`]
-    }
-
-    const [primaryCmd, fallbackCmd] = commands[packageManager]
-
     try {
-      execSync(primaryCmd, { stdio: 'pipe' })
-      console.log(chalk.green(`✅ Dependencies installed successfully`))
+      execSync(`npm install ${deps.join(' ')}`, { stdio: 'inherit' })
     } catch (err) {
-      console.log(
-        chalk.yellow(
-          `⚠️  Primary installation failed. Trying with compatibility flags...`
-        )
-      )
-      try {
-        execSync(fallbackCmd, { stdio: 'pipe' })
-        console.log(
-          chalk.green(`✅ Dependencies installed with compatibility flags`)
-        )
-      } catch (secondErr) {
-        console.log(
-          chalk.red(`❌ Failed to install dependencies with both methods`)
-        )
-        console.log(chalk.yellow(`\n💡 Manual fix suggestions:`))
-        console.log(
-          chalk.white(
-            `   1. Update React to latest: npm install react@^18.3.1 react-dom@^18.3.1`
-          )
-        )
-        console.log(
-          chalk.white(`   2. Or use legacy peer deps: ${fallbackCmd}`)
-        )
-        console.log(
-          chalk.white(
-            `   3. Or clean install: rm -rf node_modules package-lock.json && npm install`
-          )
-        )
-
-        throw new AspectUICliError(
-          `Failed to install dependencies: ${deps.join(', ')}`
-        )
-      }
+      throw new AspectUICliError('Failed to install component dependencies.')
     }
   }
 
@@ -605,13 +530,7 @@ class AspectUI {
   }
 
   handleError(error) {
-    if (error instanceof AspectUICliError) {
-      console.error(chalk.red(`❌ ${error.message}`))
-    } else {
-      console.error(
-        chalk.red(`❌ An unexpected error occurred: ${error.message || error}`)
-      )
-    }
+    console.error(chalk.red(`❌ ${error.message || error}`))
     process.exit(1)
   }
 }
@@ -764,7 +683,7 @@ export const utils = {
   portal: {
     name: 'Portal',
     path: 'utils',
-    dependencies: [],
+    dependencies: ['react-dom'],
     files: {
       javascript: ['Portal.jsx'],
       typescript: ['Portal.tsx']
