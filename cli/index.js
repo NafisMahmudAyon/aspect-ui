@@ -66,6 +66,20 @@ class AspectUI {
     await run.parseAsync(process.argv)
   }
 
+  async detectPackageManager() {
+    try {
+      await fs.access('pnpm-lock.yaml')
+      return 'pnpm'
+    } catch {}
+
+    try {
+      await fs.access('yarn.lock')
+      return 'yarn'
+    } catch {}
+
+    return 'npm'
+  }
+
   async initProject(options) {
     const spinner = ora('Initializing Aspect UI...').start()
 
@@ -425,7 +439,16 @@ class AspectUI {
         'Run inside a Node.js project (missing package.json).'
       )
     }
-    execSync('npm install clsx tailwind-merge', { stdio: 'pipe' })
+
+    const packageManager = await this.detectPackageManager()
+    const command =
+      packageManager === 'yarn'
+        ? 'yarn add clsx tailwind-merge'
+        : packageManager === 'pnpm'
+          ? 'pnpm add clsx tailwind-merge'
+          : 'npm install clsx tailwind-merge'
+
+    execSync(command, { stdio: 'pipe' })
   }
 
   async getRegistryUrl(url) {
@@ -479,10 +502,40 @@ class AspectUI {
 
   async installComponentDependencies(deps) {
     if (!deps.length) return
+
+    const packageManager = await this.detectPackageManager()
+
+    const commands = {
+      npm: [
+        `npm install ${deps.join(' ')}`,
+        `npm install ${deps.join(' ')} --legacy-peer-deps`
+      ],
+      yarn: [
+        `yarn add ${deps.join(' ')}`,
+        `yarn add ${deps.join(' ')} --ignore-engines`
+      ],
+      pnpm: [`pnpm add ${deps.join(' ')}`, `pnpm add ${deps.join(' ')} --force`]
+    }
+
+    const [primaryCmd, fallbackCmd] = commands[packageManager]
+
     try {
-      execSync(`npm install ${deps.join(' ')}`, { stdio: 'inherit' })
+      execSync(primaryCmd, { stdio: 'inherit' })
     } catch (err) {
-      throw new AspectUICliError('Failed to install component dependencies.')
+      console.log(
+        chalk.yellow(
+          `⚠️  Dependency conflict detected. Retrying with ${packageManager} compatibility flags...`
+        )
+      )
+      try {
+        execSync(fallbackCmd, { stdio: 'inherit' })
+      } catch (secondErr) {
+        throw new AspectUICliError(
+          `Failed to install dependencies. Please try:\n` +
+            `1. Update React: npm install react@^18.3.1 react-dom@^18.3.1\n` +
+            `2. Or run: ${fallbackCmd}`
+        )
+      }
     }
   }
 
