@@ -126,9 +126,9 @@ class AspectUI {
     const spinner = ora(`Adding components: ${components}...`).start()
 
     try {
-      const language = await this.determineLanguage(options.language)
-      const isTS = language === 'typescript'
-      console.log(isTS)
+      const isTS = await this.determineLanguage(options.language)
+      // const isTS = language
+      // console.log(isTS)
 
       const configExists = await this.fileExists(this.configFile)
       if (!configExists) {
@@ -217,13 +217,13 @@ class AspectUI {
   async processUtils(resolvedUtils, isTS, depsToInstall) {
     const utilPromises = Array.from(resolvedUtils).map(async utilName => {
       const util = utils[utilName]
-      const files = isTS ? util.files.typescript : util.files.javascript
+      const files = isTS === "typescript" ? util.files.typescript : util.files.javascript
       const targetDir = path.join('components', util.path)
 
       await this.ensureDirectory(targetDir)
 
       const filePromises = files.map(async file => {
-        const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS ? 'typescript' : 'javascript'}/components/utils/${file}`
+        const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS}/components/utils/${file}`
         const targetPath = path.join(targetDir, file)
 
         try {
@@ -248,14 +248,14 @@ class AspectUI {
     const componentPromises = Array.from(resolvedComponents).map(
       async compName => {
         const comp = componentList[compName]
-        const files = isTS ? comp.files.typescript : comp.files.javascript
+        const files = isTS === "typescript" ? comp.files.typescript : comp.files.javascript
         console.log(files)
         const compDir = path.join('components/aspect-ui', comp.path)
 
         await this.ensureDirectory(compDir)
 
         const filePromises = files.map(async file => {
-          const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS ? 'typescript' : 'javascript'}/components/aspect-ui/${comp.path}/${file}`
+          const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS}/${file}`
           const filePath = path.join(compDir, file)
 
           try {
@@ -274,7 +274,7 @@ class AspectUI {
 
         await this.updateRootIndexFile(
           comp.path,
-          isTS ? 'typescript' : 'javascript'
+          isTS === "typescript" ? 'typescript' : 'javascript'
         )
       }
     )
