@@ -478,9 +478,6 @@ class AspectUI {
   }
 }
 
-const aspect = new AspectUI()
-aspect.init()
-
 const componentList = {
   accordion: {
     name: 'Accordion',
@@ -633,3 +630,6 @@ const utils = {
     }
   }
 }
+
+const aspect = new AspectUI()
+aspect.init()
