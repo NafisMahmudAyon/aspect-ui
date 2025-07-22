@@ -4,7 +4,6 @@ import chalk from 'chalk'
 import { execSync } from 'child_process'
 import { Command } from 'commander'
 import fs from 'fs/promises'
-import fetch from 'node-fetch'
 import ora from 'ora'
 import path from 'path'
 
@@ -25,485 +24,426 @@ class AspectUI {
   async init() {
     const run = new Command()
 
-    run.name('aspect-ui').version('1.0.0').description('Aspect UI CLI')
+    run.name('aspect-ui').description('CLI for Aspect UI').version('1.0.0')
 
     run
       .command('init')
-      .description('Initialize Aspect UI')
-      .option('-u, --url <url>', 'Set custom registry URL', this.baseUrl)
-      .option('-l, --language <language>', 'Project language')
+      .description('Initialize Aspect UI in the current directory')
+      .option('-l, --language <language>', 'Project Language')
       .action(async options => {
-        await this.initProject(options)
+        await this.initializeAspectUI(options)
       })
 
     run
       .command('add [components...]')
-      .description('Add one or more UI components to your project')
-      .option('-l, --language <language>', 'Project language')
-      .option('-f, --force', 'Force overwrite existing files')
+      .description('Add one or more UI components to the current project')
+      .option('-l, --language <language>', 'Project Language')
       .action((components, options) => {
-        this.addComponent(components, options)
+        if (components.length != 0) {
+          this.addComponents(components, options)
+        }
       })
 
     run
       .command('update <component>')
       .description('Update a specific component')
-      .option(
-        '-l, --language <language>',
-        'Project language (typescript/javascript)'
-      )
+      .option('-l, --language <language>', 'Project Language')
       .action(async (component, options) => {
         await this.updateComponent(component, options)
       })
 
     run
-      .command('remove <component>')
-      .description('Remove a specific component')
-      .action(async component => {
-        await this.removeComponent(component)
+      .command('delete [components...]')
+      .description('Delete one or more UI components from the current project')
+      .action(async components => {
+        await this.deleteComponents(components)
       })
 
     await run.parseAsync(process.argv)
   }
 
-  async initProject(options) {
-    const spinner = ora('Initializing Aspect UI...').start()
+  async deleteComponents(components) {
+    const spinner = ora('Deleting components...').start()
 
     try {
-      const [configExists, componentsDirExists, libDirExists] =
-        await Promise.all([
-          this.fileExists(this.configFile),
-          this.dirExists(this.componentsDir),
-          this.fileExists(path.join(this.libDir, 'utils.ts'))
-        ])
-
-      if (configExists && componentsDirExists && libDirExists) {
-        spinner.info(
-          chalk.yellow('Aspect UI already initialized in this project.')
-        )
+      if (components.length === 0) {
+        spinner.warn('No components specified for deletion.')
         return
       }
 
-      spinner.text = 'Initializing Aspect UI....'
-      const language = await this.determineLanguage(options.language)
-      console.log(language)
-
-      await Promise.all([
-        this.saveConfig({
-          registryUrl: options.url || this.baseUrl,
-          componentsDir: this.componentsDir,
-          libDir: this.libDir,
-          projectLanguage: language
-        }),
-        this.ensureLibUtils({ language }),
-        this.installDependencies(),
-        this.ensureDirectory(this.componentsDir)
-      ])
-
-      const allComponentNames = Object.keys(componentList)
-      await this.addComponent(allComponentNames, {
-        language,
-        force: true
-      })
-
-      spinner.succeed('Aspect UI initialized successfully.')
-
-      console.log(chalk.blue('\nRegistry URL:'), options.url || this.baseUrl)
-      console.log(
-        chalk.blue('\nDependencies installed:\n  - clsx\n  - tailwind-merge')
+      const componentsDir = path.join(
+        process.cwd(),
+        this.componentsDir,
+        'aspect-ui'
       )
-      console.log(
-        chalk.blue('\nDirectories created:\n  - lib/\n  - components/')
-      )
-      console.log(chalk.blue('\nReady to add components!'))
-    } catch (error) {
-      spinner.fail(chalk.red('Failed to initialize Aspect UI.'))
-      this.handleError(error)
-    }
-  }
-
-  async addComponent(components, options = {}) {
-    const spinner = ora(`Adding components: ${components}...`).start()
-
-    try {
-      const isTS = await this.determineLanguage(options.language)
-      // const isTS = language
-      // console.log(isTS)
-
-      const configExists = await this.fileExists(this.configFile)
-      if (!configExists) {
-        spinner.text = 'Initializing Aspect UI....'
-        await this.saveConfig({
-          registryUrl: options.url || this.baseUrl,
-          componentsDir: this.componentsDir,
-          libDir: this.libDir,
-          projectLanguage: language
-        })
-        spinner.stop()
+      if (!(await this.checkDirectory(componentsDir))) {
+        spinner.warn('Components directory does not exist.')
+        return
       }
 
-      const { resolvedComponents, resolvedUtils } =
-        this.resolveDependencies(components)
-      const depsToInstall = new Set()
-
-      // Process utils and components in parallel
-      await Promise.all([
-        this.processUtils(resolvedUtils, isTS, depsToInstall),
-        this.processComponents(resolvedComponents, isTS, depsToInstall)
-      ])
-
-      // Install all dependencies
-      if (depsToInstall.size) {
-        await this.installComponentDependencies(Array.from(depsToInstall))
-      }
-
-      spinner.succeed('Components added successfully.')
-    } catch (error) {
-      spinner.fail('Failed to add component(s).')
-      this.handleError(error)
-    }
-  }
-
-  async determineLanguage(userLanguage) {
-    // If user provides a language, validate and use it
-    if (userLanguage) {
-      if (!['typescript', 'javascript'].includes(userLanguage)) {
-        throw new AspectUICliError(
-          "Invalid language. Must be 'typescript' or 'javascript'."
-        )
-      }
-      return userLanguage
-    }
-
-    // Try to detect project language, fallback to typescript
-    try {
-      const isTS = await this.isTypescriptProject()
-      return isTS ? 'typescript' : 'javascript' // fallback to typescript even if not detected
-    } catch {
-      return 'typescript' // fallback to typescript on any error
-    }
-  }
-
-  resolveDependencies(components) {
-    const resolvedComponents = new Set()
-    const resolvedUtils = new Set()
-
-    const resolveDependenciesRecursive = names => {
-      for (const name of names) {
-        if (componentList[name]) {
-          if (resolvedComponents.has(name)) continue
-
-          const comp = componentList[name]
-          if (comp.components?.length)
-            resolveDependenciesRecursive(comp.components)
-          if (comp.utils?.length) resolveDependenciesRecursive(comp.utils)
-
-          resolvedComponents.add(name)
-        } else if (utils[name]) {
-          if (resolvedUtils.has(name)) continue
-          resolvedUtils.add(name)
+      for (const componentName of components) {
+        const cp = componentList[componentName]
+        if (!cp) {
+          spinner.warn(`Component ${componentName} not found.`)
+          continue
+        }
+        const componentPath = path.join(componentsDir, cp.path)
+        if (await this.checkDirectory(componentPath)) {
+          await fs.rm(componentPath, { recursive: true, force: true })
+          spinner.info(`Deleted component: ${componentName}`)
         } else {
-          throw new AspectUICliError(
-            `❌ '${name}' not found in component list or utils.`
-          )
+          spinner.warn(`Component ${componentName} not found.`)
         }
       }
-    }
 
-    resolveDependenciesRecursive(components)
-    return { resolvedComponents, resolvedUtils }
-  }
-
-  async processUtils(resolvedUtils, isTS, depsToInstall) {
-    const utilPromises = Array.from(resolvedUtils).map(async utilName => {
-      const util = utils[utilName]
-      const files = isTS === "typescript" ? util.files.typescript : util.files.javascript
-      const targetDir = path.join('components', util.path)
-
-      await this.ensureDirectory(targetDir)
-
-      const filePromises = files.map(async file => {
-        const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS}/components/utils/${file}`
-        const targetPath = path.join(targetDir, file)
-
-        try {
-          const res = await fetch(fileUrl)
-          if (!res.ok) throw new Error()
-          const content = await res.text()
-          await fs.writeFile(targetPath, content)
-          console.log(chalk.green(`✅ Added util: ${utilName}/${file}`))
-        } catch {
-          console.log(chalk.red(`❌ Failed to fetch file: ${fileUrl}`))
-        }
-      })
-
-      await Promise.all(filePromises)
-      util.dependencies?.forEach(dep => depsToInstall.add(dep))
-    })
-
-    await Promise.all(utilPromises)
-  }
-
-  async processComponents(resolvedComponents, isTS, depsToInstall) {
-    const componentPromises = Array.from(resolvedComponents).map(
-      async compName => {
-        const comp = componentList[compName]
-        const files = isTS === "typescript" ? comp.files.typescript : comp.files.javascript
-        console.log(files)
-        const compDir = path.join('components/aspect-ui', comp.path)
-
-        await this.ensureDirectory(compDir)
-
-        const filePromises = files.map(async file => {
-          const fileUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${isTS}/${file}`
-          const filePath = path.join(compDir, file)
-
-          try {
-            const res = await fetch(fileUrl)
-            if (!res.ok) throw new Error()
-            const content = await res.text()
-            await fs.writeFile(filePath, content)
-            console.log(chalk.green(`✅ Added component: ${compName}/${file}`))
-          } catch {
-            console.log(chalk.red(`❌ Failed to fetch file: ${fileUrl}`))
-          }
-        })
-
-        await Promise.all(filePromises)
-        comp.dependencies?.forEach(dep => depsToInstall.add(dep))
-
-        await this.updateRootIndexFile(
-          comp.path,
-          isTS === "typescript" ? 'typescript' : 'javascript'
-        )
-      }
-    )
-
-    await Promise.all(componentPromises)
-  }
-
-  async addDefaultUtils(options) {
-    const spinner = ora(`Adding Utils...`).start()
-
-    try {
-      await this.ensureDirectory(this.componentsDir)
-
-      const language =
-        options.language ||
-        ((await this.isTypescriptProject()) ? 'typescript' : 'javascript')
-      const depsSet = new Set()
-
-      const utilPromises = Object.entries(utils).map(
-        async ([utilName, util]) => {
-          const targetDir = path.join(this.componentsDir, util.path)
-          const files = util.files[language]
-
-          await this.ensureDirectory(targetDir)
-
-          const filePromises = files.map(async file => {
-            const filePath = path.join(targetDir, file)
-
-            const alreadyExists = await this.fileExists(filePath)
-            if (!alreadyExists) {
-              const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/utils/${file}`
-              const res = await fetch(rawUrl)
-              if (!res.ok)
-                throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
-              const content = await res.text()
-              await this.ensureDirectory(path.dirname(filePath))
-              await fs.writeFile(filePath, content)
-            }
-          })
-
-          await Promise.all(filePromises)
-          util.dependencies?.forEach(dep => depsSet.add(dep))
-          console.log(chalk.green(`✓ Added util: ${utilName}`))
-        }
-      )
-
-      await Promise.all(utilPromises)
-
-      if (depsSet.size > 0) {
-        await this.installComponentDependencies(Array.from(depsSet))
-        spinner.succeed('Dependencies installed.')
-      }
+      spinner.succeed('Components deleted successfully')
     } catch (error) {
-      spinner.fail('Failed to add utils.')
-      this.handleError(error)
+      spinner.fail('Failed to delete components')
     }
   }
 
   async updateComponent(componentName, options) {
-    const spinner = ora(`Updating ${componentName}...`).start()
+    const spinner = ora(`Updating component: ${componentName}`).start()
 
     try {
-      await this.ensureLibUtils()
-
-      const config = await this.loadConfig().catch(() => ({}))
-      const language = await this.determineLanguage(
-        options.language || config.projectLanguage
-      )
-
+      const language = await this.determineLanguage(options.language)
+      if (!['javascript', 'typescript'].includes(language)) {
+        throw new AspectUICliError(
+          "Invalid language specified. Use 'javascript' or 'typescript'."
+        )
+      }
       const component = componentList[componentName]
       if (!component) {
-        spinner.fail(
-          `Component '${componentName}' is not in the component list.`
+        spinner.warn(`Component ${componentName} not found.`)
+        return
+      }
+      const componentsDir = path.join(process.cwd(), this.componentsDir)
+      const componentPath = path.join(
+        componentsDir,
+        'aspect-ui',
+        component.path
+      )
+      if (!(await this.checkDirectory(componentPath))) {
+        spinner.warn(`Component ${componentName} not found in the project.`)
+        return
+      }
+      for (const file of component.files[language]) {
+        const filePath = path.join(componentPath, file)
+
+        const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+        const res = await fetch(rawUrl)
+        if (!res.ok)
+          throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
+        const content = await res.text()
+        // rewrite the file
+        spinner.text = `Updating ${file}...`
+        await fs.writeFile(filePath, content)
+        spinner.info(`Updated ${file}`)
+      }
+      spinner.succeed(`Component ${componentName} updated successfully`)
+    } catch (error) {
+      spinner.fail(`Failed to update component: ${componentName}`)
+      throw new AspectUICliError(error.message || 'Component update error')
+    }
+  }
+
+  async addComponents(components, options) {
+    const spinner = ora('Adding components...').start()
+
+    try {
+      const language = await this.determineLanguage(options.language)
+      if (!['javascript', 'typescript'].includes(language)) {
+        throw new AspectUICliError(
+          "Invalid language specified. Use 'javascript' or 'typescript'."
         )
+      }
+
+      const depsSet = new Set()
+      const componentsDir = path.join(process.cwd(), this.componentsDir)
+
+      if (!(await this.checkDirectory(componentsDir))) {
+        await fs.mkdir(componentsDir, { recursive: true })
+      }
+
+      const exportLines = []
+
+      // check components check all does have componentList[componentName].components
+      // is there any component name then add then also join them with components
+      const componentNameSet = new Set(components)
+
+      for (const componentName of components) {
+        const component = componentList[componentName]
+        if (!component) {
+          spinner.warn(`Component ${componentName} not found.`)
+          continue
+        }
+        if (component.components && component.components.length > 0) {
+          for (const subComponent of component.components) {
+            componentNameSet.add(subComponent)
+          }
+        }
+      }
+
+      const componentNameList = Array.from(componentNameSet)
+
+      for (const componentName of componentNameList) {
+        const component = componentList[componentName]
+        if (!component) {
+          spinner.warn(`Component ${componentName} not found.`)
+          continue
+        }
+
+        const componentPath = path.join(
+          componentsDir,
+          'aspect-ui',
+          component.path
+        )
+        if (!(await this.checkDirectory(componentPath))) {
+          await fs.mkdir(componentPath, { recursive: true })
+        }
+
+        for (const file of component.files[language]) {
+          const filePath = path.join(componentPath, file)
+          if (!(await this.checkDirectory(filePath))) {
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+            const res = await fetch(rawUrl)
+            if (!res.ok)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
+            const content = await res.text()
+            await fs.writeFile(filePath, content)
+          }
+        }
+
+        if (component.dependencies && component.dependencies.length > 0) {
+          for (const dep of component.dependencies) {
+            if (!depsSet.has(dep)) {
+              depsSet.add(dep)
+              spinner.info(`Adding dependency: ${dep}`)
+            }
+          }
+        }
+        exportLines.push(`export * from './${component.path}';`)
+      }
+
+      const mainIndexFile = path.join(
+        componentsDir,
+        'aspect-ui',
+        `index.${language === 'javascript' ? 'js' : 'ts'}`
+      )
+      if (!(await this.checkDirectory(mainIndexFile))) {
+        await fs.mkdir(path.dirname(mainIndexFile), { recursive: true })
+      }
+      const mainIndexContent = '\n' + exportLines.join('\n') + '\n'
+      await fs.appendFile(mainIndexFile, mainIndexContent)
+
+      await this.addDefaultUtils(language, depsSet)
+      await this.installAllDependencies(depsSet)
+
+      spinner.succeed('Components added successfully')
+    } catch {
+      spinner.fail('Failed to add components')
+      throw new AspectUICliError(error.message || 'Components error')
+    }
+  }
+
+  async initializeAspectUI(options) {
+    const spinner = ora('Initializing Aspect UI...').start()
+    const depsSet = new Set()
+
+    try {
+      const [configExists, componentsDirExists, libDirExists] =
+        await Promise.all([
+          this.checkConfigFile(),
+          this.checkDirectory(this.componentsDir),
+          this.checkDirectory(this.libDir)
+        ])
+      if (configExists && componentsDirExists && libDirExists) {
+        spinner.info(chalk.yellow('Aspect UI is already initialized.'))
         return
       }
 
-      const files = component.files[language]
-      const filePromises = files.map(async file => {
-        const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
-        const res = await fetch(rawUrl)
-        if (!res.ok) throw new Error(`Failed to fetch file: ${rawUrl}`)
+      spinner.text = 'Initializing Aspect UI...'
 
-        const content = await res.text()
-        const filePath = path.join(
-          this.componentsDir,
-          'aspect-ui',
-          component.path,
-          file
+      const language = await this.determineLanguage(options.language)
+
+      if (!['javascript', 'typescript'].includes(language)) {
+        throw new AspectUICliError(
+          "Invalid language specified. Use 'javascript' or 'typescript'."
         )
-        await this.ensureDirectory(path.dirname(filePath))
-        await fs.writeFile(filePath, content)
-      })
-
-      await Promise.all(filePromises)
-      spinner.succeed(
-        chalk.green(`Component '${component.name}' updated successfully.`)
-      )
-    } catch (error) {
-      spinner.fail(chalk.red('Failed to update component.'))
-      this.handleError(error)
-    }
-  }
-
-  async removeComponent(componentName) {
-    const spinner = ora(`Removing ${componentName}...`).start()
-
-    try {
-      const registryUrl = await this.getRegistryUrl()
-      const component = await this.fetchComponent(componentName, registryUrl)
-
-      const removePromises = component.files.map(file =>
-        fs.unlink(path.join(this.componentsDir, file.path)).catch(() => {})
-      )
-
-      await Promise.all(removePromises)
-      spinner.succeed(chalk.green(`${component.title} removed successfully.`))
-    } catch (error) {
-      spinner.fail(chalk.red(`Failed to remove ${componentName}.`))
-      this.handleError(error)
-    }
-  }
-
-  async fileExists(filePath) {
-    try {
-      await fs.access(filePath)
-      return true
-    } catch {
-      return false
-    }
-  }
-
-  async ensureLibUtils(options = {}) {
-    const language = await this.determineLanguage(options.language)
-    await this.addDefaultUtils({ language })
-  }
-
-  async ensureDirectory(dir) {
-    try {
-      await fs.access(dir)
-    } catch {
-      await fs.mkdir(dir, { recursive: true })
-    }
-  }
-
-  async installDependencies() {
-    try {
-      await fs.access('package.json')
-    } catch {
-      throw new AspectUICliError(
-        'Run inside a Node.js project (missing package.json).'
-      )
-    }
-    execSync('npm install clsx tailwind-merge', { stdio: 'pipe' })
-  }
-
-  async getRegistryUrl(url) {
-    if (url) return url
-    try {
-      const config = await this.loadConfig()
-      return config.registryUrl
-    } catch {
-      return this.baseUrl
-    }
-  }
-
-  async loadConfig() {
-    const content = await fs.readFile(this.configFile, 'utf8')
-    return JSON.parse(content)
-  }
-
-  async fetchComponent(name, registryUrl) {
-    const url = `${registryUrl}/${name}.json`
-    const res = await fetch(url)
-    if (!res.ok) throw new AspectUICliError(`Component '${name}' not found.`)
-    return await res.json()
-  }
-
-  async checkExistingFiles(files) {
-    const existsPromises = files.map(async file => {
-      const filePath = path.join(this.componentsDir, file.path)
-      try {
-        await fs.access(filePath)
-        return file.path
-      } catch {
-        return null
       }
-    })
-
-    const results = await Promise.all(existsPromises)
-    return results.filter(Boolean)
-  }
-
-  async createComponentFiles(component) {
-    await this.ensureDirectory(this.componentsDir)
-
-    const filePromises = component.files.map(async file => {
-      const fullPath = path.join(this.componentsDir, file.path)
-      await this.ensureDirectory(path.dirname(fullPath))
-      await fs.writeFile(fullPath, file.content)
-    })
-
-    await Promise.all(filePromises)
-  }
-
-  async installComponentDependencies(deps) {
-    if (!deps.length) return
-    try {
-      execSync(`npm install ${deps.join(' ')}`, { stdio: 'inherit' })
-    } catch (err) {
-      throw new AspectUICliError('Failed to install component dependencies.')
+      await Promise.all([
+        await this.saveConfig(language),
+        await this.addDefaultUtils(language, depsSet),
+        await this.addAllComponents(language, depsSet),
+        // install dependencies
+        await this.installAllDependencies(depsSet)
+      ])
+      spinner.succeed('Aspect UI initialized successfully')
+    } catch (error) {
+      spinner.fail('Failed to initialize Aspect UI')
+      throw new AspectUICliError(error.message || 'Initialization error')
     }
   }
 
-  async dirExists(dirPath) {
+  async installAllDependencies(depsSet) {
+    if (depsSet.size === 0) {
+      console.log(chalk.yellow('No dependencies to install.'))
+    }
+    const spinner = ora('Installing dependencies...').start()
     try {
-      const stat = await fs.stat(dirPath)
-      return stat.isDirectory()
-    } catch {
-      return false
+      execSync(`npm install ${[...depsSet].join(' ')}`, {
+        stdio: 'inherit'
+      })
+      spinner.succeed('Dependencies installed successfully')
+    } catch (error) {
+      spinner.fail('Failed to install dependencies')
+      throw new AspectUICliError(
+        error.message || 'Dependency installation error'
+      )
     }
   }
 
-  async saveConfig(config) {
+  async addAllComponents(language, depsSet) {
+    const spinner = ora('Adding all components...').start()
+
+    try {
+      const componentsDir = path.join(process.cwd(), this.componentsDir)
+      if (!(await this.checkDirectory(componentsDir))) {
+        await fs.mkdir(componentsDir, { recursive: true })
+      }
+
+      const exportLines = []
+
+      for (const [key, component] of Object.entries(componentList)) {
+        const componentPath = path.join(
+          componentsDir,
+          'aspect-ui',
+          component.path
+        )
+        if (!(await this.checkDirectory(componentPath))) {
+          await fs.mkdir(componentPath, { recursive: true })
+        }
+
+        for (const file of component.files[language]) {
+          const filePath = path.join(componentPath, file)
+          if (!(await this.checkDirectory(filePath))) {
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+            const res = await fetch(rawUrl)
+            if (!res.ok)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
+            const content = await res.text()
+            await fs.writeFile(filePath, content)
+          }
+        }
+
+        if (component.dependencies && component.dependencies.length > 0) {
+          for (const dep of component.dependencies) {
+            if (!depsSet.has(dep)) {
+              depsSet.add(dep)
+              spinner.info(`Adding dependency: ${dep}`)
+              // install dep
+            }
+          }
+        }
+
+        // Collect export line for main index
+        exportLines.push(`export * from './${component.path}';`)
+      }
+
+      // Write all exports to components/index.js or index.ts
+      const mainIndexFile = path.join(
+        componentsDir,
+        'aspect-ui',
+        `index.${language === 'javascript' ? 'js' : 'ts'}`
+      )
+      const mainIndexContent = exportLines.join('\n') + '\n'
+      await fs.writeFile(mainIndexFile, mainIndexContent)
+
+      spinner.succeed('All components added successfully')
+    } catch (error) {
+      spinner.fail('Failed to add components')
+      throw new AspectUICliError(error.message || 'Components error')
+    }
+  }
+
+  async addDefaultUtils(language, depsSet) {
+    const spinner = ora('Adding default utilities...').start()
+
+    try {
+      const utilsDir = path.join(process.cwd(), this.libDir)
+
+      if (!(await this.checkDirectory(utilsDir))) {
+        await Promise.all([await fs.mkdir(utilsDir, { recursive: true })])
+      }
+
+      const utilsList = Object.values(utils)
+      for (const util of utilsList) {
+        // const utilsDir = path.join(utilsDir, util.path);
+        if (!(await this.checkDirectory(utilsDir))) {
+          await fs.mkdir(utilsDir, { recursive: true })
+        }
+
+        for (const file of util.files[language]) {
+          const filePath = path.join(utilsDir, file)
+          if (!(await this.checkDirectory(filePath))) {
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/utils/${file}`
+            const res = await fetch(rawUrl)
+            if (!res.ok)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
+            const content = await res.text()
+            await fs.writeFile(filePath, content)
+          }
+        }
+        if (util.dependencies && util.dependencies.length > 0) {
+          for (const dep of util.dependencies) {
+            if (!depsSet.has(dep)) {
+              depsSet.add(dep)
+              spinner.info(`Adding dependency: ${dep}`)
+              // Here you would typically run a package manager command to install the dependency
+              // For example, using npm:
+              // await exec(`npm install ${dep}`);
+            }
+          }
+        }
+      }
+
+      spinner.succeed('Default utilities added successfully')
+    } catch (error) {
+      spinner.fail('Failed to add default utilities')
+      throw new AspectUICliError(error.message || 'Utilities error')
+    }
+  }
+
+  async saveConfig(language) {
+    const config = {
+      language,
+      componentsDir: this.componentsDir,
+      libDir: this.libDir
+    }
     await fs.writeFile(this.configFile, JSON.stringify(config, null, 2))
+  }
+
+  async determineLanguage(language) {
+    if (language) {
+      if (language !== 'javascript' && language !== 'typescript') {
+        throw new AspectUICliError(
+          "Invalid language specified. Use 'javascript' or 'typescript'."
+        )
+      }
+      return language
+    }
+
+    try {
+      const isTS = await this.isTypescriptProject()
+      return isTS ? 'typescript' : 'javascript'
+    } catch {
+      return 'javascript'
+    }
   }
 
   async isTypescriptProject() {
     const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
+    console.log(tsConfigPath, await fs.access(tsConfigPath))
     try {
       await fs.access(tsConfigPath)
       return true
@@ -512,22 +452,22 @@ class AspectUI {
     }
   }
 
-  async updateRootIndexFile(componentName, language) {
-    const ext = language === 'javascript' ? 'js' : 'ts'
-    const indexPath = path.join(this.componentsDir, 'aspect-ui', `index.${ext}`)
-    const exportLine = `export * from './${componentName}';`
-
-    let content = ''
+  async checkConfigFile() {
     try {
-      content = await fs.readFile(indexPath, 'utf8')
-      if (content.includes(exportLine)) return
+      await fs.access(this.configFile)
+      return true
     } catch {
-      await fs.writeFile(indexPath, exportLine + '\n')
-      return
+      return false
     }
+  }
 
-    content += `\n${exportLine}`
-    await fs.writeFile(indexPath, content)
+  async checkDirectory(dir) {
+    try {
+      await fs.access(dir)
+      return true
+    } catch {
+      return false
+    }
   }
 
   handleError(error) {
@@ -671,7 +611,7 @@ const componentList = {
   }
 }
 
-export const utils = {
+const utils = {
   cn: {
     name: 'cn',
     path: 'utils',
@@ -684,7 +624,7 @@ export const utils = {
   portal: {
     name: 'Portal',
     path: 'utils',
-    dependencies: ['react-dom'],
+    dependencies: [],
     files: {
       javascript: ['Portal.jsx'],
       typescript: ['Portal.tsx']
