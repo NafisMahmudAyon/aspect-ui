@@ -80,6 +80,17 @@ class AspectUI {
                 if (await this.checkDirectory(componentPath)) {
                     await promises_1.default.rm(componentPath, { recursive: true, force: true });
                     spinner.info(`Deleted component: ${componentName}`);
+                    // remove from ./components/index.js this line export * from './${cp.path}';
+                    const indexFile = path_1.default.join(componentsDir, `index.${cp.files.javascript ? 'js' : 'ts'}`);
+                    if (await this.checkDirectory(indexFile)) {
+                        const indexContent = await promises_1.default.readFile(indexFile, 'utf-8');
+                        const updatedContent = indexContent
+                            .split('\n')
+                            .filter(line => !line.includes(`export * from './${cp.path}';`))
+                            .join('\n');
+                        await promises_1.default.writeFile(indexFile, updatedContent);
+                        spinner.info(`Removed export line for ${componentName} from index file.`);
+                    }
                 }
                 else {
                     spinner.warn(`Component ${componentName} not found.`);
@@ -218,7 +229,6 @@ class AspectUI {
             }
             spinner.text = 'Initializing Aspect UI...';
             const language = await this.determineLanguage(options.language);
-            console.log(language);
             if (!['javascript', 'typescript'].includes(language)) {
                 throw new AspectUICliError("Invalid language specified. Use 'javascript' or 'typescript'.");
             }
