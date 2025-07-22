@@ -266,6 +266,8 @@ class AspectUI {
 
       const language = await this.determineLanguage(options.language)
 
+      console.log(language)
+
       if (!['javascript', 'typescript'].includes(language)) {
         throw new AspectUICliError(
           "Invalid language specified. Use 'javascript' or 'typescript'."
