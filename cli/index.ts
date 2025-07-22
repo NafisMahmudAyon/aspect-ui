@@ -92,9 +92,12 @@ class AspectUI {
           await fs.rm(componentPath, { recursive: true, force: true })
           spinner.info(`Deleted component: ${componentName}`)
           // remove from ./components/index.js this line export * from './${cp.path}';
+          const language = await this.determineLanguage()
+          console.log(language)
+
           const indexFile = path.join(
             componentsDir,
-            `index.${cp.files.javascript ? 'js' : 'ts'}`
+            `index.${language === 'javascript' ? 'js' : 'ts'}`
           )
           if (await this.checkDirectory(indexFile)) {
             const indexContent = await fs.readFile(indexFile, 'utf-8')
