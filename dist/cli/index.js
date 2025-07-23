@@ -82,7 +82,6 @@ class AspectUI {
                     spinner.info(`Deleted component: ${componentName}`);
                     // remove from ./components/index.js this line export * from './${cp.path}';
                     const language = await this.determineLanguage();
-                    console.log(language);
                     const indexFile = path_1.default.join(componentsDir, `index.${language === 'javascript' ? 'js' : 'ts'}`);
                     if (await this.checkDirectory(indexFile)) {
                         const indexContent = await promises_1.default.readFile(indexFile, 'utf-8');
@@ -436,7 +435,6 @@ class AspectUI {
     }
     async isTypescriptProject() {
         const tsConfigPath = path_1.default.join(process.cwd(), 'tsconfig.json');
-        console.log(tsConfigPath, await promises_1.default.access(tsConfigPath));
         try {
             await promises_1.default.access(tsConfigPath);
             return true;
@@ -562,7 +560,7 @@ const componentList = {
         utils: ['cn'],
         files: {
             javascript: ['Button.jsx', 'index.js'],
-            typescript: ['Button.tsx', 'index.js']
+            typescript: ['Button.tsx', 'index.ts']
         }
     },
     card: {
@@ -952,8 +950,9 @@ const componentList = {
             typescript: [
                 'Tabs.tsx',
                 'TabsList.tsx',
-                'TabsTrigger.tsx',
+                'TabsItem.tsx',
                 'TabsContent.tsx',
+                'TabsContext.tsx',
                 'index.ts'
             ]
         }

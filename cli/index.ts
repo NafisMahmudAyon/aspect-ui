@@ -645,7 +645,7 @@ const componentList = {
     utils: ['cn'],
     files: {
       javascript: ['Button.jsx', 'index.js'],
-      typescript: ['Button.tsx', 'index.js']
+      typescript: ['Button.tsx', 'index.ts']
     }
   },
   card: {
