@@ -525,6 +525,124 @@ const componentList = {
             ]
         }
     },
+    'back-to-top': {
+        name: 'BackToTop',
+        path: 'BackToTop',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['BackToTop.jsx', 'index.js'],
+            typescript: ['BackToTop.tsx', 'index.ts']
+        }
+    },
+    badge: {
+        name: 'Badge',
+        path: 'Badge',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Badge.jsx', 'index.js'],
+            typescript: ['Badge.tsx', 'index.ts']
+        }
+    },
+    breadcrumb: {
+        name: 'Breadcrumb',
+        path: 'Breadcrumb',
+        dependencies: ['lucide-react'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Breadcrumb.jsx', 'BreadcrumbItem.jsx', 'index.js'],
+            typescript: ['Breadcrumb.tsx', 'BreadcrumbItem.tsx', 'index.ts']
+        }
+    },
+    button: {
+        name: 'Button',
+        path: 'Button',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Button.jsx', 'index.js'],
+            typescript: ['Button.tsx', 'index.js']
+        }
+    },
+    card: {
+        name: 'Card',
+        path: 'Card',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Card.jsx',
+                'CardContent.jsx',
+                'CardFooter.jsx',
+                'CardHeader.jsx',
+                'CardTitle.jsx',
+                'CardDescription.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Card.tsx',
+                'CardContent.tsx',
+                'CardFooter.tsx',
+                'CardHeader.tsx',
+                'CardTitle.tsx',
+                'CardDescription.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    carousel: {
+        name: 'Carousel',
+        path: 'Carousel',
+        dependencies: ['embla-carousel-react'],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Carousel.jsx',
+                'CarouselArrowButtons.jsx',
+                'Control.jsx',
+                'Indicators.jsx',
+                'Item.jsx',
+                'Slides.jsx',
+                'CarouselContext.jsx',
+                'CarouselDotButton.jsx',
+                'Viewport.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Carousel.tsx',
+                'CarouselArrowButtons.tsx',
+                'Control.tsx',
+                'Indicators.tsx',
+                'Item.tsx',
+                'Slides.tsx',
+                'CarouselContext.tsx',
+                'CarouselDotButton.tsx',
+                'Viewport.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    checkbox: {
+        name: 'Checkbox',
+        path: 'Checkbox',
+        dependencies: ['lucide-react'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Checkbox.jsx', 'index.js'],
+            typescript: ['Checkbox.tsx', 'index.ts']
+        }
+    },
+    'circular-progress-bar': {
+        name: 'CircularProgressBar',
+        path: 'CircularProgressBar',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['CircularProgressBar.jsx', 'index.js'],
+            typescript: ['CircularProgressBar.tsx', 'index.ts']
+        }
+    },
     'date-picker': {
         name: 'DatePicker',
         path: 'DatePicker',
@@ -534,6 +652,16 @@ const componentList = {
         files: {
             javascript: ['DatePicker.jsx', 'index.js'],
             typescript: ['DatePicker.tsx', 'index.ts']
+        }
+    },
+    divider: {
+        name: 'Divider',
+        path: 'Divider',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Divider.jsx', 'index.js'],
+            typescript: ['Divider.tsx', 'index.ts']
         }
     },
     dropdown: {
@@ -562,14 +690,25 @@ const componentList = {
             ]
         }
     },
-    popover: {
-        name: 'Popover',
-        path: 'Popover',
+    input: {
+        name: 'Input',
+        path: 'Input',
         dependencies: ['lucide-react'],
+        components: ['tooltip'],
         utils: ['cn'],
         files: {
-            javascript: ['Popover.jsx', 'index.js'],
-            typescript: ['Popover.tsx', 'index.ts']
+            javascript: ['Input.jsx', 'index.js'],
+            typescript: ['Input.tsx', 'index.ts']
+        }
+    },
+    masonry: {
+        name: 'Masonry',
+        path: 'Masonry',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Masonry.jsx', 'index.js'],
+            typescript: ['Masonry.tsx', 'index.ts']
         }
     },
     modal: {
@@ -596,6 +735,309 @@ const componentList = {
                 'ModalPortal.tsx',
                 'index.ts'
             ]
+        }
+    },
+    navbar: {
+        name: 'Navbar',
+        path: 'Navbar',
+        dependencies: ['framer-motion'],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Navbar.jsx',
+                'NavbarContainer.jsx',
+                'NavbarList.jsx',
+                'NavbarItem.jsx',
+                'NavbarCollapse.jsx',
+                'NavbarCollapseBtn.jsx',
+                'NavbarContext.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Navbar.tsx',
+                'NavbarContainer.tsx',
+                'NavbarList.tsx',
+                'NavbarItem.tsx',
+                'NavbarCollapse.tsx',
+                'NavbarCollapseBtn.tsx',
+                'NavbarContext.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    'number-counter': {
+        name: 'NumberCounter',
+        path: 'NumberCounter',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['NumberCounter.jsx', 'index.js'],
+            typescript: ['NumberCounter.tsx', 'index.ts']
+        }
+    },
+    pagination: {
+        name: 'Pagination',
+        path: 'Pagination',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Pagination.jsx', 'index.js'],
+            typescript: ['Pagination.tsx', 'index.ts']
+        }
+    },
+    popover: {
+        name: 'Popover',
+        path: 'Popover',
+        dependencies: ['@radix-ui/react-popover'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Popover.jsx', 'index.js'],
+            typescript: ['Popover.tsx', 'index.ts']
+        }
+    },
+    progressbar: {
+        name: 'ProgressBar',
+        path: 'ProgressBar',
+        dependencies: ['framer-motion'],
+        utils: ['cn'],
+        files: {
+            javascript: ['ProgressBar.jsx', 'index.js'],
+            typescript: ['ProgressBar.tsx', 'index.ts']
+        }
+    },
+    radio: {
+        name: 'Radio',
+        path: 'Radio',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Radio.jsx', 'index.js'],
+            typescript: ['Radio.tsx', 'index.ts']
+        }
+    },
+    rating: {
+        name: 'Rating',
+        path: 'Rating',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Rating.jsx', 'index.js'],
+            typescript: ['Rating.tsx', 'index.ts']
+        }
+    },
+    sidebar: {
+        name: 'Sidebar',
+        path: 'Sidebar',
+        dependencies: ['framer-motion', 'lucide-react'],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Sidebar.jsx',
+                'SidebarHeader.jsx',
+                'SidebarItem.jsx',
+                'SidebarContainer.jsx',
+                'SidebarFooter.jsx',
+                'SidebarContext.jsx',
+                'SidebarToggleButton.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Sidebar.tsx',
+                'SidebarHeader.tsx',
+                'SidebarItem.tsx',
+                'SidebarContainer.tsx',
+                'SidebarFooter.tsx',
+                'SidebarContext.tsx',
+                'SidebarToggleButton.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    skeleton: {
+        name: 'Skeleton',
+        path: 'Skeleton',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Skeleton.jsx', 'index.js'],
+            typescript: ['Skeleton.tsx', 'index.ts']
+        }
+    },
+    slider: {
+        name: 'Slider',
+        path: 'Slider',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Slider.jsx', 'index.js'],
+            typescript: ['Slider.tsx', 'index.ts']
+        }
+    },
+    spinner: {
+        name: 'Spinner',
+        path: 'Spinner',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Spinner.jsx', 'index.js'],
+            typescript: ['Spinner.tsx', 'index.ts']
+        }
+    },
+    stepper: {
+        name: 'Stepper',
+        path: 'Stepper',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Stepper.jsx', 'index.js'],
+            typescript: ['Stepper.tsx', 'index.ts']
+        }
+    },
+    switch: {
+        name: 'Switch',
+        path: 'Switch',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Switch.jsx', 'index.js'],
+            typescript: ['Switch.tsx', 'index.ts']
+        }
+    },
+    table: {
+        name: 'Table',
+        path: 'Table',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Table.jsx',
+                'TableBody.jsx',
+                'TableCaption.jsx',
+                'TableFooter.jsx',
+                'TableHeader.jsx',
+                'TableHeadCell.jsx',
+                'TableRow.jsx',
+                'TableCell.jsx',
+                'TableContext.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Table.tsx',
+                'TableBody.tsx',
+                'TableCaption.tsx',
+                'TableFooter.tsx',
+                'TableHeader.tsx',
+                'TableHeadCell.tsx',
+                'TableRow.tsx',
+                'TableCell.tsx',
+                'TableContext.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    tabs: {
+        name: 'Tabs',
+        path: 'Tabs',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'Tabs.jsx',
+                'TabList.jsx',
+                'TabItem.jsx',
+                'TabContent.jsx',
+                'TabsContext.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'Tabs.tsx',
+                'TabsList.tsx',
+                'TabsTrigger.tsx',
+                'TabsContent.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    textarea: {
+        name: 'Textarea',
+        path: 'Textarea',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Textarea.jsx', 'index.js'],
+            typescript: ['Textarea.tsx', 'index.ts']
+        }
+    },
+    timeline: {
+        name: 'Timeline',
+        path: 'Timeline',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Timeline.jsx', 'TimelineItem.jsx', 'index.js'],
+            typescript: ['Timeline.tsx', 'TimelineItem.tsx', 'index.ts']
+        }
+    },
+    toast: {
+        name: 'Toast',
+        path: 'Toast',
+        dependencies: ['framer-motion'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Toast.jsx', 'index.js'],
+            typescript: ['Toast.tsx', 'index.ts']
+        }
+    },
+    'toggle-button': {
+        name: 'ToggleButton',
+        path: 'ToggleButton',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: [
+                'ToggleButton.jsx',
+                'Toggle.jsx',
+                'ToggleButtonGroup.jsx',
+                'ToggleButtonGroupContext.jsx',
+                'index.js'
+            ],
+            typescript: [
+                'ToggleButton.tsx',
+                'Toggle.tsx',
+                'ToggleButtonGroup.tsx',
+                'ToggleButtonGroupContext.tsx',
+                'index.ts'
+            ]
+        }
+    },
+    tooltip: {
+        name: 'Tooltip',
+        path: 'Tooltip',
+        dependencies: ['@radix-ui/react-tooltip'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Tooltip.jsx', 'index.js'],
+            typescript: ['Tooltip.tsx', 'index.ts']
+        }
+    },
+    typography: {
+        name: 'Typography',
+        path: 'Typography',
+        dependencies: [],
+        utils: ['cn'],
+        files: {
+            javascript: ['Typography.jsx', 'index.js'],
+            typescript: ['Typography.tsx', 'index.ts']
+        }
+    },
+    upload: {
+        name: 'Upload',
+        path: 'Upload',
+        dependencies: ['lucide-react'],
+        utils: ['cn'],
+        files: {
+            javascript: ['Upload.jsx', 'index.js'],
+            typescript: ['Upload.tsx', 'index.ts']
         }
     }
 };
