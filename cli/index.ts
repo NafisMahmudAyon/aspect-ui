@@ -93,7 +93,6 @@ class AspectUI {
           spinner.info(`Deleted component: ${componentName}`)
           // remove from ./components/index.js this line export * from './${cp.path}';
           const language = await this.determineLanguage()
-          console.log(language)
 
           const indexFile = path.join(
             componentsDir,
@@ -519,7 +518,7 @@ class AspectUI {
 
   async isTypescriptProject() {
     const tsConfigPath = path.join(process.cwd(), 'tsconfig.json')
-    console.log(tsConfigPath, await fs.access(tsConfigPath))
+
     try {
       await fs.access(tsConfigPath)
       return true
@@ -1036,8 +1035,9 @@ const componentList = {
       typescript: [
         'Tabs.tsx',
         'TabsList.tsx',
-        'TabsTrigger.tsx',
+        'TabsItem.tsx',
         'TabsContent.tsx',
+        'TabsContext.tsx',
         'index.ts'
       ]
     }
