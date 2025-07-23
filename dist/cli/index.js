@@ -208,6 +208,7 @@ class AspectUI {
             const mainIndexContent = '\n' + exportLines.join('\n') + '\n';
             await promises_1.default.appendFile(mainIndexFile, mainIndexContent);
             await this.addDefaultUtils(language, depsSet);
+            await this.addCSS();
             await this.installAllDependencies(depsSet);
             spinner.succeed('Components added successfully');
         }
@@ -238,6 +239,7 @@ class AspectUI {
                 await this.saveConfig(language),
                 await this.addDefaultUtils(language, depsSet),
                 await this.addAllComponents(language, depsSet),
+                await this.addCSS(),
                 // install dependencies
                 await this.installAllDependencies(depsSet)
             ]);
@@ -246,6 +248,61 @@ class AspectUI {
         catch (error) {
             spinner.fail('Failed to initialize Aspect UI');
             throw new AspectUICliError(error.message || 'Initialization error');
+        }
+    }
+    async addCSS() {
+        const spinner = (0, ora_1.default)('Adding CSS files...').start();
+        try {
+            const cssDir = path_1.default.join(process.cwd(), this.componentsDir, 'aspect-ui');
+            if (!(await this.checkDirectory(cssDir))) {
+                await promises_1.default.mkdir(cssDir, { recursive: true });
+            }
+            const cssFile = path_1.default.join(cssDir, 'aspect-ui.css');
+            if (!(await this.checkDirectory(cssFile))) {
+                const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/javascript/components/aspect-ui/aspect-ui.css`;
+                const res = await fetch(rawUrl);
+                if (!res.ok)
+                    throw new AspectUICliError(`Failed to fetch CSS file: ${rawUrl}`);
+                const content = await res.text();
+                await promises_1.default.writeFile(cssFile, content);
+            }
+            spinner.succeed('CSS files added successfully');
+            // check the project is nextjs or vite or not
+            // const packageJsonPath = path.join(process.cwd(), "package.json");
+            // try {
+            // 	await fs.access(packageJsonPath);
+            // 	const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf-8"));
+            // 	if (packageJson.dependencies && packageJson.dependencies.next) {
+            // 		spinner.info("Next.js project detected. Adding CSS import to _app.js");
+            // 		const appJsPath = path.join(process.cwd(), "pages", "_app.js");
+            // 		if (!(await this.checkDirectory(appJsPath))) {
+            // 			await fs.writeFile(appJsPath, `import '../components/aspect-ui/aspect-ui.css';\n`);
+            // 		} else {
+            // 			const content = await fs.readFile(appJsPath, "utf-8");
+            // 			if (!content.includes("aspect-ui.css")) {
+            // 				await fs.appendFile(appJsPath, `import '../components/aspect-ui/aspect-ui.css';\n`);
+            // 			}
+            // 		}
+            // 	}
+            // 	if (packageJson.dependencies && packageJson.dependencies.vite) {
+            // 		spinner.info("Vite project detected. Adding CSS import to main.js");
+            // 		const mainJsPath = path.join(process.cwd(), "src", "main.js");
+            // 		if (!(await this.checkDirectory(mainJsPath))) {
+            // 			await fs.writeFile(mainJsPath, `import '../components/aspect-ui/aspect-ui.css';\n`);
+            // 		} else {
+            // 			const content = await fs.readFile(mainJsPath, "utf-8");
+            // 			if (!content.includes("aspect-ui.css")) {
+            // 				await fs.appendFile(mainJsPath, `import '../components/aspect-ui/aspect-ui.css';\n`);
+            // 			}
+            // 		}
+            // 	}
+            // } catch (error) {
+            // 	spinner.warn("No package.json found or unable to read it. Skipping CSS import.");
+            // }
+        }
+        catch (error) {
+            spinner.fail('Failed to add CSS files');
+            throw new AspectUICliError(error.message || 'CSS files error');
         }
     }
     async installAllDependencies(depsSet) {
