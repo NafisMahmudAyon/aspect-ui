@@ -949,9 +949,9 @@ const componentList = {
             ],
             typescript: [
                 'Tabs.tsx',
-                'TabsList.tsx',
-                'TabsItem.tsx',
-                'TabsContent.tsx',
+                'TabList.tsx',
+                'TabItem.tsx',
+                'TabContent.tsx',
                 'TabsContext.tsx',
                 'index.ts'
             ]
