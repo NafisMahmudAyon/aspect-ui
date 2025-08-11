@@ -15,6 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="6Nf-bb3_ExXyV1qd2_tYr2BUJr5S5Wum-aY-8jnzSvI" />
+        </head>
       <body className={`text-text-muted scrollbar-thin font-sans ${montserrat.className}`} suppressHydrationWarning>
         <RouteProgress /> {/* Place early for better timing */}
         <ClerkProvider>
