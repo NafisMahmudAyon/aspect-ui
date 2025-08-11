@@ -133,3 +133,49 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+
+export const textareaPropsData = [
+  {
+    prop: 'label',
+    type: 'string',
+    default: '-',
+    description: 'Label text displayed above the textarea.'
+  },
+  {
+    prop: 'error',
+    type: 'string',
+    default: '-',
+    description: 'Error message displayed below the textarea.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class for the textarea element.'
+  },
+  {
+    prop: 'labelClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class for the label element.'
+  },
+  {
+    prop: 'wrapperClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class for the textarea wrapper container.'
+  },
+  {
+    prop: 'errorClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class for the error message element.'
+  },
+  {
+    prop: '...rest',
+    type: 'React.TextareaHTMLAttributes<HTMLTextAreaElement>',
+    default: '-',
+    description: 'Any other native textarea attributes such as placeholder, rows, etc.'
+  }
+]

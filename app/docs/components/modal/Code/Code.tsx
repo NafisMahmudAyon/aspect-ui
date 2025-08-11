@@ -133,3 +133,72 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const modalPropsData = [
+  {
+    prop: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Content inside the modal, typically ModalAction and ModalContent components.'
+  },
+  {
+    prop: 'isOpenExternal',
+    type: 'boolean',
+    default: '-',
+    description: 'Controls whether the modal is open (controlled mode).'
+  },
+  {
+    prop: 'onToggle',
+    type: '(isOpen: boolean) => void',
+    default: '-',
+    description: 'Callback fired when the modal open state changes.'
+  }
+]
+
+export const modalActionPropsData = [
+  {
+    prop: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Content of the modal action button.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the action button.'
+  },
+  {
+    prop: '...rest',
+    type: 'ButtonHTMLAttributes<HTMLButtonElement>',
+    default: '-',
+    description: 'Any other native button attributes passed to the action button.'
+  }
+]
+
+export const modalContentPropsData = [
+  {
+    prop: 'children',
+    type: 'ReactNode',
+    default: '-',
+    description: 'Content inside the modal content container.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the modal content container.'
+  },
+  {
+    prop: 'overlayClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the modal overlay background.'
+  },
+  {
+    prop: '...rest',
+    type: 'HTMLAttributes<HTMLDivElement> & MotionProps',
+    default: '-',
+    description: 'Additional HTML and animation props passed to the modal content container.'
+  }
+]

@@ -133,3 +133,73 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+
+export const toastOptionsPropsData = [
+  {
+    prop: 'className',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS class for the toast element.'
+  },
+  {
+    prop: 'containerClassName',
+    type: 'string',
+    default: '-',
+    description: 'Additional CSS class for the toast container element.'
+  },
+  {
+    prop: 'message',
+    type: 'string',
+    default: '-',
+    description: 'Main message text displayed in the toast.'
+  },
+  {
+    prop: 'description',
+    type: 'string',
+    default: '-',
+    description: 'Optional secondary text displayed below the main message.'
+  },
+  {
+    prop: 'messageClassName',
+    type: 'string',
+    default: '-',
+    description: 'CSS class applied to the toast message text.'
+  },
+  {
+    prop: 'messageAreaClassName',
+    type: 'string',
+    default: '-',
+    description: 'CSS class applied to the container holding the message and description.'
+  },
+  {
+    prop: 'descriptionClassName',
+    type: 'string',
+    default: '-',
+    description: 'CSS class applied to the toast description text.'
+  },
+  {
+    prop: 'type',
+    type: `'success' | 'error' | 'info' | 'warning'`,
+    default: '-',
+    description: 'Type of the toast, which can affect styling and icon.'
+  },
+  {
+    prop: 'duration',
+    type: 'number',
+    default: '-',
+    description: 'Duration in milliseconds before the toast automatically disappears.'
+  },
+  {
+    prop: 'action',
+    type: 'ToastAction',
+    default: '-',
+    description: 'Optional action button configuration for the toast.'
+  },
+  {
+    prop: 'id',
+    type: 'string',
+    default: '-',
+    description: 'Optional ID for the toast. If not provided, one may be auto-generated.'
+  }
+]

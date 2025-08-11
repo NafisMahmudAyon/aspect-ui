@@ -133,3 +133,104 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const tabPropsData = {
+  TabContent: [
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '-',
+      description: 'Content to display when the tab is active.'
+    },
+    {
+      prop: 'id',
+      type: 'string',
+      default: '-',
+      description: 'Unique identifier for the tab content, matching its corresponding TabItem ID.'
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      default: `''`,
+      description: 'Additional CSS class for styling the tab content.'
+    }
+  ],
+  TabItem: [
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '-',
+      description: 'Label or content of the tab.'
+    },
+    {
+      prop: 'id',
+      type: 'string',
+      default: '-',
+      description: 'Unique identifier for the tab, used to match TabContent.'
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether the tab is disabled and non-interactive.'
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      default: `''`,
+      description: 'Additional CSS class for the tab item.'
+    },
+    {
+      prop: 'activeClassName',
+      type: 'string',
+      default: `''`,
+      description: 'CSS class applied when the tab is active.'
+    },
+    {
+      prop: 'disabledClassName',
+      type: 'string',
+      default: `''`,
+      description: 'CSS class applied when the tab is disabled.'
+    },
+    {
+      prop: 'onClick',
+      type: '() => void',
+      default: '-',
+      description: 'Callback triggered when the tab is clicked.'
+    }
+  ],
+  TabList: [
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '-',
+      description: 'A collection of TabItem components.'
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      default: `''`,
+      description: 'Additional CSS class for the tab list container.'
+    }
+  ],
+  Tabs: [
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '-',
+      description: 'TabList and TabContent components.'
+    },
+    {
+      prop: 'defaultActive',
+      type: 'string',
+      default: '-',
+      description: 'ID of the tab that should be active by default.'
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      default: `''`,
+      description: 'Additional CSS class for the root tabs container.'
+    }
+  ]
+}

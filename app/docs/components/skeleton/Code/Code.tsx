@@ -133,3 +133,30 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const skeletonPropsData = [
+  {
+    prop: 'variation',
+    type: 'SkeletonVariation',
+    default: `'text'`,
+    description: 'The style variation of the skeleton placeholder (e.g., text, circle, rectangular).'
+  },
+  {
+    prop: 'width',
+    type: 'string | number',
+    default: '-',
+    description: 'The width of the skeleton. Accepts CSS units or numeric values (interpreted as pixels).'
+  },
+  {
+    prop: 'height',
+    type: 'string | number',
+    default: '-',
+    description: 'The height of the skeleton. Accepts CSS units or numeric values (interpreted as pixels).'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class names for custom styling.'
+  }
+]

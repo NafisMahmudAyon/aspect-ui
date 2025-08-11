@@ -133,3 +133,72 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const fileUploadPropsData = [
+  {
+    prop: 'onFileSelect',
+    type: '(files: File[]) => void',
+    default: '-',
+    description: 'Callback function triggered when files are selected.'
+  },
+  {
+    prop: 'accept',
+    type: 'string',
+    default: "'*'",
+    description: 'Specifies the accepted file types (e.g., "image/*", ".pdf").'
+  },
+  {
+    prop: 'multiple',
+    type: 'boolean',
+    default: 'false',
+    description: 'Allows selection of multiple files if set to true.'
+  },
+  {
+    prop: 'maxFiles',
+    type: 'number',
+    default: '1',
+    description: 'Maximum number of files that can be selected.'
+  },
+  {
+    prop: 'maxFileSize',
+    type: 'number',
+    default: '-',
+    description: 'Maximum file size allowed, in bytes.'
+  },
+  {
+    prop: 'selectedFiles',
+    type: 'File[]',
+    default: '[]',
+    description: 'List of preselected files.'
+  },
+  {
+    prop: 'content',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Custom content to display in the upload area.'
+  },
+  {
+    prop: 'uploadIcon',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Icon displayed for uploading files.'
+  },
+  {
+    prop: 'deleteButton',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Custom delete button element for removing files.'
+  },
+  {
+    prop: 'uploadIconClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the upload icon.'
+  },
+  {
+    prop: 'deleteIconClassName',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the delete icon.'
+  }
+]

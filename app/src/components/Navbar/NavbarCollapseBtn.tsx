@@ -6,7 +6,7 @@ import { useNavbar } from './NavbarContext'
 
 interface NavbarCollapseBtnProps {
   className?: string
-  icon?: React.ReactNode // 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
+  icon?: React.ReactNode
 }
 
 export const NavbarCollapseBtn: React.FC<NavbarCollapseBtnProps> = ({

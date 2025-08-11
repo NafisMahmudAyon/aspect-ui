@@ -5,7 +5,8 @@
   --text: hsl(0, 0%, 5%);
   --text-muted: hsl(0, 0%, 30%);
   --border: hsl(0, 0%, 80%);
-  --primary: hsl(183, 28%, 74%);
+  /* --primary: hsl(183, 28%, 74%); */
+  --primary: hsl(183, 35%, 78%);
   --primary-foreground: hsl(185, 37%, 20%);
   --error: hsl(0, 86%, 88%);
   --error-foreground: hsl(0, 84%, 60%);
@@ -204,7 +205,8 @@
   --text-muted: hsl(0, 0%, 70%);
   --border: hsl(0, 0%, 20%);
   --primary: hsl(185, 37%, 20%);
-  --primary-foreground: hsl(183, 28%, 74%);
+  --primary-foreground: hsl(183, 35%, 78%);
+  /* --primary-foreground: hsl(183, 28%, 74%); */
   --error: hsl(0, 84%, 5%);
   --error-foreground: hsl(0, 85%, 74%);
   --warning: hsl(45, 92%, 5%);

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://aspect-ui.vercel.app/
+
+# Sitemaps
+Sitemap: https://aspect-ui.vercel.app/sitemap.xml

@@ -133,3 +133,30 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const typographyPropsData = [
+  {
+    prop: 'variant',
+    type: `'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'display-1' | 'display-2' | 'body-1' | 'body-2' | 'caption'`,
+    default: "''",
+    description: 'Determines the typography style variant, such as heading, display, body text, or caption.'
+  },
+  {
+    prop: 'tagName',
+    type: `'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'caption' | 'span'`,
+    default: "'p'",
+    description: 'Specifies the HTML tag to render for the text.'
+  },
+  {
+    prop: 'children',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Content to be displayed within the typography element.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS class for the typography element.'
+  }
+]

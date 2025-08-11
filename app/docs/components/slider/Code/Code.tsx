@@ -133,3 +133,48 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const sliderPropsData = [
+  {
+    prop: 'min',
+    type: 'number',
+    default: '0',
+    description: 'The minimum selectable value of the slider.'
+  },
+  {
+    prop: 'max',
+    type: 'number',
+    default: '100',
+    description: 'The maximum selectable value of the slider.'
+  },
+  {
+    prop: 'step',
+    type: 'number',
+    default: '1',
+    description: 'The increment between selectable values.'
+  },
+  {
+    prop: 'defaultValue',
+    type: 'number[]',
+    default: '-',
+    description: 'The initial selected range values of the slider.'
+  },
+  {
+    prop: 'onChange',
+    type: '(values: number[]) => void',
+    default: '-',
+    description: 'Callback fired when the slider value changes.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class names for styling the slider.'
+  },
+  {
+    prop: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether the slider is disabled and not interactive.'
+  }
+]

@@ -133,3 +133,60 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const radioPropsData = [
+  {
+    prop: 'id',
+    type: 'string',
+    default: '-',
+    description: 'Unique identifier for the radio input.'
+  },
+  {
+    prop: 'name',
+    type: 'string',
+    default: '-',
+    description: 'Name attribute to group radio inputs.'
+  },
+  {
+    prop: 'value',
+    type: 'string',
+    default: '-',
+    description: 'Value of the radio input.'
+  },
+  {
+    prop: 'label',
+    type: 'string',
+    default: '-',
+    description: 'Label text displayed next to the radio button.'
+  },
+  {
+    prop: 'checked',
+    type: 'boolean',
+    default: 'false',
+    description: 'Controls whether the radio is selected (controlled mode).'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the radio input element.'
+  },
+  {
+    prop: 'labelClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the label element.'
+  },
+  {
+    prop: 'wrapperClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the wrapper container around the input and label.'
+  },
+  {
+    prop: 'onChange',
+    type: '(event: React.ChangeEvent<HTMLInputElement>) => void',
+    default: '-',
+    description: 'Callback fired when the radio input value changes.'
+  }
+]

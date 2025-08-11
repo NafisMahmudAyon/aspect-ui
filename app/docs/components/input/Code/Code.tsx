@@ -133,3 +133,84 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const inputPropsData = [
+  {
+    prop: 'label',
+    type: 'string',
+    default: '-',
+    description: 'Optional label text displayed above the input field.'
+  },
+  {
+    prop: 'type',
+    type: 'string',
+    default: `'text'`,
+    description: 'Specifies the type of input element (e.g., text, password, email).'
+  },
+  {
+    prop: 'error',
+    type: 'string',
+    default: '-',
+    description: 'Error message displayed below the input field.'
+  },
+  {
+    prop: 'icon',
+    type: 'ReactNode',
+    default: '<Mail />',
+    description: 'Optional icon displayed inside the input field.'
+  },
+  {
+    prop: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Disables the input field if true.'
+  },
+  {
+    prop: 'labelClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the label element.'
+  },
+  {
+    prop: 'iconClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the icon element.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the input element.'
+  },
+  {
+    prop: 'wrapperClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the input wrapper container.'
+  },
+  {
+    prop: 'errorClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the error message.'
+  },
+  {
+    prop: 'passwordIconClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the password toggle icon (if applicable).'
+  },
+  {
+    prop: 'onChange',
+    type: '(event: ChangeEvent<HTMLInputElement>) => void',
+    default: '-',
+    description: 'Callback function triggered when the input value changes.'
+  },
+  {
+    prop: '...rest',
+    type: 'InputHTMLAttributes<HTMLInputElement>',
+    default: '-',
+    description: 'Any other native input attributes will be passed to the input element.'
+  }
+]

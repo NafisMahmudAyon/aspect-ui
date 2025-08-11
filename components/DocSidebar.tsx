@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 // import { Accordion
 //   // AccordionContainer, AccordionContent, AccordionPanel, AccordionTitle 
 // } from ''
-import { Accordion, AccordionContent, AccordionHeader, AccordionItem, Sidebar, useSidebar } from '@/app/src'
+import { Accordion, AccordionContent, AccordionHeader, AccordionItem, Sidebar, SidebarItem, useSidebar } from '@/app/src'
 import { cn } from '@/app/src/utils/cn'
 
 const DocSidebar = () => {
@@ -42,16 +42,15 @@ const DocSidebar = () => {
               <ul className="mt-3">
                 {gettingStartedRoutes.map((route) => (
                   <li key={route.id}>
-                    <div className={cn("border-l-2 border-border block pl-3 py-1.5 hover:border-l-primary-foreground", IsActive(route.href) && firstPart === "docs" && secondPart === "getting-started" && "border-l-primary-foreground")}>
-
+                    <SidebarItem className={cn("border-l-2 border-border block p-0 hover:border-l-primary-foreground rounded-none", IsActive(route.href) && firstPart === "docs" && secondPart === "getting-started" && "border-l-primary-foreground")}>
                       <Link
-                        className={cn("pl-3 text-body-2 font-medium text-text-muted ", IsActive(route.href)
+                        className={cn("pl-4 py-2 text-body-2 font-medium text-text-muted block", IsActive(route.href)
                           && firstPart === "docs" && secondPart === "getting-started" && 'text-primary-foreground'
                         )}
                         href={route.href}>
                         {route.name}
                       </Link>
-                    </div>
+                    </SidebarItem>
                   </li>
                 ))}
               </ul>
@@ -65,16 +64,15 @@ const DocSidebar = () => {
               <ul className="mt-3">
                 {routes.map((route) => (
                   <li key={route.id}>
-                    <div className={cn("border-l-2 border-border block pl-3 py-1.5 hover:border-l-primary-foreground", IsActive(route.href) && firstPart === "docs" && secondPart === "components" && "border-l-primary-foreground")}>
-
+                    <SidebarItem className={cn("border-l-2 border-border block p-0 hover:border-l-primary-foreground rounded-none", IsActive(route.href) && firstPart === "docs" && secondPart === "components" && "border-l-primary-foreground bg-bg-light")}>
                       <Link
-                        className={cn("pl-3 text-body-2 font-medium text-text-muted ", IsActive(route.href)
+                        className={cn("pl-4 py-2 text-body-2 font-medium text-text-muted block", IsActive(route.href)
                           && firstPart === "docs" && secondPart === "components" && 'text-primary-foreground'
                         )}
                         href={route.href}>
                         {route.name}
                       </Link>
-                    </div>
+                    </SidebarItem>
                   </li>
                 ))}
               </ul>
@@ -88,16 +86,15 @@ const DocSidebar = () => {
               <ul className="mt-3">
                 {variationsRoutes.map((route) => (
                   <li key={route.id}>
-                    <div className={cn("border-l-2 border-border block pl-3 py-1.5 hover:border-l-primary-foreground", IsActive(route.href) && firstPart === "variations" && "border-l-primary-foreground")}>
-
+                    <SidebarItem className={cn("border-l-2 border-border block p-0 hover:border-l-primary-foreground rounded-none", IsActive(route.href) && firstPart === "variations" && "border-l-primary-foreground")}>
                       <Link
-                        className={cn("pl-3 text-body-2 font-medium text-text-muted ", IsActive(route.href)
+                        className={cn("pl-4 py-2 text-body-2 font-medium text-text-muted block", IsActive(route.href)
                           && firstPart === "variations" && 'text-primary-foreground'
                         )}
                         href={route.href}>
                         {route.name}
                       </Link>
-                    </div>
+                    </SidebarItem>
                   </li>
                 ))}
               </ul>
@@ -111,16 +108,15 @@ const DocSidebar = () => {
               <ul className="mt-3">
                 {templatesRoutes.map((route) => (
                   <li key={route.id}>
-                    <div className={cn("border-l-2 border-border block pl-3 py-1.5 hover:border-l-primary-foreground", IsActive(route.href) && "border-l-primary-foreground")}>
-
+                    <SidebarItem className={cn("border-l-2 border-border block p-0 hover:border-l-primary-foreground rounded-none", IsActive(route.href) && "border-l-primary-foreground")}>
                       <Link
-                        className={cn("pl-3 text-body-2 font-medium text-text-muted ", IsActive(route.href)
+                        className={cn("pl-4 py-2 text-body-2 font-medium text-text-muted block", IsActive(route.href)
                           && 'text-primary-foreground'
                         )}
                         href={route.href}>
                         {route.name}
                       </Link>
-                    </div>
+                    </SidebarItem>
                   </li>
                 ))}
               </ul>

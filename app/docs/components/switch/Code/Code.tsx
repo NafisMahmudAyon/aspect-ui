@@ -133,3 +133,96 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+export const switchPropsData = [
+  {
+    prop: 'checked',
+    type: 'boolean',
+    default: '-',
+    description: 'Whether the switch is currently on (true) or off (false).'
+  },
+  {
+    prop: 'onChange',
+    type: '(checked: boolean) => void',
+    default: '-',
+    description: 'Callback function triggered when the switch state changes.'
+  },
+  {
+    prop: 'disabled',
+    type: 'boolean',
+    default: 'false',
+    description: 'Disables the switch when set to true.'
+  },
+  {
+    prop: 'label',
+    type: 'string',
+    default: '-',
+    description: 'Optional label text displayed next to the switch.'
+  },
+  {
+    prop: 'size',
+    type: `'small' | 'medium' | 'large'`,
+    default: `'medium'`,
+    description: 'Determines the size of the switch.'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS class for the root container.'
+  },
+  {
+    prop: 'switchClassName',
+    type: 'string',
+    default: `''`,
+    description: 'Custom CSS class applied to the switch element.'
+  },
+  {
+    prop: 'activeClassName',
+    type: 'string',
+    default: `''`,
+    description: 'CSS class applied to the active (checked) state container.'
+  },
+  {
+    prop: 'deactiveClassName',
+    type: 'string',
+    default: `''`,
+    description: 'CSS class applied to the inactive (unchecked) state container.'
+  },
+  {
+    prop: 'activeSwitchClassName',
+    type: 'string',
+    default: `''`,
+    description: 'CSS class applied to the switch knob when active.'
+  },
+  {
+    prop: 'deactiveSwitchClassName',
+    type: 'string',
+    default: `''`,
+    description: 'CSS class applied to the switch knob when inactive.'
+  },
+  {
+    prop: 'labelClassName',
+    type: 'string',
+    default: `''`,
+    description: 'CSS class applied to the label element.'
+  },
+  {
+    prop: 'switchIconEnabled',
+    type: 'boolean',
+    default: 'true',
+    description: 'If true, shows the active and inactive switch icons.'
+  },
+  {
+    prop: 'activeSwitchIcon',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Icon displayed inside the switch knob when active.'
+  },
+  {
+    prop: 'deactiveSwitchIcon',
+    type: 'React.ReactNode',
+    default: '-',
+    description: 'Icon displayed inside the switch knob when inactive.'
+  }
+]

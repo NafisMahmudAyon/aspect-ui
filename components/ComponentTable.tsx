@@ -32,14 +32,16 @@ const ComponentTable = ({ data }: {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data && data.map((item, i) => (
+          {data && data.map((item, i) => {
+            const isMultipleType = item.type.includes('|')
+            return(
             <TableRow key={i} className="">
               <TableCell className="whitespace-nowrap">{item.prop}</TableCell>
-              <TableCell className="max-w-[240px] flex gap-1 flex-wrap">{codeText(item.type)}</TableCell>
+              <TableCell className={`max-w-[240px] ${isMultipleType ? 'flex gap-1 flex-wrap' : 'text-ellipsis overflow-hidden'}`}>{codeText(item.type)}</TableCell>
               <TableCell className="whitespace-nowrap">{item.default}</TableCell>
-              <TableCell className="">{item.description}</TableCell>
+              <TableCell className="whitespace-normal">{item.description}</TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
       </Table>
     </div>

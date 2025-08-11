@@ -133,3 +133,37 @@ export const alertPropsData = [
     description: 'Additional CSS classes for the alert container.'
   }
 ]
+
+
+export const masonryPropsData = [
+  {
+    prop: 'children',
+    type: 'ReactNode[]',
+    default: '-',
+    description: 'Array of elements to be displayed in the masonry grid layout.'
+  },
+  {
+    prop: 'columnCount',
+    type: '{ sm: number; md: number; lg: number; xl: number }',
+    default: `{ sm: 1, md: 2, lg: 3, xl: 4 }`,
+    description: 'Number of columns to display at different screen sizes.'
+  },
+  {
+    prop: 'gap',
+    type: 'number',
+    default: '4',
+    description: 'Gap between items in the masonry grid (in pixels or spacing units).'
+  },
+  {
+    prop: 'className',
+    type: 'string',
+    default: `''`,
+    description: 'Additional CSS classes for the masonry container.'
+  },
+  {
+    prop: '...rest',
+    type: 'HTMLAttributes<HTMLDivElement>',
+    default: '-',
+    description: 'Any other HTML div attributes passed to the masonry container.'
+  }
+]
