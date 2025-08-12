@@ -123,11 +123,12 @@ class AspectUI {
             }
             for (const file of component.files[language]) {
                 const filePath = path_1.default.join(componentPath, file);
-                const apiUrl = `${this.baseUrl}/api/component/${componentName}/${language}/${file}`;
+                const apiUrl = `${this.baseUrl}/api/components/${componentName}/files/${language}/${file}`;
                 const res = await fetch(apiUrl);
                 if (!res.ok)
                     throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`);
-                const content = await res.text();
+                const response = await res.json();
+                const content = response.data.content;
                 // rewrite the file
                 spinner.text = `Updating ${file}...`;
                 await promises_1.default.writeFile(filePath, content);
@@ -182,11 +183,12 @@ class AspectUI {
                 for (const file of component.files[language]) {
                     const filePath = path_1.default.join(componentPath, file);
                     if (!(await this.checkDirectory(filePath))) {
-                        const apiUrl = `${this.baseUrl}/api/component/${componentName}/${language}/${file}`;
+                        const apiUrl = `${this.baseUrl}/api/components/${componentName}/files/${language}/${file}`;
                         const res = await fetch(apiUrl);
                         if (!res.ok)
                             throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`);
-                        const content = await res.text();
+                        const response = await res.json();
+                        const content = response.data.content;
                         await promises_1.default.writeFile(filePath, content);
                     }
                 }
@@ -211,7 +213,7 @@ class AspectUI {
             await this.installAllDependencies(depsSet);
             spinner.succeed('Components added successfully');
         }
-        catch {
+        catch (error) {
             spinner.fail('Failed to add components');
             throw new AspectUICliError(error.message || 'Components error');
         }
@@ -310,7 +312,7 @@ class AspectUI {
         }
         const spinner = (0, ora_1.default)('Installing dependencies...').start();
         try {
-            (0, child_process_1.execSync)(`npm install ${[...depsSet].join(' ')}`, {
+            (0, child_process_1.execSync)(`npm install ${[...depsSet].join(' ')}  --legacy-peer-deps`, {
                 stdio: 'inherit'
             });
             spinner.succeed('Dependencies installed successfully');
@@ -336,11 +338,12 @@ class AspectUI {
                 for (const file of component.files[language]) {
                     const filePath = path_1.default.join(componentPath, file);
                     if (!(await this.checkDirectory(filePath))) {
-                        const apiUrl = `${this.baseUrl}/api/component/${key}/${language}/${file}`;
+                        const apiUrl = `${this.baseUrl}/api/components/${key}/files/${language}/${file}`;
                         const res = await fetch(apiUrl);
                         if (!res.ok)
                             throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`);
-                        const content = await res.text();
+                        const response = await res.json();
+                        const content = response.data.content;
                         await promises_1.default.writeFile(filePath, content);
                     }
                 }
@@ -383,11 +386,12 @@ class AspectUI {
                 for (const file of util.files[language]) {
                     const filePath = path_1.default.join(utilsDir, file);
                     if (!(await this.checkDirectory(filePath))) {
-                        const apiUrl = `${this.baseUrl}/api/utils/${language}/${file}`;
+                        const apiUrl = `${this.baseUrl}/api/utils/${util.name}/${language}/${file}`;
                         const res = await fetch(apiUrl);
                         if (!res.ok)
                             throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`);
-                        const content = await res.text();
+                        const response = await res.json();
+                        const content = response.data.content;
                         await promises_1.default.writeFile(filePath, content);
                     }
                 }
@@ -1051,7 +1055,7 @@ const utils = {
         }
     },
     portal: {
-        name: 'Portal',
+        name: 'portal',
         path: 'utils',
         dependencies: [],
         files: {
@@ -1059,6 +1063,19 @@ const utils = {
             typescript: ['Portal.tsx']
         }
     }
+};
+const staticFiles = {
+    'aspect-ui': {
+        name: 'AspectUI Core',
+        path: 'aspect-ui',
+        description: 'Core CSS and configuration files for AspectUI',
+        files: {
+            css: ['aspect-ui.css'],
+            typescript: [], // Add any TS config files if needed
+            javascript: [] // Add any JS config files if needed
+        }
+    }
+    // Add more static file groups as needed
 };
 const aspect = new AspectUI();
 aspect.init();
