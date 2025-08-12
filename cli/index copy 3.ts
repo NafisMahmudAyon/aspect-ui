@@ -15,7 +15,7 @@ class AspectUICliError extends Error {
 }
 
 class AspectUI {
-  baseUrl = 'https://aspect-ui-server.onrender.com'
+  baseUrl = 'https://aspect-ui.nafisbd.com'
   registryListUrl = `${this.baseUrl}/api/registry/list`
   componentsDir = 'components'
   libDir = 'components/utils'
@@ -148,10 +148,10 @@ class AspectUI {
       for (const file of component.files[language]) {
         const filePath = path.join(componentPath, file)
 
-        const apiUrl = `${this.baseUrl}/api/component/${componentName}/${language}/${file}`
-        const res = await fetch(apiUrl)
+        const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+        const res = await fetch(rawUrl)
         if (!res.ok)
-          throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`)
+          throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
         const content = await res.text()
         // rewrite the file
         spinner.text = `Updating ${file}...`
@@ -223,10 +223,10 @@ class AspectUI {
         for (const file of component.files[language]) {
           const filePath = path.join(componentPath, file)
           if (!(await this.checkDirectory(filePath))) {
-            const apiUrl = `${this.baseUrl}/api/component/${componentName}/${language}/${file}`
-            const res = await fetch(apiUrl)
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+            const res = await fetch(rawUrl)
             if (!res.ok)
-              throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
             const content = await res.text()
             await fs.writeFile(filePath, content)
           }
@@ -314,10 +314,10 @@ class AspectUI {
       }
       const cssFile = path.join(cssDir, 'aspect-ui.css')
       if (!(await this.checkDirectory(cssFile))) {
-        const apiUrl = `${this.baseUrl}/api/css/aspect-ui.css`
-        const res = await fetch(apiUrl)
+        const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/javascript/components/aspect-ui/aspect-ui.css`
+        const res = await fetch(rawUrl)
         if (!res.ok)
-          throw new AspectUICliError(`Failed to fetch CSS file: ${apiUrl}`)
+          throw new AspectUICliError(`Failed to fetch CSS file: ${rawUrl}`)
         const content = await res.text()
         await fs.writeFile(cssFile, content)
       }
@@ -402,10 +402,10 @@ class AspectUI {
         for (const file of component.files[language]) {
           const filePath = path.join(componentPath, file)
           if (!(await this.checkDirectory(filePath))) {
-            const apiUrl = `${this.baseUrl}/api/component/${key}/${language}/${file}`
-            const res = await fetch(apiUrl)
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/aspect-ui/${component.path}/${file}`
+            const res = await fetch(rawUrl)
             if (!res.ok)
-              throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
             const content = await res.text()
             await fs.writeFile(filePath, content)
           }
@@ -461,10 +461,10 @@ class AspectUI {
         for (const file of util.files[language]) {
           const filePath = path.join(utilsDir, file)
           if (!(await this.checkDirectory(filePath))) {
-            const apiUrl = `${this.baseUrl}/api/utils/${language}/${file}`
-            const res = await fetch(apiUrl)
+            const rawUrl = `https://raw.githubusercontent.com/NafisMahmudAyon/aspect-ui-components-folders/${language}/components/utils/${file}`
+            const res = await fetch(rawUrl)
             if (!res.ok)
-              throw new AspectUICliError(`Failed to fetch file: ${apiUrl}`)
+              throw new AspectUICliError(`Failed to fetch file: ${rawUrl}`)
             const content = await res.text()
             await fs.writeFile(filePath, content)
           }
