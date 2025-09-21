@@ -59,6 +59,38 @@ class AspectUI {
         await this.deleteComponents(components)
       })
 
+    run
+  .command('create <project-name>')
+  .description('Create a new Next.js project and initialize Aspect UI')
+  .option('-l, --language <language>', 'Project Language')
+  .action(async (projectName, options) => {
+    const spinner = ora(`Creating Next.js project: ${projectName}`).start()
+    try {
+      // Step 1: Run create-next-app
+      execSync(`npx create-next-app@latest ${projectName} --use-npm`, { stdio: 'inherit' })
+
+      spinner.succeed('Next.js project created successfully.')
+
+      // Step 2: Change into the project directory
+      process.chdir(projectName)
+
+      // Step 3: Run Aspect UI initialization
+      spinner.start('Initializing Aspect UI...')
+      await this.initializeAspectUI(options)
+      spinner.succeed('Aspect UI setup complete! 🎉')
+
+      console.log(`
+Next steps:
+  cd ${projectName}
+  npm run dev
+      `)
+    } catch (error) {
+      spinner.fail('Failed to create project with Aspect UI.')
+      this.handleError(error)
+    }
+  })
+
+
     await run.parseAsync(process.argv)
   }
 
